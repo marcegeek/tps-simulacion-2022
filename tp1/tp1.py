@@ -14,14 +14,15 @@ def carga_lista(n):
     #for i in range(n):
     #    lista.append(np.random.randint(0, 36))
     #return lista
-    return np.random.randint(0, 36, size=n)
+    return np.random.randint(0, 37, size=n)
 
 
 def frecuencia_rel(x):
     # freqs = [(value, x.count(value)/len(x)) for value in set(x)]
     # x es un array de NumPy, comparar tira un array de booleanos (equivalente a 0s y 1s), la suma
     # da la cantidad
-    return [(value, (x == value).sum()/len(x)) for value in set(x)]
+    #return [(value, (x == value).sum()/len(x)) for value in set(x)]
+    return [((x == value).sum() / len(x)) for value in set(x)]
 
 
 def main():
@@ -37,25 +38,27 @@ def main():
     print(f'El desvío es {desvio}')
     print(freqs)
 
+    "Comienzo de creación de imágen de promedio"
     fig, ax = plt.subplots()
     ax.plot(range(n), lista)
 
-
+    # Aquí se grafica la recta del promedio de las tiradas realizadas
     ax.plot([0, n], [prom, prom], marker='o')
-    #Aquí se grafica la recta del promedio de las tiradas realizadas
 
+    # Se configuran algunos títulos para mejorar la vista del gráfico
     ax.set_title('Promedio de tiradas:', loc = 'left',fontdict = {'fontsize':14, 'fontweight':'bold', 'color':'tab:blue'})
     ax.set_xlabel('Tirada')
     ax.set_ylabel('Número')
 
-
     plt.show()
-    #Aquí se muestra en una gráfica los distintos números de cada tirada
 
-    ax.plot()
-
-    #plt.plot(freqs)
-    #plt.show()
+    "Comienzo de imágen de frecuencias relativas"
+    fig, frec = plt.subplots()
+    frec.bar(range(len(freqs)), freqs)
+    frec.set_title('Frecuencias relativas:',loc='left',fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    frec.set_xlabel('Número')
+    frec.set_ylabel('Frecuencia')
+    plt.show()
 
     # frecuencia relativa, varianza, desvío y promedio
 
