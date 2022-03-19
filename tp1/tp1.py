@@ -2,11 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def promedio(n):
+"""def promedio(n):
     prome = []
     for i in range(n):
         prome.append(np.random.randint(0, 36))
-    return sum(prome)/len(prome)
+    return sum(prome)/len(prome)"""
 
 
 def carga_lista(n):
@@ -31,10 +31,29 @@ def main():
     varianza = lista.var()
     desvio = lista.std()
     freqs = frecuencia_rel(lista)
+    print(f'La lista es: {lista}')
     print(f'El promedio es {prom}')
     print(f'La varianza es {varianza}')
     print(f'El desvío es {desvio}')
     print(freqs)
+
+    fig, ax = plt.subplots()
+    ax.plot(range(n), lista)
+
+
+    ax.plot([0, n], [prom, prom], marker='o')
+    #Aquí se grafica la recta del promedio de las tiradas realizadas
+
+    ax.set_title('Promedio de tiradas:', loc = 'left',fontdict = {'fontsize':14, 'fontweight':'bold', 'color':'tab:blue'})
+    ax.set_xlabel('Tirada')
+    ax.set_ylabel('Número')
+
+
+    plt.show()
+    #Aquí se muestra en una gráfica los distintos números de cada tirada
+
+    ax.plot()
+
     #plt.plot(freqs)
     #plt.show()
 
