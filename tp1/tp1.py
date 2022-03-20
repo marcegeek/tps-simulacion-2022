@@ -9,29 +9,29 @@ import matplotlib.pyplot as plt
     return sum(prome)/len(prome)"""
 
 
-def carga_lista(n):
+def carga_lista(n, valor_max):
     #lista = []
     #for i in range(n):
     #    lista.append(np.random.randint(0, 36))
     #return lista
-    return np.random.randint(0, 37, size=n)
+    return np.random.randint(0, valor_max + 1, size=n)
 
 
-def frecuencia_rel(x):
+def frecuencia_rel(x, valor_max):
     # freqs = [(value, x.count(value)/len(x)) for value in set(x)]
     # x es un array de NumPy, comparar tira un array de booleanos (equivalente a 0s y 1s), la suma
     # da la cantidad
-    #return [(value, (x == value).sum()/len(x)) for value in set(x)]
-    return [((x == value).sum() / len(x)) for value in set(x)]
+    return [(x == value).sum()/len(x) for value in range(0, valor_max + 1)]
 
 
 def main():
     n = 100
-    lista = carga_lista(n)
+    valor_max = 36
+    lista = carga_lista(n, valor_max)
     prom = lista.mean()
     varianza = lista.var()
     desvio = lista.std()
-    freqs = frecuencia_rel(lista)
+    freqs = frecuencia_rel(lista, valor_max)
     print(f'La lista es: {lista}')
     print(f'El promedio es {prom}')
     print(f'La varianza es {varianza}')
