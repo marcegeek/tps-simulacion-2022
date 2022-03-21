@@ -38,26 +38,45 @@ def main():
     print(f'El desvío es {desvio}')
     print(freqs)
 
+    "Imágen de varianza"
+    fig, ax = plt.subplots()
+    ax.plot(range(n), lista)
+    ax.plot([0, n], [prom, prom], marker='o', linestyle='dotted')
+    ax.set_title('Promedio de tiradas:', loc='left',
+                 fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    ax.set_xlabel('Tirada')
+    ax.set_ylabel('Número')
+    fig, frec = plt.subplots()
+    frec.bar(range(len(freqs)), freqs)
+    frec.set_title('Frecuencias relativas:', loc='left',
+                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    frec.set_xlabel('Número')
+    frec.set_ylabel('Frecuencia')
+
+    "Imágen de desvíos"
+    fig, des = plt.subplots()
+    des.plot(range(n), lista)
+    des.plot([0, n], [prom + desvio, prom + desvio], [0, n], [prom - desvio, prom - desvio], marker='|', linestyle='dashed')
+    des.plot([0, n], [prom, prom], marker='o', linestyle='dotted')
+    des.set_title('Desvío estándar:', loc='left',
+                 fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    des.set_xlabel('Tirada')
+    des.set_ylabel('Número')
+
     "Comienzo de creación de imágen de promedio"
     fig, ax = plt.subplots()
     ax.plot(range(n), lista)
 
     # Aquí se grafica la recta del promedio de las tiradas realizadas
-    ax.plot([0, n], [prom, prom], marker='o')
+    ax.plot([0, n], [prom, prom], marker='o', linestyle='dotted')
 
     # Se configuran algunos títulos para mejorar la vista del gráfico
-    ax.set_title('Promedio de tiradas:', loc = 'left',fontdict = {'fontsize':14, 'fontweight':'bold', 'color':'tab:blue'})
+    ax.set_title('Promedio de tiradas:', loc='left', fontdict={'fontsize':14, 'fontweight':'bold', 'color':'tab:blue'})
     ax.set_xlabel('Tirada')
     ax.set_ylabel('Número')
 
-    plt.show()
+    ""
 
-    "Comienzo de imágen de frecuencias relativas"
-    fig, frec = plt.subplots()
-    frec.bar(range(len(freqs)), freqs)
-    frec.set_title('Frecuencias relativas:',loc='left',fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
-    frec.set_xlabel('Número')
-    frec.set_ylabel('Frecuencia')
     plt.show()
 
     # frecuencia relativa, varianza, desvío y promedio
