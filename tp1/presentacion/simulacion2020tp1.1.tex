@@ -34,81 +34,34 @@ En este trabajo realizamos la simulación del comportamiento de una ruleta tipo 
 Con esos números obtenidos, procedemos luego, a calcular el promedio, el desvío, la varianza y la frecuencia relativa.
 
 \section{Gráficas}
-
-\subsection{Figures}
-\lipsum[10] 
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11] 
-
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-  \caption{Sample figure caption.}
-  \label{fig:fig1}
+  \includegraphics[width=0.3\textwidth]{frec_rel.pdf}
+  %\caption{Frecuencias relativas}
+  \label{fig:frec_rel}
 \end{figure}
 
-\begin{figure} % picture
-    \centering
-    \includegraphics{test.png}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{promedio.pdf}
+  %\caption{Promedios}
+  \label{fig:promedio}
 \end{figure}
 
-\subsection{Tables}
-\lipsum[12]
-See awesome Table~\ref{tab:table}.
-
-\begin{table}
- \caption{Sample table title}
+\begin{figure}[H]
   \centering
-  \begin{tabular}{lll}
-    \toprule
-    \multicolumn{2}{c}{Part}                   \\
-    \cmidrule(r){1-2}
-    Name     & Description     & Size ($\mu$m) \\
-    \midrule
-    Dendrite & Input terminal  & $\sim$100     \\
-    Axon     & Output terminal & $\sim$10      \\
-    Soma     & Cell body       & up to $10^6$  \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:table}
-\end{table}
+  \includegraphics[width=0.3\textwidth]{varianza.pdf}
+  %\caption{Varianzas}
+  \label{fig:varianza}
+\end{figure}
 
-\subsection{Lists}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet
-\item consectetur adipiscing elit. 
-\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-\end{itemize}
-
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{desvio.pdf}
+  %\caption{Desvíos}
+  \label{fig:desvio}
+\end{figure}
 
 \bibliographystyle{unsrt}  
 %\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
-%%% and comment out the ``thebibliography'' section.
-
-
-%%% Comment out this section when you \bibliography{references} is enabled.
-\begin{thebibliography}{1}
-
-\bibitem{kour2014real}
-George Kour and Raid Saabne.
-\newblock Real-time segmentation of on-line handwritten arabic script.
-\newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
-  International Conference on}, pages 417--422. IEEE, 2014.
-
-\bibitem{kour2014fast}
-George Kour and Raid Saabne.
-\newblock Fast classification of handwritten on-line arabic characters.
-\newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
-  International Conference of}, pages 312--318. IEEE, 2014.
-
-\bibitem{hadash2018estimate}
-Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
-  Jacovi.
-\newblock Estimate and replace: A novel approach to integrating deep neural
-  networks with existing applications.
-\newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
-
-\end{thebibliography}
-
-
 \end{document}
