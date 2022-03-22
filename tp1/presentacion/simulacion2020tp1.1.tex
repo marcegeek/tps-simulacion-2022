@@ -33,6 +33,50 @@ En este trabajo realizamos la simulación del comportamiento de una ruleta tipo 
 
 Con esos números obtenidos, procedemos luego, a calcular el promedio, el desvío, la varianza y la frecuencia relativa.
 
+\section{Marco teórico}
+\subsection{Distribución uniforme discreta}
+Función de probabilidad:
+\begin{equation}
+p_X(x_i) = P(X = x_i) = \frac{1}{n}
+\end{equation}
+
+Esperanza matemática:
+\begin{equation}
+\operatorname{E}[X] = \frac{a+b}{2}
+\end{equation}
+
+Varianza:
+\begin{equation}
+\operatorname{Var}(X) = \sigma^{2} = \frac{(b-a+1)^{2}-1}{12}
+\end{equation}
+
+Desvío estándar:
+\begin{equation}
+\sigma = \sqrt{\operatorname{Var}(X)} = \sqrt{\frac{(b-a+1)^{2}-1}{12}}
+\end{equation}
+
+\subsection{Fórmulas muestrales}
+Frecuencia relativa:
+\begin{equation}
+f_{i} = f_{r}(x_{i}) = \frac {n_{i}}{N}
+\end{equation}
+
+Esperanza matemática:
+\begin{equation}
+\operatorname{E}[X] = \sum_{i=1}^{n}x_{i}\,f_{i}=x_{1}f_{1}+x_{2}f_{2}+\cdots +x_{n}f_{n} = \frac{\sum_{i=1}^{n}x_{i}\,n_{i}}{N}
+\end{equation}
+
+Varianza:
+\begin{equation}
+\operatorname{Var}(X) = \sigma^{2} = \operatorname{E}\left[(X - \mu)^{2}\right] = \operatorname{E}\left[(X - \operatorname{E}[X])^{2}\right]
+\end{equation}
+
+Desvío estándar:
+\begin{equation}
+\sigma = \sqrt{\operatorname{Var}(X)} = \sqrt{\operatorname{E}\left[(X - \operatorname{E}[X])^{2}\right]}
+\end{equation}
+
+\pagebreak  % comenzar siguiente sección en una página aparte
 \section{Gráficas}
 \begin{figure}[H]
   \centering
