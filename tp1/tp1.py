@@ -49,7 +49,10 @@ def main():
     frec_esperado = 0.04
     prom_esperado = 15
 
-
+    fig, var_u = plt.subplots()
+    fig, frec_u = plt.subplots()
+    fig, des_u = plt.subplots()
+    fig, ax_u = plt.subplots()
 
     for i in range(10):
         valor_max = 36
@@ -64,18 +67,48 @@ def main():
         print(f'El desvío es {desvio}')
         print(freqs)
 
+        var_u.plot(range(100), varianza)
+        var_u.plot([0, 100], [var_esperado, var_esperado], marker='o', linestyle='dotted')
+        var_u.set_title('Varianzas por tirada:', loc='center',
+                      fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+        var_u.set_xlabel('Tirada')
+        var_u.set_ylabel('Variación')
 
+        "Imágen de frecuencias"
+        frec_u.bar(range(37), freqs)
+        frec_u.plot([0, 36], [frec_esperado, frec_esperado], marker='o', linestyle='dotted')
+        frec_u.set_title('Frecuencias por número:', loc='center',
+                       fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+        frec_u.set_xlabel('Número')
+        frec_u.set_ylabel('Frecuencia')
+
+        "Imágen de desvíos"
+        des_u.plot(range(100), desvio)
+        des_u.plot([0, 100], [desv_esperado, desv_esperado], marker='|', linestyle='dashed')
+        des_u.set_title('Desvío por número aparecido:', loc='center',
+                      fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+        des_u.set_xlabel('Tirada')
+        des_u.set_ylabel('Desvío Estándar')
+
+        "Comienzo de creación de imágen de promedio"
+        ax_u.plot(range(100), prom)
+        ax_u.plot([0, 100], [prom_esperado, prom_esperado], marker='o', linestyle='dotted')
+        ax_u.set_title('Promedio por tirada:', loc='center',
+                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+        ax_u.set_xlabel('Tirada')
+        ax_u.set_ylabel('Promedio')
 
         promedios.extend(prom)
         listas.extend(lista)
         varianzas.extend(varianza)
         desvios.extend(desvio)
         frecuencias.extend(freqs)
+    plt.show()
 
     "Imágen de puntos"
     fig, lis = plt.subplots()
     lis.scatter(range(1000), listas, s=2)
-    lis.set_title('Números:', loc='left',
+    lis.set_title('Números aparecidos:', loc='left',
                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     lis.set_xlabel('Tirada')
     lis.set_ylabel('Número')
@@ -84,25 +117,17 @@ def main():
     fig, var = plt.subplots()
     var.plot(range(1000), varianzas)
     var.plot([0, 1000], [var_esperado, var_esperado], marker='o', linestyle='dotted')
-    var.set_title('Varianzas:', loc='left',
+    var.set_title('Varianza por tirada:', loc='left',
                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     var.set_xlabel('Tirada')
     var.set_ylabel('Variación')
 
-    "Imágen de frecuencias"
-    fig, frec = plt.subplots()
-    frec.bar(range(len(frecuencias)), frecuencias)
-    frec.plot([0, 1000], [frec_esperado, frec_esperado], marker='o', linestyle='dotted')
-    frec.set_title('Frecuencias relativas:', loc='left',
-                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
-    frec.set_xlabel('Número')
-    frec.set_ylabel('Frecuencia')
 
     "Imágen de desvíos"
     fig, des = plt.subplots()
     des.plot(range(1000), desvios)
     des.plot([0, 1000], [desv_esperado, desv_esperado], marker='|', linestyle='dashed')
-    des.set_title('Desvíos:', loc='left',
+    des.set_title('Desvío por tirada:', loc='left',
                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     des.set_xlabel('Tirada')
     des.set_ylabel('Desvío Estándar')
@@ -111,7 +136,7 @@ def main():
     fig, ax = plt.subplots()
     ax.plot(range(1000), promedios)
     ax.plot([0, 1000], [prom_esperado, prom_esperado], marker='o', linestyle='dotted')
-    ax.set_title('Promedio de tiradas:', loc='left',
+    ax.set_title('Promedio por tirada:', loc='left',
                  fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     ax.set_xlabel('Tirada')
     ax.set_ylabel('Promedio')
