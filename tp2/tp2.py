@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import statistics as st
+import abc
 
 
 class Ruleta:
@@ -35,13 +36,22 @@ class Jugador:
             return False
 
 
-class EstrategiaMartingala:
+class Estrategia:
     APUESTA_INICIAL = 1
+    nombre = 'Estrategia vacía'
 
     def __init__(self, ruleta, jugador):
         self.ruleta = ruleta
         self.jugador = jugador
         self.cantidad = self.APUESTA_INICIAL
+
+    @abc.abstractmethod
+    def apostar(self):
+        pass
+
+
+class EstrategiaMartingala (Estrategia):
+    nombre = 'Martingala'
 
     def apostar(self):
         if not self.jugador.apostar(self.cantidad):
@@ -55,19 +65,43 @@ class EstrategiaMartingala:
             return True
 
 
-def main():
-    ruleta = Ruleta()
-    jugador = Jugador(ruleta, 10, color='rojo')
-    estrategia = EstrategiaMartingala(ruleta, jugador)
-    for i in range(10):
+
+class EstrategiaDAlembert (Estrategia):
+    nombre = 'D\'Alembert'
+
+    def apostar(self):
+        if not self.jugador.apostar(self.cantidad):
+            if self.jugador.capital >= self.cantidad + 1:
+                self.cantidad += 1
+            else:
+                self.cantidad = self.jugador.capital
+            return False
+        else:
+            self.cantidad = self.APUESTA_INICIAL
+            return True
+
+
+def probarEstrategia(estrategia,ruleta,rondas,capital):
+    print('')
+    print('Usando estrategia: '+estrategia.nombre)
+    print('')
+    jugador = Jugador(ruleta, capital, color='rojo' if np.random.random()>0.5 else 'negro')
+    estrategia = estrategia(ruleta, jugador)
+    for i in range(rondas):
         ruleta.nuevoNumero()
         print(f'Jugador apostará {estrategia.cantidad}')
         estado = 'ganó' if estrategia.apostar() else 'perdió'
         print(f'Jugador {estado}, su capital actual es {jugador.capital}')
-        if jugador.capital == 0:
+        if jugador.capital == 0 and capital!=0:
             print('Jugador quebró')
             break
 
+def main():
+    ruleta = Ruleta()
+
+    probarEstrategia(EstrategiaMartingala,ruleta,rondas=10,capital=10)
+
+    probarEstrategia(EstrategiaDAlembert,ruleta,rondas=10,capital=10)
 
 if __name__ == '__main__':
     main()
