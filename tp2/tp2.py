@@ -17,11 +17,56 @@ class Ruleta:
     def esRojo(self):
         return self.ultimoNumero!=0 and not self.esNegro()
 
+
+class Jugador:
+
+    def __init__(self, ruleta, capital_inicial, color='rojo'):
+        self.ruleta = ruleta
+        self.capital = capital_inicial
+        self.color = color
+
+    def apostar(self, cantidad):
+        self.capital -= cantidad
+        gane = self.ruleta.esRojo if self.color == 'rojo' else self.ruleta.esNegro
+        if gane():
+            self.capital += cantidad * 2
+            return True
+        else:
+            return False
+
+
+class EstrategiaMartingala:
+    APUESTA_INICIAL = 1
+
+    def __init__(self, ruleta, jugador):
+        self.ruleta = ruleta
+        self.jugador = jugador
+        self.cantidad = self.APUESTA_INICIAL
+
+    def apostar(self):
+        if not self.jugador.apostar(self.cantidad):
+            if self.jugador.capital >= self.cantidad * 2:
+                self.cantidad *= 2
+            else:
+                self.cantidad = self.jugador.capital
+            return False
+        else:
+            self.cantidad = self.APUESTA_INICIAL
+            return True
+
+
 def main():
     ruleta = Ruleta()
-    print(ruleta.nuevoNumero())
-    print(ruleta.esNegro())
-    print(ruleta.esRojo())
+    jugador = Jugador(ruleta, 10, color='rojo')
+    estrategia = EstrategiaMartingala(ruleta, jugador)
+    for i in range(10):
+        ruleta.nuevoNumero()
+        print(f'Jugador apostará {estrategia.cantidad}')
+        estado = 'ganó' if estrategia.apostar() else 'perdió'
+        print(f'Jugador {estado}, su capital actual es {jugador.capital}')
+        if jugador.capital == 0:
+            print('Jugador quebró')
+            break
 
 
 if __name__ == '__main__':
