@@ -81,6 +81,47 @@ class EstrategiaDAlembert (Estrategia):
             return True
 
 
+class EstrategiaFibonacci(Estrategia):
+    nombre = 'Fibonacci'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.generador = self._get_generador()
+        self.secuencia = []
+        # inicializar para primer apuesta
+        self.index = 0
+        self._avanzar(0)
+
+    def apostar(self):
+        if not self.jugador.apostar(self.cantidad):
+            self._avanzar(1)
+            if self.jugador.capital < self.cantidad:
+                self.cantidad = self.jugador.capital
+            return False
+        else:
+            self._retroceder(2)
+            return True
+
+    def _avanzar(self, n):
+        self.index += n
+        if self.index < 0:
+            self.index = 0
+        if self.index >= len(self.secuencia):
+            for i in range(self.index - len(self.secuencia) + 1):
+                self.secuencia.append(next(self.generador))
+        self.cantidad = self.secuencia[self.index] * self.APUESTA_INICIAL
+
+    def _retroceder(self, n):
+        self._avanzar(-n)
+
+    @staticmethod
+    def _get_generador():
+        a, b = 1, 1
+        while True:
+            yield a
+            a, b = b, a + b
+
+
 def probarEstrategia(estrategia,ruleta,rondas,capital):
     print('')
     print('Usando estrategia: '+estrategia.nombre)
@@ -102,6 +143,8 @@ def main():
     probarEstrategia(EstrategiaMartingala,ruleta,rondas=10,capital=10)
 
     probarEstrategia(EstrategiaDAlembert,ruleta,rondas=10,capital=10)
+
+    probarEstrategia(EstrategiaFibonacci,ruleta,rondas=10,capital=10)
 
 if __name__ == '__main__':
     main()
