@@ -65,7 +65,6 @@ class EstrategiaMartingala (Estrategia):
             return True
 
 
-
 class EstrategiaDAlembert (Estrategia):
     nombre = 'D\'Alembert'
 
@@ -123,6 +122,8 @@ class EstrategiaFibonacci(Estrategia):
 
 
 def probarEstrategia(estrategia,ruleta,rondas,capital):
+    list_est, list_cap, list_color = [], [], []
+    victorias, derrotas= 0, 0
     print('')
     print('Usando estrategia: '+estrategia.nombre)
     print('')
@@ -133,18 +134,58 @@ def probarEstrategia(estrategia,ruleta,rondas,capital):
         print(f'Jugador apostará {estrategia.cantidad}')
         estado = 'ganó' if estrategia.apostar() else 'perdió'
         print(f'Jugador {estado}, su capital actual es {jugador.capital}')
+        list_est.append(estado)
+        list_cap.append(jugador.capital)
         if jugador.capital == 0 and capital!=0:
             print('Jugador quebró')
             break
 
+    for e in list_est:
+        if e == "ganó":
+            victorias += 1
+        else:
+            derrotas += 1
+
+
+    list_porc = [victorias, derrotas]
+    fig, torta = plt.subplots()
+    torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
+    torta.axis("equal")
+    torta.set_title('Gráfico de porcentajes del modelo:', loc='center',
+                    fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+
+    fig, cap = plt.subplots()
+    cap.plot(range(len(list_cap)), list_cap)
+    cap.set_title('Capital en cada ronda:', loc='center',
+                    fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+
+    plt.show()
+    return list_cap
+
+
 def main():
+    vict = 0
+    derr = 0
+
     ruleta = Ruleta()
 
-    probarEstrategia(EstrategiaMartingala,ruleta,rondas=10,capital=10)
+    t_1 = probarEstrategia(EstrategiaMartingala,ruleta,rondas=10,capital=10)
 
-    probarEstrategia(EstrategiaDAlembert,ruleta,rondas=10,capital=10)
+    t_2 = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=10,capital=10)
 
-    probarEstrategia(EstrategiaFibonacci,ruleta,rondas=10,capital=10)
+    t_3 = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=10,capital=10)
+
+    fig, capi = plt.subplots()
+    capi.plot(range(len(t_1)), t_1, label="Martin Gala")
+    capi.plot(range(len(t_2)), t_2, label="DAlembert")
+    capi.plot(range(len(t_3)), t_3, label="Fibonacci")
+    capi.legend(loc='upper right')
+    capi.set_title('Capital por cada Modelo:', loc='center',
+                  fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+
+    plt.show()
+
+
 
 if __name__ == '__main__':
     main()
