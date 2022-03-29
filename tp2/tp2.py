@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import statistics as st
 import abc
 
 
@@ -122,7 +121,7 @@ class EstrategiaFibonacci(Estrategia):
 
 
 def probarEstrategia(estrategia,ruleta,rondas,capital):
-    list_est, list_cap, list_color = [], [], []
+    list_est, list_cap, list_num, list_color = [], [], [], []
     victorias, derrotas= 0, 0
     print('')
     print('Usando estrategia: '+estrategia.nombre)
@@ -131,6 +130,8 @@ def probarEstrategia(estrategia,ruleta,rondas,capital):
     estrategia = estrategia(ruleta, jugador)
     for i in range(rondas):
         ruleta.nuevoNumero()
+        list_num.append(ruleta.ultimoNumero)
+        list_color.append(ruleta.esNegro())
         print(f'Jugador apostará {estrategia.cantidad}')
         estado = 'ganó' if estrategia.apostar() else 'perdió'
         print(f'Jugador {estado}, su capital actual es {jugador.capital}')
@@ -160,28 +161,59 @@ def probarEstrategia(estrategia,ruleta,rondas,capital):
                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
     plt.show()
-    return list_cap
+    return list_cap, list_num, list_color
 
+def frecuencia_rel(x):
+    # x es un array de NumPy, comparar tira un array de booleanos (equivalente a 0s y 1s), la suma
+    # da la cantidad
+    return [x.count(i)/len(x) for i in range(0, max(x)+1)]
 
 def main():
-    vict = 0
-    derr = 0
+    c_rojo = 0
+    c_negro = 0
 
+    numeros, frecuencias, colores = [], [], []
     ruleta = Ruleta()
 
-    t_1 = probarEstrategia(EstrategiaMartingala,ruleta,rondas=10,capital=10)
+    t_1 = probarEstrategia(EstrategiaMartingala,ruleta,rondas=1000,capital=10)
+    numeros.extend(t_1[1])
+    colores.extend(t_1[2])
+    t_2 = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=1000,capital=10)
+    numeros.extend(t_2[1])
+    colores.extend(t_2[2])
+    t_3 = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=1000,capital=10)
+    numeros.extend(t_3[1])
+    colores.extend(t_3[2])
 
-    t_2 = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=10,capital=10)
-
-    t_3 = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=10,capital=10)
-
+    fig, nums = plt.subplots()
     fig, capi = plt.subplots()
-    capi.plot(range(len(t_1)), t_1, label="Martin Gala")
-    capi.plot(range(len(t_2)), t_2, label="DAlembert")
-    capi.plot(range(len(t_3)), t_3, label="Fibonacci")
+    fig, colors = plt.subplots()
+
+    capi.plot(range(len(t_1[0])), t_1[0], label="Martin Gala")
+    capi.plot(range(len(t_2[0])), t_2[0], label="DAlembert")
+    capi.plot(range(len(t_3[0])), t_3[0], label="Fibonacci")
     capi.legend(loc='upper right')
     capi.set_title('Capital por cada Modelo:', loc='center',
                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+
+    frecuencias = frecuencia_rel(numeros)
+
+    nums.bar(range(len(frecuencias)), frecuencias)
+    nums.set_title('Frecuencias de aparición por cada número:', loc='center',
+                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    nums.set_xlabel('Número')
+    nums.set_ylabel('Frecuencia')
+
+    for n in colores:
+        if n:
+            c_negro += 1
+        else:
+            c_rojo += 1
+
+    colors.pie([c_negro, c_rojo], labels=["Negro", "Rojo"], autopct="%0.1f %%")
+    colors.axis("equal")
+    colors.set_title('Gráfico de porcentajes de colores:', loc='center',
+                    fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
     plt.show()
 
