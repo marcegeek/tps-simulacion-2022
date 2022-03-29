@@ -61,7 +61,7 @@
     \maketitle
     \begin{abstract}
         El siguiente documento tiene por objetivo detallar el trabajo realizado para
-        profundizar el estudio de la estrategia de "martingala", y 2 estrategias más, teniendo en cuenta los supuestos "capital acotado"
+        profundizar el estudio de la estrategia de "Martingala", "D'alembert" y "Fibonacci, teniendo en cuenta los supuestos "capital acotado"
         y "capital infinito".
     \end{abstract}
 
@@ -112,17 +112,59 @@
 
     \section{Descripción del trabajo}
     \label{sec:headings}
+    Mediante un programa en Python 3.7 simulamos el comportamiento de una ruleta mediante
+    los sistemas de apuestas denominados "Martingala", "D´Alembert" y "Fibonacci".
 
-
+    Realizadas las tiradas correspondientes, se muestra si el jugador ganó o perdió,
+    y se exhibe su capital actual. Además se obtienen los resultados que son reflejados en las gráficas.
 
     \section{Marco teórico}
 
+    Frecuencia relativa: Magnitud que mide la cantidad de repeticiones que puede tener un suceso por unidad de tiempo.
+    \begin{equation}
+        f_{i} = f_{r}(x_{i}) = \frac {n_{i}}{N}
+    \end{equation}
 
     \section{Gráficas}
+    
+    \vspace{1cm}
 
+    {\itshape\Large Estrategia Martingala \par}
 
+    \includegraphics[width=0.3\textwidth]{mg1.JPG}
+    \includegraphics[width=0.3\textwidth]{mg2.JPG}
 
+    \vspace{1cm}
+
+    {\itshape\Large Estrategia D’Alembert \par}
+
+    \includegraphics[width=0.3\textwidth]{dalem1.JPG}
+    \includegraphics[width=0.3\textwidth]{dalem2.JPG}
+
+    \vspace{1cm}
+
+    {\itshape\Large Estrategia Fibonacci \par}
+
+    \includegraphics[width=0.3\textwidth]{fibo1.JPG}
+    \includegraphics[width=0.3\textwidth]{fibo2.JPG}
+
+    \vspace{1cm}
+
+    {\itshape\Large Resumen de tiradas \par}
+    \includegraphics[width=0.3\textwidth]{frecAparicion.JPG}
+    \includegraphics[width=0.3\textwidth]{resumenColores.JPG}
 
     \section{Conclusiones}
+
+    Con lo obtenido y trabajado hasta el momento,
+    el sistema más ganador en las tiradas correspondientes, es el denominado "Martingala",
+    el cual posee el mayor porcentaje de victorias (52.9).
+    La diferencia también se puede observar en los graficos de capital de cada ronda de los tres sistemas, donde
+    en los otros sistemas, la curva decrece a comparación del primero. Se puede observar además, que el color rojo tiene más tendencia a salir,
+    y que además, el los números que han más han salido, son los números que van desde el 15 al 25.
+
+    Por lo que es más conveniente el sistema "Martingala" para realizar apuestas.
+
+
 
 \end{document}
