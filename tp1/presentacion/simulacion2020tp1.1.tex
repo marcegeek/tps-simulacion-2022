@@ -6,6 +6,11 @@
 \begin{document}
 \maketitle
 \begin{abstract}
+  En este proyecto de investigación realizamos un estudio sobre el comportamiento de una ruleta enfocándonos en los números que salen en cada ronda y realizando los cálculos necesarios para comprender su funcionamiento. El objeto del estudio era tratar de encontrar patrones en las rondas a través del estudio de distintas tiradas (100 rondas seguidas), las cuales nos servían para comparar entre ellas y conocer mejor la naturaleza de la ruleta.
+
+  Al conocer los resultados pudimos encontrar que hay ciertas gráficas (como son la del promedio y el desvío estándar) que se mantienen o rondan un intervalo de números específicos que los podremos ver y analizar más detalladamente en la sección en cuestión.
+
+  Esto no significa que se pueda determinar el número que puede salir en la próxima ronda, pero podría permitirnos calcular un cierto rango de resultados que podríamos tener en cuenta para una apuesta.
 \end{abstract}
 
 % keywords can be removed
@@ -28,9 +33,15 @@ Más adelante, en algunas ruletas (sobre todo las que se usan en países anglosa
 
 \section{Descripción del trabajo}
 \label{sec:headings}
-En este trabajo realizamos la simulación del comportamiento de una ruleta tipo Montecarlo (los números val del 0 al 36, 37 números en total) mediante un programa en Python 3.7 que carga una lista con los números que fueron saliendo en las tiradas de la ruleta, asumiendo una distribución de probabilidad uniforme discreta.
+En este trabajo realizamos la simulación del comportamiento de una ruleta tipo Montecarlo, los números están comprendidos del 0 al 36 (37 números en total) mediante un programa hecho en Python 3.8, el cual carga una lista con los números que fueron apareciendo en las tiradas de la ruleta, asumiendo una distribución de probabilidad uniforme discreta.
 
-Con esos números obtenidos, procedemos luego, a calcular el promedio, el desvío, la varianza y la frecuencia relativa.
+Para la aparición de números aleatorios se utilizó la función random.randint() de la librería NumPy, usando 0 y 37 como parámetros, ya que nos ofrece los números buscados con una distribución uniforme.
+
+Con esos números obtenidos, procedemos luego a calcular el promedio, el desvío, la varianza y la frecuencia relativa de cada ronda en una tirada (100 rondas).
+
+Finalmente las guardamos en listas que luego se utilizan para las gráficas con la librería “matplotlib”, con la cual podemos observar el histórico de los promedios, desvíos, varianza y frecuencia de cada número.
+
+Además de esto también se encuentran las gráficas de los resultados globales de todas las tiradas para analizar los resultados totales de cada fórmula mencionada.
 
 \section{Marco teórico}
 \subsection{Distribución uniforme discreta}
@@ -110,7 +121,15 @@ Desvío estándar:
 \end{figure}
 
 \section{Conclusiones}
-A medida que el número de tiradas se incrementa, se puede ver cómo se alínean las gráficas de los valores obtenidos, tanto en el promedio, como así también las frecuencias relativas. Por ello, se ve cuan útil puede llegar a ser la simulación, y qué datos nos brinda la misma.
+En los resultados de la simulación podemos observar que tras varias tiradas el promedio de los números aparecidos rondan entre 15 y 20.
+
+Sin embargo, luego de aproximadamente 14 rondas de juego este promedio comenzará a oscilar cerca del número promedio de su caso obtenido analíticamente.
+
+El desvío estándar de los números, al igual que el promedio comenzará con números altos y luego se estabilizará entre aproximadamente 10 y 12.
+
+La varianza por tirada está comprendida entre 95 y 140.
+
+Las aproximaciones de los valores simulados a los valores obtenidos analíticamente muestran cuan útil puede llegar a ser la simulación, y qué datos nos brinda la misma.
 
 \bibliographystyle{unsrt}  
 %\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
