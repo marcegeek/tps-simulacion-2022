@@ -45,38 +45,42 @@ class Estrategia:
         self.cantidad = self.APUESTA_INICIAL
 
     @abc.abstractmethod
-    def apostar(self):
+    def avanzar(self):
         pass
+
+    @abc.abstractmethod
+    def retroceder(self):
+        pass
+
+    def apostar(self):
+        if not self.jugador.apostar(self.cantidad):
+            self.avanzar()
+            if self.jugador.capital < self.cantidad:
+                self.cantidad = self.jugador.capital
+            return False
+        else:
+            self.retroceder()
+            return True
 
 
 class EstrategiaMartingala (Estrategia):
     nombre = 'Martingala'
 
-    def apostar(self):
-        if not self.jugador.apostar(self.cantidad):
-            if self.jugador.capital >= self.cantidad * 2:
-                self.cantidad *= 2
-            else:
-                self.cantidad = self.jugador.capital
-            return False
-        else:
-            self.cantidad = self.APUESTA_INICIAL
-            return True
+    def avanzar(self):
+        self.cantidad *= 2
+
+    def retroceder(self):
+        self.cantidad = self.APUESTA_INICIAL
 
 
 class EstrategiaDAlembert (Estrategia):
     nombre = 'D\'Alembert'
 
-    def apostar(self):
-        if not self.jugador.apostar(self.cantidad):
-            if self.jugador.capital >= self.cantidad + 1:
-                self.cantidad += 1
-            else:
-                self.cantidad = self.jugador.capital
-            return False
-        else:
-            self.cantidad = self.APUESTA_INICIAL
-            return True
+    def avanzar(self):
+        self.cantidad += 1
+
+    def retroceder(self):
+        self.cantidad = self.APUESTA_INICIAL
 
 
 class EstrategiaFibonacci(Estrategia):
@@ -90,15 +94,11 @@ class EstrategiaFibonacci(Estrategia):
         self.index = 0
         self._avanzar(0)
 
-    def apostar(self):
-        if not self.jugador.apostar(self.cantidad):
-            self._avanzar(1)
-            if self.jugador.capital < self.cantidad:
-                self.cantidad = self.jugador.capital
-            return False
-        else:
-            self._retroceder(2)
-            return True
+    def avanzar(self):
+        self._avanzar(1)
+
+    def retroceder(self):
+        self._retroceder(2)
 
     def _avanzar(self, n):
         self.index += n
