@@ -39,10 +39,11 @@ class Estrategia:
     APUESTA_INICIAL = 1
     nombre = 'Estrategia vacía'
 
-    def __init__(self, ruleta, jugador):
+    def __init__(self, ruleta, jugador, capital_acotado=True):
         self.ruleta = ruleta
         self.jugador = jugador
         self.cantidad = self.APUESTA_INICIAL
+        self.capital_acotado = capital_acotado  # TODO/FIXME algún lugar mejor para la lógica de capital acotado/infinito?
 
     @abc.abstractmethod
     def avanzar(self):
@@ -55,8 +56,11 @@ class Estrategia:
     def apostar(self):
         if not self.jugador.apostar(self.cantidad):
             self.avanzar()
-            if self.jugador.capital < self.cantidad:
-                self.cantidad = self.jugador.capital
+            if self.capital_acotado:
+                if self.jugador.capital < self.cantidad:
+                    self.cantidad = self.jugador.capital
+            elif self.jugador.capital < self.cantidad:  # capital infinito
+                self.jugador.capital = self.cantidad
             return False
         else:
             self.retroceder()
@@ -119,14 +123,14 @@ class EstrategiaFibonacci(Estrategia):
             a, b = b, a + b
 
 
-def probarEstrategia(estrategia,ruleta,rondas,capital):
+def probarEstrategia(estrategia,ruleta,rondas,capital, capital_acotado=True):
     list_est, list_cap, list_num, list_color = [], [], [], []
     victorias, derrotas= 0, 0
     print('')
     print('Usando estrategia: '+estrategia.nombre)
     print('')
     jugador = Jugador(ruleta, capital, color='rojo' if np.random.random()>0.5 else 'negro')
-    estrategia = estrategia(ruleta, jugador)
+    estrategia = estrategia(ruleta, jugador, capital_acotado=capital_acotado)
     for i in range(rondas):
         ruleta.nuevoNumero()
         list_num.append(ruleta.ultimoNumero)
@@ -174,26 +178,45 @@ def main():
     numeros, frecuencias, colores = [], [], []
     ruleta = Ruleta()
 
-    t_1 = probarEstrategia(EstrategiaMartingala,ruleta,rondas=1000,capital=10)
-    numeros.extend(t_1[1])
-    colores.extend(t_1[2])
-    t_2 = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=1000,capital=10)
-    numeros.extend(t_2[1])
-    colores.extend(t_2[2])
-    t_3 = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=1000,capital=10)
-    numeros.extend(t_3[1])
-    colores.extend(t_3[2])
+    t_1_acotado = probarEstrategia(EstrategiaMartingala,ruleta,rondas=1000,capital=10)
+    numeros.extend(t_1_acotado[1])
+    colores.extend(t_1_acotado[2])
+    t_2_acotado = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=1000,capital=10)
+    numeros.extend(t_2_acotado[1])
+    colores.extend(t_2_acotado[2])
+    t_3_acotado = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=1000,capital=10)
+    numeros.extend(t_3_acotado[1])
+    colores.extend(t_3_acotado[2])
+
+    t_1_infinito = probarEstrategia(EstrategiaMartingala,ruleta,rondas=1000,capital=10, capital_acotado=False)
+    numeros.extend(t_1_infinito[1])
+    colores.extend(t_1_infinito[2])
+    t_2_infinito = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=1000,capital=10, capital_acotado=False)
+    numeros.extend(t_2_infinito[1])
+    colores.extend(t_2_infinito[2])
+    t_3_infinito = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=1000,capital=10, capital_acotado=False)
+    numeros.extend(t_3_infinito[1])
+    colores.extend(t_3_infinito[2])
 
     fig, nums = plt.subplots()
     fig, capi = plt.subplots()
     fig, colors = plt.subplots()
 
-    capi.plot(range(len(t_1[0])), t_1[0], label="Martin Gala")
-    capi.plot(range(len(t_2[0])), t_2[0], label="DAlembert")
-    capi.plot(range(len(t_3[0])), t_3[0], label="Fibonacci")
+    capi.plot(range(len(t_1_acotado[0])), t_1_acotado[0], label="Martingala")
+    capi.plot(range(len(t_2_acotado[0])), t_2_acotado[0], label="D'Alembert")
+    capi.plot(range(len(t_3_acotado[0])), t_3_acotado[0], label="Fibonacci")
     capi.legend(loc='upper right')
-    capi.set_title('Capital por cada Modelo:', loc='center',
-                  fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    capi.set_title('Capital por cada Modelo (acotado):', loc='center',
+                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+
+    fig, capi = plt.subplots()
+
+    capi.plot(range(len(t_1_infinito[0])), t_1_infinito[0], label="Martingala")
+    capi.plot(range(len(t_2_infinito[0])), t_2_infinito[0], label="D'Alembert")
+    capi.plot(range(len(t_3_infinito[0])), t_3_infinito[0], label="Fibonacci")
+    capi.legend(loc='upper right')
+    capi.set_title('Capital por cada Modelo (no acotado):', loc='center',
+                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
     frecuencias = frecuencia_rel(numeros)
 
