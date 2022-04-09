@@ -89,10 +89,9 @@ class EstrategiaFibonacci(Estrategia):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.generador = self._get_generador()
-        self.secuencia = []
+        self.secuencia = [next(self.generador) for _ in range(10)]
         # inicializar para primer apuesta
-        self.index = 0
-        self._avanzar(0)
+        self.index = 1  # empezar como 1 2 3 5 8... en lugar de 1 1 2 3 5 8...
 
     def avanzar(self):
         self._avanzar(1)
@@ -102,8 +101,8 @@ class EstrategiaFibonacci(Estrategia):
 
     def _avanzar(self, n):
         self.index += n
-        if self.index < 0:
-            self.index = 0
+        if self.index <= 0:
+            self.index = 1  # volver al segundo valor de la sucesión (no repetir dos 1s)
         if self.index >= len(self.secuencia):
             for i in range(self.index - len(self.secuencia) + 1):
                 self.secuencia.append(next(self.generador))
