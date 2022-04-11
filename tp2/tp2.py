@@ -17,6 +17,9 @@ class Ruleta:
     def esRojo(self):
         return self.ultimoNumero!=0 and not self.esNegro()
 
+    def color2int(self):
+        return 0 if self.esNegro() else 1 if self.esRojo() else -1
+
 
 class Jugador:
 
@@ -141,7 +144,7 @@ def probar_estrategia(estrategia, ruleta, rondas, capital, capital_acotado=True)
     for i in range(rondas):
         ruleta.nuevoNumero()
         list_num.append(ruleta.ultimoNumero)
-        list_color.append(ruleta.esNegro())
+        list_color.append(ruleta.color2int())
         print(f'Jugador apostará {estrategia.cantidad}')
         estado = 'ganó' if estrategia.apostar() else 'perdió'
         print(f'Jugador {estado}, su capital actual es {jugador.capital}')
@@ -180,6 +183,7 @@ def frecuencia_rel(x):
 def main():
     c_rojo = 0
     c_negro = 0
+    c_cero = 0
 
     numeros, frecuencias, colores = [], [], []
     ruleta = Ruleta()
@@ -227,12 +231,14 @@ def main():
     nums.set_ylabel('Frecuencia')
 
     for n in colores:
-        if n:
+        if n == 0:
             c_negro += 1
-        else:
+        elif n == 1:
             c_rojo += 1
+        else:
+            c_cero += 1
 
-    colors.pie([c_negro, c_rojo], labels=["Negro", "Rojo"], autopct="%0.1f %%")
+    colors.pie([c_negro, c_rojo, c_cero], labels=["Negro", "Rojo", "Cero"], autopct="%0.1f %%")
     colors.axis("equal")
 
     plt.show()
