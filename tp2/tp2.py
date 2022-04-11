@@ -123,7 +123,14 @@ class EstrategiaFibonacci(Estrategia):
             a, b = b, a + b
 
 
-def probarEstrategia(estrategia,ruleta,rondas,capital, capital_acotado=True):
+def crear_grafica(titulo):
+    fig, ax = plt.subplots()
+    ax.set_title(titulo, loc='center',
+                 fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    return fig, ax
+
+
+def probar_estrategia(estrategia, ruleta, rondas, capital, capital_acotado=True):
     list_est, list_cap, list_num, list_color = [], [], [], []
     victorias, derrotas= 0, 0
     print('')
@@ -150,26 +157,25 @@ def probarEstrategia(estrategia,ruleta,rondas,capital, capital_acotado=True):
         else:
             derrotas += 1
 
+    aco = 'acotado' if capital_acotado else 'no acotado'
 
     list_porc = [victorias, derrotas]
-    fig, torta = plt.subplots()
+    fig, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):')
     torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
     torta.axis("equal")
-    torta.set_title('Gráfico de porcentajes del modelo:', loc='center',
-                    fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
-    fig, cap = plt.subplots()
+    fig, cap = crear_grafica(f'Capital en cada ronda ({aco}):')
     cap.plot(range(len(list_cap)), list_cap)
-    cap.set_title('Capital en cada ronda:', loc='center',
-                    fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
     plt.show()
     return list_cap, list_num, list_color
+
 
 def frecuencia_rel(x):
     # x es un array de NumPy, comparar tira un array de booleanos (equivalente a 0s y 1s), la suma
     # da la cantidad
     return [x.count(i)/len(x) for i in range(0, max(x)+1)]
+
 
 def main():
     c_rojo = 0
@@ -178,51 +184,45 @@ def main():
     numeros, frecuencias, colores = [], [], []
     ruleta = Ruleta()
 
-    t_1_acotado = probarEstrategia(EstrategiaMartingala,ruleta,rondas=1000,capital=10)
+    t_1_acotado = probar_estrategia(EstrategiaMartingala, ruleta, rondas=1000, capital=10)
     numeros.extend(t_1_acotado[1])
     colores.extend(t_1_acotado[2])
-    t_2_acotado = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=1000,capital=10)
+    t_2_acotado = probar_estrategia(EstrategiaDAlembert, ruleta, rondas=1000, capital=10)
     numeros.extend(t_2_acotado[1])
     colores.extend(t_2_acotado[2])
-    t_3_acotado = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=1000,capital=10)
+    t_3_acotado = probar_estrategia(EstrategiaFibonacci, ruleta, rondas=1000, capital=10)
     numeros.extend(t_3_acotado[1])
     colores.extend(t_3_acotado[2])
 
-    t_1_infinito = probarEstrategia(EstrategiaMartingala,ruleta,rondas=1000,capital=10, capital_acotado=False)
+    t_1_infinito = probar_estrategia(EstrategiaMartingala, ruleta, rondas=1000, capital=10, capital_acotado=False)
     numeros.extend(t_1_infinito[1])
     colores.extend(t_1_infinito[2])
-    t_2_infinito = probarEstrategia(EstrategiaDAlembert,ruleta,rondas=1000,capital=10, capital_acotado=False)
+    t_2_infinito = probar_estrategia(EstrategiaDAlembert, ruleta, rondas=1000, capital=10, capital_acotado=False)
     numeros.extend(t_2_infinito[1])
     colores.extend(t_2_infinito[2])
-    t_3_infinito = probarEstrategia(EstrategiaFibonacci,ruleta,rondas=1000,capital=10, capital_acotado=False)
+    t_3_infinito = probar_estrategia(EstrategiaFibonacci, ruleta, rondas=1000, capital=10, capital_acotado=False)
     numeros.extend(t_3_infinito[1])
     colores.extend(t_3_infinito[2])
 
-    fig, nums = plt.subplots()
-    fig, capi = plt.subplots()
-    fig, colors = plt.subplots()
+    fig, nums = crear_grafica('Frecuencias de aparición por cada número:')
+    fig, capi = crear_grafica('Capital por cada Modelo (acotado):')
+    fig, colors = crear_grafica('Gráfico de porcentajes de colores:')
 
     capi.plot(range(len(t_1_acotado[0])), t_1_acotado[0], label="Martingala")
     capi.plot(range(len(t_2_acotado[0])), t_2_acotado[0], label="D'Alembert")
     capi.plot(range(len(t_3_acotado[0])), t_3_acotado[0], label="Fibonacci")
     capi.legend(loc='upper right')
-    capi.set_title('Capital por cada Modelo (acotado):', loc='center',
-                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
-    fig, capi = plt.subplots()
+    fig, capi = crear_grafica('Capital por cada Modelo (no acotado):')
 
     capi.plot(range(len(t_1_infinito[0])), t_1_infinito[0], label="Martingala")
     capi.plot(range(len(t_2_infinito[0])), t_2_infinito[0], label="D'Alembert")
     capi.plot(range(len(t_3_infinito[0])), t_3_infinito[0], label="Fibonacci")
     capi.legend(loc='upper right')
-    capi.set_title('Capital por cada Modelo (no acotado):', loc='center',
-                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
     frecuencias = frecuencia_rel(numeros)
 
     nums.bar(range(len(frecuencias)), frecuencias)
-    nums.set_title('Frecuencias de aparición por cada número:', loc='center',
-                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     nums.set_xlabel('Número')
     nums.set_ylabel('Frecuencia')
 
@@ -234,11 +234,8 @@ def main():
 
     colors.pie([c_negro, c_rojo], labels=["Negro", "Rojo"], autopct="%0.1f %%")
     colors.axis("equal")
-    colors.set_title('Gráfico de porcentajes de colores:', loc='center',
-                    fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
 
     plt.show()
-
 
 
 if __name__ == '__main__':
