@@ -4,11 +4,14 @@ import abc
 
 
 class Ruleta:
-    def __init__(self):
+
+    def __init__(self, entropia=None):
+        self.sec_semilla = np.random.SeedSequence(entropia)
+        self.generador = np.random.RandomState(np.random.MT19937(self.sec_semilla))
         self.ultimoNumero=None
 
     def nuevoNumero(self):
-        self.ultimoNumero=np.random.randint(0, 37)
+        self.ultimoNumero=self.generador.randint(0, 37)
         return self.ultimoNumero
 
     def esNegro(self):
@@ -160,18 +163,7 @@ def probar_estrategia(estrategia, ruleta, rondas, capital, capital_acotado=True)
         else:
             derrotas += 1
 
-    aco = 'acotado' if capital_acotado else 'no acotado'
-
-    list_porc = [victorias, derrotas]
-    fig, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):')
-    torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
-    torta.axis("equal")
-
-    fig, cap = crear_grafica(f'Capital en cada ronda ({aco}):')
-    cap.plot(range(len(list_cap)), list_cap)
-
-    plt.show()
-    return list_cap, list_num, list_color
+    return list_cap, list_num, list_color, (victorias, derrotas)
 
 
 def frecuencia_rel(x):
@@ -186,43 +178,31 @@ def main():
     c_cero = 0
 
     numeros, frecuencias, colores = [], [], []
+
     ruleta = Ruleta()
+    for acotado in [True, False]:
+        aco = 'acotado' if acotado else 'no acotado'
+        fig, capi = crear_grafica(f'Capital por cada Modelo ({aco}):')
+        for estrategia in [EstrategiaMartingala, EstrategiaDAlembert, EstrategiaFibonacci]:
+            # ruleta = Ruleta(ruleta.sec_semilla.entropy)  # probar todas las estrategias con los mismos valores?
+            t = probar_estrategia(estrategia, ruleta, rondas=1000, capital=10, capital_acotado=acotado)
+            numeros.extend(t[1])
+            colores.extend(t[2])
+            print('long t:', len(t[0]))
+            capi.plot(range(len(t[0])), t[0], label=estrategia.nombre)
 
-    t_1_acotado = probar_estrategia(EstrategiaMartingala, ruleta, rondas=1000, capital=10)
-    numeros.extend(t_1_acotado[1])
-    colores.extend(t_1_acotado[2])
-    t_2_acotado = probar_estrategia(EstrategiaDAlembert, ruleta, rondas=1000, capital=10)
-    numeros.extend(t_2_acotado[1])
-    colores.extend(t_2_acotado[2])
-    t_3_acotado = probar_estrategia(EstrategiaFibonacci, ruleta, rondas=1000, capital=10)
-    numeros.extend(t_3_acotado[1])
-    colores.extend(t_3_acotado[2])
+            victorias, derrotas = t[3]
+            list_porc = [victorias, derrotas]
+            fig, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):')
+            torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
+            torta.axis("equal")
 
-    t_1_infinito = probar_estrategia(EstrategiaMartingala, ruleta, rondas=1000, capital=10, capital_acotado=False)
-    numeros.extend(t_1_infinito[1])
-    colores.extend(t_1_infinito[2])
-    t_2_infinito = probar_estrategia(EstrategiaDAlembert, ruleta, rondas=1000, capital=10, capital_acotado=False)
-    numeros.extend(t_2_infinito[1])
-    colores.extend(t_2_infinito[2])
-    t_3_infinito = probar_estrategia(EstrategiaFibonacci, ruleta, rondas=1000, capital=10, capital_acotado=False)
-    numeros.extend(t_3_infinito[1])
-    colores.extend(t_3_infinito[2])
+            fig, cap = crear_grafica(f'Capital en cada ronda ({aco}):')
+            cap.plot(range(len(t[0])), t[0])
+        capi.legend(loc='upper right')
 
     fig, nums = crear_grafica('Frecuencias de aparición por cada número:')
-    fig, capi = crear_grafica('Capital por cada Modelo (acotado):')
     fig, colors = crear_grafica('Gráfico de porcentajes de colores:')
-
-    capi.plot(range(len(t_1_acotado[0])), t_1_acotado[0], label="Martingala")
-    capi.plot(range(len(t_2_acotado[0])), t_2_acotado[0], label="D'Alembert")
-    capi.plot(range(len(t_3_acotado[0])), t_3_acotado[0], label="Fibonacci")
-    capi.legend(loc='upper right')
-
-    fig, capi = crear_grafica('Capital por cada Modelo (no acotado):')
-
-    capi.plot(range(len(t_1_infinito[0])), t_1_infinito[0], label="Martingala")
-    capi.plot(range(len(t_2_infinito[0])), t_2_infinito[0], label="D'Alembert")
-    capi.plot(range(len(t_3_infinito[0])), t_3_infinito[0], label="Fibonacci")
-    capi.legend(loc='upper right')
 
     frecuencias = frecuencia_rel(numeros)
 
@@ -237,7 +217,6 @@ def main():
             c_rojo += 1
         else:
             c_cero += 1
-
     colors.pie([c_negro, c_rojo, c_cero], labels=["Negro", "Rojo", "Cero"], autopct="%0.1f %%")
     colors.axis("equal")
 
