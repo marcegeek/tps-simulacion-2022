@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import abc
 
+from presentation import generated_img_path
+
 
 class Ruleta:
 
@@ -177,38 +179,48 @@ def main():
     c_negro = 0
     c_cero = 0
 
+    mostrar = False
+    exportar = True
+
     numeros, frecuencias, colores = [], [], []
 
     ruleta = Ruleta()
     for acotado in [True, False]:
         aco = 'acotado' if acotado else 'no acotado'
-        fig, capi = crear_grafica(f'Capital por cada Modelo ({aco}):')
+        fig_capi, capi = crear_grafica(f'Capital por cada Modelo ({aco}):')
         for estrategia in [EstrategiaMartingala, EstrategiaDAlembert, EstrategiaFibonacci]:
             # ruleta = Ruleta(ruleta.sec_semilla.entropy)  # probar todas las estrategias con los mismos valores?
             t = probar_estrategia(estrategia, ruleta, rondas=1000, capital=10, capital_acotado=acotado)
             numeros.extend(t[1])
             colores.extend(t[2])
-            print('long t:', len(t[0]))
             capi.plot(range(len(t[0])), t[0], label=estrategia.nombre)
 
             victorias, derrotas = t[3]
             list_porc = [victorias, derrotas]
-            fig, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):')
+            fig_porc, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):')
             torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
             torta.axis("equal")
+            if exportar:
+                fig_porc.savefig(generated_img_path(f'porcentajes-{estrategia.nombre.lower()}-{aco}.pdf'))
 
-            fig, cap = crear_grafica(f'Capital en cada ronda ({aco}):')
+            fig_cap_ronda, cap = crear_grafica(f'Capital en cada ronda ({aco}):')
             cap.plot(range(len(t[0])), t[0])
+            if exportar:
+                fig_cap_ronda.savefig(generated_img_path(f'capital-{estrategia.nombre.lower()}-{aco}.pdf'))
         capi.legend(loc='upper right')
+        if exportar:
+            fig_capi.savefig(generated_img_path(f'capital-{aco}.pdf'))
 
-    fig, nums = crear_grafica('Frecuencias de aparición por cada número:')
-    fig, colors = crear_grafica('Gráfico de porcentajes de colores:')
+    fig_frecs, nums = crear_grafica('Frecuencias de aparición por cada número:')
+    fig_colors, colors = crear_grafica('Gráfico de porcentajes de colores:')
 
     frecuencias = frecuencia_rel(numeros)
 
     nums.bar(range(len(frecuencias)), frecuencias)
     nums.set_xlabel('Número')
     nums.set_ylabel('Frecuencia')
+    if exportar:
+        fig_frecs.savefig(generated_img_path('frec-aparicion.pdf'))
 
     for n in colores:
         if n == 0:
@@ -219,8 +231,11 @@ def main():
             c_cero += 1
     colors.pie([c_negro, c_rojo, c_cero], labels=["Negro", "Rojo", "Cero"], autopct="%0.1f %%")
     colors.axis("equal")
+    if exportar:
+        fig_colors.savefig(generated_img_path('resumen-colores.pdf'))
 
-    plt.show()
+    if mostrar:
+        plt.show()
 
 
 if __name__ == '__main__':
