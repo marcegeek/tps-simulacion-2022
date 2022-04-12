@@ -131,10 +131,13 @@ class EstrategiaFibonacci(Estrategia):
             a, b = b, a + b
 
 
-def crear_grafica(titulo):
+def crear_grafica(titulo, exportar=False):
     fig, ax = plt.subplots()
-    ax.set_title(titulo, loc='center',
-                 fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    # si vamos a exportar, no mostramos título
+    # lo ponemos en el \caption de la figura LaTeX
+    if not exportar:
+        ax.set_title(titulo, loc='center',
+                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     return fig, ax
 
 
@@ -179,7 +182,6 @@ def main():
     c_negro = 0
     c_cero = 0
 
-    mostrar = False
     exportar = True
 
     numeros, frecuencias, colores = [], [], []
@@ -187,32 +189,36 @@ def main():
     ruleta = Ruleta()
     for acotado in [True, False]:
         aco = 'acotado' if acotado else 'no acotado'
-        fig_capi, capi = crear_grafica(f'Capital por cada Modelo ({aco}):')
+        fig_capi, capi = crear_grafica(f'Capital por cada Modelo ({aco}):', exportar)
         for estrategia in [EstrategiaMartingala, EstrategiaDAlembert, EstrategiaFibonacci]:
             # ruleta = Ruleta(ruleta.sec_semilla.entropy)  # probar todas las estrategias con los mismos valores?
             t = probar_estrategia(estrategia, ruleta, rondas=1000, capital=10, capital_acotado=acotado)
             numeros.extend(t[1])
             colores.extend(t[2])
             capi.plot(range(len(t[0])), t[0], label=estrategia.nombre)
+            capi.set_xlabel('n')
+            capi.set_ylabel('u.m.')
 
             victorias, derrotas = t[3]
             list_porc = [victorias, derrotas]
-            fig_porc, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):')
+            fig_porc, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):', exportar)
             torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
             torta.axis("equal")
             if exportar:
                 fig_porc.savefig(generated_img_path(f'porcentajes-{estrategia.nombre.lower()}-{aco}.pdf'))
 
-            fig_cap_ronda, cap = crear_grafica(f'Capital en cada ronda ({aco}):')
+            fig_cap_ronda, cap = crear_grafica(f'Capital en cada ronda ({aco}):', exportar)
             cap.plot(range(len(t[0])), t[0])
+            cap.set_xlabel('n')
+            cap.set_ylabel('u.m.')
             if exportar:
                 fig_cap_ronda.savefig(generated_img_path(f'capital-{estrategia.nombre.lower()}-{aco}.pdf'))
         capi.legend(loc='upper right')
         if exportar:
             fig_capi.savefig(generated_img_path(f'capital-{aco}.pdf'))
 
-    fig_frecs, nums = crear_grafica('Frecuencias de aparición por cada número:')
-    fig_colors, colors = crear_grafica('Gráfico de porcentajes de colores:')
+    fig_frecs, nums = crear_grafica('Frecuencias de aparición por cada número:', exportar)
+    fig_colors, colors = crear_grafica('Gráfico de porcentajes de colores:', exportar)
 
     frecuencias = frecuencia_rel(numeros)
 
@@ -234,7 +240,7 @@ def main():
     if exportar:
         fig_colors.savefig(generated_img_path('resumen-colores.pdf'))
 
-    if mostrar:
+    if not exportar:
         plt.show()
 
 
