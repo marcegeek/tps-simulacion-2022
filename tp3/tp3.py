@@ -1,10 +1,16 @@
 import abc
+import datetime as dt
 
 
 class Generador(abc.ABC):
     """
     Clase base abstracta general de un generador de números pseudoaleatorios
     """
+
+    def __init__(self, semilla=None):
+        self.semilla = None
+        self.valor = None
+        self.seed(semilla)
 
     def random(self, size=None):
         """
@@ -29,6 +35,16 @@ class Generador(abc.ABC):
             return func()
         return [func() for _ in range(size)]
 
+    def seed(self, semilla=None):
+        """
+        Inicializar/reinicializar semilla del generador.
+        """
+        if semilla is None:
+            self.semilla = self._guess_seed()
+        else:
+            self.semilla = semilla
+        self.valor = self.semilla
+
     @abc.abstractmethod
     def _rand(self):
         pass
@@ -38,17 +54,24 @@ class Generador(abc.ABC):
     def _rand_max(self):
         pass
 
+    def _guess_seed(self):
+        """
+        Obtener semilla a partir del timestamp (en segundos).
+        Nota: inicializar varios generadores en poco tiempo puede asignarles la misma semilla.
+        """
+        return int(dt.datetime.now().timestamp() + .5) % (self._rand_max + 1)
+
 
 class GeneradorGCL(Generador):
     """
     Implementación general de un generador congruencial lineal
     """
 
-    def __init__(self, modulo, multiplicador, incremento, semilla):
+    def __init__(self, modulo, multiplicador, incremento, semilla=None):
         self.modulo = modulo
         self.multiplicador = multiplicador
         self.incremento = incremento
-        self.valor = semilla
+        super().__init__(semilla=semilla)  # se llama después porque requiere tener los parámetros cargados
 
     def _rand(self):
         self.valor = (self.multiplicador * self.valor + self.incremento) % self.modulo
@@ -61,39 +84,48 @@ class GeneradorGCL(Generador):
 
 class GCLAnsiC(GeneradorGCL):
 
-    def __init__(self, semilla):
-        super().__init__(2**31, 1103515245, 12345, semilla)
+    def __init__(self, semilla=None):
+        super().__init__(2**31, 1103515245, 12345, semilla=semilla)
 
 
 class GCLNumericalRecipes(GeneradorGCL):
 
-    def __init__(self, semilla):
-        super().__init__(2**32, 1664525, 1013904223, semilla)
+    def __init__(self, semilla=None):
+        super().__init__(2**32, 1664525, 1013904223, semilla=semilla)
 
 
 class GCLRandu(GeneradorGCL):
     """
     RANDU: un antiguo generador con malas elecciones de parámetros
     """
-    def __init__(self, semilla):
-        super().__init__(2**31, 65539, 0, semilla)
+    def __init__(self, semilla=None):
+        super().__init__(2**31, 65539, 0, semilla=semilla)
 
 
-def main():
+def test():
     semilla = 10
 
     generador = GCLAnsiC(semilla)
+    print(f'Generando con semilla: {generador.semilla}')
     nums_size = generador.randint(0, 1, size=100)
 
-    generador = GCLAnsiC(semilla)
+    generador.seed(semilla)  # resetea con misma semilla
     nums_list = []
     for i in range(len(nums_size)):
         nums_list.append(generador.randint(0, 1))
+
+    assert nums_size == nums_list
     print(nums_size)
     print(nums_size.count(0)/len(nums_size))
     print(nums_size.count(1)/len(nums_size))
-    assert nums_size == nums_list
+
+    generador.seed()  # obtiene semilla automática
+    print(f'Generando con semilla: {generador.semilla}')
+    nums = generador.randint(0, 1, size=100)
+    print(nums)
+    print(nums.count(0)/len(nums))
+    print(nums.count(1)/len(nums))
 
 
 if __name__ == '__main__':
-    main()
+    test()
