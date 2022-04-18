@@ -141,25 +141,27 @@ def crear_grafica(titulo, exportar=False):
     return fig, ax
 
 
-def probar_estrategia(estrategia, ruleta, rondas, capital, capital_acotado=True):
+def probar_estrategia(estrategia, ruleta, rondas, capital,color, capital_acotado=True):
     list_est, list_cap, list_num, list_color = [], [], [], []
     victorias, derrotas= 0, 0
-    print('')
-    print('Usando estrategia: '+estrategia.nombre)
-    print('')
-    jugador = Jugador(ruleta, capital, color='rojo' if np.random.random()>0.5 else 'negro')
+    # TODO parámetro "debug" para habilitar prints
+    #print('')
+    #print('Usando estrategia: '+estrategia.nombre)
+    #print('')
+    jugador = Jugador(ruleta, capital, color=color)
     estrategia = estrategia(ruleta, jugador, capital_acotado=capital_acotado)
     for i in range(rondas):
         ruleta.nuevoNumero()
         list_num.append(ruleta.ultimoNumero)
         list_color.append(ruleta.color2int())
-        print(f'Jugador apostará {estrategia.cantidad}')
+        #print(f'Jugador apostará {estrategia.cantidad}')
         estado = 'ganó' if estrategia.apostar() else 'perdió'
-        print(f'Jugador {estado}, su capital actual es {jugador.capital}')
+        #print(f'Jugador {estado}, su capital actual es {jugador.capital}')
         list_est.append(estado)
         list_cap.append(jugador.capital)
+        # TODO Se había pensado que capital inicial de 0 indicaba capital no-acotado. Hay que definir una de las dos formas y refactorizar para consistencia
         if jugador.capital == 0 and capital!=0:
-            print('Jugador quebró')
+            #print('Jugador quebró')
             break
 
     for e in list_est:
@@ -182,24 +184,43 @@ def main():
     c_negro = 0
     c_cero = 0
 
-    exportar = True
+    exportar = False
+    tiradas = 25
+    color='rojo' if np.random.random()>0.5 else 'negro'
 
     numeros, frecuencias, colores = [], [], []
 
-    ruleta = Ruleta()
     for acotado in [True, False]:
         aco = 'acotado' if acotado else 'no acotado'
-        fig_capi, capi = crear_grafica(f'Capital por cada Modelo ({aco}):', exportar)
+        #fig_capi, capi = crear_grafica(f'Capital por cada Modelo ({aco}):', exportar)
         for estrategia in [EstrategiaMartingala, EstrategiaDAlembert, EstrategiaFibonacci]:
-            # ruleta = Ruleta(ruleta.sec_semilla.entropy)  # probar todas las estrategias con los mismos valores?
-            t = probar_estrategia(estrategia, ruleta, rondas=1000, capital=10, capital_acotado=acotado)
-            numeros.extend(t[1])
-            colores.extend(t[2])
-            capi.plot(range(len(t[0])), t[0], label=estrategia.nombre)
-            capi.set_xlabel('n')
-            capi.set_ylabel('u.m.')
+            victorias, derrotas = 0,0
+            fig_cap_ronda, cap = crear_grafica(f'Capital/ronda ({aco}), {tiradas} tiradas, estrategia {estrategia.nombre}:', exportar)
+            cap.set_xlabel('n')
+            cap.set_ylabel('u.m.')
+            for i in range(tiradas):
+                ruleta = Ruleta(4*i)
+                # Random seed space with generator chosen by fair dice roll https://xkcd.com/221/
+                # probamos todas las estrategias con los mismos valores
+                t = probar_estrategia(estrategia, ruleta, rondas=1000, capital=10, capital_acotado=acotado,color=color)
 
-            victorias, derrotas = t[3]
+                numeros.extend(t[1])
+                colores.extend(t[2])
+                victorias+=t[3][0]
+                derrotas+=t[3][1]
+
+                cap.plot(range(len(t[0])), t[0],color='gray')
+                cap.plot(len(t[0])-1,0,marker='.',mec='r',mfc='r')
+            if exportar:
+                fig_cap_ronda.savefig(generated_img_path(f'capital-{estrategia.nombre.lower()}-{aco}.pdf'))
+                #capi.plot(range(len(t[0])), t[0]
+                          #, label=estrategia.nombre
+                          #,color='gray'
+                          #)
+            #capi.set_xlabel('n')
+            #capi.set_ylabel('u.m.')
+
+            # victorias, derrotas = t[3]
             list_porc = [victorias, derrotas]
             fig_porc, torta = crear_grafica(f'Gráfico de porcentajes del modelo (capital {aco}):', exportar)
             torta.pie(list_porc, labels=["Victorias", "Derrotas"], autopct="%0.1f %%")
@@ -207,15 +228,9 @@ def main():
             if exportar:
                 fig_porc.savefig(generated_img_path(f'porcentajes-{estrategia.nombre.lower()}-{aco}.pdf'))
 
-            fig_cap_ronda, cap = crear_grafica(f'Capital en cada ronda ({aco}):', exportar)
-            cap.plot(range(len(t[0])), t[0])
-            cap.set_xlabel('n')
-            cap.set_ylabel('u.m.')
-            if exportar:
-                fig_cap_ronda.savefig(generated_img_path(f'capital-{estrategia.nombre.lower()}-{aco}.pdf'))
-        capi.legend(loc='upper right')
-        if exportar:
-            fig_capi.savefig(generated_img_path(f'capital-{aco}.pdf'))
+        #capi.legend(loc='upper right')
+        #if exportar:
+            #fig_capi.savefig(generated_img_path(f'capital-{aco}.pdf'))
 
     fig_frecs, nums = crear_grafica('Frecuencias de aparición por cada número:', exportar)
     fig_colors, colors = crear_grafica('Gráfico de porcentajes de colores:', exportar)
@@ -235,7 +250,7 @@ def main():
             c_rojo += 1
         else:
             c_cero += 1
-    colors.pie([c_negro, c_rojo, c_cero], labels=["Negro", "Rojo", "Cero"], autopct="%0.1f %%")
+    colors.pie([c_negro, c_rojo, c_cero], labels=["Negro", "Rojo", "Cero"], colors = ['black','red','green'],autopct="%0.1f %%")
     colors.axis("equal")
     if exportar:
         fig_colors.savefig(generated_img_path('resumen-colores.pdf'))
