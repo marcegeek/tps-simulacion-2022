@@ -1,5 +1,6 @@
 import abc
 import datetime as dt
+import hashlib
 
 
 class Generador(abc.ABC):
@@ -56,10 +57,17 @@ class Generador(abc.ABC):
 
     def _guess_seed(self):
         """
-        Obtener semilla a partir del timestamp (en segundos).
-        Nota: inicializar varios generadores en poco tiempo puede asignarles la misma semilla.
+        Derivar semilla a partir de la fecha y hora del sistema en microsegundos,
+        hasheada con SHA-256 para asegurar la variabilidad
         """
-        return int(dt.datetime.now().timestamp() + .5) % (self._rand_max + 1)
+        # en microsegundos para evitar que se repita al inicializar varias veces en poco tiempo
+        timestamp = int(dt.datetime.now().timestamp() * 10**6 + .5)
+        # hashear el timestamp con SHA-256 para asegurar la variabilidad
+        ts_bytes = timestamp.to_bytes(8, 'big')
+        sha256 = hashlib.sha256()
+        sha256.update(ts_bytes)
+        digest = sha256.digest()
+        return int.from_bytes(digest, 'big') % (self._rand_max + 1)
 
 
 class GeneradorGCL(Generador):
