@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+
+
 class GeneradorGCL:
     """
     Implementación general de un generador congruencial lineal
@@ -42,13 +45,29 @@ class GCLRandu(GeneradorGCL):
 
 
 def main():
+    lista_randint = []
     generador = GCLAnsiC(10)
     nums = []
-    for i in range(100):
-        nums.append(generador.randint(0, 1))
+    for i in range(10000):
+        nums.append(generador.randint(0, 36))
     print(nums)
     print(nums.count(0)/len(nums))
     print(nums.count(1)/len(nums))
+
+    """Diagrama de puntos de generador de python"""
+    fig, pts = plt.subplots()
+    pts.scatter(range(10000), nums)
+
+    """ Diagrama de caja y bigotes"""
+    fig, caja = plt.subplots()
+    caja.boxplot(nums)
+
+    """Diagrama de violín"""
+    fig, viol = plt.subplots()
+    viol.violinplot(nums)
+
+
+    plt.show()
 
 
 if __name__ == '__main__':
