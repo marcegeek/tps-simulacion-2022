@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{import}
+\import{../../latex/}{formato}
+\import{../../latex/}{autores}
+
+\title{Ejemplo de documento}
+
+% paquetes locales adicionales
+\usepackage{lipsum}  % para mostrar texto de ejemplo
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Un ejemplo de documento que muestra como se puede unificar el formato e importar archivos en \LaTeX con el paquete '\emph{import}'.
+\end{abstract}
+\keywords{\LaTeX \and paquete \emph{import}}
+
+\section{Una sección}
+  \import{./}{unasec}
+
+\section{Otra sección}
+  \import{./}{unasec}
+
+  \subsection{Subsección}
+    \subsubsection{Subsubsección}
+      \import{./}{unasec}
+
+  \subsection{Aun más}
+    \import{./}{unasec}
+
+% para la bibliografía
+\bibliographystyle{unsrt}
+\bibliography{references}
+\end{document}
