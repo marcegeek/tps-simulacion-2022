@@ -1,12 +1,11 @@
-\documentclass{article}
-\usepackage{import}
-\import{../../latex/}{formato}
+\input{../../latex/formato-base}     % se puede hacer \input porque no contiene dependencias locales
+\import{../../latex/}{formato-extra} % con dependencias locales (eg. arxiv.sty)
 \import{../../latex/}{autores}
 
 \title{Ejemplo de documento}
 
 % paquetes locales adicionales
-\usepackage{lipsum}  % para mostrar texto de ejemplo
+\usepackage{lipsum} % para mostrar texto de ejemplo
 
 \begin{document}
 \maketitle
