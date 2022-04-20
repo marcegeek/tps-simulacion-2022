@@ -184,7 +184,7 @@ def main():
     c_negro = 0
     c_cero = 0
 
-    exportar = False
+    exportar = True
     tiradas = 25
     color='rojo' if np.random.random()>0.5 else 'negro'
 
