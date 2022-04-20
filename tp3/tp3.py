@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import statistics as st
+# import numpy as np
 
 
 class GeneradorGCL:
@@ -44,8 +46,51 @@ class GCLRandu(GeneradorGCL):
         super().__init__(2**31, 65539, 0, semilla)
 
 
+def grafico_puntos(rango, lista):
+    fig, pts = plt.subplots()
+    pts.scatter(range(rango), lista)
+    plt.show()
+
+
+def grafico_caja(lista):
+    fig, caja = plt.subplots()
+    caja.boxplot(lista)
+    plt.show()
+
+
+def grafico_violin(lista):
+    fig, viol = plt.subplots()
+    viol.violinplot(lista)
+    plt.show()
+
+
+"""def frecuencia_rel(x, valor_max):
+    return [(0 if i not in x else x.count(i)/len(x)) for i in range(0, valor_max+1)]
+
+
+def grafico_frecuencias(lista, valor_max, frec_esperado):
+    freqs = frecuencia_rel(lista, valor_max)
+    fig, frec_u = plt.subplots()
+    frec_u.bar(range(36), freqs)
+    frec_u.plot([0, 36], [frec_esperado, frec_esperado], marker='o', linestyle='dotted')
+    frec_u.set_title('Frecuencias por número:', loc='center',
+                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    frec_u.set_xlabel('Número')
+    frec_u.set_ylabel('Frecuencia')
+    plt.show()"""
+
+
+def grafico_histograma(lista):
+    intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
+    plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
+    plt.title('Histograma de números generados')
+    plt.xlabel('Número')
+    plt.ylabel('Frecuencia')
+    plt.xticks(intervalos)
+    plt.show()
+
+
 def main():
-    lista_randint = []
     generador = GCLAnsiC(10)
     nums = []
     for i in range(10000):
@@ -54,20 +99,8 @@ def main():
     print(nums.count(0)/len(nums))
     print(nums.count(1)/len(nums))
 
-    """Diagrama de puntos de generador de python"""
-    fig, pts = plt.subplots()
-    pts.scatter(range(10000), nums)
-
-    """ Diagrama de caja y bigotes"""
-    fig, caja = plt.subplots()
-    caja.boxplot(nums)
-
-    """Diagrama de violín"""
-    fig, viol = plt.subplots()
-    viol.violinplot(nums)
-
-
-    plt.show()
+    frec = st.mean(nums)
+    grafico_frecuencias(nums, 36, frec)
 
 
 if __name__ == '__main__':
