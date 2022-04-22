@@ -1,0 +1,34 @@
+\input{../../../latex/formato-base}     % se puede hacer \input porque no contiene dependencias locales
+\import{../../../latex/}{formato-extra} % con dependencias locales (eg. arxiv.sty)
+\import{../../../latex/}{autores}
+
+\title{Ejemplo de documento}
+
+% paquetes locales adicionales
+\usepackage{lipsum} % para mostrar texto de ejemplo
+
+\begin{document}
+  \maketitle
+  \begin{abstract}
+    Un ejemplo de documento que muestra como se puede unificar el formato e importar archivos en \LaTeX con el paquete '\emph{import}'.
+  \end{abstract}
+  \keywords{\LaTeX \and paquete \emph{import}}
+
+  \section{Una sección}
+    \import{./}{unasec}
+
+  \section{Otra sección}
+    \import{./}{unasec}
+
+    \subsection{Subsección}
+      \subsubsection{Subsubsección}
+        \import{./}{unasec}
+
+    \subsection{Aun más}
+      \import{./}{unasec}
+
+  % para la bibliografía
+  \nocite{*} % citar todas las referencias al final sin especificarlas en el texto, si no con \cite{...} donde corresponda
+  \bibliographystyle{unsrt}
+  \bibliography{main}
+\end{document}
