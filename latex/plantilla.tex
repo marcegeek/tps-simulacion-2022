@@ -1,0 +1,13 @@
+\input{../../../latex/formato-base}     % se puede hacer \input porque no contiene dependencias locales
+\import{../../../latex/}{formato-extra} % con dependencias locales (eg. arxiv.sty)
+\import{../../../latex/}{autores}
+
+\input{preambulo} % se define para cada documento, al menos \title{...} + posibles dependencias
+
+\begin{document}
+  \maketitle
+  \input{cuerpo}
+
+  % para la bibliografía
+  \printbibliography
+\end{document}
