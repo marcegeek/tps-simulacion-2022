@@ -1,4 +1,6 @@
 import abc
+import matplotlib as plt
+import statistics as st
 import datetime as dt
 import hashlib
 
@@ -184,7 +186,6 @@ def main():
     print(nums.count(1)/len(nums))
 
     frec = st.mean(nums)
-    grafico_frecuencias(nums, 36, frec)
 
 
 if __name__ == '__main__':
