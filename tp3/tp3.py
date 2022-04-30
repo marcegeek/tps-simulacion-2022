@@ -1,5 +1,5 @@
 import abc
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import statistics as st
 import datetime as dt
 import hashlib
@@ -132,29 +132,32 @@ def test():
     generador.seed()  # obtiene semilla automática
     print(f'Generando con semilla: {generador.semilla}')
     nums = generador.randint(0, 1, size=100)
+
+
 def grafico_puntos(rango, lista):
     fig, pts = plt.subplots()
     pts.scatter(range(rango), lista)
+    pts.set_xlabel('Número de generación')
+    pts.set_ylabel('Número aparecido')
     plt.show()
 
 
 def grafico_caja(lista):
     fig, caja = plt.subplots()
     caja.boxplot(lista)
+    caja.set_ylabel('Número')
     plt.show()
 
 
 def grafico_violin(lista):
     fig, viol = plt.subplots()
     viol.violinplot(lista)
+    viol.set_xlabel('Probabilidad de aparición')
+    viol.set_ylabel('Número')
     plt.show()
 
 
-"""def frecuencia_rel(x, valor_max):
-    return [(0 if i not in x else x.count(i)/len(x)) for i in range(0, valor_max+1)]
-
-
-def grafico_frecuencias(lista, valor_max, frec_esperado):
+"""def grafico_frecuencias(lista, valor_max, frec_esperado):
     freqs = frecuencia_rel(lista, valor_max)
     fig, frec_u = plt.subplots()
     frec_u.bar(range(36), freqs)
@@ -171,22 +174,37 @@ def grafico_histograma(lista):
     plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
     plt.title('Histograma de números generados')
     plt.xlabel('Número')
-    plt.ylabel('Frecuencia')
+    plt.ylabel('Frecuencia absoluta')
     plt.xticks(intervalos)
     plt.show()
 
 
 def main():
+    """Generador GCL"""
     generador = GCLAnsiC(10)
     nums = []
-    for i in range(10000):
-        nums.append(generador.randint(0, 36))
+    for i in range(8000):
+        nums.append(generador.randint(0, 100))
     print(nums)
     print(nums.count(0)/len(nums))
     print(nums.count(1)/len(nums))
+    grafico_puntos(8000, nums)
+    grafico_histograma(nums)
+    grafico_caja(nums)
+    grafico_violin(nums)
 
-    frec = st.mean(nums)
+    """Generador de Python"""
+    nums_python = []
+    for i in range(8000):
+        nums_python.append(generador.randint(0, 100))
+    print(nums_python)
+    print(nums_python.count(0) / len(nums_python))
+    print(nums_python.count(1) / len(nums_python))
+    grafico_puntos(8000, nums_python)
+    grafico_histograma(nums_python)
+    grafico_caja(nums_python)
+    grafico_violin(nums_python)
 
 
 if __name__ == '__main__':
-    test()
+    main()
