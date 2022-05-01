@@ -1,8 +1,8 @@
 import abc
 import matplotlib.pyplot as plt
-import statistics as st
 import datetime as dt
 import hashlib
+import random
 
 
 class Generador(abc.ABC):
@@ -157,18 +157,6 @@ def grafico_violin(lista):
     plt.show()
 
 
-"""def grafico_frecuencias(lista, valor_max, frec_esperado):
-    freqs = frecuencia_rel(lista, valor_max)
-    fig, frec_u = plt.subplots()
-    frec_u.bar(range(36), freqs)
-    frec_u.plot([0, 36], [frec_esperado, frec_esperado], marker='o', linestyle='dotted')
-    frec_u.set_title('Frecuencias por número:', loc='center',
-                     fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
-    frec_u.set_xlabel('Número')
-    frec_u.set_ylabel('Frecuencia')
-    plt.show()"""
-
-
 def grafico_histograma(lista):
     intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
     plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
@@ -180,14 +168,11 @@ def grafico_histograma(lista):
 
 
 def main():
-    """Generador GCL"""
+    """Generador GCL AnsiC"""
     generador = GCLAnsiC(10)
     nums = []
     for i in range(8000):
         nums.append(generador.randint(0, 100))
-    print(nums)
-    print(nums.count(0)/len(nums))
-    print(nums.count(1)/len(nums))
     grafico_puntos(8000, nums)
     grafico_histograma(nums)
     grafico_caja(nums)
@@ -196,14 +181,33 @@ def main():
     """Generador de Python"""
     nums_python = []
     for i in range(8000):
-        nums_python.append(generador.randint(0, 100))
-    print(nums_python)
-    print(nums_python.count(0) / len(nums_python))
-    print(nums_python.count(1) / len(nums_python))
+        nums_python.append(random.randint(0, 100))
     grafico_puntos(8000, nums_python)
     grafico_histograma(nums_python)
     grafico_caja(nums_python)
     grafico_violin(nums_python)
+
+    """Generador Metodos Cuadrados"""
+    met_cuad = []
+    semilla = random.randint(0, 9999)
+    print('semilla' + str(semilla))
+    tam1 = len(str(semilla))
+    print("Cantidad de dígitos: ", tam1)
+    numero1 = int(semilla)
+    for i in range(100):
+        numero2 = numero1 ** 2
+        snumero2 = str(numero2)
+        tam2 = len(snumero2)
+        primerc = int((tam2 - tam1) / 2)
+
+        snumero3 = snumero2[primerc:primerc + tam1]
+        numero1 = int(snumero3)
+        met_cuad.append(numero1)
+
+    grafico_puntos(100, met_cuad)
+    grafico_histograma(met_cuad)
+    grafico_caja(met_cuad)
+    grafico_violin(met_cuad)
 
 
 if __name__ == '__main__':
