@@ -48,6 +48,17 @@ class Generador(abc.ABC):
             self.semilla = semilla
         self.valor = self.semilla
 
+    def rand(self, size=None):
+        """
+        Devuelve un entero aleatorio en el rango interno completo del generador.
+        O una lista si se especifica el parámetro size.
+        """
+        def func():
+            return self._rand()
+        if size is None:
+            return func()
+        return [func() for _ in range(size)]
+
     @abc.abstractmethod
     def _rand(self):
         pass
@@ -110,6 +121,30 @@ class GCLRandu(GeneradorGCL):
     """
     def __init__(self, semilla=None):
         super().__init__(2**31, 65539, 0, semilla=semilla)
+
+
+class GeneradorCuadrados(Generador):
+
+    def __init__(self, semilla=None, digitos=4):
+        if digitos <= 0 or digitos % 2 != 0:
+            raise Exception('La cantidad de dígitos debe ser par')
+        self.digitos = digitos
+        super().__init__(semilla=semilla)  # se llama después porque requiere tener los parámetros cargados
+
+    def _rand(self):
+        numero2 = self.valor ** 2
+        snumero2 = str(numero2)
+        tam2 = len(snumero2)
+        if tam2 < self.digitos * 2:
+            snumero2 = '0' * (self.digitos * 2 - tam2) + snumero2
+        primerc = self.digitos//2
+        snumero3 = snumero2[primerc:primerc + self.digitos]
+        self.valor = int(snumero3)
+        return self.valor
+
+    @property
+    def _rand_max(self):
+        return 10**self.digitos - 1
 
 
 def test():
@@ -189,21 +224,13 @@ def main():
 
     """Generador Metodos Cuadrados"""
     met_cuad = []
-    tam1 = 4
-    semilla = random.randint(0, 10**4 - 1)
+    digitos = 4
+    semilla = random.randint(0, 10**digitos - 1)
+    generador = GeneradorCuadrados(semilla=semilla, digitos=digitos)
     print('semilla: ' + str(semilla))
-    print("Cantidad de dígitos: ", tam1)
-    numero1 = semilla
+    print("Cantidad de dígitos: ", digitos)
     for i in range(100):
-        numero2 = numero1 ** 2
-        snumero2 = str(numero2)
-        tam2 = len(snumero2)
-        if tam2 < tam1 * 2:
-            snumero2 = '0' * (tam1 * 2 - tam2) + snumero2
-        primerc = tam1//2
-        snumero3 = snumero2[primerc:primerc + tam1]
-        numero1 = int(snumero3)
-        met_cuad.append(numero1)
+        met_cuad.append(generador.rand())
 
     grafico_puntos(100, met_cuad)
     # grafico_histograma(met_cuad)
