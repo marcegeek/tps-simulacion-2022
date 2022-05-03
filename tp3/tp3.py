@@ -189,23 +189,25 @@ def main():
 
     """Generador Metodos Cuadrados"""
     met_cuad = []
-    semilla = random.randint(0, 9999)
-    print('semilla' + str(semilla))
-    tam1 = len(str(semilla))
+    tam1 = 4
+    semilla = random.randint(0, 10**4 - 1)
+    print('semilla: ' + str(semilla))
     print("Cantidad de dígitos: ", tam1)
-    numero1 = int(semilla)
+    numero1 = semilla
     for i in range(100):
         numero2 = numero1 ** 2
         snumero2 = str(numero2)
         tam2 = len(snumero2)
-        primerc = int((tam2 - tam1) / 2)
-
+        if tam2 < tam1 * 2:
+            snumero2 = '0' * (tam1 * 2 - tam2) + snumero2
+        primerc = tam1//2
         snumero3 = snumero2[primerc:primerc + tam1]
         numero1 = int(snumero3)
         met_cuad.append(numero1)
 
     grafico_puntos(100, met_cuad)
-    grafico_histograma(met_cuad)
+    # grafico_histograma(met_cuad)
+    plt.hist(met_cuad, bins='sqrt')
     grafico_caja(met_cuad)
     grafico_violin(met_cuad)
 
