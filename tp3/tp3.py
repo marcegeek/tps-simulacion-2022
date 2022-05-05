@@ -5,6 +5,7 @@ import hashlib
 import random
 import math
 import statistics as st
+from scipy.stats import chisquare
 
 
 class Generador(abc.ABC):
@@ -231,6 +232,14 @@ def rachas(l, l_median):
     return "No es aleatorio" if abs(z) > 1.96 else "Puede ser aleatorio"
 
 
+def test_chicuadrado_uniforme(valores, rango, alpha=0.05):
+    """Test de chi cuadrado de bondad de ajuste para distribución uniforme discreta"""
+    frecs_abs = [valores.count(x) for x in rango]
+    frecs_abs_exp = [len(valores)/len(rango)] * len(rango)
+    chi2, pvalue = chisquare(frecs_abs, frecs_abs_exp)
+    return "No es aleatorio" if pvalue < alpha else "Puede ser aleatorio"
+
+
 def main():
     #Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
@@ -248,6 +257,17 @@ def main():
     grafico_caja(nums)
     grafico_violin(nums)
     print("Por test de rachas, el generador GCL AsinC: " + rachas(nums, st.median(nums)))
+    print("Por test de chi cuadrado, el generador GCL ANSI C: " + test_chicuadrado_uniforme(nums, range(0, 101)))
+
+    """Generador GCL parámetros arbitrarios (m=2**31, a=1000, c=151)"""
+    generador = GeneradorGCL(2**31, 1000, 151)
+    nums_gcl_arbitrario = generador.randint(0, 100, size=8000)
+    grafico_puntos(len(nums_gcl_arbitrario), nums_gcl_arbitrario)
+    grafico_histograma(nums_gcl_arbitrario)
+    grafico_caja(nums_gcl_arbitrario)
+    grafico_violin(nums_gcl_arbitrario)
+    print("Por test de rachas, el generador GCL con (m=2**31, a=1000, c=151): " + rachas(nums_gcl_arbitrario, st.median(nums_gcl_arbitrario)))
+    print("Por test de chi cuadrado, el generador GCL con (m=2**31, a=1000, c=151): " + test_chicuadrado_uniforme(nums_gcl_arbitrario, range(0, 101)))
 
     """Generador de Python"""
     nums_python = []
@@ -258,6 +278,7 @@ def main():
     grafico_caja(nums_python)
     grafico_violin(nums_python)
     print("Por test de rachas, el generador MT19937: " + rachas(nums_python, st.median(nums_python)))
+    print("Por test de chi cuadrado, el generador MT19937: " + test_chicuadrado_uniforme(nums_python, range(0, 101)))
 
     """Generador Metodos Cuadrados"""
     met_cuad = []
@@ -274,6 +295,7 @@ def main():
     grafico_caja(met_cuad)
     grafico_violin(met_cuad)
     print("Por test de rachas, el generador de Cuadrados Medios: " + rachas(met_cuad, st.median(met_cuad)))
+    print("Por test de chi cuadrado, el generador Cuadrados Medios: " + test_chicuadrado_uniforme(met_cuad, range(0, 10**digitos)))
 
 
 if __name__ == '__main__':
