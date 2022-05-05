@@ -233,10 +233,10 @@ def rachas(l, l_median):
 
 def main():
     #Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
-    lista= [0,1,2,0,1,2,0,1,2]
+    lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
     lista2=[2,4,2,5,1,6,2]
-    print("Lista 1: " + rachas(sorted(lista), st.median(lista)))
-    print("Lista 2: " + rachas(sorted(lista2), st.median(lista2)))
+    print("Lista 1: " + rachas(lista, st.median(lista)))
+    print("Lista 2: " + rachas(lista2, st.median(lista2)))
 
     """Generador GCL AnsiC"""
     generador = GCLAnsiC(10)
