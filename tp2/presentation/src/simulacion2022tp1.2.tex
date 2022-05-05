@@ -13,8 +13,10 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{import}
+\usepackage{float}
 \graphicspath{ {./images/} }
 
+\usepackage{subcaption}
 
 \title{TP 1.2 - ESTUDIO ECONÓMICO-MATEMÁTICO DE APUESTAS EN LA RULETA}
 
@@ -59,12 +61,10 @@
 
 \usepackage[spanish]{babel}
 \begin{document}
-    \maketitle
-    \begin{abstract}
-        El siguiente documento tiene por objetivo detallar el trabajo realizado para
-        profundizar el estudio de la estrategia de "Martingala", "D'alembert" y "Fibonacci, teniendo en cuenta los supuestos "capital acotado"
-        y "capital infinito".
-    \end{abstract}
+  \maketitle
+  \begin{abstract}
+    El juego de la ruleta es un juego de casino muy popular y existen diversas estrategias que presuntamente permitirían vencer las probabilidades y ganar ``dinero fácil'', especialmente populares entre jugadores inexpertos o poco formados en la teoría de probabilidad. Por ello hemos realizado un estudio de simulación para poner a prueba tres estrategias elegidas (martingala, d'Alembert y Fibonacci), bajo los supuestos de capital infinito y capital acotado. Hemos descubierto/nuestros resultados/descubrimientos... % adelanto/esbozo de lo más importante de la conclusión
+  \end{abstract}
 
     \keywords{
     Simulación \and Ruleta \and Apuestas \and Estrategias
@@ -83,7 +83,7 @@
     Es de suponer que su referencia más antigua es la llamada Rueda de la Fortuna, de la que hay
     noticias a lo largo de toda la historia, prácticamente en todos los campos del saber humano.
 
-    Una ruleta posee un sistema de apuestas denominado "Martingala", que es un sistema de apuestas progresivo,
+    Una ruleta posee un sistema de apuestas denominado ``Martingala'', que es un sistema de apuestas progresivo,
     en el cual se dobla la apuesta tras una pérdida, y se continúa jugando normalmente si se gana.
 
     Por otro lado, también se tiene el sistema D'Alembert, que es mucho más seguro que el método anterior.
@@ -114,7 +114,7 @@
     \section{Descripción del trabajo}
     \label{sec:headings}
     Mediante un programa en Python 3.7 simulamos el comportamiento de una ruleta mediante
-    los sistemas de apuestas denominados "Martingala", "D´Alembert" y "Fibonacci".
+    los sistemas de apuestas denominados ``Martingala'', ``D´Alembert'' y ``Fibonacci''.
 
     Realizadas las tiradas correspondientes, se muestra si el jugador ganó o perdió,
     y se exhibe su capital actual. Además se obtienen los resultados que son reflejados en las gráficas.
@@ -126,39 +126,142 @@
         f_{i} = f_{r}(x_{i}) = \frac {n_{i}}{N}
     \end{equation}
 
-    \section{Gráficas}
-    
-    \vspace{1cm}
+    Estrategia Martingala: Estrategia de apuestas que consiste en hacer una apuesta inicial y subsiguientemente duplicar la apuesta al perder o regresar a la apuesta inicial al ganar.
 
-    {\itshape\Large Estrategia Martingala \par}
+    Estrategia d'Alembert: Estrategia de apuestas que consiste en hacer una apuesta inicial y subsiguientemente aumentar la apuesta en una unidad al perder o regresar a la apuesta inicial al ganar.
 
-    \includegraphics[width=0.3\textwidth]{mg1.JPG}
-    \includegraphics[width=0.3\textwidth]{mg2.JPG}
+    Estrategia de Fibonacci: Estrategia de apuestas que consiste en hacer una apuesta inicial y subsiguientemente elevar la apuesta en tantas unidades como tenía la apuesta previa al perder o regresar a la apuesta previa a la anterior al ganar.
 
-    \vspace{1cm}
+\section{Gráficas}
+  \subsection{Con capital infinito}
+  \subsubsection{Estrategia martingala}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/porcentajes-martingala-no acotado.pdf}
+      \caption{Porcentajes de victorias vs. derrotas}
+    \end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+	  \centering
+      \includegraphics[width=0.8\textwidth]{generated/capital-martingala-no acotado.pdf}
+	  \caption{Flujo de caja}
+	\end{subfigure}
+	\caption{resultados obtenidos aplicando la estrategia martingala en una corrida de $n = 1000$ rondas (con capital infinito)}
+  \end{figure}
 
-    {\itshape\Large Estrategia D’Alembert \par}
+  \subsubsection{Estrategia d’Alembert}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/porcentajes-d'alembert-no acotado.pdf}
+      \caption{Porcentajes de victorias vs. derrotas}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/capital-d'alembert-no acotado.pdf}
+      \caption{Flujo de caja}
+    \end{subfigure}
+    \caption{resultados obtenidos aplicando la estrategia d’Alembert en una corrida de $n = 1000$ rondas (con capital infinito)}
+  \end{figure}
 
-    \includegraphics[width=0.3\textwidth]{dalem1.JPG}
-    \includegraphics[width=0.3\textwidth]{dalem2.JPG}
+  \subsubsection{Estrategia Fibonacci}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/porcentajes-fibonacci-no acotado.pdf}
+      \caption{Porcentajes de victorias vs. derrotas}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/capital-fibonacci-no acotado.pdf}
+      \caption{Flujo de caja}
+    \end{subfigure}
+    \caption{resultados obtenidos aplicando la estrategia Fibonacci en una corrida de $n = 1000$ rondas (con capital infinito)}
+  \end{figure}
 
-    \vspace{1cm}
+  \subsubsection{Resumen}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{generated/capital-no acotado.pdf}
+    \caption{flujo de caja de todas las estrategias con respecto al número de tiradas (capital infinito)}
+  \end{figure}
 
-    {\itshape\Large Estrategia Fibonacci \par}
+  \subsection{Con capital acotado}
+  \subsubsection{Estrategia martingala}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/porcentajes-martingala-acotado.pdf}
+      \caption{Porcentajes de victorias vs. derrotas}
+    \end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+	  \centering
+	    \includegraphics[width=0.8\textwidth]{generated/capital-martingala-acotado.pdf}
+      \caption{Flujo de caja}
+    \end{subfigure}
+    \caption{resultados obtenidos aplicando la estrategia martingala en una corrida de $n \approx 50$ rondas (con capital acotado)}
+  \end{figure}
 
-    \includegraphics[width=0.3\textwidth]{fibo1.JPG}
-    \includegraphics[width=0.3\textwidth]{fibo2.JPG}
+  \subsubsection{Estrategia d’Alembert}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/porcentajes-d'alembert-acotado.pdf}
+      \caption{Porcentajes de victorias vs. derrotas}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/capital-d'alembert-acotado.pdf}
+      \caption{Flujo de caja}
+    \end{subfigure}
+    \caption{resultados obtenidos aplicando la estrategia d’Alembert en una corrida de $n = 120$ rondas (con capital acotado)}
+  \end{figure}
 
-    \vspace{1cm}
+  \subsubsection{Estrategia Fibonacci}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/porcentajes-fibonacci-acotado.pdf}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/capital-fibonacci-acotado.pdf}
+    \end{subfigure}
+    \caption{resultados obtenidos aplicando la estrategia Fibonacci en una corrida de $n = 14$ rondas (con capital acotado)}
+  \end{figure}
 
-    {\itshape\Large Resumen de tiradas \par}
-    \includegraphics[width=0.3\textwidth]{frecAparicion.JPG}
-    \includegraphics[width=0.3\textwidth]{resumenColores.JPG}
+  \subsubsection{Resumen}
+  \begin{figure}[H]´
+    \centering
+    \includegraphics[width=0.5\textwidth]{generated/capital-acotado.pdf}
+    \caption{flujo de caja de todas las estrategias con respecto al número de tiradas (con capital acotado)}
+  \end{figure}
 
-    \section{Conclusiones}
+  \subsection{Resumen general de las tiradas}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/frec-aparicion.pdf}
+      \caption{Frecuencias relativas de aparición por cada número}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{generated/resumen-colores.pdf}
+      \caption{Porcentajes de colores}
+    \end{subfigure}
+  \end{figure}
+
+\section{Conclusiones}
 
     Con lo obtenido y trabajado hasta el momento,
-    el sistema más ganador en las tiradas correspondientes, es el denominado "Martingala",
+    el sistema más ganador en las tiradas correspondientes, es el denominado ``Martingala'',
     el cual posee el mayor porcentaje de victorias (52.9).
     La diferencia también se puede observar en los graficos de capital de cada ronda de los tres sistemas, donde
     en los otros sistemas, la curva decrece a comparación del primero. Se puede observar además, que el color rojo tiene más tendencia a salir,
