@@ -227,12 +227,12 @@ def rachas(l, l_median):
                          (((n1 + n2) ** 2) * (n1 + n2 - 1)))
 
     z = (runs - runs_exp) / stan_dev
-
-    return "No es aleatorio" if abs(z) > 1.96 else "Es aleatorio"
+    print("La frecuencia es:" + str(abs(z)))
+    return "No es aleatorio" if abs(z) > 1.96 else "Puede ser aleatorio"
 
 
 def main():
-    "Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas"
+    #Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2]
     lista2=[2,4,2,5,1,6,2]
     print("Lista 1: " + rachas(sorted(lista), st.median(lista)))
@@ -247,7 +247,7 @@ def main():
     grafico_histograma(nums)
     grafico_caja(nums)
     grafico_violin(nums)
-    print("Por test de rachas, el generador GCL AsinC: " + rachas(sorted(nums), st.median(nums)))
+    print("Por test de rachas, el generador GCL AsinC: " + rachas(nums, st.median(nums)))
 
     """Generador de Python"""
     nums_python = []
@@ -257,7 +257,7 @@ def main():
     grafico_histograma(nums_python)
     grafico_caja(nums_python)
     grafico_violin(nums_python)
-    print("Por test de rachas, el generador MT19937: " + rachas(sorted(nums_python), st.median(nums_python)))
+    print("Por test de rachas, el generador MT19937: " + rachas(nums_python, st.median(nums_python)))
 
     """Generador Metodos Cuadrados"""
     met_cuad = []
@@ -273,7 +273,7 @@ def main():
     plt.hist(met_cuad, bins='sqrt')
     grafico_caja(met_cuad)
     grafico_violin(met_cuad)
-    print("Por test de rachas, el generador de Cuadrados Medios: " + rachas(sorted(met_cuad), st.median(met_cuad)))
+    print("Por test de rachas, el generador de Cuadrados Medios: " + rachas(met_cuad, st.median(met_cuad)))
 
 
 if __name__ == '__main__':
