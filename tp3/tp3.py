@@ -279,10 +279,20 @@ def test_chicuadrado_uniforme(valores, rango, alpha=0.05):
     return "No es aleatorio" if pvalue < alpha else "Puede ser aleatorio"
 
 
+def int2bits(n):
+    return [int(i) for i in bin(n)[2:]]
+
+
 def test_frecuencia(lista):
-    """"Bibliografia: http://synnick.blogspot.com/2012/03/tarea-3-modelado-y-simulacion.html"""
+    """Bibliografia: http://synnick.blogspot.com/2012/03/tarea-3-modelado-y-simulacion.html"""
+    # Test de frecuencia (monobit)
     i = 0
     suma = 0
+    # convertir lista de enteros a lista de ceros y unos (extraer sus bits)
+    lista_bits = []
+    for n in lista:
+        lista_bits.extend(int2bits(n))
+    lista = lista_bits
     n = len(lista)
     for i in range(len(lista)):
         if lista[i] == 0:
