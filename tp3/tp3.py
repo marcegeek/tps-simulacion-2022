@@ -283,15 +283,20 @@ def int2bits(n):
     return [int(i) for i in bin(n)[2:]]
 
 
-def test_frecuencia(lista):
+def test_frecuencia(lista, cant_bits):
     """Bibliografia: http://synnick.blogspot.com/2012/03/tarea-3-modelado-y-simulacion.html"""
+    # ejemplo de llamada: test_frecuencia(lista, math.ceil(math.log2(valor_max)))
     # Test de frecuencia (monobit)
     i = 0
     suma = 0
     # convertir lista de enteros a lista de ceros y unos (extraer sus bits)
     lista_bits = []
     for n in lista:
-        lista_bits.extend(int2bits(n))
+        bits = int2bits(n)
+        lbits = len(bits)
+        if lbits < cant_bits:
+            bits = [0] * (cant_bits - lbits) + bits
+        lista_bits.extend(bits)
     lista = lista_bits
     n = len(lista)
     for i in range(len(lista)):
