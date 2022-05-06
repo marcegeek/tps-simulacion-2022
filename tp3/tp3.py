@@ -279,6 +279,23 @@ def test_chicuadrado_uniforme(valores, rango, alpha=0.05):
     return "No es aleatorio" if pvalue < alpha else "Puede ser aleatorio"
 
 
+def test_frecuencia(lista):
+    """"Bibliografia: http://synnick.blogspot.com/2012/03/tarea-3-modelado-y-simulacion.html"""
+    i = 0
+    suma = 0
+    n = len(lista)
+    for i in range(len(lista)):
+        if lista[i] == 0:
+            lista[i] = -1
+            suma = suma + lista[i]
+    suma_abs = abs(suma)/math.sqrt(n)
+    p_value = math.erfc(suma_abs/math.sqrt(2))
+    if p_value < 0.01:
+        return "No es aleatorio"
+    else:
+        return "Puede ser aleatorio"
+
+
 def main():
     """nums = []
     for i in range(8000):
