@@ -15,10 +15,10 @@ H_{1}&: \text{hay diferencia entre las distribuciones}
 
 El procedimiento de cálculo de la prueba de $\chi^{2}$ para bondad de ajuste incluye los pasos siguientes:
 \begin{enumerate}
-  \item Calcular el estádistico $\chi^{2}$, que se asemeja a una suma normalizada de los desvíos entre las frecuencias observadas y las teóricas al cuadrado (ver debajo).
+  \item Calcular el estádistico $\chi^{2}$, que se asemeja a una suma normalizada de los desvíos entre las frecuencias observadas y las teóricas al cuadrado (ecuación \ref{eq:estadistico-chi2}).
   \item Determinar los grados de libertad, \textbf{gl}, del estadístico: para nuestro caso, de bondad de ajuste, $\text{gl} = n - m$, donde $n$ es el número de valores distintos de la distribución, y $m$ es el número de parámetros ajustados para hacer que la distribución se ajuste mejor a las observaciones: el número de valores reducidos por el número de parámetros ajustados en la distribución.
   \item Seleccionar el nivel deseado de confianza (nivel de significancia, valor p\footnote{Probabilidad de obtener resultados de prueba al menos tan extremos como los observados, bajo la suposición de que la hipótesis nula es correcta\cite{enwiki2022pvalue}} o el nivel alfa correspondiente) para el resultado de la prueba. Usualmente y para nuestro caso seleccionamos un alfa de 0.05, lo que corresponde a un 95\% de confianza.
-  \item Comparar $\chi^{2}$ con una distribución $\chi^{2}$ con \emph{gl} grados de libertad para obtener el valor p correspondiente y emplear y el nivel de confianza seleccionado (de un solo lado, puesto que la prueba es solamente en una dirección, esto es, ¿es el valor del estadístico de prueba mayor que valor el crítico? o ¿es el valor p menor que nivel alfa?), lo que en muchos casos de una buena aproximación de la distribución $\chi^{2}$.
+  \item Comparar $\chi^{2}$ con una distribución $\chi^{2}$ con \emph{gl} grados de libertad para obtener el valor p correspondiente y emplear y el nivel de confianza seleccionado (de un solo lado, puesto que la prueba es solamente en una dirección, esto es, ¿es el valor del estadístico de prueba mayor que valor el crítico? o ¿es el valor p menor o igual al alfa?), lo que en muchos casos da una buena aproximación de la distribución $\chi^{2}$.
   \item Rechazar o mantener la hipótesis nula de que la distribución de frecuencias observadas es la misma que la teórica empleando el valor p correspondiente. Si el valor p es menor o igual que el nivel alfa seleccionado, se rechaza la hipótesis nula ($H_{0}$) y se acepta la alternativa ($H_{1}$), con el nivel de confianza seleccionado. Si en cambio el valor p supera dicho umbral, no se puede llegar a una conclusión clara, y se mantiene la hipótesis nula (no la podemos rechazar), lo que no significa necesariamente que la misma sea aceptada.
 \end{enumerate}
 
@@ -31,6 +31,7 @@ y la reducción en los grados de libertad es $p=1$, dado que las frecuencias obs
 
 El valor del estadístico de prueba es
 \begin{equation}
+\label{eq:estadistico-chi2}
 \chi^{2} = \sum_{i=1}^{n}{\frac{(O_{i}-E_{i})^{2}}{E_{i}}} = N\sum_{i=1}^{n}{\frac{\left(O_{i}/N-p_{i}\right)^{2}}{p_{i}}}
 \end{equation}
 donde
@@ -44,6 +45,7 @@ donde
 
 Finalmente, el estadístico $\chi^{2}$ puede entonces emplearse para calcular un valor p comparando el valor del estadístico con una distribución $\chi^{2}$. Esto es
 \begin{equation}
+  \label{eq:p-value}
   \text{valor p} = 1 - P(X \le \chi^2)
 \end{equation}
 
