@@ -5,6 +5,7 @@ import hashlib
 import random
 import math
 import statistics as st
+from collections import Counter
 from scipy.stats import chisquare
 
 
@@ -232,6 +233,44 @@ def rachas(l, l_median):
     return "No es aleatorio" if abs(z) > 1.96 else "Puede ser aleatorio"
 
 
+def poker(l):
+    """Bibliografía: https://idoc.pub/documents/idocpub-6klz2po2qvlg"""
+    diferentes,un_par,dos_pares,tercia,full,poker,generala=0,0,0,0,0,0,0
+    print(l[1])
+    for i in range(len(l)):
+        digitos=str(l[i]*10**5)[:5]
+
+        counts = Counter(digitos)
+        cantidades=[]
+        for character, count in counts.most_common():
+            if count==5:
+                generala +=1
+                break
+            if count==4:
+                poker +=1
+                break
+            cantidades.append(count)
+        if len(cantidades)==5:
+            diferentes+=1
+        elif len(cantidades)==4:
+            un_par+=1
+        elif cantidades.count(2)==2:
+            dos_pares+=1
+        elif len(cantidades)==3: # 3 1 1
+            tercia+=1
+        elif 3 in cantidades:
+            full+=1
+    # Frecuencias esperadas.
+    fe_dif,fe_unp,fe_dos,fe_res=len(l)*0.3024,len(l)*0.504,len(l)*0.108,len(l)*0.08155
+    # 7.815 es el valor "Chi Cuadrado" con p=0.05 y 3 grados de confianza
+    return ('No p' if 7.815 > (
+        (diferentes-fe_dif)**2/fe_dif
+        +(un_par-fe_unp)**2/fe_unp
+        +(dos_pares-fe_dos)**2/fe_dos
+        +((tercia+full+poker+generala)-fe_res)**2/fe_res
+    ) else 'P')+'odemos decir que estos números no vinieron de una distribución uniforme.'
+
+
 def test_chicuadrado_uniforme(valores, rango, alpha=0.05):
     """Test de chi cuadrado de bondad de ajuste para distribución uniforme discreta"""
     frecs_abs = [valores.count(x) for x in rango]
@@ -241,6 +280,17 @@ def test_chicuadrado_uniforme(valores, rango, alpha=0.05):
 
 
 def main():
+    """nums = []
+    for i in range(8000):
+        nums.append(random.random())
+    print(poker(nums))
+    generador = GCLAnsiC(10)
+    nums = []
+    for i in range(8000):
+        nums.append(generador.rand())
+    print(poker(nums))
+    return"""
+
     #Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
     lista2=[2,4,2,5,1,6,2]
