@@ -1,0 +1,53 @@
+\begin{abstract}
+Los números pseudoaleatorios se generan de manera secuencial con un algoritmo determinístico. Construir un buen algoritmo de números pseudoaleatorios es complicado, por eso hemos hecho un estudio sobre cómo funcionan y de la manera que se comportan.
+\end{abstract}
+
+
+% keywords can be removed
+%\keywords{First keyword \and Second keyword \and More}
+
+
+\section{Introducción}
+Un proceso que parece generar números pseudoaleatorios al azar, pero no lo hace realmente. Una forma de analizar esto y probarlos es con los generadores de números pseudoaleatorios. Uno de estos generadores es el método de los cuadrados medios, que fue generado en 1946 y fue uno de los más populares, otro es el de GCL que en el presente es el más utilizado.
+
+
+
+\section{Descripción del trabajo}
+
+
+
+\section{Marco teórico}
+Existen diferentes generadores números pseudoaleatorios, uno de ellos es el método de los cuadrados medio que Jon Von Neuman sugirió usar las operaciones aritméticas de una computadora para generar secuencias de número pseudoaleatorios. Con este procedimiento se generan números pseudoaleatorios de 4 dígitos de la siguiente forma:
+\begin{enumerate}
+    \item Se inicia con una semilla de 4 dígitos.
+    \item La semilla se eleva al cuadrado, produciendo un número de 8 dígitos (si el resultado tiene menos de 8 dígitos se añaden ceros al inicio). 
+    \item Los 4 números del centro serán el siguiente número en la secuencia, y se devuelven como resultado. 
+\end{enumerate}
+Este generador cae rápidamente en ciclos cortos, por ejemplo, si aparece un cero se propagará por siempre.
+A inicios de 1950s se exploró el método y se propusieron mejoras, por ejemplo para evitar caer en cero. Metrópolis logró obtener una secuencia de 750,000 números distintos al usar semillas de 38 bits (usaba sistema binario), además la secuencia de Metrópolis mostraba propiedades deseables. No obstante, el método del valor medio no es considerado un método bueno por lo común de los ciclos cortos.
+
+Otro generador de número pseudoaleatorio es el de GCL que se introdujeron en 1949 por D.H. Lehemer, son muy populares y los más utilizados. Los generadores como rand y randu se denominan generadores congruenciales. Tienen la forma:
+\begin{equation}
+    X_{n+1} = (aX_{n}+c)mod(m)
+\end{equation}
+Donde a es el multiplicador, m el módulo, c el incremento y X la semilla.
+
+Vale la pena notar que un periodo grande no determina que el generador congruencial es bueno, debemos verificar que los números que generan se comportan como si fueran aleatorios.Los GCLs continúan siendo utilizados en muchas aplicaciones porque con una elección cuidadosa de los parámetros (la elección de los parámetros determina la calidad del generador) pueden pasar muchas pruebas de aleatoriedad, son rápidos y requieren poca memoria.
+
+Recordemos que lo que nos interesa para trabajar con un buen generador de números aleatorios es que la distribución de los números obtenidos tiene que ser uniforme, no deben de haber correlaciones entre los términos de la secuencia, el periodo debe ser lo más largo posible, y el algoritmo debe ser de ejecución rápida.
+
+El problema es saber que generador de números es mejor, ya que la razón es que si su generador de números aleatorios es bueno, es igualmente probable que aparezca cada posible secuencia de valores . Esto significa que un buen generador de números aleatorios también producirá secuencias que parecen no aleatorias para el ojo humano y que también fallan en cualquier prueba estadística a la que podamos exponerlo. 
+
+
+Es imposible probar definitivamente la aleatoriedad. Una forma de aproximar esto es tomar muchas secuencias de números aleatorios de un generador dado y someterlos a una batería de pruebas estadísticas. A medida que las secuencias pasan más pruebas, aumenta la confianza en la aleatoriedad de los números y también la confianza en el generador. Sin embargo, debido a que esperamos que algunas secuencias no parezcan aleatorias, debemos esperar que algunas de las secuencias fallen al menos en algunas de las pruebas. Sin embargo, si muchas secuencias fallan en las pruebas, deberíamos sospechar.
+
+Hay varias formas de examinar un generador de números aleatorios, las distintas pruebas estadisticas son: Analisis visual simple, Análisis estadístico de Charmaine Kenny y Análisis estadístico de Louise Foley.
+ 
+
+
+
+
+\section{Gráficas}
+
+
+\section{Conclusiones}
