@@ -8,6 +8,9 @@ if ! [ -f "$1" ]; then
   exit 1
 fi
 archivo_latex=$1
+if echo "$archivo_latex" | grep -i '^[a-z]:\\' > /dev/null; then  # se llamó desde Explorer en Windows (arrastrando y soltando)
+    archivo_latex=$(echo "$archivo_latex" | sed 's/\\/\//g')
+fi
 if echo "$archivo_latex" | grep "/" > /dev/null; then
     echo "La ruta de archivo incluye directorio/s"
     directorio="${archivo_latex%/*}"
