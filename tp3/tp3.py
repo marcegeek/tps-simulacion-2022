@@ -289,15 +289,17 @@ def test_frecuencia(lista, cant_bits):
     # Test de frecuencia (monobit)
     i = 0
     suma = 0
-    # convertir lista de enteros a lista de ceros y unos (extraer sus bits)
-    lista_bits = []
-    for n in lista:
-        bits = int2bits(n)
-        lbits = len(bits)
-        if lbits < cant_bits:
-            bits = [0] * (cant_bits - lbits) + bits
-        lista_bits.extend(bits)
-    lista = lista_bits
+    if min(lista) != 0 or max(lista) != 1:  # lista no es de solo ceros y unos
+        # convertir lista de enteros a lista de ceros y unos (extraer sus bits)
+        lista_bits = []
+        for n in lista:
+            lista_bits.extend(int2bits(n))
+            bits = int2bits(n)
+            lbits = len(bits)
+            if lbits < cant_bits:
+                bits = [0] * (cant_bits - lbits) + bits
+            lista_bits.extend(bits)
+        lista = lista_bits
     n = len(lista)
     for i in range(len(lista)):
         if lista[i] == 0:
