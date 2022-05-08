@@ -39,11 +39,12 @@ Estos métodos, que parecen generar números aleatorios, pero no lo hacen realme
 
 
 \section{Marco teórico}
-\input{marcoprueba}
-
 Existen diferentes tipos y familias de generadores números pseudoaleatorios, algunos de ellos son el método de los cuadrados medios y los generadores congruenciales lineales (y los generadores congruenciales en general).
 
-El período de un generador: es blabla repiten..., algunos repiten blabla blabla. Vale la pena notar que un período grande no determina que un generador es bueno, debemos verificar que los números que se generan se comportan como si fueran aleatorios.
+A grandes rasgos, un generador de números pseudoaleatorios se basa en aplicar una serie de operaciones aritméticas a un estado inicial (la \emph{semilla}) para obtener el siguiente, y así sucesivamente.
+
+\paragraph{Período de un generador}
+Debido a que el estado de un generador es finito, finalmente el mismo se repetirá en algún punto y habrá un ciclo que se repite infinitamente. La cantidad de iteraciones necesaria para que esto ocurra es lo que se denomina el \emph{período del generador}. Según el tipo de generador, sus parámetros y tal vez la semilla empleada puede ser que el mismo sea el máximo soportado por el tamaño de su estado o que sea menor. Normalmente es deseable que este sea suficientemente grande, idealmente el máximo posible. Sin embargo, vale la pena notar que un período grande no determina que un generador es bueno, debemos verificar que los números que se generan se comportan como si fueran aleatorios.
 
 Recordemos que lo que nos interesa para trabajar con un buen generador de números aleatorios es que la distribución de los números obtenidos tiene que ser uniforme, no deben de haber correlaciones entre los términos de la secuencia, el período debe ser lo más largo posible, y el algoritmo debe ser de ejecución rápida.
 
