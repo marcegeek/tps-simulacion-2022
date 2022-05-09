@@ -1,9 +1,9 @@
 \subsubsection{Prueba \texorpdfstring{$\chi^2$}{X2} de Pearson}
-La prueba $\chi^2$ de Pearson se considera una prueba no paramétrica que mide la discrepancia entre una distribución observada y otra teórica (bondad de ajuste), indicando en qué medida las diferencias existentes entre ambas, de haberlas, se deben al azar en el contraste de hipótesis.\cite{eswiki2022pearson}
+La prueba $\chi^2$ de Pearson se considera una prueba no paramétrica que mide la discrepancia entre una distribución observada y otra teórica (bondad de ajuste), indicando en qué medida las diferencias existentes entre ambas, de haberlas, se deben al azar en el contraste de hipótesis \cite{eswiki2022pearson}.
 
-Pone a prueba una hipótesis nula que establece que la distribución de frecuencia de ciertos eventos obervados en una muestra es consistente con una distribución teórica en particular. Los eventos considerados deben ser mutuamente excluyentes y tener una probabilidad total igual a 1. Un caso común para esto es donde cada uno de los eventos cubren un resultado de una variable categórica.\cite{enwiki2022pearson}
+Pone a prueba una hipótesis nula que establece que la distribución de frecuencia de ciertos eventos obervados en una muestra es consistente con una distribución teórica en particular. Los eventos considerados deben ser mutuamente excluyentes y tener una probabilidad total igual a 1. Un caso común para esto es donde cada uno de los eventos cubren un resultado de una variable categórica \cite{enwiki2022pearson}.
 
-La prueba $\chi^{2}$ de Pearson se usa para realizar distintos tipos de contrastes, como bondad de ajuste, homogeneidad, e independencia.\cite{enwiki2022pearson} Para nuestro estudio, como los valores generados son números enteros y deberían estar distribuidos de manera uniforme, llevamos a cabo pruebas de bondad de ajuste a la distribución uniforme discreta.
+La prueba $\chi^{2}$ de Pearson se usa para realizar distintos tipos de contrastes, como bondad de ajuste, homogeneidad, e independencia \cite{enwiki2022pearson}. Para nuestro estudio, como los valores generados son números enteros y deberían estar distribuidos de manera uniforme, llevamos a cabo pruebas de bondad de ajuste a la distribución uniforme discreta.
 
 Una prueba de bondad de ajuste determina si una distribución de frecuencia observada difiere de una distribución teórica dada.
 
@@ -13,17 +13,17 @@ H_{0}&: \text{no hay diferencia entre las distribuciones}\\
 H_{1}&: \text{hay diferencia entre las distribuciones}
 \end{align*}
 
-El procedimiento de cálculo de la prueba de $\chi^{2}$ para bondad de ajuste incluye los pasos siguientes\cite{enwiki2022pearson}:
+El procedimiento de cálculo de la prueba de $\chi^{2}$ para bondad de ajuste incluye los pasos siguientes \cite{enwiki2022pearson}:
 \begin{enumerate}
   \item Calcular el estádistico $\chi^{2}$, que se asemeja a una suma normalizada de los desvíos al cuadrado entre las frecuencias observadas y las teóricas (ecuación \ref{eq:estadistico-chi2}).
   \item Determinar los grados de libertad, \textbf{gl}, del estadístico: para nuestro caso, de bondad de ajuste, $\text{gl} = n - m$, donde $n$ es el número de valores distintos de la distribución, y $m$ es el número de parámetros ajustados para hacer que la distribución se ajuste mejor a las observaciones: el número de valores reducidos por el número de parámetros ajustados en la distribución.
-  \item Seleccionar el nivel deseado de confianza (nivel de significancia, valor p\footnote{Probabilidad de obtener resultados de prueba al menos tan extremos como los observados, bajo la suposición de que la hipótesis nula es correcta\cite{enwiki2022pvalue}} o el nivel alfa correspondiente) para el resultado de la prueba. Usualmente y para nuestro caso seleccionamos un alfa de 0.05, lo que corresponde a un 95\% de confianza.
+  \item Seleccionar el nivel deseado de confianza (nivel de significancia, valor p\footnote{Probabilidad de obtener resultados de prueba al menos tan extremos como los observados, bajo la suposición de que la hipótesis nula es correcta \cite{enwiki2022pvalue}.} o el nivel alfa correspondiente) para el resultado de la prueba. Usualmente y para nuestro caso seleccionamos un alfa de 0.05, lo que corresponde a un 95\% de confianza.
   \item Comparar $\chi^{2}$ con una distribución $\chi^{2}$ con \emph{gl} grados de libertad para obtener el valor p correspondiente y emplear y el nivel de confianza seleccionado (de un solo lado, puesto que la prueba es solamente en una dirección, esto es, ¿es el valor del estadístico de prueba mayor que valor el crítico? o ¿es el valor p menor o igual al alfa?), lo que en muchos casos da una buena aproximación de la distribución $\chi^{2}$.
   \item Rechazar o mantener la hipótesis nula de que la distribución de frecuencias observadas es la misma que la teórica empleando el valor p correspondiente. Si el valor p es menor o igual que el nivel alfa seleccionado, se rechaza la hipótesis nula ($H_{0}$) y se acepta la alternativa ($H_{1}$), con el nivel de confianza seleccionado. Si en cambio el valor p supera dicho umbral, no se puede llegar a una conclusión clara, y se mantiene la hipótesis nula (no la podemos rechazar), lo que no significa necesariamente que la misma sea aceptada.
 \end{enumerate}
 
 \paragraph{Prueba de bondad de ajuste - distribución discreta uniforme}
-En este caso se dividen $N$ observaciones entre $n$ valores\cite{enwiki2022pearson}. Una aplicación simple es probar la hipótesis de que, en la población general, los distintos valores se producirán con la misma frecuencia. La frecuencia teórica absoluta para cualquier valor (bajo la hipótesis nula de una distribucíón discreta uniforme) se calcula como
+En este caso se dividen $N$ observaciones entre $n$ valores \cite{enwiki2022pearson}. Una aplicación simple es probar la hipótesis de que, en la población general, los distintos valores se producirán con la misma frecuencia. La frecuencia teórica absoluta para cualquier valor (bajo la hipótesis nula de una distribucíón discreta uniforme) se calcula como
 \begin{equation*}
   E_i=\frac{N}{n},
 \end{equation*}
@@ -43,7 +43,7 @@ donde
   %\item $n$: el número de valores distintos
 \end{itemize}
 
-Finalmente, el estadístico $\chi^{2}$ puede entonces emplearse para calcular un valor p comparando el valor del estadístico con una distribución $\chi^{2}$.\cite{enwiki2022pearson} Esto es
+Finalmente, el estadístico $\chi^{2}$ puede entonces emplearse para calcular un valor p comparando el valor del estadístico con una distribución $\chi^{2}$ \cite{enwiki2022pearson}. Esto es
 \begin{equation}
   \label{eq:p-value}
   \text{valor p} = 1 - P(X \le \chi^2)
@@ -52,4 +52,4 @@ Finalmente, el estadístico $\chi^{2}$ puede entonces emplearse para calcular un
 Como ya se ha mencionado, si el valor p resulta menor o igual que el nivel de significancia $\alpha = 0.05$, rechazamos la hipótesis nula y concluimos con un 95\% de confianza que los valores generados difieren de manera estadísticamente significativa de una distribución discreta uniforme y por lo tanto no son aleatorios, en caso contrario, concluimos que no se puede rechazar la hipótesis nula y por lo tanto los valores pueden ser aleatorios.
 
 \paragraph{Implementación}
-En nuestro trabajo empleamos la función \texttt{scipy.stats.chisquare}, del paquete SciPy\cite{scipy2022chisquare}, que se encarga tanto de calcular el estadístico como el valor p correspondiente y ya tiene en cuenta por defecto la reducción en los grados de libertad $p = 1$.
+En nuestro trabajo empleamos la función \texttt{scipy.stats.chisquare}, del paquete SciPy \cite{scipy2022chisquare}, que se encarga tanto de calcular el estadístico como el valor p correspondiente y ya tiene en cuenta por defecto la reducción en los grados de libertad $p = 1$.
