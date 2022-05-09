@@ -119,6 +119,9 @@
     Realizadas las tiradas correspondientes, se muestra si el jugador ganó o perdió,
     y se exhibe su capital actual. Además se obtienen los resultados que son reflejados en las gráficas.
 
+    Las tres estrategias responden a los mismos datos generados aleatoriamente y realizan la misma apuesta (rojo o
+    negro) para compararlas justamente (que ninguna estrategia tenga corridas más favorables que otra).
+
     \section{Marco teórico}
 
     Frecuencia relativa: Magnitud que mide la cantidad de repeticiones que puede tener un suceso por unidad de tiempo.
@@ -147,7 +150,7 @@
       \includegraphics[width=0.8\textwidth]{generated/capital-martingala-no acotado.pdf}
 	  \caption{Flujo de caja}
 	\end{subfigure}
-	\caption{resultados obtenidos aplicando la estrategia martingala en una corrida de $n = 1000$ rondas (con capital infinito)}
+	\caption{resultados obtenidos aplicando la estrategia martingala en 25 corridas de $n = 1000$ rondas (con capital infinito)}
   \end{figure}
 
   \subsubsection{Estrategia d’Alembert}
@@ -163,7 +166,7 @@
       \includegraphics[width=0.8\textwidth]{generated/capital-d'alembert-no acotado.pdf}
       \caption{Flujo de caja}
     \end{subfigure}
-    \caption{resultados obtenidos aplicando la estrategia d’Alembert en una corrida de $n = 1000$ rondas (con capital infinito)}
+    \caption{resultados obtenidos aplicando la estrategia d’Alembert en 25 corridas de $n = 1000$ rondas (con capital infinito)}
   \end{figure}
 
   \subsubsection{Estrategia Fibonacci}
@@ -179,15 +182,13 @@
       \includegraphics[width=0.8\textwidth]{generated/capital-fibonacci-no acotado.pdf}
       \caption{Flujo de caja}
     \end{subfigure}
-    \caption{resultados obtenidos aplicando la estrategia Fibonacci en una corrida de $n = 1000$ rondas (con capital infinito)}
+    \caption{resultados obtenidos aplicando la estrategia Fibonacci en 25 corridas de $n = 1000$ rondas (con capital infinito)}
   \end{figure}
 
   \subsubsection{Resumen}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{generated/capital-no acotado.pdf}
-    \caption{flujo de caja de todas las estrategias con respecto al número de tiradas (capital infinito)}
-  \end{figure}
+
+  Vemos que las diferentes estrategias logran resultados muy beneficiosos, pero muy raramente y luego de perder todo el
+  capital reiteradas veces.
 
   \subsection{Con capital acotado}
   \subsubsection{Estrategia martingala}
@@ -203,7 +204,7 @@
 	    \includegraphics[width=0.8\textwidth]{generated/capital-martingala-acotado.pdf}
       \caption{Flujo de caja}
     \end{subfigure}
-    \caption{resultados obtenidos aplicando la estrategia martingala en una corrida de $n \approx 50$ rondas (con capital acotado)}
+    \caption{resultados obtenidos aplicando la estrategia martingala en 25 corridas (con capital acotado)}
   \end{figure}
 
   \subsubsection{Estrategia d’Alembert}
@@ -219,7 +220,7 @@
       \includegraphics[width=0.8\textwidth]{generated/capital-d'alembert-acotado.pdf}
       \caption{Flujo de caja}
     \end{subfigure}
-    \caption{resultados obtenidos aplicando la estrategia d’Alembert en una corrida de $n = 120$ rondas (con capital acotado)}
+    \caption{resultados obtenidos aplicando la estrategia d’Alembert en 25 corridas (con capital acotado)}
   \end{figure}
 
   \subsubsection{Estrategia Fibonacci}
@@ -233,15 +234,14 @@
       \centering
       \includegraphics[width=0.8\textwidth]{generated/capital-fibonacci-acotado.pdf}
     \end{subfigure}
-    \caption{resultados obtenidos aplicando la estrategia Fibonacci en una corrida de $n = 14$ rondas (con capital acotado)}
+    \caption{resultados obtenidos aplicando la estrategia Fibonacci en 25 corridas (con capital acotado)}
   \end{figure}
 
   \subsubsection{Resumen}
-  \begin{figure}[H]´
-    \centering
-    \includegraphics[width=0.5\textwidth]{generated/capital-acotado.pdf}
-    \caption{flujo de caja de todas las estrategias con respecto al número de tiradas (con capital acotado)}
-  \end{figure}
+
+  Si bien en algunos casos se ha llegado a mantener un capital creciente por más de 200 rondas y se han obtenido
+  ganancias de más de 60 veces el capital inicial, la verdad es que la mayoría de las rondas no se han extendido a más
+  de 40 rondas, y las ganancias de estos casos no han subido a más de 30 veces la apuesta inicial.
 
   \subsection{Resumen general de las tiradas}
   \begin{figure}[H]
@@ -260,13 +260,11 @@
 
 \section{Conclusiones}
 
-    Con lo obtenido y trabajado hasta el momento,
-    el sistema más ganador en las tiradas correspondientes, es el denominado ``Martingala'',
-    el cual posee el mayor porcentaje de victorias (52.9).
-    La diferencia también se puede observar en los graficos de capital de cada ronda de los tres sistemas, donde
-    en los otros sistemas, la curva decrece a comparación del primero. Se puede observar además, que el color rojo tiene más tendencia a salir,
-    y que además, el los números que han más han salido, son los números que van desde el 15 al 25.
+    Con lo obtenido y trabajado hasta el momento, queda demostrado que estas estrategias no ofrecen resultados
+    consistentes y su desempeño es tan azaroso como el juego al que están sujetas.
 
-
+    Otra observación que se puede hacer es que, aunque no son buenas estrategias a largo plazo, sí ofrecen una gran
+    posibilidad de obtener pocas ganancias en un corto plazo, evidenciado por la gran cantidad de veces que las
+    estrategias, aún con capital acotado, han sobrevivido y obtenido ganancias tras unas pocas rondas.
 
 \end{document}
