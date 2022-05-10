@@ -236,7 +236,6 @@ def rachas(l, l_median):
 def poker(l):
     """Bibliografía: https://idoc.pub/documents/idocpub-6klz2po2qvlg"""
     diferentes,un_par,dos_pares,tercia,full,poker,generala=0,0,0,0,0,0,0
-    print(l[1])
     for i in range(len(l)):
         digitos=str(l[i]*10**5)[:5]
 
@@ -263,15 +262,40 @@ def poker(l):
     lenl=len(l)
     # Frecuencias esperadas.
     fe_dif,fe_unp,fe_dos,fe_ter,fe_ful,fe_pok,fe_qui=lenl*0.3024,lenl*0.504,lenl*0.108,lenl*0.072,lenl*0.009,lenl*0.0045,lenl*0.0001
-    # 12.592 es el valor "Chi Cuadrado" con alpha=0.05 y 6 grados de confianza
-    return ('S' if 12.592 > (
-        (diferentes-fe_dif)**2/fe_dif
-        +(un_par-fe_unp)**2/fe_unp
-        +(dos_pares-fe_dos)**2/fe_dos
-        +(tercia-fe_ter)**2/fe_ter
-        +(full-fe_ful)**2/fe_ful
-        +(poker-fe_pok)**2/fe_pok
-        +(generala-fe_qui)**2/fe_qui
+    cantidades_a_tener_en_cuenta=[
+        [fe_qui,generala],
+        [fe_pok,poker],
+        [fe_ful,full],
+        [fe_ter,tercia],
+        [fe_dos,dos_pares],
+        [fe_unp,un_par],
+        [fe_dif,diferentes]
+    ]
+    acumulado=[0,0]
+    cantidades_finales=[]
+    for cantidad in cantidades_a_tener_en_cuenta:
+        if cantidad[1]<5:
+            acumulado[0]+=cantidad[0]
+            acumulado[1]+=cantidad[1]
+        else:
+            cantidades_finales.append(cantidad)
+    cantidad_de_cantidades_finales=len(cantidades_finales)
+    if cantidad_de_cantidades_finales==0:
+        return 'Pocos datos.'
+    if acumulado[0]!=0 and len(cantidades_finales)!=6: # Si solo una fue menor que 5, la ignoramos.
+        cantidades_finales.append(acumulado)
+    return ('S' if (
+            # Valores de chi cuadrado para significancia de 0.05 y diferentes grados de confianza.
+            [
+                3.841
+                ,5.991
+                ,7.815
+                ,9.488
+                ,11.070
+                ,12.592
+            ][len(cantidades_finales)-1]
+                   ) > (
+            sum([(el[0]-el[1])**2/el[0] for el in cantidades_finales ])
     ) else 'No s')+'e acepta la hipótesis de que los números están ordenados al azar.'
 
 
@@ -311,7 +335,7 @@ def test_frecuencia(lista):
 
 
 def main():
-    """nums = []
+    nums = []
     for i in range(8000):
         nums.append(random.random())
     print(poker(nums))
@@ -320,7 +344,7 @@ def main():
     for i in range(8000):
         nums.append(generador.rand())
     print(poker(nums))
-    return"""
+    return
 
     #Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
