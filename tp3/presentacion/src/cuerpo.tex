@@ -13,7 +13,23 @@ Un proceso que parece generar números pseudoaleatorios al azar, pero no lo hace
 
 
 \section{Descripción del trabajo}
+    Utilizando en Python 3.7, reproducimos y comparamos algoritmos generadores de números pseudoaleatorios, poniendo a prueba
+    la aleatoriedad de cada método por medio de diferentes pruebas.
 
+    Los algoritmos generadores de números pseudoaleatorios utilizados fueron:
+\begin{enumerate}
+    \item Método de los cuadrados medios.
+    \item Generador lineal congruencial (GLC), en sus formas:
+    \begin{enumerate}
+        \item Ansi
+        \item Randu
+    \end{enumerate}
+\end{enumerate}
+    Y las pruebas realizadas, fueron:
+\begin{enumerate}
+    \item Test de Chi Cuadrado
+    \item Test de póker
+\end{enumerate}
 
 
 \section{Marco teórico}
@@ -26,7 +42,7 @@ Existen diferentes generadores números pseudoaleatorios, uno de ellos es el mé
 Este generador cae rápidamente en ciclos cortos, por ejemplo, si aparece un cero se propagará por siempre.
 A inicios de 1950s se exploró el método y se propusieron mejoras, por ejemplo para evitar caer en cero. Metrópolis logró obtener una secuencia de 750,000 números distintos al usar semillas de 38 bits (usaba sistema binario), además la secuencia de Metrópolis mostraba propiedades deseables. No obstante, el método del valor medio no es considerado un método bueno por lo común de los ciclos cortos.
 
-Otro generador de número pseudoaleatorio es el de GCL que se introdujeron en 1949 por D.H. Lehemer, son muy populares y los más utilizados. Los generadores como rand y randu se denominan generadores congruenciales. Tienen la forma:
+Otro generador de número pseudoaleatorio es el de GLC que se introdujeron en 1949 por D.H. Lehemer, son muy populares y los más utilizados. Los generadores como rand y randu se denominan generadores congruenciales. Tienen la forma:
 \begin{equation}
     X_{n+1} = (aX_{n}+c)mod(m)
 \end{equation}
@@ -45,6 +61,7 @@ Hay varias formas de examinar un generador de números aleatorios, las distintas
  
 \subsection{Pruebas estadísticas}
 \input{chicuadrado}
+\input{poker}
 
 
 
