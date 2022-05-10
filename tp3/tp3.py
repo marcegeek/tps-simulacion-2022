@@ -259,15 +259,19 @@ def poker(l):
             tercia+=1
         elif 3 in cantidades:
             full+=1
+    lenl=len(l)
     # Frecuencias esperadas.
-    fe_dif,fe_unp,fe_dos,fe_res=len(l)*0.3024,len(l)*0.504,len(l)*0.108,len(l)*0.08155
-    # 7.815 es el valor "Chi Cuadrado" con p=0.05 y 3 grados de confianza
-    return ('No p' if 7.815 > (
+    fe_dif,fe_unp,fe_dos,fe_ter,fe_ful,fe_pok,fe_qui=lenl*0.3024,lenl*0.504,lenl*0.108,lenl*0.072,lenl*0.009,lenl*0.0045,lenl*0.0001
+    # 12.592 es el valor "Chi Cuadrado" con alpha=0.05 y 6 grados de confianza
+    return ('S' if 12.592 > (
         (diferentes-fe_dif)**2/fe_dif
         +(un_par-fe_unp)**2/fe_unp
         +(dos_pares-fe_dos)**2/fe_dos
-        +((tercia+full+poker+generala)-fe_res)**2/fe_res
-    ) else 'P')+'odemos decir que estos números no vinieron de una distribución uniforme.'
+        +(tercia-fe_ter)**2/fe_ter
+        +(full-fe_ful)**2/fe_ful
+        +(poker-fe_pok)**2/fe_pok
+        +(generala-fe_qui)**2/fe_qui
+    ) else 'No s')+'e acepta la hipótesis de que los números están ordenados al azar.'
 
 
 def main():
