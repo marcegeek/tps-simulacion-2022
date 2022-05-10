@@ -1,0 +1,29 @@
+\subsubsection{Prueba de Póker}
+Esta prueba examina en forma individual los dígitos del número pseudoaleatorio generado. La forma como esta prueba se
+realiza es tomando 5 dígitos a al vez y clasificándolos como : Par, dos pares, tercia, póker, full, quintilla, y todos
+diferentes.
+
+Las probabilidades para cada una de las manos del póker diferentes se muestran enseguida:
+
+\begin{enumerate}
+    \item Todos diferentes = 0.3024
+    \item Un par = 0.504
+    \item Dos pares = 0.108
+    \item Tercia = 0.072
+    \item Póker = 0.009
+    \item Full = 0.0045
+    \item Quintilla = 0.0001
+\end{enumerate}
+
+Con las probabilidades anteriores y con el número de números pseudoaleatorios generados, se puede calcular la frecuencia
+esperada de cada posible resultado, la cual al compararse con la frecuencia observada, produce el estadístico:
+
+$X^7_0 = \sum_{i=1}^{7} (FO_i-FE_i)^2/FE_i$
+
+Si $X^2_0 < X^2_(\alpha,6)$, entonces los números pasan la prueba, y no podemos rechazar la hipótesis de que los números
+fueron generados aleatoriamente e independientemente.
+
+\paragraph{Implementación}
+En este trabajo utilizamos 5 números de cada muestra y los 7 casos descriptos más arriba.
+
+Sin embargo, juntamos las posibilidades de tercia, poker, full y quintilla ya que la frecuencia relativa es muy poca.
