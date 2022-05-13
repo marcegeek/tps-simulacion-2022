@@ -18,9 +18,9 @@ Las probabilidades para cada una de las manos del póker diferentes se muestran 
 Con las probabilidades anteriores y con el número de números pseudoaleatorios generados, se puede calcular la frecuencia
 esperada de cada posible resultado, la cual al compararse con la frecuencia observada, produce el estadístico:
 
-$X^7_0 = \sum_{i=1}^{7} (FO_i-FE_i)^2/FE_i$
+$X^7_0 = \sum_{i=1}^{7} {(FO_i-FE_i)^2 \over FE_i}$
 
-Si $X^2_0 < X^2_(\alpha,6)$, entonces los números pasan la prueba, y no podemos rechazar la hipótesis de que los números
+Si $X^2_0 < X^2_{\alpha,6}$, entonces los números pasan la prueba, y no podemos rechazar la hipótesis de que los números
 fueron generados aleatoriamente e independientemente.
 
 \paragraph{Implementación}
