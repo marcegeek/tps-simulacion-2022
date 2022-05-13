@@ -7,6 +7,7 @@ import math
 import statistics as st
 from collections import Counter
 from scipy import stats
+from chisquare import chisquare  # vieja versión de scipy.stats.chisquare
 
 
 class Generador(abc.ABC):
@@ -204,18 +205,20 @@ def grafico_violin(lista):
 
 
 def grafico_histograma(lista):
-    intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
-    plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
+    #intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
+    #plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
+    plt.hist(lista, bins='sqrt', color='#F2AB6D')
     plt.title('Histograma de números generados')
     plt.xlabel('Número')
     plt.ylabel('Frecuencia absoluta')
-    plt.xticks(intervalos)
+    #plt.xticks(intervalos)
     plt.show()
 
 
-def rachas(l, l_median):
+def rachas(l):
     """Bibliografía: https://es.acervolima.com/ejecuta-una-prueba-de-aleatoriedad-en-python/"""
     runs, n1, n2 = 0, 0, 0
+    l_median = st.median(l)
     for i in range(len(l)):
         if (l[i] >= l_median > l[i - 1]) or \
                 (l[i] < l_median <= l[i - 1]):
@@ -235,6 +238,11 @@ def rachas(l, l_median):
     return pvalue
     #print("La frecuencia es:" + str(abs(z)))
     #return "No es aleatorio" if abs(z) > 1.96 else "Puede ser aleatorio"
+
+
+def chi_cuadrado(obs, exp):
+    pvalue = chisquare(obs, exp)[1]
+    return pvalue
 
 
 def poker(l):
@@ -285,29 +293,26 @@ def poker(l):
             cantidades_finales.append(cantidad)
     cantidad_de_cantidades_finales=len(cantidades_finales)
     if cantidad_de_cantidades_finales==0:
-        return 'Pocos datos.'
+        return 0.  # Pocos datos, asumimos falla el test -> devolvemos p-value = 0
     if acumulado[0]!=0 and len(cantidades_finales)!=6: # Si solo una fue menor que 5, la ignoramos.
         cantidades_finales.append(acumulado)
-    return ('S' if (
-            # Valores de chi cuadrado para significancia de 0.05 y diferentes grados de confianza.
-            [
-                3.841
-                ,5.991
-                ,7.815
-                ,9.488
-                ,11.070
-                ,12.592
-            ][len(cantidades_finales)-1]
-                   ) > (
-            sum([(el[0]-el[1])**2/el[0] for el in cantidades_finales ])
-    ) else 'No s')+'e acepta la hipótesis de que los números están ordenados al azar.'
+    tabla_obs_exp = [
+        [],  # valores observados
+        []   # valores esperados
+    ]
+    for exp, obs in cantidades_finales:
+        tabla_obs_exp[0].append(obs)
+        tabla_obs_exp[1].append(exp)
+    # test de chi cuadrado, los grados de libertad se calculan automáticamente
+    pvalue = chi_cuadrado(tabla_obs_exp[0], tabla_obs_exp[1])
+    return pvalue
 
 
 def test_chicuadrado_uniforme(valores, rango):
     """Test de chi cuadrado de bondad de ajuste para distribución uniforme discreta"""
     frecs_abs = [valores.count(x) for x in rango]
     frecs_abs_exp = [len(valores)/len(rango)] * len(rango)
-    pvalue = stats.chisquare(frecs_abs, frecs_abs_exp)[1]
+    pvalue = chi_cuadrado(frecs_abs, frecs_abs_exp)
     return pvalue
 
 
@@ -343,16 +348,18 @@ def evaluar_pvalue(pvalue, alpha=0.05):
         return "Puede ser aleatorio"
 
 
-def probar_generador(generador, nombre, n_min=0, n_max=100, size=1000):
+def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000):
     nums = [generador.randint(n_min, n_max) for _ in range(size)]
     grafico_puntos(size, nums)
     grafico_histograma(nums)
     grafico_caja(nums)
     grafico_violin(nums)
-    rachas_pvalue = rachas(nums, st.median(nums))
+    rachas_pvalue = rachas(nums)
     chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
+    poker_pvalue = poker(nums)
     print(f"Por test de rachas, el generador {nombre}: {evaluar_pvalue(rachas_pvalue)}")
     print(f"Por test de chi cuadrado, el generador {nombre}: {evaluar_pvalue(chi2_pvalue)}")
+    print(f"Por test de póker, el generador {nombre}: {evaluar_pvalue(poker_pvalue)}")
 
 
 def main():
@@ -370,8 +377,8 @@ def main():
     """#Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
     lista2=[2,4,2,5,1,6,2]
-    print("Lista 1: " + evaluar_pvalue(rachas(lista, st.median(lista))))
-    print("Lista 2: " + evaluar_pvalue(rachas(lista2, st.median(lista2))))"""
+    print("Lista 1: " + evaluar_pvalue(rachas(lista)))
+    print("Lista 2: " + evaluar_pvalue(rachas(lista2)))"""
 
     """Generador GCL ANSI C"""
     probar_generador(GCLAnsiC(), "GCL ANSI C")
