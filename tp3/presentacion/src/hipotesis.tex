@@ -1,0 +1,28 @@
+Las pruebas estadísticas se llevan a cabo mediante la parte de la inferencia estadística conocida como \emph{prueba o test de hipótesis}.
+
+Una \textbf{hipótesis estadística}, o simplemente \emph{hipótesis}, es una afirmación acerca del valor de un único parámetro (característica de la población o de una distribución de probabilidad), de los valores de varios parámetros, o de la forma de toda una distribución de probabilidad \cite{devore2015probability}. Cuando se lleva a cabo una prueba de hipótesis, se ponen en consideración dos hipótesis contradictorias. El objetivo es decidir, basándose en la información muestral, cuál de las dos es correcta.
+
+En la prueba de hipótesis estadísticas, el problema se formula de manera que una de las afirmaciones se vea inicialmente favorecida. Esta afirmación no se rechaza en favor de la alternativa salvo que la evidencia la contradiga y provea un fuerte respaldo por la alternativa \cite{devore2015probability}.
+
+\paragraph{Hipótesis nula y alternativa}
+La \textbf{hipótesis nula}, denominada $H_{0}$, es la afirmación que inicialmente se asume como verdadera \cite{devore2015probability}. La \textbf{hipótesis alternativa}, denominada $H_{1}$, es la afirmación contraria a $H_{0}$. La hipótesis nula será rechazada en favor de la alternativa solo si la evidencia muestral sugiere que $H_{0}$ es falsa. Si la muestra no la contradice significativamente, se puede seguir creyendo en su verosimiltud. Las dos conclusiones posibles son entonces \emph{rechazar $H_{0}$} o \emph{no rechazar $H_{0}$}.
+
+Una \textbf{prueba de hipótesis} es un método para decidir si la hipótesis nula debería ser rechazada, usando datos de una muestra \cite{devore2015probability}. Ésta debería rechazarse solo si los datos de la muestra sugieren fuertemente que la hipótesis nula no es cierta. En ausencia de tal evidencia, $H_{0}$ no debería ser rechazada, puesto que aun es lo bastante plausible.
+
+$H_{0}$ se establece generalmente como una afirmación de igualdad. Si $\theta$ denota al parámetro de interés, la hipótesis nula tendrá la forma  $H_{0}: \theta = \theta_{0}$, donde  $\theta_{0}$ es un número conocido como el \emph{valor nulo}  del parámetro (el valor de $\theta$ afirmado por la hipótesis nula).
+
+La alternativa a la hipótesis nula $H_{0}: \theta=\theta_{0}$ tendrá una de las formas siguientes:
+\begin{enumerate}
+  \item $H_{1}: \theta > \theta_{0}$ la hipótesis nula implícita es $\theta \le \theta_{0}$,
+  \item $H_{1}: \theta < \theta_{0}$ la hipótesis nula implícita es $\theta \ge \theta_{0}$) o
+  \item $H_{1}: \theta \ne \theta_{0}$
+\end{enumerate}
+
+\paragraph{Estadístico de prueba}
+Un estadístico de prueba es una función sobre los datos de la muestra que se utiliza como base para decidir si se rechaza $H_{0}$ \cite{devore2015probability}. El estadístico seleccionado debe distinguir efectivamente las dos hipótesis. Es decir, los valores del estadístico usualmente observados cuando $H_{0}$ es verdadera deberían ser muy diferentes de los típicamente observados cuando no lo es.
+
+\paragraph{Valor p}
+El \emph{valor p} o \emph{p-value} es la probabilidad, calculada asumiendo que la hipótesis nula es verdadera, de obtener un valor del estadístico de prueba al menos tan contradictorio con $H_{0}$ como el calculado con los datos disponibles de la muestra \cite{devore2015probability}. En un análisis de prueba de hipótesis se arriba a una conclusión seleccionando un número $\alpha$, denominado el nivel de significancia de la prueba, que es razonablemente cercano a 0. Entonces $H_{0}$ será rechazada en favor de $H_{1}$ si $\text{valor p} \le \alpha$, mientras que $H_{0}$ no será rechazada (todavía considerada verosímil) si $\text{valor p} < \alpha$. Los niveles de significancia más usados en la práctica son (en orden) $\alpha = 0.05;\,0.01;\,0.001;\;\text{y}\;0.10$.
+
+\paragraph{La distribución del valor p}
+  Cuando se repite un experimento varias veces o se obtienen varias muestras de una misma población, al realizar pruebas de hipótesis, se obtiene un valor p para cada repetición del experimento. Como el valor p está basado en el análisis de variables aleatorias, es también una variable aleatoria, que para estadísticos de prueba continuos se distribuye de manera uniforme sobre el intervalo [0, 1] cuando la hipótesis nula es verdadera, sin importar el tamaño de la muestra \cite{hung1997behavior}. En contraste, la distribución del valor p bajo la hipótesis alternativa es una función del tamaño de la muestra y el valor verdadero o el rango de valores verdaderos del parámetro bajo prueba. Para el caso de la prueba $\chi^{2}$ de Pearson, aunque la distribución del estadístico es discreta, el valor p se calcula basado en su distribución $\chi^{2}$ asintótica \cite{wang2019p}. Por lo tanto, el valor p se distribuye de manera prácticamente uniforme cuando el tamaño de la muestra es lo suficientemente grande.
