@@ -6,7 +6,7 @@ import random
 import math
 import statistics as st
 from collections import Counter
-from scipy.stats import chisquare
+from scipy import stats
 
 
 class Generador(abc.ABC):
@@ -228,9 +228,13 @@ def rachas(l, l_median):
     stan_dev = math.sqrt((2 * n1 * n2 * (2 * n1 * n2 - n1 - n2)) / \
                          (((n1 + n2) ** 2) * (n1 + n2 - 1)))
 
+    if stan_dev == 0:
+        return 0.0
     z = (runs - runs_exp) / stan_dev
-    print("La frecuencia es:" + str(abs(z)))
-    return "No es aleatorio" if abs(z) > 1.96 else "Puede ser aleatorio"
+    pvalue = stats.norm.cdf(-abs(z)) * 2
+    return pvalue
+    #print("La frecuencia es:" + str(abs(z)))
+    #return "No es aleatorio" if abs(z) > 1.96 else "Puede ser aleatorio"
 
 
 def poker(l):
@@ -299,12 +303,12 @@ def poker(l):
     ) else 'No s')+'e acepta la hipótesis de que los números están ordenados al azar.'
 
 
-def test_chicuadrado_uniforme(valores, rango, alpha=0.05):
+def test_chicuadrado_uniforme(valores, rango):
     """Test de chi cuadrado de bondad de ajuste para distribución uniforme discreta"""
     frecs_abs = [valores.count(x) for x in rango]
     frecs_abs_exp = [len(valores)/len(rango)] * len(rango)
-    chi2, pvalue = chisquare(frecs_abs, frecs_abs_exp)
-    return "No es aleatorio" if pvalue < alpha else "Puede ser aleatorio"
+    pvalue = stats.chisquare(frecs_abs, frecs_abs_exp)[1]
+    return pvalue
 
 
 def int2bits(n):
@@ -329,14 +333,30 @@ def test_frecuencia(lista):
             suma = suma + lista[i]
     suma_abs = abs(suma)/math.sqrt(n)
     p_value = math.erfc(suma_abs/math.sqrt(2))
-    if p_value < 0.01:
+    return p_value
+
+
+def evaluar_pvalue(pvalue, alpha=0.05):
+    if pvalue <= alpha or abs(pvalue - alpha) < 0.00001:
         return "No es aleatorio"
     else:
         return "Puede ser aleatorio"
 
 
+def probar_generador(generador, nombre, n_min=0, n_max=100, size=1000):
+    nums = [generador.randint(n_min, n_max) for _ in range(size)]
+    grafico_puntos(size, nums)
+    grafico_histograma(nums)
+    grafico_caja(nums)
+    grafico_violin(nums)
+    rachas_pvalue = rachas(nums, st.median(nums))
+    chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
+    print(f"Por test de rachas, el generador {nombre}: {evaluar_pvalue(rachas_pvalue)}")
+    print(f"Por test de chi cuadrado, el generador {nombre}: {evaluar_pvalue(chi2_pvalue)}")
+
+
 def main():
-    nums = []
+    """nums = []
     for i in range(8000):
         nums.append(random.random())
     print(poker(nums))
@@ -345,63 +365,26 @@ def main():
     for i in range(8000):
         nums.append(generador.rand())
     print(poker(nums))
-    return
+    return"""
 
-    #Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
+    """#Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
     lista2=[2,4,2,5,1,6,2]
-    print("Lista 1: " + rachas(lista, st.median(lista)))
-    print("Lista 2: " + rachas(lista2, st.median(lista2)))
+    print("Lista 1: " + evaluar_pvalue(rachas(lista, st.median(lista))))
+    print("Lista 2: " + evaluar_pvalue(rachas(lista2, st.median(lista2))))"""
 
-    """Generador GCL AnsiC"""
-    generador = GCLAnsiC(10)
-    nums = []
-    for i in range(8000):
-        nums.append(generador.randint(0, 100))
-    grafico_puntos(8000, nums)
-    grafico_histograma(nums)
-    grafico_caja(nums)
-    grafico_violin(nums)
-    print("Por test de rachas, el generador GCL AsinC: " + rachas(nums, st.median(nums)))
-    print("Por test de chi cuadrado, el generador GCL ANSI C: " + test_chicuadrado_uniforme(nums, range(0, 101)))
+    """Generador GCL ANSI C"""
+    probar_generador(GCLAnsiC(), "GCL ANSI C")
 
     """Generador GCL parámetros arbitrarios (m=2**31, a=1000, c=151)"""
-    generador = GeneradorGCL(2**31, 1000, 151)
-    nums_gcl_arbitrario = generador.randint(0, 100, size=8000)
-    grafico_puntos(len(nums_gcl_arbitrario), nums_gcl_arbitrario)
-    grafico_histograma(nums_gcl_arbitrario)
-    grafico_caja(nums_gcl_arbitrario)
-    grafico_violin(nums_gcl_arbitrario)
-    print("Por test de rachas, el generador GCL con (m=2**31, a=1000, c=151): " + rachas(nums_gcl_arbitrario, st.median(nums_gcl_arbitrario)))
-    print("Por test de chi cuadrado, el generador GCL con (m=2**31, a=1000, c=151): " + test_chicuadrado_uniforme(nums_gcl_arbitrario, range(0, 101)))
+    probar_generador(GeneradorGCL(2**31, 1000, 151), "GCL con (m=2**31, a=1000, c=151)")
 
     """Generador de Python"""
-    nums_python = []
-    for i in range(8000):
-        nums_python.append(random.randint(0, 100))
-    grafico_puntos(8000, nums_python)
-    grafico_histograma(nums_python)
-    grafico_caja(nums_python)
-    grafico_violin(nums_python)
-    print("Por test de rachas, el generador MT19937: " + rachas(nums_python, st.median(nums_python)))
-    print("Por test de chi cuadrado, el generador MT19937: " + test_chicuadrado_uniforme(nums_python, range(0, 101)))
+    probar_generador(random, "MT19937 de Python")
 
     """Generador Metodos Cuadrados"""
-    met_cuad = []
-    digitos = 4
-    semilla = random.randint(0, 10 ** digitos - 1)
-    generador = GeneradorCuadrados(semilla=semilla, digitos=digitos)
-    print('semilla: ' + str(semilla))
-    print("Cantidad de dígitos: ", digitos)
-    for i in range(100):
-        met_cuad.append(generador.rand())
-
-    grafico_puntos(100, met_cuad)
-    plt.hist(met_cuad, bins='sqrt')
-    grafico_caja(met_cuad)
-    grafico_violin(met_cuad)
-    print("Por test de rachas, el generador de Cuadrados Medios: " + rachas(met_cuad, st.median(met_cuad)))
-    print("Por test de chi cuadrado, el generador Cuadrados Medios: " + test_chicuadrado_uniforme(met_cuad, range(0, 10**digitos)))
+    probar_generador(GeneradorCuadrados(digitos=4), "Cuadrados Medios (4 dígitos)")
+    probar_generador(GeneradorCuadrados(digitos=10), "Cuadrados Medios (10 dígitos)")
 
 
 if __name__ == '__main__':
