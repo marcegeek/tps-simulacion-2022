@@ -316,20 +316,21 @@ def test_chicuadrado_uniforme(valores, rango):
     return pvalue
 
 
-def int2bits(n):
-    return [int(i) for i in bin(n)[2:]]
+def int2bits(n, maxbits):
+    return [int(i) for i in bin(n)[2:].zfill(maxbits)]
 
 
-def test_frecuencia(lista):
+def test_frecuencia_monobit(lista):
     """Bibliografia: http://synnick.blogspot.com/2012/03/tarea-3-modelado-y-simulacion.html"""
     # Test de frecuencia (monobit)
     i = 0
     suma = 0
     if min(lista) != 0 or max(lista) != 1:  # lista no es de solo ceros y unos
         # convertir lista de enteros a lista de ceros y unos (extraer sus bits)
+        maxbits = max(lista).bit_length()
         lista_bits = []
         for n in lista:
-            lista_bits.extend(int2bits(n))
+            lista_bits.extend(int2bits(n, maxbits))
         lista = lista_bits
     n = len(lista)
     for i in range(len(lista)):
@@ -357,9 +358,11 @@ def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000):
     rachas_pvalue = rachas(nums)
     chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
     poker_pvalue = poker(nums)
+    frecuencia_monobit_pvalue = test_frecuencia_monobit(nums)
     print(f"Por test de rachas, el generador {nombre}: {evaluar_pvalue(rachas_pvalue)}")
     print(f"Por test de chi cuadrado, el generador {nombre}: {evaluar_pvalue(chi2_pvalue)}")
     print(f"Por test de póker, el generador {nombre}: {evaluar_pvalue(poker_pvalue)}")
+    print(f"Por test de frecuencia (monobit), el generador {nombre}: {evaluar_pvalue(frecuencia_monobit_pvalue)}")
 
 
 def main():
