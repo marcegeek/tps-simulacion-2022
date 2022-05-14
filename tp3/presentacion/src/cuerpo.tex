@@ -24,19 +24,23 @@ Estos métodos, que parecen generar números aleatorios, pero no lo hacen realme
 
     Los algoritmos generadores de números pseudoaleatorios utilizados fueron:
 \begin{enumerate}
-    \item Método de los cuadrados medios.
-    \item Generador lineal congruencial (GLC), en sus formas:
+    \item Método de los cuadrados medios, en dos variantes:
+      \begin{enumerate}
+        \item 4 dígitos
+        \item 10 dígitos (aproximadamente 34 bits como máximo, que da un rango similar a los GCL estudiados)
+      \end{enumerate}
+    \item Generador congruencial lineal (GCL), en sus formas:
     \begin{enumerate}
-        \item Ansi
-        \item Randu
+        \item Parámetros de glibc ($m=2^{31},a=1103515245,c=12345$)
+        \item Parámetros arbitrarios ($m=2^{31},a=1000,c=151$)
     \end{enumerate}
 \end{enumerate}
     Y las pruebas realizadas, fueron:
 \begin{enumerate}
-    \item Test de Chi Cuadrado
-    \item Test de Póker
-    \item Test de Rachas
-    \item Test de Frecuencia (Monobit)
+    \item Test de $\chi^{2}$
+    \item Test de póker
+    \item Test de rachas
+    \item Test de frecuencia (monobit)
 \end{enumerate}
 
 
@@ -78,7 +82,7 @@ Donde $a$ es el multiplicador, $m$ el módulo, $c$ el incremento y $X$ la semill
 
 Los GCLs continúan siendo utilizados en muchas aplicaciones porque con una elección cuidadosa de los parámetros (la elección de los parámetros determina la calidad del generador) pueden pasar muchas pruebas de aleatoriedad, son rápidos y requieren poca memoria \cite{ortiz2018numeros}.\footnote{Quizás esto no sea tan relevante hoy en día, pero sí que lo es especialmente en dispositivos muy limitados (como pueden ser los microcontroladores).}
 
-Hay distintas variantes de este generador según sus parámetros... Lehmer Parker-Miller, minstd, rand, randu, etc.
+Según los parámetros de este generador, existen distintas variantes, cada una con sus propiedades particulares. Algunas de estas variantes son: la sugerida como ejemplo por ANSI C/ISO 9899:1990 (y 1999, 2011, 2017) ($m=2^{31},a=1103515245,c=12345$)\footnote{Aunque en este caso solamente devuelve los 15 bits más significativos de los valores generados}, el implementado por la biblioteca glibc (usado por GCC) que emplea los mismos parámetros que el de ANSI C (sin truncar los bits) \cite{enwiki2022linear}. Otra variante es el infame\cite{knuth1997seminumerical} generador RANDU de Fortran ($m=2^{31},a=65539,c=0$), que ya no se utiliza.
 
 \subsection{Pruebas estadísticas}
 \input{hipotesis}
