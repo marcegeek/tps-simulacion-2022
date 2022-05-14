@@ -349,12 +349,12 @@ def evaluar_pvalue(pvalue, alpha=0.05):
         return "Puede ser aleatorio"
 
 
-def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000):
+def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000,rondas=10):
     nums = [generador.randint(n_min, n_max) for _ in range(size)]
-    grafico_puntos(size, nums)
+    """grafico_puntos(size, nums)
     grafico_histograma(nums)
     grafico_caja(nums)
-    grafico_violin(nums)
+    grafico_violin(nums)"""
     rachas_pvalue = rachas(nums)
     chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
     poker_pvalue = poker(nums)
@@ -383,7 +383,12 @@ def main():
     print("Lista 1: " + evaluar_pvalue(rachas(lista)))
     print("Lista 2: " + evaluar_pvalue(rachas(lista2)))"""
 
+    # Histograma de valores p
+    # Test de hipótesis de uniformidad de valores p
+    # Proporción de aceptación de hipótesis nula
+
     """Generador GCL ANSI C"""
+    #[valores_p,proporciones_aceptacion],\
     probar_generador(GCLAnsiC(), "GCL ANSI C")
 
     """Generador GCL parámetros arbitrarios (m=2**31, a=1000, c=151)"""
