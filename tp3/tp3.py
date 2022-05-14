@@ -159,6 +159,43 @@ class GeneradorCuadrados(Generador):
         return 10 ** self.digitos - 1
 
 
+class GeneradorPyMT19937:
+    """
+    Wrapper para el generador MT19937 de Python
+    """
+
+    def __init__(self, semilla=None):
+        self._rand_max = 2**32 - 1
+        self._random = random.Random(semilla)
+
+    def random(self, size=None):
+        def func():
+            return self._random.random()
+
+        if size is None:
+            return func()
+        return [func() for _ in range(size)]
+
+    def randint(self, a, b, size=None):
+        def func():
+            return self._random.randint(a, b)
+
+        if size is None:
+            return func()
+        return [func() for _ in range(size)]
+
+    def rand(self, size=None):
+        def func():
+            return self._random.randint(0, self._rand_max)
+
+        if size is None:
+            return func()
+        return [func() for _ in range(size)]
+
+    def seed(self, semilla=None):
+        self._random.seed(semilla)
+
+
 def test():
     semilla = 10
 
@@ -323,8 +360,6 @@ def int2bits(n, maxbits):
 def test_frecuencia_monobit(lista):
     """Bibliografia: http://synnick.blogspot.com/2012/03/tarea-3-modelado-y-simulacion.html"""
     # Test de frecuencia (monobit)
-    i = 0
-    suma = 0
     if min(lista) != 0 or max(lista) != 1:  # lista no es de solo ceros y unos
         # convertir lista de enteros a lista de ceros y unos (extraer sus bits)
         maxbits = max(lista).bit_length()
@@ -332,11 +367,14 @@ def test_frecuencia_monobit(lista):
         for n in lista:
             lista_bits.extend(int2bits(n, maxbits))
         lista = lista_bits
+    else:  # lista ya es binaria
+        lista = lista.copy()
     n = len(lista)
+    suma = 0
     for i in range(len(lista)):
         if lista[i] == 0:
             lista[i] = -1
-            suma = suma + lista[i]
+        suma += lista[i]
     suma_abs = abs(suma)/math.sqrt(n)
     p_value = math.erfc(suma_abs/math.sqrt(2))
     return p_value
@@ -349,8 +387,8 @@ def evaluar_pvalue(pvalue, alpha=0.05):
         return "Puede ser aleatorio"
 
 
-def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000):
-    nums = [generador.randint(n_min, n_max) for _ in range(size)]
+def probar_generador(generador, nombre, size=1000):
+    nums = generador.rand(size=size)  # usar los rangos completos
     grafico_puntos(size, nums)
     grafico_histograma(nums)
     grafico_caja(nums)
@@ -390,7 +428,7 @@ def main():
     probar_generador(GeneradorGCL(2**31, 1000, 151), "GCL con (m=2**31, a=1000, c=151)")
 
     """Generador de Python"""
-    probar_generador(random, "MT19937 de Python")
+    probar_generador(GeneradorPyMT19937(), "MT19937 de Python")
 
     """Generador Metodos Cuadrados"""
     probar_generador(GeneradorCuadrados(digitos=4), "Cuadrados Medios (4 dígitos)")
