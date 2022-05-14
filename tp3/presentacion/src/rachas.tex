@@ -1,0 +1,23 @@
+\subsubsection{Prueba de rachas}
+El contraste de rachas permite verificar la hipótesis nula de que la muestra es aleatoria, es decir, si las sucesivas observaciones son independientes. Este contraste se basa en el número de rachas que presenta una muestra. Una racha se define como una secuencia de valores muestrales con una característica común precedida y seguida por valores que no presentan esa característica. Así, se considera una racha la secuencia de k valores consecutivos superiores o iguales a la media muestral (o a la mediana o a la moda, o a cualquier otro valor de corte) siempre que estén precedidos y seguidos por valores inferiores a la media muestral (o a la mediana o a la moda, o a cualquier otro valor de corte).
+
+El número total de rachas en una muestra proporciona un indicio de si hay o no aleatoriedad en la muestra. Un número reducido de rachas (el caso extremo es 2) es indicio de que las observaciones no se han extraído de forma aleatoria, los elementos de la primera racha proceden de una población con una determinada característica (valores mayores o menores al punto de corte) mientras que los de la segunda proceden de otra población. De forma idéntica un número excesivo de rachas puede ser también indicio de no aleatoriedad de la muestra.
+
+Si la muestra es suficientemente grande y la hipótesis de aleatoriedad es cierta, la distribución muestral del número de rachas, R, puede aproximarse mediante una distribución normal de parámetros $\mu_R$ y $\sigma_R$:
+
+$\mu_R={2n_1 n_2 \over n}+1$
+
+$\sigma_R=\sqrt {2n_1 n_2(2n_1 n_2-n) \over n^2(n-1)}$
+
+donde n1 es el número de elementos de una clase, n2 es el número de elementos de la otra clase y n es el número total de observaciones.
+
+Tras esto, si estandarizamos el valor:
+
+$Z={R-\mu_R \over \sigma_R}$
+
+podemos usar la función de distribución acumulada para obtener el valor p.
+
+\paragraph{Implementación}
+La función que implementa el test de rachas realiza exactamente este algoritmo, utilizando la librería st incluída en
+Python para calcular la mediana de la tirada de números aleatorios y el módulo stat de scipy para evaluar el valor z
+con la función de distribución normal.
