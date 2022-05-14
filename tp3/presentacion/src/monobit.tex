@@ -1,0 +1,16 @@
+\subsubsection{Prueba monobit}
+Esta prueba se concentra en la proporción de zeros y unos de una secuencia entera. El propósito es encontrar si el número de unos y zeros en una secuencia es aproximadamente el mismo, como se esperaría de una verdadera secuencia aleatoria.
+
+Para ellos calculamos la siguiente prueba estadística:
+
+$S_{obs}={|n_1-n_0| \over \sqrt {n}}$
+
+Donde $n_1$ es la cantidad de 1s, $n_0$ es la cantidad de 0s, y $n$ es la cantidad total de bits.
+
+Luego calculamos el valor p con la función error complementario:
+
+$p = 1-{{\frac {2}{\sqrt {\pi }}}\int _{0}^{S_{obs}/\sqrt{2}}e^{-t^{2}}dt}$
+
+\paragraph{Implementación}
+Para la implementación de esta prueba, tras transformar los números generados en bits y contar las cantidades,
+utilizamos varias funciones del módulo Math de Python para poder conseguir el valor p.
