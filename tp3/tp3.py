@@ -252,6 +252,17 @@ def grafico_histograma(lista):
     plt.show()
 
 
+def grafico_histograma_p(valores_p,nombre_generador):
+    #intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
+    #plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
+    # len_valores_p=len(valores_p)
+    plt.hist(valores_p, bins='sqrt', color='#F2AB6D')
+    plt.title('Histograma de números generados - '+nombre_generador)
+    plt.xlabel('Número')
+    plt.ylabel('Frecuencia absoluta')
+    # plt.show()
+
+
 def rachas(l):
     """Bibliografía: https://es.acervolima.com/ejecuta-una-prueba-de-aleatoriedad-en-python/"""
     runs, n1, n2 = 0, 0, 0
@@ -387,20 +398,42 @@ def evaluar_pvalue(pvalue, alpha=0.05):
         return "Puede ser aleatorio"
 
 
-def probar_generador(generador, nombre, size=1000):
+def grafico_torta(valores_p1,valores_p0):
+    fig,ax = plt.subplots()
+    ax.pie(
+        [valores_p1,valores_p0]
+        , labels=["Puede ser aleatorio","No es aleatorio"]
+        # , autopct="%0.1f %%"
+    )
+    #ax.set_title('T´ítulo', loc='center',
+     #            fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    #ax.plot(range(len(valores_p)), valores_p)
+
+
+def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000,rondas=10,mostrar_en_consola=False):
     nums = generador.rand(size=size)  # usar los rangos completos
-    grafico_puntos(size, nums)
+    """grafico_puntos(size, nums)
     grafico_histograma(nums)
     grafico_caja(nums)
-    grafico_violin(nums)
-    rachas_pvalue = rachas(nums)
-    chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
-    poker_pvalue = poker(nums)
-    frecuencia_monobit_pvalue = test_frecuencia_monobit(nums)
-    print(f"Por test de rachas, el generador {nombre}: {evaluar_pvalue(rachas_pvalue)}")
-    print(f"Por test de chi cuadrado, el generador {nombre}: {evaluar_pvalue(chi2_pvalue)}")
-    print(f"Por test de póker, el generador {nombre}: {evaluar_pvalue(poker_pvalue)}")
-    print(f"Por test de frecuencia (monobit), el generador {nombre}: {evaluar_pvalue(frecuencia_monobit_pvalue)}")
+    grafico_violin(nums)"""
+    print(f"- - - Generador {nombre} - - -")
+    valores_p=[]
+    for i in range(rondas):
+        print(f"- - Ronda {i} - - ")
+        generador.seed()
+        rachas_pvalue = rachas(nums)
+        chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
+        poker_pvalue = poker(nums)
+        frecuencia_monobit_pvalue = test_frecuencia_monobit(nums)
+        valores_p.extend([rachas_pvalue,chi2_pvalue,poker_pvalue,frecuencia_monobit_pvalue])
+        if mostrar_en_consola:
+            print(f"Por test de rachas: {evaluar_pvalue(rachas_pvalue)}")
+            print(f"Por test de chi cuadrado: {evaluar_pvalue(chi2_pvalue)}")
+            print(f"Por test de póker: {evaluar_pvalue(poker_pvalue)}")
+            print(f"Por test de frecuencia (monobit): {evaluar_pvalue(frecuencia_monobit_pvalue)}")
+    grafico_histograma_p(valores_p,nombre)
+    p_evaluados=[evaluar_pvalue(val).startswith('Puede') for val in valores_p]
+    grafico_torta([i for i in range(p_evaluados.count(True))],[i for i in range(p_evaluados.count(False))])
 
 
 def main():
@@ -423,6 +456,7 @@ def main():
 
     # Histograma de valores p
     # Test de hipótesis de uniformidad de valores p
+        # Por chi cuadrado
     # Proporción de aceptación de hipótesis nula
 
     """Generador GCL ANSI C"""
@@ -432,6 +466,7 @@ def main():
     """Generador GCL parámetros arbitrarios (m=2**31, a=1000, c=151)"""
     probar_generador(GeneradorGCL(2**31, 1000, 151), "GCL con (m=2**31, a=1000, c=151)")
 
+    plt.show()
     """Generador de Python"""
     probar_generador(GeneradorPyMT19937(), "MT19937 de Python")
 
