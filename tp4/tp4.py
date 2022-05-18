@@ -347,25 +347,41 @@ def graficar(u, g, e, n, p, b, em, pas, hipergeo):
     plt.show()
 
 
-uni = (uniforme(1, 3, 1000))
-gam = (gamma(5, 20, 1000))
-expo = (exponencial(5, 1000))
-nor = normal(2.35, 30, 1000)
-poi = poisson(50, 1000)
-bino = binomial(1000, 0.4, 1000)
-empi = empirica_discreta(1000)
-pas = pascal(5, 0.4, 1000)
-hipergeo = hipergeometrica(5000000, 500, 0.4, 1000)
+def main():
+    uni = []
+    gam = []
+    expo = []
+    nor = []
+    poi = []
+    bino = []
+    empi = []
+    pas = []
+    hipergeo = []
 
-graficar(uni, gam, expo, nor, poi, bino, empi, pas, hipergeo)
-TestChiCuadUni(uni)
-print()
-TestChiCuadExp(expo)
-print()
-TestChiCuadNormal(nor)
-print()
-TestChiCuadBinomial(bino)
-print()
-TestChiCuadPoisson(poi)
-print()
-TestChiCuadEmpirica(empi)
+    for i in range(4):
+        uni = (uniforme(-0.5, 0.5, 1000))
+        gam = (gamma(5, 20, 1000))
+        expo = (exponencial(5, 1000))
+        nor = normal(2.35, 30, 1000)
+        poi = poisson(50, 1000)
+        bino = binomial(1000, 0.4, 1000)
+        empi = empirica_discreta(1000)
+        pas = pascal(5, 0.4, 1000)
+        hipergeo = hipergeometrica(5000000, 500, 0.4, 1000)
+        graficar(uni, gam, expo, nor, poi, bino, empi, pas, hipergeo)
+
+    TestChiCuadUni(uni)
+    print()
+    TestChiCuadExp(expo)
+    print()
+    TestChiCuadNormal(nor)
+    print()
+    TestChiCuadBinomial(bino)
+    print()
+    TestChiCuadPoisson(poi)
+    print()
+    TestChiCuadEmpirica(empi)
+
+
+if __name__ == '__main__':
+    main()
