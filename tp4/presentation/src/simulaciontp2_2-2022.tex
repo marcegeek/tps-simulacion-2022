@@ -108,6 +108,7 @@
 }
 
 \usepackage[spanish]{babel}
+\usepackage{amsmath}
 \begin{document}
   \maketitle
   \begin{abstract}
@@ -272,7 +273,175 @@
 
   \paragraph{Test}
 
-  
+  \subsubsection{Distribucion Gamma}
+  Si un determinado proceso consiste de k eventos sucesivos y si el total del tiempo transcurrido para dicho proceso se puede considerar igual a la suma de k valores independientes de la variable aleatoria con distribución
+  exponencial, cada uno de los cuales tiene un parámetro definido a la distribución de esta suma coincidirá con una distribución gamma con parámetros a y k.
+  La función gamma está descrita mediante la siguiente función de densidad:
+  \begin{equation}
+    f(x) = \frac{a^{k}x^{(k-1)}e^{-ax}}{(k-1)!}
+  \end{equation}
+  donde a > 0, k > 9 y x se considera no negativo.
+  Respecto a la media y la variancia de esta distribución, sus corrspondientes expresiones están formuladas como sigue:
+  \begin{equation}
+    EX = \frac{k}{a}
+  \end{equation}
+  \begin{equation}
+    VX = \frac{k}{a^{x}}
+  \end{equation}
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+   def gamma(k, a, rep: int = 1):
+      x = []
+      for i in range(1, rep):
+          tr = 1
+          for j in range(1, k):
+              tr *= random()
+          x.append(-(math.log(tr)) / a)
+      return x
+  \end{lstlisting}
+  Para la distribución Gamma, se realizarán 1000 tiradas y se generaran los valores a partir del método de la transformada
+  inversa. El parámetro k representa la cantidad de eventos sucesivos y a representa el parámetro lambda a utilizar.El valor
+  de la variable r es generado por el generador Mersenne Twister propio de python.
+
+  \paragraph{Análisis}
+
+
+  \subsubsection{Distribución Normal}
+  La distribución normal basa su utilidad en el teorema del límite central. Este postula que, la distribución de probabilidad de la sima de N valores
+  de variable aleatoria x independientes pero idénticamente distribuidos, con medias respectivas u y variancias σ se aproximan asintóticamente a una distribución normal, a medida
+  que N se hace muy grande.
+
+  En consecuencia, el teorema del límite central permite el empleo de distribuciones normales para representar medidas globales operadas sobre los efectos de causas (errores)
+  aditivas distribuidas en forma independiente sin importar la distribución de probabilidad a que obedezcan las mediciones de causas individuales.
+
+  Si la variable aleatoria X tiene una función de densidad f(x) dada como:
+
+  \begin{equation}
+    f(x) = \frac{1}{σ_{x}\sqrt {2\pi}}e^{\frac{-(x-\mu)^2}{2σ^2}}
+  \end{equation}
+
+  El valor esperado y la variancia de la distribución normal están dados por:
+  \begin{equation}
+    EX = \mu_{x}
+  \end{equation}
+  \begin{equation}
+    EX = \sigma_{x}^2
+  \end{equation}
+
+  \paragraph{Método de la transformación inversa para la distribución de probabilidad Normal}
+  El procedimiento para simular valores normales utilizando computadoras requiere el uso de la suma de K valores de
+  variables aleatorias distribuidos uniformemente; esto es la suma de r1, r2... rk con cada ri definida en el intervalo 0 <ri
+  <1. Aplicando la convención notacional de la forma matemática del teorema central del límite, encontramos que:
+  \begin{equation}
+    \theta = \frac{a+b}{2} = \frac{0+1}{2} = \frac{1}{2},
+  \end{equation}
+  \begin{equation}
+    \sigma = \frac{b-a}{\sqrt {12}} = \frac{1}{\sqrt {12}},
+  \end{equation}
+  \begin{equation}
+    z = \frac{\sum_{i=2}^{K}r_{i}-K/2}{\sqrt {K/12}}
+  \end{equation}
+  Pero por definición, z es un valor de variable aleatoria con distribución normal estándar.
+  Por lo tanto:
+
+  \begin{equation}
+    x = \sigma_{x}(\frac{12}{K})^{1/2}(\sum_{i=1}^{K}r_{i}-\frac{K}{2}) + \mu_{x}
+  \end{equation}
+  Por lo tanto, con la ecuación anterior, podemos proporcionar una formulación muy simple para generar valores de
+  variable aleatoria normalmente distribuidos. Para generar un solo valor x bastará con sumar K números aleatorios
+  definidos en el intervalo de 0 a 1. Este procedimiento se puede repetir tantas veces como valores de variables aleatorias
+  normalmente distribuidos se quieran
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+    def normal(ex, stdx, rep: int = 1):
+      x = []
+      for i in range(rep):
+          sm = 0
+          for j in range(12):
+              sm += random()
+          x.append(stdx * (sm - 6) + ex)
+      return x
+  \end{lstlisting}
+  En el código se puede observar como se ingresa como parámetro la media(ex) y la desviación estándar (stdx).Se
+  generaran una cantidad arbitraria de valores a través del método de la transformación inversa con una variable r cuyo
+  valor es generado por Python.
+
+  \paragraph{Análisis}
+
+  \paragraph{Test}
+
+  \subsection{Distribuciones Discretas de Probabilidad}
+  \subsubsection{Distribución Pascal}
+  Cuando los procesos de ensayos de Bernoulli se repiten hasta lograr que ocurran k éxitos (k > 1), la variable aleatoria que caracteriza al número de fallas tendrá una distribución binomial negativa.
+  Por consiguiente, los valores de variables aleatorias con distribución binomial negativa coinciden esencialmente con la suma de k valores de variable aleatoria con distribución geométrica; en este caso, k es un
+  número entero y la distribución recibe el nombre de distribución de Pascal.
+
+  La función de distribución de probabilidad para una distribución binomial negativa está dada por:
+
+  \begin{equation}
+    f(x) = (\frac{k+x-1}{x})p^{k}q^{x} \ \text{   } \ x = 0,1,2,...,
+  \end{equation}
+  donde k es el número total de éxitos en una sucesión de k + x ensayos, con x el número de fallas que ocurren antes de obtener k éxitos.
+
+  El valor esperado y la variancia de X se representa con:
+
+  \begin{equation}
+    EX = \frac{kq}{p}
+  \end{equation}
+  \begin{equation}
+    VX = \frac{kq}{p^2}
+  \end{equation}
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+    def pascal(k, q, rep: int = 1):
+      nx = []
+      for i in range(rep):
+          tr = 1
+          for j in range(k):
+              tr *= random()
+          x = math.log(tr) // math.log(q)
+          nx.append(x)
+      return nx
+  \end{lstlisting}
+
+  \subsubsection{Distribución Binomial}
+  La distribución binomial proporciona la probabilidad de que un evento o acontecimiento tenga lugar x veces en un conjunto de n ensayos,
+  donde la probabilidad de éxito está dada por p. La función de probabilidad para la distribución binomial se puede expresar de la manera siguiente:
+
+  \begin{equation}
+    f(x) = \binom{n}{x} p^{x}q^{n-x}
+  \end{equation}
+  donde x se toma como un entero definido en el intervalo finito 0,1,2,...n, y al que se le asocio el valor q = (1-p).
+
+  El valor esperado y la variancia de la variable binomial X son
+  \begin{equation}
+    EX = np
+  \end{equation}
+
+  \begin{equation}
+  VX = npq
+  \end{equation}
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+   def binomial(n, p, rep: int = 1):
+      x = []
+      for i in range(rep):
+          y = 0
+          for j in range(1, n):
+              if (random() - p) < 0:
+                  y += 1
+          x.append(y)
+      return x
+  \end{lstlisting}
+
+  \paragraph{Test}
+
+  \subsubsection{Distribución Hipergeométrica}
+
   \section{Gráficas}
   \subsection{Con capital infinito}
   \subsubsection{Estrategia martingala}
