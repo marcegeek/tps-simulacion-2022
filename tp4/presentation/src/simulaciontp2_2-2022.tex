@@ -438,9 +438,125 @@
       return x
   \end{lstlisting}
 
+  \paragraph{Análisis}
+
   \paragraph{Test}
 
   \subsubsection{Distribución Hipergeométrica}
+  En teoría de la probabilidad la distribución hipergeométrica es una distribución discreta relacionada con muestreos
+  aleatorios y sin reemplazo. Suponga que se tiene una población de N elementos de los cuales, d pertenecen a la categoría
+  A y N-d a la B. La distribución hipergeométrica mide la probabilidad de obtener x elementos de la categoría A en una
+  muestra sin reemplazo de n elementos de la población original.
+  La función de probabilidad de una variable aleatoria con distribución hipergeométrica puede deducirse a través de
+  razonamientos combinatorios y es igual a:
+
+  \begin{equation}
+    f(x) = \frac{\binom{N_{p}}{x}\binom{N_{q}}{n-x}}{\binom{N}{n}}
+    \end{equation}
+  con 0 =< x =< Np, y 0 =< n-x =<Nq. Donde x,n y N son enteros. El valor esperado y la variancia se caracterizan como sigue:
+  \begin{equation}
+    EX = np
+    \end{equation}
+
+  \begin{equation}
+    VX = npq(\frac{N-n}{N-1})
+    \end{equation}
+  La generación de valores hipergeométricos involucra, substancialmente, la simulación de experimentos de muestreo sin reemplazo.
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+   def hipergeometrica(tn, ns, p, rep: int = 1):
+      x = []
+      for i in range(rep):
+          tn1 = tn
+          ns1 = ns
+          p1 = p
+          y = 0
+          for j in range(1, ns1):
+              if (random() - p1) > 0:
+                  s = 0
+              else:
+                  s = 1
+                  y += 1
+              p1 = (tn1 * p1 - s) / (tn1 - 1)
+              tn1 -= 1
+          x.append(y)
+      return x
+  \end{lstlisting}
+
+  \paragraph{Análisis}
+
+  \subsubsection{Distribución Poisson}
+  Si tomamos una serie de n ensayos independientes de Bernoulli, en cada uno de los cuales se tenga una probabilidad p muy pequeña relativa a la ocurrencia de un cierto evento,
+  a medida que n tiende al infinito, la probabilidad de x ocurrencias está dada por la distribución de Poisson
+
+  \begin{equation}
+    f(x) = e^{-\delta}\frac{\delta^x}{x!}
+    \end{equation}
+  con x = 0,1,2,... y \delta > 0.
+  Esto sucede siempre y cuando permitamos que p se aproxime a cero de manera que se satisfaga la relación \delta = np consistentemente.
+
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+    def poisson(lamb, rep: int = 1):
+      x = []
+      for i in range(rep):
+          cont = 0
+          tr = 1
+          b = 0
+          while tr - b >= 0:
+              b = math.exp(-lamb)
+              tr *= random()
+              if tr - b >= 0:
+                  cont += 1
+          x.append(cont)
+      return x
+  \end{lstlisting}
+
+  \paragraph{Análisis}
+
+  \paragraph{Test}
+
+  \subsubsection{Distribución Empírica Discreta}
+  Sea X una variable aleatoria discreta con P(X=bi) = pi.
+  En consecuencia, resulta evidente que un método para generar X en una computadora es aquel que genera un valor de
+  baile ahora aleatoria y sujeto a una instrucción el informe, el intervalo (0, 1) y un conjunto de valores X= bi siempre
+  que se satisfaga:
+  \begin{equation}
+    p1 + ... + p_{i-1} < r \leq p_{1} + ... p_{i}.
+    \end{equation}
+  Pese a que se han desarrollado un buen número de técnicas de búsqueda basadas en este método, en su gran mayoría
+  requieren un programa relativamente complejos que a su vez emplean un tiempo de computación excesivo.
+  Uno de los procedimientos más rápidos para generar valores de variable aleatoria discreta es el desarrollado por G.
+  Marsaglia, quien presupone la disponibilidad de una computadora decimal cuyos bloques o palabras de memoria pueden
+  referirse mediante números. Esta última característica en realidad constituye una propiedad de la gran mayoría de las
+  computadoras actuales. Conviene hacer notar que si bien este método es extremadamente rápido, también requiere
+  por lo menos una memoria de 1000 palabras. Existe otro método desarrollado también por Marsaglia que en forma
+  alternativa utiliza mucho menos capacidad de memoria aunque incrementa ligeramente el tiempo de computación.
+
+  \paragraph{Código en Python}
+  \begin{lstlisting}[style = Python]
+    def empirica_discreta(rep: int = 1):
+      x = []
+      p = [0.273, 0.037, 0.195, 0.009, 0.124, 0.058, 0.062, 0.151, 0.047, 0.044]
+      for i in range(rep):
+          a = 0
+          z = 1
+          for j in p:
+              a += j
+              if random() <= a:
+                  break
+              else:
+                  z += 1
+          x.append(z)
+      return x
+  \end{lstlisting}
+
+  \paragraph{Análisis}
+
+  \paragraph{Test}
+
 
   \section{Gráficas}
   \subsection{Con capital infinito}
