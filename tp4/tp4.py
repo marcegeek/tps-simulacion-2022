@@ -125,10 +125,17 @@ def TestChiCuadUni(u):
         observado.append(x)
         c += 0.2
     x2 = 0
+    print("Valor chi cuadrados:")
     for i in range(len(observado)):
         x1 = (((observado[i] - esperado) ** 2) / esperado)
         x2 += x1
+        print(x2)
 
+    print("Uniforme")
+    print("Observado")
+    print(observado)
+    print("Esperado")
+    print(esperado)
     print("Valor de X2 obtenido = " + str(x2))
     print("Se poseen 10 intervalos, por lo tantos tendremos 9 grados de libertad.")
     print("Con 9 grados de libertad y con un 95 porciento de confianza se obtiene un valor de Chi cuadrado de 16.92")
@@ -156,9 +163,17 @@ def TestChiCuadExp(u):
     observado.append(1000 - sum(observado))
     esperado.append(1000 * (math.e ** (-(1 / 5) * (c - 0.3))))
     x2 = 0
+    print("Valor chi cuadrados:")
     for i in range(len(observado)):
         x1 = (((observado[i] - esperado[i]) ** 2) / esperado[i])
         x2 += x1
+        print(x2)
+
+    print("Exponencial")
+    print("Observado")
+    print(observado)
+    print("Esperado")
+    print(esperado)
     print("Valor de X2 obtenido = " + str(x2))
     print("Se poseen 10 intervalos, por lo tantos tendremos 9 grados de libertad.")
     print("Con 9 grados de libertad y con un 95 porciento de confianza se obtiene un valor de Chi cuadrado de 16.92")
@@ -196,9 +211,17 @@ def TestChiCuadNormal(u):
         esperado.append(1000 * (norm.cdf((c - media) / desviacion) - norm.cdf(((c - 20) - media) / desviacion)))
         c += 20
     x2 = 0
+    print("Valor chi cuadrados:")
     for i in range(len(observado)):
         x1 = (((observado[i] - esperado[i]) ** 2) / esperado[i])
         x2 += x1
+        print(x2)
+
+    print("Normal")
+    print("Observado")
+    print(observado)
+    print("Esperado")
+    print(esperado)
     print("Valor de X2 obtenido = " + str(x2))
     print("Se poseen 10 intervalos, por lo tantos tendremos 9 grados de libertad.")
     print("Con 9 grados de libertad y con un 95 porciento de confianza se obtiene un valor de Chi cuadrado de 16.92")
@@ -226,9 +249,17 @@ def TestChiCuadPoisson(u):
         esperado.append(1000*total)
         c += 6
     x2 = 0
+    print("Valor chi cuadrados:")
     for i in range(len(observado)):
         x1 = (((observado[i]-esperado[i])**2)/esperado[i])
         x2 += x1
+        print(x2)
+
+    print("Poisson")
+    print("Observado")
+    print(observado)
+    print("Esperado")
+    print(esperado)
     print("Valor de X2 obtenido = " + str(x2))
     print("Se poseen 30 intervalos, por lo tantos tendremos 29 grados de libertad.")
     print("Con 29 grados de libertad y con un 95 porciento de confianza se obtiene un valor de Chi cuadrado de 42,56")
@@ -256,10 +287,17 @@ def TestChiCuadBinomial(u):
         esperado.append(1000*total)
         c += 14
     x2 = 0
+    print("Valor chi cuadrados")
     for i in range(len(observado)):
         x1 = (((observado[i]-esperado[i])**2)/esperado[i])
         x2 += x1
+        print(x2)
 
+    print("Binomial")
+    print("Observado")
+    print(observado)
+    print("Esperado")
+    print(esperado)
     print("Valor de X2 obtenido = " + str(x2))
     print("Se poseen 10 intervalos, por lo tantos tendremos 9 grados de libertad.")
     print("Con 9 grados de libertad y con un 95 porciento de confianza se obtiene un valor de Chi cuadrado de 16.92")
@@ -284,10 +322,17 @@ def TestChiCuadEmpirica(u):
         observado.append(x)
         esperado.append(1000 * p[i])
     x2 = 0
+    print("Valor chi cuadrados:")
     for i in range(len(observado)):
         x1 = (((observado[i] - esperado[i]) ** 2) / esperado[i])
         x2 += x1
+        print(x2)
 
+    print("Empírica")
+    print("Observado")
+    print(observado)
+    print("Esperado")
+    print(esperado)
     print("Valor de X2 obtenido = " + str(x2))
     print("Se poseen 10 intervalos, por lo tantos tendremos 9 grados de libertad.")
     print(
@@ -301,48 +346,48 @@ def TestChiCuadEmpirica(u):
 
 def graficar(u, g, e, n, p, b, em, pas, hipergeo):
     plt.figure(1)
-    plt.title("uniforme")
+    plt.title("Distribución Uniforme")
     plt.hist(u)
 
     plt.show()
 
     plt.figure(2)
-    plt.title("gamma")
+    plt.title("Distribución Gamma")
     plt.hist(g, 25, histtype="stepfilled", alpha=.7, linewidth=5, color='r')
     plt.show()
 
     plt.figure(3)
-    plt.title("exponencial")
+    plt.title("Distribución Exponencial")
     plt.hist(e, 25, histtype="stepfilled", alpha=.7, linewidth=5, color='g')
     plt.show()
 
     plt.figure(4)
-    plt.title("normal")
+    plt.title("Distribución Normal")
     plt.hist(n, 25, histtype="stepfilled", alpha=.7, linewidth=5, color='y')
     plt.show()
 
     plt.figure(5)
-    plt.title("poisson")
+    plt.title("Distribución Poisson")
     plt.hist(p, 25, histtype="stepfilled", alpha=.7, linewidth=5, color='orange')
     plt.show()
 
     plt.figure(6)
-    plt.title("binomial")
+    plt.title("Distribución Binomial")
     plt.hist(b, 25, histtype="stepfilled", alpha=.7, linewidth=5, color='black')
     plt.show()
 
     plt.figure(7)
-    plt.title("empirica")
+    plt.title("Distribución Empirica")
     plt.hist(em, color='violet')
     plt.show()
 
     plt.figure(8)
-    plt.title("pascal")
+    plt.title("Distribución Pascal")
     plt.hist(pas, color='cyan')
     plt.show()
 
     plt.figure(9)
-    plt.title("hipergeometrica")
+    plt.title("Distribución Hipergeometrica")
     plt.hist(hipergeo, 25, histtype="stepfilled", alpha=.7, linewidth=5, color='chocolate')
     plt.show()
 
@@ -358,17 +403,16 @@ def main():
     pas = []
     hipergeo = []
 
-    for i in range(4):
-        uni = (uniforme(-0.5, 0.5, 1000))
-        gam = (gamma(5, 20, 1000))
-        expo = (exponencial(5, 1000))
-        nor = normal(2.35, 30, 1000)
-        poi = poisson(50, 1000)
-        bino = binomial(1000, 0.4, 1000)
-        empi = empirica_discreta(1000)
-        pas = pascal(5, 0.4, 1000)
-        hipergeo = hipergeometrica(5000000, 500, 0.4, 1000)
-        graficar(uni, gam, expo, nor, poi, bino, empi, pas, hipergeo)
+    uni = (uniforme(0, 5, 1000))
+    gam = (gamma(5, 20, 1000))
+    expo = (exponencial(5, 1000))
+    nor = normal(2.35, 30, 1000)
+    poi = poisson(50, 1000)
+    bino = binomial(1000, 0.4, 1000)
+    empi = empirica_discreta(1000)
+    pas = pascal(5, 0.4, 1000)
+    hipergeo = hipergeometrica(5000000, 500, 0.4, 1000)
+    graficar(uni, gam, expo, nor, poi, bino, empi, pas, hipergeo)
 
     TestChiCuadUni(uni)
     print()
