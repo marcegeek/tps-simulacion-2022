@@ -1,8 +1,7 @@
 # Especificaciones del sistema de colas:
 ## Intervalo entre arribos:
-~ Exp(1')
-
 Variar en 25%, 50%, 75%, 100%, 125% de la tasa de servicio. 
+
 ## Duración del servicio:
 ~ Exp(0.5')
 
