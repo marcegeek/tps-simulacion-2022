@@ -1,3 +1,6 @@
+import abc
+
+
 class Evento:
     """Clase base evento con callback para la rutina correspondiente"""
 
@@ -15,7 +18,7 @@ class Evento:
         self.callback(self)
 
 
-class Simulacion:
+class Simulacion(abc.ABC):
     """Clase base de una simulación por eventos discretos"""
 
     def __init__(self):
@@ -42,3 +45,11 @@ class Simulacion:
         self.sig_evento.manejar()
         self.eventos.remove(self.sig_evento)
         self.sig_evento = None
+
+    @abc.abstractmethod
+    def correr(self):
+        pass
+
+    @abc.abstractmethod
+    def informe(self):
+        pass
