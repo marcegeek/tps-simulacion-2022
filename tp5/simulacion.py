@@ -1,4 +1,5 @@
 import abc
+import numpy as np
 
 
 class Evento:
@@ -21,12 +22,13 @@ class Evento:
 class Simulacion(abc.ABC):
     """Clase base de una simulación por eventos discretos"""
 
-    def __init__(self):
+    def __init__(self, semilla=None):
         self.reloj = 0.
         self.eventos = []
         self.sig_evento = None  # el valor se modifica en la rutina de avance en el tiempo
         self.tiempo_ult_evento = 0.
         self.tiempo_desde_ult_evento = 0.
+        self.np_randomstate = np.random.RandomState(semilla)
 
     def avance_tiempo(self):
         if len(self.eventos) == 0:

@@ -13,7 +13,7 @@ class ColaMMC(Simulacion):
     ESTADO_DESOCUPADO, ESTADO_OCUPADO = 0, 1
 
     def __init__(self, servidores, tasa_arribos, tasa_servicio, num_clientes=1000, semilla=None):
-        super().__init__()
+        super().__init__(semilla=semilla)
         self.tasa_arribos = tasa_arribos
         self.tasa_servicio = tasa_servicio
         self.np_randomstate = np.random.RandomState(semilla)

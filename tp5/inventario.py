@@ -11,8 +11,7 @@ class EventoPartida(Evento):
 
 class ModeloInventario(Simulacion):
     def __init__(self, tasa_arribos, semilla: None):
-        super().__init__()
-        self.np_randomstate = np.random.RandomState(semilla) ##ver si esto se puede poner en la clase Simulacion
+        super().__init__(semilla=semilla)
         self.nivel_inventario = 60
         self.mantenidos_area = 0
         self.area_escacez = 0
