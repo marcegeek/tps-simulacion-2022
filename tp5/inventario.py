@@ -28,29 +28,26 @@ class ModeloInventario(Simulacion):
         self.costo_mantenimiento = 1
         self.tasa_arribos = tasa_arribos ##ver si esto se puede poner en la clase Simulacion
 
-    def orden_arribos(self, cantidad):
+    def orden_arribos(self, cantidad, siguiente):
         self.nivel_inventario += cantidad
         self.costo_total_ordenado += cantidad * self.costo_incremental
         self.eventos.append(
-            Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos),
-                   self.siguiente)
+            Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos), siguiente)
             #El self.siguiente lo agregué porque no sabría que metodo podría agregar al init de Evento
         )
 
-    def demanda(self, cant_demand):
+    def demanda(self, cant_demand, siguiente):
         self.nivel_inventario -= cant_demand
         self.eventos.append(
-            Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos),
-                   self.siguiente)
+            Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos), siguiente)
         )
 
-    def evaluar(self):
+    def evaluar(self, siguiente):
         if self.nivel_inventario < self.smalls:
             cantidad = self.bigs - self.nivel_inventario
             self.costo_total_ordenado = self.setup_cost + self.costo_incremental * cantidad
             self.eventos.append(
-                Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos),
-                       self.siguiente)
+                Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos), siguiente)
             )
 
     def reporte(self):
