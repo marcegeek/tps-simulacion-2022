@@ -1,7 +1,62 @@
 \begin{abstract}
-  Placeholder del abstract.
+  En este trabajo estudiaremos dos modelos de simulación de eventos discretos, el primero es el comportamiento
+  de líneas de espera. El cual es de gran ayuda para predecir el comportamiento de dichas lineas en
+  situaciones del mundo real, desde la entrada y salida de autos de un estacionamiento hasta la utilización
+  de una red distribuida de servidores a lo largo del mundo que alojan una página web para miles de usuarios.
+  El siguiente será un modelo de inventario que nos permitirá saber los costos correspondientes al mantenimiento
+  o de compras necesarias y será de gran ayuda para un inventario en la vida real
 \end{abstract}
-\section{Introducción}
-\section{Marco teórico}
+
+
+\section{Introducción}\label{sec:introduccion}
+En el siguiente trabajo simularemos mediante un programa desarrollado en lenguaje Python, una cola simple, en la que
+solamente habrá llegada de clientes, atendidos por un único servidor luego de haber realizado una espera
+determinada en la cola y posteriormente partirán. Adicionalmente se simulará una cola con una cantidad de servidores predeterminada.
+El modelo de inventario contará con el mismo formato y consistirá en un proceso por mes en el que se realiza una orden de compra
+a los proveedores, mientras se trata de alcanzar la demanda de los clientes a través de distintos indicadores de escacez y
+existencia. Finalmente se realizará una evaluación y se calcularán las estadísticas correspondientes.
+A su vez estudiaremos la eficacia de dichos programas al comparar ciertas medidas de rendimiento observadas con las
+teóricas computadas y a su vez con las obtenidas mediante una calculadora web, y de otra simulación desarrollada
+en el aplicativo Anylogic.
+
+
+\section{Marco teórico}\label{sec:marco-teórico}
+
+\subsection{Proceso Estocástico}\label{subsec:proceso-estocástico}
+En la teoría de la probabilidad, un proceso estocástico es un concepto matemático que sirve para representar
+magnitudes aleatorias que varían con el tiempo o para caracterizar una sucesión de variables aleatorias (estocásticas)
+que evolucionan en función de otra variable, generalmente el tiempo. Cada una de las variables aleatorias del proceso
+tiene su propia función de distribución de probabilidad y pueden o no estar correlacionadas entre sí.
+
+Cada variable o conjunto de variables sometidas a influencias o efectos aleatorios constituye un proceso estocástico.
+Un proceso estocástico {\displaystyle X_{t}}{\displaystyle X_{t}} puede entenderse como una familia uniparamétrica de
+variables aleatorias indexadas mediante el tiempo t. Los procesos estocásticos permiten tratar procesos dinámicos en los
+que hay cierta aleatoriedad.
+
+\section{Modelo M/M/1}\label{sec:modelo-m/m/1}
+Un sistema de espera M/M/1 es aquel que considera un servidor, con tiempos exponenciales de servicio y entre llegadas
+de clientes. La implicancia que los tiempos de servicio se distribuyan exponencial es que existe una preponderancia de
+tiempos de servicio menores al promedio combinados con algunos pocos tiempos extensos. Un ejemplo de ello es lo que
+sucede en las cajas de los bancos donde la mayoría de las transacciones requieren poco tiempo de proceso por parte del
+cajero, no obstante algunas transacciones más complejas consumen bastante tiempo. Por otra parte afirmar que los tiempos
+entre llegadas se distribuyen exponencial implica una preponderancia de tiempos entre llegadas menores que el promedio
+en combinación con algunos tiempos más extensos. Lo anterior tiene relación con la aleatoriedad del proceso de llegada
+de clientes que permite establecer la Propiedad de Falta de Memoria o Amnesia de la Distribución Exponencial y
+con los conceptos presentados en el artículo Qué son las Líneas de Espera (Teoría de Colas), donde queda en evidencia
+que la formación de las colas o filas esta asociada a la variabilidad del sistema.
+
+En este contexto consideremos la siguiente notación, donde valores usuales para A y B son M (distribución exponencial)
+y G (distribución general).
+
+
+
+\section{Modelo M/M/C}\label{sec:modelo-m/m/c}
+
+
+
 \section{Análisis de resultados}
 \section{Conclusiones}
+\section{Referencias}
+  \label{sec:references}
+    https://es.wikipedia.org/wiki/Proceso_estoc%C3%A1stico#:~:text=En%20la%20teor%C3%ADa%20de%20la,otra%20variable%2C%20generalmente%20el%20tiempo.
+
