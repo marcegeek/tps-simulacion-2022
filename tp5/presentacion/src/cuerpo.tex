@@ -143,8 +143,92 @@ En definitiva, u(n) es la sumatoria de áreas rectangulares, donde la base es el
 está en un estado específico, y la altura es dicho estado, 0 o 1.
 
 \section{Modelo de Inventario}\label{sec:modelo-m/m/c}
+Los inventarios están presentes en todas las compañías que tratan con productos físicos,
+tales como fabricantes, distribuidores, comerciantes, etc.
+Las empresas necesitan inventarios de materias primas para la manufactura de productos y a su vez
+deben almacenar productos terminados en el almacén a la espera de ser vendidos.
+De manera similar, los distribuidores deben mantener inventarios de bienes que deberán estar
+disponibles cuando los consumidores los necesiten.
+Dado que los stocks representan una cantidad de dinero inmovilizada muy importante dentro
+de una empresa, la reducción de los costos de almacenamiento (evitando inventarios
+innecesariamente grandes) podría mejorar la competitividad de cualquier sistema
+productivo.
 
+Cuando hay que analizar los inventarios con una demanda independiente los modelos de
+gestión de stocks que se utilizan son: el modelo de cantidad fija del pedido (EOQ) y el
+modelo de periodo de tiempo fijo (también llamado de revisión periódica, modelo P) [1-2].
+En el modelo de cantidad fija de pedido se coloca un pedido cuando el inventario restante cae a
+un punto de pedido y se revisa el nivel de inventario continuamente.
+De esta manera, el modelo de cantidad fija de pedido es un sistema perpetuo que requiere que cada
+vez que se haga un retiro o una adición al inventario, los registros deban actualizarse para
+asegurar que el punto del nuevo pedido se ha alcanzado o no.
+En cambio en el modelo de periodo de
+tiempo fijo, el conteo tiene lugar solo durante el periodo de revisión.
 
+Suponiendo una empresa que vende un solo producto le gustaría decidir cuántos artículos debería
+tener en inventario para cada uno de los siguientes n meses (n es un parámetro de entrada fijo).
+Los tiempos entre demandas son variables aleatorias exponenciales con una media de 0,1 mes.
+Los tamaños de las demandas, D, son variables aleatorias IID (independientes de cuando se presentan
+las demandas), con:
+\begin{equation}
+  \label{eq:equation9}
+  D=\left\{ \begin{array}{lcc}
+            1 &   c.p.  & 1/6 \\
+            \\ 2 &  c.p. & 1/3 \\
+            \\ 3 &  c.p. & 1/3 \\
+            \\ 4 &  c.p.  & 1/6
+  \end{array}
+  \right
+\end{equation}
+donde c.p. significa "Con Probabilidad de".
+
+Al comienzo de cada mes, la empresa revisa el nivel de inventario y decide cuántos artículos pedir
+a su proveedor.
+Si la empresa ordena Z artículos, incurre en un costo de K + iZ, donde K = \$32 es el costo de
+preparación e i = \$3 es el incremento coste incremental por artículo pedido.
+(Si Z = 0, no incurre ningún costo).
+Cuando se realiza un pedido, el tiempo requerido para que llegue (llamado retraso en la entrega
+o tiempo de entrega) es una variable aleatoria que se distribuye uniformemente entre 0,5 y 1 mes.
+
+La empresa utiliza una política estacionaria (s, S) para decidir cuánto pedir, es decir,
+\begin{equation}
+  \label{eq:equation10}
+  Z = \left\{ \begin{array}{lcc}
+                S-I & if I < s \\
+                \\ 0 & if I \leq s
+  \end{array}
+  \right.
+\end{equation}
+donde I es el nivel de inventario al comienzo del mes.
+
+Para nuestro modelo, supondremos que la empresa incurre en un costo de mantenimiento de
+h = \$1 por artículo por mes mantenido en el inventario (positivo).
+El costo de mantenimiento incluye costos tales como alquiler de almacenes, seguros, impuestos
+y mantenimiento, así como el costo de oportunidad de tener capital inmovilizado en el inventario
+en lugar de invertirlo en otra parte.
+Hemos ignorado en nuestra formulación el hecho de que todavía se incurre en algunos costos de
+mantenimiento cuando I = 0.
+Sin embargo, dado que nuestro objetivo es comparar las políticas de pedido, ignorar este factor,
+que después de todo es independiente de la política utilizada, no afectará nuestra evaluación
+de qué política es la mejor.
+Ahora, dado que I es el número de elementos retenidos en el inventario en el momento t,
+la cantidad promedio de tiempo (por mes) de artículos mantenidos en el inventario durante el
+período de n meses es
+\begin{equation}
+  \label{eq:equation11}
+  \bar{I}^{+}=\frac{\int_{0}^{n}I^{+}(t)dt}{n}
+\end{equation}
+
+De manera similar, suponga que la compañía incurre en un costo de trabajo pendiente de p = \$5 por
+artículo por mes en reserva;
+esto representa el costo del mantenimiento adicional de activos cuando existe acumulación de pedidos,
+así como pérdida de la buena voluntad de los clientes.
+El número promedio de tiempo de los elementos en la reserva es:
+\begin{equation}
+    \label{eq:equation12}
+    \bar{I}^{-}=\frac{\int_{0}^{n}I^{-}(t)dt}{n}
+\end{equation}
+por lo que el costo promedio de la cartera de pedidos por mes es \pi I.
 
 \section{Análisis de resultados}
 \section{Conclusiones}
