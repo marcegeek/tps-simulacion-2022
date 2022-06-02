@@ -25,13 +25,15 @@ en el aplicativo Anylogic.
 \subsection{Proceso Estocástico}\label{subsec:proceso-estocástico}
 En la teoría de la probabilidad, un proceso estocástico es un concepto matemático que sirve para representar
 magnitudes aleatorias que varían con el tiempo o para caracterizar una sucesión de variables aleatorias (estocásticas)
-que evolucionan en función de otra variable, generalmente el tiempo. Cada una de las variables aleatorias del proceso
-tiene su propia función de distribución de probabilidad y pueden o no estar correlacionadas entre sí.
+que evolucionan en función de otra variable, generalmente el tiempo.
+Cada una de las variables aleatorias del proceso tiene su propia función de distribución de probabilidad y pueden o no
+estar correlacionadas entre sí.
 
 Cada variable o conjunto de variables sometidas a influencias o efectos aleatorios constituye un proceso estocástico.
-Un proceso estocástico {\displaystyle X_{t}}{\displaystyle X_{t}} puede entenderse como una familia uniparamétrica de
-variables aleatorias indexadas mediante el tiempo t. Los procesos estocásticos permiten tratar procesos dinámicos en los
-que hay cierta aleatoriedad.
+Un proceso estocástico Xt puede entenderse como una familia uniparamétrica de
+variables aleatorias indexadas mediante el tiempo t.
+Los procesos estocásticos permiten tratar procesos dinámicos en los que hay cierta aleatoriedad.
+
 
 \section{Modelo M/M/1}\label{sec:modelo-m/m/1}
 Un sistema de espera M/M/1 es aquel que considera un servidor, con tiempos exponenciales de servicio y entre llegadas
@@ -48,9 +50,99 @@ que la formación de las colas o filas esta asociada a la variabilidad del siste
 En este contexto consideremos la siguiente notación, donde valores usuales para A y B son M (distribución exponencial)
 y G (distribución general).
 
+En el estudio con colas simples, cuya notación de Kendalls son M/M/1, para la primera, donde se posee un sólo serivor,
+las distribuciones de arribo y de servicio proceden de manera Markoviana y su cola es infinita, y en el caso de la
+siguientes M/M/C dónde solamente se añadiran mas servidores.
+Para la distribución de arribos, se tiene un parámetro λ, la tasa de arribos de clientes, de él obtenemos la media de
+clientes entrantes por unidad de tiempo 1/λ.
+Por otro lado, la tasa de tiempo de serivicios µ y la media de tiempos de servicios 1/ µ.
+A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor ρ = 1/sµ, la relación entre los clientes
+arribando y los clientes partiendo, siendo s el número de servidores, en nuestro caso s = 1 (luego se permitira variarlo).
+Como la llegada de clientes y su tiempo en ser servidos son variables aleatorias, se pueden considerar
+nuevas variables aleatorias, que son combinaciones lineales de las anteriores, por ejemplo:
 
+Considere un sistema de colas de un solo servidor para el cual el intervalo entre llegadas son A1, A2, . . . veces con
+variables aleatorias independientes e idénticamente distribuidas.
 
-\section{Modelo M/M/C}\label{sec:modelo-m/m/c}
+A partir de una única ejecución de la simulación con retrasos de los clientes D1, D2, . . . , Dn, es obvio que el
+estimador de d(n) es:
+
+\begin{equation} \label{eq:equation}
+\hat{d}(n) = \frac{\sum_{i = 1}^{n}D_{i}}{n}
+\end{equation}
+que es solo el promedio de los Di's que se observaron en la simulación.
+
+Una de las medidas para nuestro modelo simple es el número promedio esperado de clientes en la cola (pero sin
+ser servida), denotada por q(n), donde la n es necesaria en la notación para indicar que este promedio se
+toma durante el período de tiempo necesario para observar los n retrasos que definen
+nuestra regla de parada.
+Este es un tipo diferente de "promedio" a comparación del retraso promedio en cola, porque se toma el tiempo
+(continuo), en lugar de los clientes (siendo este discreto).
+Por lo tanto, necesitamos definir qué significa este número promedio de tiempo de
+clientes en cola.
+Para hacer esto, sea Q(t) el número de clientes en cola en el tiempo t, para cualquier número real t>=0 ,
+y sea T(n) el tiempo requerido para observar nuestros n retrasos en la cola.
+Entonces para cualquier tiempo t entre 0 y T(n), Q(t) es un entero no negativo. Además, si dejamos que pi sea la
+proporción esperada (que estará entre 0 y 1) del tiempo que Q(t) es igual a i, entonces una definición
+razonable de q(n) sería:
+ \begin{equation}
+   \label{eq:equation2}
+q(n) = \sum_{i=0}^{\infty}ip_{i}
+ \end{equation}
+Por lo tanto, q(n) es un promedio ponderado de los posibles valores de i para la longitud de la cola Q(t),
+siendo las áreas la proporción esperada de tiempo que la cola pasa en cada uno de sus posibles longitudes.
+Para estimar q(n) a partir de una simulación, simplemente reemplazamos los pi con estimaciones de ellos y
+obtenemos:
+\begin{equation}
+  \label{eq:equation3}
+  \hat{q}(n) = \sum_{i=0}^{\infty}i\hat{p}_{i}
+\end{equation}
+donde \hat{p}i es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
+donde que había i clientes en la cola.
+Computacionalmente, sin embargo, es más fácil reescribir \hat{q}(n) usando algunas consideraciones geométricas.
+Si dejamos que Ti sea el total de tiempo durante la simulación donde la cola tiene una longitud i, entonces
+T(n) = T0 + T1 + T2 + ∙ ∙ ∙ y \hat{p}i = Ti/T(n), por lo que podemos reescribir la ecuación 1.1 como:
+
+\begin{equation}
+  \label{eq:equation4}
+\hat{q}(n)=\frac{\sum_{i=0}^{\infty}iT_{i} }{T(n)}
+\end{equation}
+
+El numerador de la ecuación anterior, representa el área bajo la función Q(t):
+\begin{equation}
+  \label{eq:equation5}
+  \sum_{i=0}^{k-1}iT_{i} = \int_{0}^{T(n)}Q(t)dt
+\end{equation}
+Reemplazándolo en la ecuación anterior, nos queda:
+
+\begin{equation}
+  \label{eq:equation6}
+  \hat{q}(n)=\frac{\int_{0}^{T(n)}Q(t)dt }{T(n)}
+\end{equation}
+Esta integral puede ser calculada como la suma de rectángulos formados por la base tiempo de cierta cantidad
+de clientes en cola por la altura dicha cantidad de clientes en cola.
+
+La proporción esperada de tiempo del servidor en estado ocupado u(n), deviene de la probabilidad de que
+el servidor no esté vacío, pN>0 = 1 − p0. Para calcular su estimador u(n), primero se define la "función
+ocupada":
+
+\begin{equation}\label{eq:equation7}
+  B(t)\left\{ \begin{array}{lcc}
+                  1 &   si  & Nt>0  \\
+                  \\ 0 &  si  & Nt=0
+  \end{array}
+  \right
+\end{equation}
+
+Entonces u(n) es la porción del tiempo total en la que B(t) = 1.
+Al igual que a la medida anterior, podemos considerarlo como el área bajo B(t), así,
+\begin{equation}\label{eq:equation8}
+\hat{u}(n)=\frac{\int_{0}^{T(n)}B(t)}{T(n)}
+\end{equation}
+En definitiva, u(n) es la sumatoria de áreas rectangulares, donde la base es el tiempo en el que el servidor
+está en un estado específico, y la altura es dicho estado, 0 o 1.
+
+\section{Modelo de Inventario}\label{sec:modelo-m/m/c}
 
 
 
@@ -60,3 +152,8 @@ y G (distribución general).
   \label{sec:references}
     https://es.wikipedia.org/wiki/Proceso_estoc%C3%A1stico#:~:text=En%20la%20teor%C3%ADa%20de%20la,otra%20variable%2C%20generalmente%20el%20tiempo.
 
+    Arash Mahdavi, Simulation Modeling Consultant, The AnyLogic Company M/M/1/∞/∞ (single-server
+    queues). En The Art of Process-Centric Modeling with AnyLogic, pages 81–103. 2020. Disponible en https://www.anylogic.com/resources/books/the-art-of-process-centric-modeling-with-anylogic/
+
+    Averill M. Law, W. David. Kelton Simulation of a single-server queueing system. En Simulation Modeling Analysis,
+    pages 13–74. 199
