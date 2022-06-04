@@ -34,7 +34,9 @@ class ModeloInventario(Simulacion):
         self.programar_demanda()  # demanda inicial
 
     def programar_evaluacion(self):
-        self.eventos.append(Evento(self.reloj + 1, self.evaluar))
+        tiempo = self.reloj + 1
+        if tiempo < self.meses:  # al final de la simulación no se evalúa más
+            self.eventos.append(Evento(tiempo, self.evaluar))
 
     def programar_arribo_pedido(self, cantidad):
         self.eventos.append(
