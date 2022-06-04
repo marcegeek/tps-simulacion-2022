@@ -117,7 +117,7 @@ class ColaMMC(Simulacion):
     def utilizacion_servidor(self):
         return self.area_estados / self.reloj
 
-    def promedio_clientes_denegados(self):
+    def denegacion_servicio(self):
         return self.clientes_denegados / self.clientes_completaron_demora
 
     def correr(self):
@@ -137,8 +137,7 @@ class ColaMMC(Simulacion):
         print(f'Número promedio de clientes en cola: {self.promedio_clientes_cola():11.3f}')
         print(f'Número promedio de clientes en el sistema: {self.promedio_clientes_sistema():5.3f}')
         if self.capacidad is not None:
-            print(f'Número promedio de clientes denegados: {self.promedio_clientes_denegados():9.3f}')
-            print(f'Número total de clientes denegados: {self.clientes_denegados:12.3f}')
+            print(f'Probabilidad de denegación de servicio: {self.denegacion_servicio():8.3f}')
         print('Utilización de', end='')
         if len(self.estado_servidores) == 1:
             print('l servidor: ', end='')
