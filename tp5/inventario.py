@@ -82,6 +82,18 @@ class ModeloInventario(Simulacion):
         costo_mantenimiento_prom = self.costo_mantenimiento * self.mantenidos_area / self.meses
         costo_escasez_prom = self.costo_reserva * self.area_escasez / self.meses
         costo_total = costo_ordenes_prom + costo_mantenimiento_prom + costo_escasez_prom
+        print('Modelo de inventario de producto único')
+        print(f'Nivel de inicial inventario: {self.niveles_inventario[0]}')
+        print(f'Tiempo medio entre demandas: {self.media_entredemanda}')
+        print(f'Distribución de la demanda: {self.distribucion_demanda}')
+        print(f'Política de pedido: {(self.smalls, self.bigs)}')
+        print(f'Costo de establecimiento de pedido: {self.setup_cost}')
+        print(f'Costo incremental: {self.costo_incremental}')
+        print(f'Costo de mantenimiento: {self.costo_mantenimiento}')
+        print(f'Costo de faltante: {self.costo_reserva}')
+        print(f'Rango distribución de demora de pedido: {list(self.rango_lag)}')
+        print(f'Cantidad total de períodos: {self.meses}')
+        print('\nResultados de la simulación:')
         print(f'Costo orden promedio: {costo_ordenes_prom}')
         print(f'Costo mantenimiento promedio: {costo_mantenimiento_prom}')
         print(f'Costo escasez promedio: {costo_escasez_prom}')
