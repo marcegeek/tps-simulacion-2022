@@ -12,10 +12,11 @@ class EventoPartida(Evento):
 class ColaMMC(Simulacion):
     ESTADO_DESOCUPADO, ESTADO_OCUPADO = 0, 1
 
-    def __init__(self, servidores, tasa_arribos, tasa_servicio, num_clientes=1000, semilla=None):
+    def __init__(self, servidores, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=None, semilla=None):
         super().__init__(semilla=semilla)
         self.tasa_arribos = tasa_arribos
         self.tasa_servicio = tasa_servicio
+        self.capacidad = capacidad
         self.np_randomstate = np.random.RandomState(semilla)
         self.programar_arribo()  # evento arribo inicial
 
@@ -23,7 +24,10 @@ class ColaMMC(Simulacion):
         self.estado_servidores = [self.ESTADO_DESOCUPADO] * servidores
         self.clientes_cola = 0
         self.clientes_cola_tiempo = [self.clientes_cola]
+        self.clientes_denegados = 0
+        self.clientes_denegados_tiempo = [self.clientes_denegados]
         self.tiempos_cola = [0.0]
+        self.tiempos_denegados = [0.0]
         self.estados_servidores_tiempo = [[self.ESTADO_DESOCUPADO]] * servidores
         self.tiempos_servidores = [[0.0]] * servidores
 
@@ -51,10 +55,15 @@ class ColaMMC(Simulacion):
         self.programar_arribo()
         if self.estado_servidores.count(self.ESTADO_OCUPADO) == len(self.estado_servidores):
             # todos los servidores ocupados, incrementar clientes en cola
-            self.clientes_cola += 1
-            self.tiempos_arribo.append(ev.tiempo)
-            self.clientes_cola_tiempo.append(self.clientes_cola)
-            self.tiempos_cola.append(self.reloj)
+            if self.capacidad is None or self.clientes_cola + 1 <= self.capacidad:  # comprobar capacidad de cola
+                self.clientes_cola += 1
+                self.tiempos_arribo.append(ev.tiempo)
+                self.clientes_cola_tiempo.append(self.clientes_cola)
+                self.tiempos_cola.append(self.reloj)
+            else:
+                self.clientes_denegados += 1
+                self.clientes_denegados_tiempo.append(self.clientes_denegados)
+                self.tiempos_denegados.append(self.reloj)
         else:
             # servidor desocupado, el cliente es atendido sin demora
             self.clientes_completaron_demora += 1
@@ -108,13 +117,17 @@ class ColaMMC(Simulacion):
     def utilizacion_servidor(self):
         return self.area_estados / self.reloj
 
+    def promedio_clientes_denegados(self):
+        return self.clientes_denegados / self.clientes_completaron_demora
+
     def correr(self):
         while self.clientes_completaron_demora < self.num_clientes:
             self.hacer_un_paso()
         self.informe()
 
     def informe(self):
-        print(f'Modelo de colas M/M/{len(self.estado_servidores)}')
+        capacidad = '∞' if self.capacidad is None else self.capacidad
+        print(f'Modelo de colas M/M/{len(self.estado_servidores)}/{capacidad}')
         print(f'Tasa de arribos: {self.tasa_arribos:31.3f} clientes/min')
         print(f'Tasa de servicio: {self.tasa_servicio:30.3f} clientes/min')
         print(f'Número de clientes: {self.num_clientes:27}')
@@ -123,6 +136,9 @@ class ColaMMC(Simulacion):
         print(f'Tiempo promedio en el sistema: {self.tiempo_promedio_sistema():17.3f}')
         print(f'Número promedio de clientes en cola: {self.promedio_clientes_cola():11.3f}')
         print(f'Número promedio de clientes en el sistema: {self.promedio_clientes_sistema():5.3f}')
+        if self.capacidad is not None:
+            print(f'Número promedio de clientes denegados: {self.promedio_clientes_denegados():9.3f}')
+            print(f'Número total de clientes denegados: {self.clientes_denegados:12.3f}')
         print('Utilización de', end='')
         if len(self.estado_servidores) == 1:
             print('l servidor: ', end='')
@@ -136,8 +152,8 @@ class ColaMMC(Simulacion):
 
 class ColaMM1(ColaMMC):
 
-    def __init__(self, tasa_arribos, tasa_servicio, num_clientes=1000, semilla=None):
-        super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, semilla=semilla)
+    def __init__(self, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=None, semilla=None):
+        super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad, semilla=semilla)
 
 
 def test():
