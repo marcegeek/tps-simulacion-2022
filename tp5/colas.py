@@ -22,6 +22,10 @@ class ColaMMC(Simulacion):
         self.tiempos_arribo = []
         self.estado_servidores = [self.ESTADO_DESOCUPADO] * servidores
         self.clientes_cola = 0
+        self.clientes_cola_tiempo = [self.clientes_cola]
+        self.tiempos_cola = [0.0]
+        self.estados_servidores_tiempo = [[self.ESTADO_DESOCUPADO]] * servidores
+        self.tiempos_servidores = [[0.0]] * servidores
 
         self.clientes_completaron_demora = 0
         self.demora_total = 0.
@@ -49,6 +53,8 @@ class ColaMMC(Simulacion):
             # todos los servidores ocupados, incrementar clientes en cola
             self.clientes_cola += 1
             self.tiempos_arribo.append(ev.tiempo)
+            self.clientes_cola_tiempo.append(self.clientes_cola)
+            self.tiempos_cola.append(self.reloj)
         else:
             # servidor desocupado, el cliente es atendido sin demora
             self.clientes_completaron_demora += 1
@@ -56,11 +62,15 @@ class ColaMMC(Simulacion):
 
     def partida(self, ev):
         self.estado_servidores[ev.servidor] = self.ESTADO_DESOCUPADO
+        self.estados_servidores_tiempo[ev.servidor].append(self.estado_servidores[ev.servidor])
+        self.tiempos_servidores[ev.servidor].append(self.reloj)
         if self.clientes_cola != 0:
             # hay clientes en cola, el primero pasa a ser atendido
             self.clientes_cola -= 1
             self.demora_total += ev.tiempo - self.tiempos_arribo.pop(0)
             self.clientes_completaron_demora += 1
+            self.clientes_cola_tiempo.append(self.clientes_cola)
+            self.tiempos_cola.append(self.reloj)
             self.servicio()
 
     def determinar_servidor(self):
@@ -72,6 +82,8 @@ class ColaMMC(Simulacion):
         servidor = self.determinar_servidor()
         self.estado_servidores[servidor] = self.ESTADO_OCUPADO
         self.programar_partida(servidor)
+        self.estados_servidores_tiempo[servidor].append(self.estado_servidores[servidor])
+        self.tiempos_servidores[servidor].append(self.reloj)
 
     def actualizar_estadisticas(self):
         super().actualizar_estadisticas()
