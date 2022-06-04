@@ -9,9 +9,12 @@ class EventoArriboPedido(Evento):
 
 class ModeloInventario(Simulacion):
     def __init__(self, meses=120, nivel_inventario=60, bigs=40, smalls=20, setup_cost=32, costo_incremental=3,
-                 costo_mantenimiento=1, costo_reserva=5, rango_lag=(0.5, 1), media_entredemanda=0.1, distribucion_demanda=((1, 2, 3, 4), (1/6, 1/3, 1/3, 1/6)), semilla=None):
+                 costo_mantenimiento=1, costo_reserva=5, rango_lag=(0.5, 1),
+                 media_entredemanda=0.1, distribucion_demanda=((1, 2, 3, 4), (1/6, 1/3, 1/3, 1/6)), semilla=None):
         super().__init__(semilla=semilla)
         self.nivel_inventario = nivel_inventario
+        self.niveles_inventario = [nivel_inventario]
+        self.tiempos = [0.0]
         self.meses = meses
         self.bigs = bigs
         self.smalls = smalls
@@ -27,12 +30,11 @@ class ModeloInventario(Simulacion):
         self.mantenidos_area = 0
         self.area_escasez = 0
 
-        self.programar_evaluacion()  # evaluación inicial (inicio primer mes)
+        self.eventos.append(Evento(0.0, self.evaluar))  # evaluación inicial (inicio primer mes)
         self.programar_demanda()  # demanda inicial
 
     def programar_evaluacion(self):
         self.eventos.append(Evento(self.reloj + 1, self.evaluar))
-        pass
 
     def programar_arribo_pedido(self, cantidad):
         self.eventos.append(
@@ -44,6 +46,8 @@ class ModeloInventario(Simulacion):
 
     def arribo_pedido(self, ev: EventoArriboPedido):
         self.nivel_inventario += ev.cantidad
+        self.tiempos.append(self.reloj)
+        self.niveles_inventario.append(self.nivel_inventario)
 
     def demanda(self, ev):
         self.programar_demanda()
@@ -56,6 +60,8 @@ class ModeloInventario(Simulacion):
         # noinspection PyUnboundLocalVariable
         cant_demand = valores[i]
         self.nivel_inventario -= cant_demand
+        self.tiempos.append(self.reloj)
+        self.niveles_inventario.append(self.nivel_inventario)
 
     def programar_demanda(self):
         self.eventos.append(
