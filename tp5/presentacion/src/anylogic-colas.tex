@@ -5,37 +5,85 @@
   \caption{Bloques del modelo MM1 en Anylogic.}
 \end{figure}
 
-Para analizar el rendimiento del modelo, variamos la tasa de arribos ($T_a$) en base a la tasa de servicio ($T_s$) y
+Para analizar el rendimiento del modelo, variamos la tasa de arribos ($T_a$) en base a la tasa de servicio ($T_s$), y
 la capacidad de la cola ($cap$).
 
 Realizaremos 10 simulaciones de 1000 clientes cada una y promediamos los siguientes estadísticos:
 \begin{itemize}
-    \item Demora promedio esperada en cola ($d(n)$)
-    \item Cantidad de clientes en cola en promedio ($q(n)$)
-    \item Ocupación del servidor ($u(n)*100\%$)
     \item Promedio de clientes en el sistema ($q(n)+u(n)$)
+    \item Cantidad de clientes en cola en promedio ($q(n)$)
+    \item Demora promedio esperada en cola ($d(n)$)
+    \item Tiempo promedio en el sistema ($d(n)+s(n)$)
+    \item Ocupación del servidor ($u(n)*100\%$)
     \item Probabilidad de denegación del servicio. ($p(den)$)
     \item Probabilidad de encontrar n clientes en cola. ($p(Q(t)=n)\times100\%$)
 \end{itemize}
 
 Los primeros 5 fueron tabulados y el último fue graficado.
 
-\subsubsection{$T_a = 25\% * T_s$}
+\subsubsection{$cap = 0$}
 
-\begin{tabular}{||c|c|c|c|c|c||}
+Los parámetros $d(n)$, $q(n)$ y $p(Q(t)=n)\times100\%$ no aplican cuando la capacidad de la cola es 0.
+El promedio de clientes en sistema es en este caso, equivalente al factor de uso del servicio.
+
+\begin{tabular}{||c||c|c|c||}
     \hline \hline
-    $cap$ & $d(n)$ & $q(n)$ & $u(n)\times100\%$ & $q(n)+u(n)$ & $p(den)$ \\
+    $T_a \over T_s\times100\% [\%]$ & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
     \hline \hline
-    0 & N/A & N/A & $19,8$ & $1,98$ & $20,16$ \\
+    25 & $2,005$ & $19,823$ & $19,46$ \\
     \hline
-    2 & $0,5771$ & $0,0718$ & $24,8$ & $2,5728$ & $1,21$ \\
+    50 & $2,059$ & $33,656$ & $34,09$ \\
     \hline
-    5 &  &  &  &  &  \\
+    75 & $1,93$ & $42,212$ & $41,65$ \\
     \hline
-    10 &  &  &  &  &  \\
+    100 & $1,985$ & $49,165$ & $50,12$ \\
     \hline
-    50 &  &  &  &  &  \\
-    \hline
-    $\infty$ &  &  &  &  & N/A \\
+    125 & $2,004$ & $55,434$ & $55,15$ \\
     \hline \hline
 \end{tabular}
+
+\subsubsection{$cap = $}
+
+\begin{tabular}{||c||c|c|c|c|c|c||}
+    \hline \hline
+    $T_a \over T_s\times100\% [\%]$ & $q(n)+u(n) [min]$ & $q(n) [clientes]$  & $d(n) [min]$   & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
+    \hline \hline
+    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline \hline
+\end{tabular}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{images/anylogic-colas-}
+  \caption{Probabilidad de encontrar n clientes en cola.}
+\end{figure}
+
+\subsubsection{$cap = 2$}
+
+\begin{tabular}{||c||c|c|c|c|c|c||}
+    \hline \hline
+    $T_a \over T_s\times100\% [\%]$ & $q(n)+u(n) [min]$ & $q(n) [clientes]$  & $d(n) [min]$   & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
+    \hline \hline
+    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline
+    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    \hline \hline
+\end{tabular}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{images/anylogic-colas-}
+  \caption{Probabilidad de encontrar n clientes en cola.}
+\end{figure}
