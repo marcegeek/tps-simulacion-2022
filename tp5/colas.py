@@ -120,10 +120,8 @@ class ColaMMC(Simulacion):
     def denegacion_servicio(self):
         return self.clientes_denegados / self.clientes_completaron_demora
 
-    def correr(self):
-        while self.clientes_completaron_demora < self.num_clientes:
-            self.hacer_un_paso()
-        self.informe()
+    def es_fin(self):
+        return self.clientes_completaron_demora >= self.num_clientes
 
     def informe(self):
         capacidad = '∞' if self.capacidad is None else self.capacidad

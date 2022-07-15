@@ -106,10 +106,8 @@ class ModeloInventario(Simulacion):
         elif self.nivel_inventario > 0:
             self.mantenidos_area += self.nivel_inventario * self.tiempo_desde_ult_evento
 
-    def correr(self):
-        while self.reloj < self.meses:
-            self.hacer_un_paso()
-        self.informe()
+    def es_fin(self):
+        return self.reloj >= self.meses
 
 
 def test():
