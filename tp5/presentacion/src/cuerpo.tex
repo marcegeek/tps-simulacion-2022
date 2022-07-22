@@ -11,10 +11,12 @@
 \section{Introducción}\label{sec:introduccion}
 En el siguiente trabajo simularemos mediante un programa desarrollado en lenguaje Python, una cola simple, en la que
 solamente habrá llegada de clientes, atendidos por un único servidor luego de haber realizado una espera
-determinada en la cola y posteriormente partirán. Adicionalmente se simulará una cola con una cantidad de servidores predeterminada.
+determinada en la cola y posteriormente partirán.
+Adicionalmente se simulará una cola con una cantidad de servidores predeterminada.
 El modelo de inventario contará con el mismo formato y consistirá en un proceso por mes en el que se realiza una orden de compra
 a los proveedores, mientras se trata de alcanzar la demanda de los clientes a través de distintos indicadores de escacez y
-existencia. Finalmente se realizará una evaluación y se calcularán las estadísticas correspondientes.
+existencia.
+Finalmente se realizará una evaluación y se calcularán las estadísticas correspondientes.
 A su vez estudiaremos la eficacia de dichos programas al comparar ciertas medidas de rendimiento observadas con las
 teóricas computadas y a su vez con las obtenidas mediante una calculadora web, y de otra simulación desarrollada
 en el aplicativo Anylogic.
@@ -250,15 +252,16 @@ por lo que el costo promedio de la cartera de pedidos por mes es \pi I.
     Suponiendo que la demanda diaria y/o el tiempo de entrega se distribuyen normalmente.
     Necesitamos definir más  parámetros para el tiempo de entrega, la demanda media, el tiempo de entrega promedio, la desviación estándar de la demanda y la desviación estándar del tiempo de entrega.
 
-    Para el sistema de revisión periódica, reabastecemos en fechas fijas, por lo que solo modificamos el tiempo de recurrencia del evento “Ordering” definiéndolo a través del parámetro “t_Period”.
+    Para el sistema de revisión periódica, reabastecemos en fechas fijas, por lo que solo modificamos el tiempo de recurrencia del evento “Ordering” definiéndolo a través del parámetro "t\_period".
 
     Para el sistema de revisión continua, la regla de reabastecimiento se puede definir con la ayuda del punto de pedido (ROP).
 
     Además incluiremos stock de seguridad en nuestro modelo.
-    Para modelar el tiempo de entrega, definimos el evento "NewOrder" y la variable "OrderReceived" de tipo "Booleano" (con valor inicial "false") y vuelva a escribir la regla de reposición en el evento "Ordering".
+    Para modelar el tiempo de entrega, definimos el evento "NewOrder" y la variable "OrderReceived de tipo "Booleano" (con valor inicial "false") y vuelva a escribir la regla de reposición en el evento "Ordering".
 
     Si el nivel de inventario alcanza el punto de pedido, se genera un nuevo pedido de reabastecimiento el cual llegará en X días definidos en el parámetro LeadTime.
-    Es por eso que dejamos que el evento "NewOrder" comience en X días. En el momento de la entrada del pedido y el aumento del nivel de inventario, la variable lógica "OrderReceived" toma el valor "false". Esto significa que no hay otras órdenes
+    Es por eso que dejamos que el evento "NewOrder" comience en X días.
+    En el momento de la entrada del pedido y el aumento del nivel de inventario, la variable lógica "OrderReceived" toma el valor "false". Esto significa que no hay otras órdenes
     recibidas por nuestro proveedor.
     El siguiente pedido se generará cuando el nivel de inventario vuelva a alcanzar el punto de pedido.
 
@@ -267,89 +270,108 @@ por lo que el costo promedio de la cartera de pedidos por mes es \pi I.
     Definimos tres nuevos parámetros “HoldingCost”, “OrderingCost” y “StockoutCosts” y tres nuevas variables de los mismos. Es necesario definir otras tres nuevas variables, "ServiceLevel", "TotalSales" y "RetailShortage".
 
     Los costos, la escasez y el nivel de servicio se actualizan en el evento "CostsUpdate".
+
+    A continuación se realizarán 10 simulaciones de 30 días cada una, donde se llevarán a cabo las mediciones de las siguientes variables:
     \begin{itemize}
-        \item Promedio de clientes en el sistema ($q(n)+u(n)$)
-        \item Cantidad de clientes en cola en promedio ($q(n)$)
-        \item Demora promedio esperada en cola ($d(n)$)
-        \item Tiempo promedio en el sistema ($d(n)+s(n)$)
-        \item Ocupación del servidor ($u(n)*100\%$)
-        \item Probabilidad de denegación del servicio. ($p(den)$)
-        \item Probabilidad de encontrar n clientes en cola. ($p(Q(t)=n)\times100\%$)
+        \item Costo de Orden
+        \item Costo de Mantenimiento
+        \item Costo de Faltante
+        \item Costo Total
     \end{itemize}
 
-    Los primeros 5 fueron tabulados y el último fue graficado.
-
-    \subsubsection{$cap = 0$}
-
-    Los parámetros $d(n)$, $q(n)$ y $p(Q(t)=n)\times100\%$ no aplican cuando la capacidad de la cola es 0.
-    El promedio de clientes en sistema es en este caso, equivalente al factor de uso del servicio.
-
-    \begin{tabular}{||c||c|c|c||}
-        \hline \hline
-        $T_a \over T_s\times100\% [\%]$ & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
-        \hline \hline
-        25 & $2,005$ & $19,823$ & $19,46$ \\
-        \hline
-        50 & $2,059$ & $33,656$ & $34,09$ \\
-        \hline
-        75 & $1,93$ & $42,212$ & $41,65$ \\
-        \hline
-        100 & $1,985$ & $49,165$ & $50,12$ \\
-        \hline
-        125 & $2,004$ & $55,434$ & $55,15$ \\
-        \hline \hline
-    \end{tabular}
-
-    \subsubsection{$cap = 2$}
-
-    \begin{tabular}{||c||c|c|c|c|c|c||}
-        \hline \hline
-        $T_a \over T_s\times100\% [\%]$ & $q(n)+u(n) [min]$ & $q(n) [clientes]$  & $d(n) [min]$   & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
-        \hline \hline
-        25 & $0,313$ & $0,068$ & $0,548$ & $2,54$ & $24,546$ & $1,26$ \\
-        \hline
-        50 & $0,739$ & $0,266$ & $1,148$ & $3,186$ & $47,27$ & $6,39$ \\
-        \hline
-        75 & $1,168$ & $0,524$ & $1,65$ & $3,681$ & $64,373$ & $15,71$ \\
-        \hline
-        100 & $1,499$ & $0,748$ & $2,014$ & $4,039$ & $75,164$ & $25,3$ \\
-        \hline
-        125 & $1,756$ & $0,934$ & $2,26$ & $4,246$ & $82,168$ & $32,93$ \\
-        \hline \hline
-    \end{tabular}
-
+    A continuación se presentarán algunas simulaciones por parte del sistema creado y luego veremos una tabla comparativa con los resultados de las variables analizadas:
     \begin{figure}[H]
-        \includegraphics[width=\linewidth]{images/anylogic-colas-}
-        \caption{Probabilidad de encontrar n clientes en cola.}
+        \includegraphics[width=\linewidth]{images/img1invent}
+        \caption{Simulación 1. Orden de compra alto.}
     \end{figure}
 
-    \subsubsection{$cap = $}
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img2invent}
+        \caption{Simulación 2. Orden de compra y ROP bajo.}
+    \end{figure}
 
-    \begin{tabular}{||c||c|c|c|c|c|c||}
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img3invent}
+        \caption{Simulación 3. Cantidad inicial alta y ROP a un tercio de la cantidad inicial.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img4invent}
+        \caption{Simulación 4. Gran falta de stock.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img5invent}
+        \caption{Simulación 5. Gran falta de stock con mayor velocidad de recepción.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img6invent}
+        \caption{Simulación 6. Mismo Escenario con mayor cantidad de demanda.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img7invent}
+        \caption{Simulación 7. Mismo Escenario con mayor cantidad de orden de compra.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img8invent}
+        \caption{Simulación 8. Baja demanda.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img9invent}
+        \caption{Simulación 9. Baja demanda y aumento de ROP.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{images/img9invent}
+        \caption{Simulación 10. Disminución de orden de compra.}
+    \end{figure}
+
+    \begin{tabular}{||c||c|c|c|c||}
         \hline \hline
-        $T_a \over T_s\times100\% [\%]$ & $q(n)+u(n) [min]$ & $q(n) [clientes]$  & $d(n) [min]$   & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
+        Simulación nro & Orden & Mantenimiento & Faltante & TOTAL\\
         \hline \hline
-        25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+        1 & $60$ & $486,7$ & $0$ & $546,7$\\
         \hline
-        50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+        2 & $40$ & $34,8$ & $60,4$ & $135,2$\\
         \hline
-        75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+        3 & $60$ & $285,5$ & $0$ & $345,5$\\
         \hline
-        100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+        4 & $40$ & $0$ & $190,8$ & $230,8$\\
         \hline
-        125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+        5 & $100$ & $0$ & $204,4$ & $304,4$\\
+        \hline
+        6 & $100$ & $2,6$ & $155,2$ & $257,8$\\
+        \hline
+        7 & $100$ & $52,7$ & $389,2$ & $541,9$\\
+        \hline
+        8 & $100$ & $66,1$ & $37,2$ & $203,3$\\
+        \hline
+        9 & $100$ & $138,9$ & $0$ & $238,9$\\
+        \hline
+        10 & $100$ & $124,4$ & $0$ &$224,4$\\
         \hline \hline
     \end{tabular}
 
-    \begin{figure}[H]
-        \includegraphics[width=\linewidth]{images/anylogic-colas-}
-        \caption{Probabilidad de encontrar n clientes en cola.}
-    \end{figure}
+    \subsubsection{Conclusion de las simulaciones}\label{subsubsec:conclusiones}
+    Cabe aclarar que los resultados negativos no significan que se "ahorró" el costo, esto cuenta como 0 debido a que no se pudo realizar el costo de mantenimiento del stock ya que hubo faltante del mismo.
+    Además se puede observar como en la simulación 2 fué la que más pudo mantener bajos costos a comparación de las demás debido a que tuvo pocas ordenes de compra y una gran existencia al principio.
+
+    La Simulación 8 fué la siguiente con menos costo debido a que si bien tuvo muchos gastos en las ordenes de compra, pudo distribuir mejor la faltante y el mantenimiento de la existencia en el inventario.
+
+    A su vez la Simulación 1 fué la más costosa, debido a que mantuvo una gran cantidad de stock en el inventario mientras que la segunda mas costosa (la simulación 7) tuvo el mismo problema con la diferencia de que esta que tuvo mucha faltante.
+
+    Como conclusión se puede decir que el mayor problema radica en la falta de equilibrio en los costos de cada acción, ya que por ejemplo se pueden tener altos costos de orden de compra, pero esto no fué problema para la simulación 8 que distribuyó la faltante y el mantenimiento de existencia de manera que pudo reducir los costos.
+    De la misma manera, hubo simulaciones con pocas ordenes de compra pero con altos costes de faltante o de mantenimiento, lo que llevo a grandes costos totales.
+
 
 \section{Conclusiones}
 \section{Referencias}
   \label{sec:references}
-    https://es.wikipedia.org/wiki/Proceso_estoc%C3%A1stico#:~:text=En%20la%20teor%C3%ADa%20de%20la,otra%20variable%2C%20generalmente%20el%20tiempo.
+    https://es.wikipedia.org/wiki/Proceso\_estoc%C3%A1stico#:~:text=En%20la%20teor%C3%ADa%20de%20la,otra%20variable%2C%20generalmente%20el%20tiempo.
 
     Arash Mahdavi, Simulation Modeling Consultant, The AnyLogic Company M/M/1/∞/∞ (single-server
     queues). En The Art of Process-Centric Modeling with AnyLogic, pages 81–103. 2020. Disponible en https://www.anylogic.com/resources/books/the-art-of-process-centric-modeling-with-anylogic/
