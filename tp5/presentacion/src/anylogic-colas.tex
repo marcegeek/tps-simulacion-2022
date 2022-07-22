@@ -28,7 +28,7 @@ El promedio de clientes en sistema es en este caso, equivalente al factor de uso
 
 \begin{tabular}{||c||c|c|c||}
     \hline \hline
-    $T_a \over T_s\times100\% [\%]$ & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
+    ${T_a \over T_s}\times100\%$ [\%] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
     25 & $2,005$ & $19,823$ & $19,46$ \\
     \hline
@@ -46,7 +46,7 @@ El promedio de clientes en sistema es en este caso, equivalente al factor de uso
 
 \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
-    $T_a \over T_s\times100\% [\%]$ & $q(n)+u(n) [min]$ & $q(n) [clientes]$  & $d(n) [min]$   & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
+    ${T_a \over T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
     25 & $0,313$ & $0,068$ & $0,548$ & $2,54$ & $24,546$ & $1,26$ \\
     \hline
@@ -61,7 +61,30 @@ El promedio de clientes en sistema es en este caso, equivalente al factor de uso
 \end{tabular}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-}
+  \includegraphics[width=\linewidth]{images/anylogic-colas-2}
+  \caption{Probabilidad de encontrar n clientes en cola.}
+\end{figure}
+
+\subsubsection{$cap = 5$}
+
+\begin{tabular}{||c||c|c|c|c|c|c||}
+    \hline \hline
+    ${T_a \over T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
+    \hline \hline
+    25 & $0,326$ & $0,079$ & $0,634$ & $2,069$ & $24,672$ & $0,01$ \\
+    \hline
+    50 & $0,917$ & $0,424$ & $1,7$ & $3,681$ & $49,263$ & $0,85$ \\
+    \hline
+    75 & $1,882$ & $1,18$ & $3,318$ & $5,289$ & $70,119$ & $4,9$ \\
+    \hline
+    100 & $3,122$ & $2,253$ & $5,234$ & $7,254$ & $86,914$ & $14,19$ \\
+    \hline
+    125 & $3,847$ & $2,917$ & $6,267$ & $8,266$ & $93,034$ & $25,23$ \\
+    \hline \hline
+\end{tabular}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{images/anylogic-colas-5}
   \caption{Probabilidad de encontrar n clientes en cola.}
 \end{figure}
 
@@ -69,7 +92,7 @@ El promedio de clientes en sistema es en este caso, equivalente al factor de uso
 
 \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
-    $T_a \over T_s\times100\% [\%]$ & $q(n)+u(n) [min]$ & $q(n) [clientes]$  & $d(n) [min]$   & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den) [\%]$ \\
+    ${T_a \over T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
     25 & $$ & $$ & $$ & $$ & $$ & $$ \\
     \hline

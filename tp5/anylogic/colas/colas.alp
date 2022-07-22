@@ -254,7 +254,7 @@
 				<Connector>
 					<Id>1654301596624</Id>
 					<Name><![CDATA[connector3]]></Name>
-					<X>90</X><Y>240</Y>
+					<X>120</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -281,8 +281,8 @@
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-50</X><Y>0</Y></Point>
+						<Point><X>-30</X><Y>0</Y></Point>
+						<Point><X>-60</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -383,7 +383,7 @@
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>-90</Y></Point>
+						<Point><X>0</X><Y>-60</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -416,7 +416,7 @@
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>20</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -457,7 +457,7 @@
 				<Connector>
 					<Id>1657768040659</Id>
 					<Name><![CDATA[connector7]]></Name>
-					<X>100</X><Y>240</Y>
+					<X>130</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -484,13 +484,13 @@
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>100</X><Y>0</Y></Point>
+						<Point><X>70</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1657770073696</Id>
 					<Name><![CDATA[connector8]]></Name>
-					<X>80</X><Y>110</Y>
+					<X>190</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -517,7 +517,7 @@
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>130</X><Y>0</Y></Point>
+						<Point><X>20</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -588,7 +588,7 @@
 				<EmbeddedObject>
 					<Id>1654298990571</Id>
 					<Name><![CDATA[clientes]]></Name>
-					<X>10</X><Y>230</Y>
+					<X>30</X><Y>230</Y>
 					<Label><X>-5</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -810,7 +810,7 @@
 						<Parameter>
 							<Name><![CDATA[capacity]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[2]]></Code>
+								<Code><![CDATA[5]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -1082,7 +1082,7 @@
 				<EmbeddedObject>
 					<Id>1654298990723</Id>
 					<Name><![CDATA[colaTiempoInicio]]></Name>
-					<X>90</X><Y>220</Y>
+					<X>120</X><Y>220</Y>
 					<Label><X>-40</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1358,7 +1358,7 @@
 				<EmbeddedObject>
 					<Id>1654304651427</Id>
 					<Name><![CDATA[denegacion]]></Name>
-					<X>220</X><Y>130</Y>
+					<X>220</X><Y>160</Y>
 					<Label><X>-75</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1511,11 +1511,11 @@
 				<EmbeddedObject>
 					<Id>1657770063992</Id>
 					<Name><![CDATA[source]]></Name>
-					<X>50</X><Y>100</Y>
+					<X>160</X><Y>100</Y>
 					<Label><X>-5</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
+					<ShowLabel>false</ShowLabel>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
 						<ClassName><![CDATA[Source]]></ClassName>
@@ -1820,6 +1820,9 @@
 			<AfterSimulationRunCode><![CDATA[Main simulacion=((Main)getEngine().getRoot());
 int primerIndice=primerIndice(),segundoIndice=segundoIndice();
 
+if(primerIndice==0 && segundoIndice==0)
+	tamanioDeCola=simulacion.cola.capacity;
+
 ocupacionServidor[primerIndice][segundoIndice]=(simulacion.usoTiempoFin.dataset.getYMean()*simulacion.usoTiempoFin.dataset.size())/simulacion.getEngine().time();
 tiempoPromedioSistema[primerIndice][segundoIndice]=simulacion.usoTiempoFin.dataset.getYMean()+simulacion.colaTiempoFin.dataset.getYMean();
 cantidadClientesCola[primerIndice][segundoIndice]=simulacion.tamanioDeCola.getYMean();
@@ -1828,7 +1831,10 @@ probabilidadDenegacionServicio[primerIndice][segundoIndice]=(double)simulacion.d
 demoraPromedioCola[primerIndice][segundoIndice]=simulacion.colaTiempoFin.dataset.getYMean();
 DataSet tdc=simulacion.tamanioDeCola;
 for(int i=0,to=tdc.size();i<to;i++)
-	tamanioColaDatasets[primerIndice].add(tdc.getX(i),tdc.getY(i));]]></AfterSimulationRunCode>
+	tamanioColaDatasets[primerIndice].add(tdc.getX(i),tdc.getY(i));
+
+if(primerIndice==4 && segundoIndice==9)
+	mostrarProbabilidadesDeTamanioDeColas(0);]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
 			<VmArgs><![CDATA[]]></VmArgs>
@@ -1927,7 +1933,7 @@ for(int i=0,to=tdc.size();i<to;i++)
 				<Variable Class="PlainVariable">
 					<Id>1655437565104</Id>
 					<Name><![CDATA[tamanioColaDatasets]]></Name>
-					<X>-200</X><Y>180</Y>
+					<X>-200</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1943,6 +1949,18 @@ for(int i=0,to=tdc.size();i<to;i++)
 	new DataSet(30000)
 }]]></Code>
 						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1658438826571</Id>
+					<Name><![CDATA[tamanioDeCola]]></Name>
+					<X>-200</X><Y>320</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
 			</Variables>
@@ -1970,6 +1988,40 @@ for(int i=0,to=tdc.size();i<to;i++)
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[return (getCurrentIteration()-1)%10;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658437393066</Id>
+					<Name><![CDATA[mostrarProbabilidadesDeTamanioDeColas]]></Name>
+					<X>-250</X><Y>110</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[indiceTaSobreTd]]></Name>
+						<Type><![CDATA[int]]></Type>
+					</Parameter>
+					<Body><![CDATA[chart.removeAll();
+HashMap<Integer,Integer> dic=new HashMap<>();
+DataSet tamanioCola=tamanioColaDatasets[indiceTaSobreTd];
+for(int i=0,max=tamanioCola.size();i<max;i++){
+	int clave=(int)tamanioCola.getY(i);
+	if(dic.containsKey(clave))
+		dic.put(clave,dic.get(clave)+1);
+	else dic.put(clave,1);
+}
+for(int i=0;i<=tamanioDeCola;i++){
+	DataItem di=new DataItem();
+	di.setValue(dic.containsKey(i)?
+		dic.get(i)
+		:0
+	);
+	
+	
+	chart.addDataItem(di,""+i,Color.BLUE);
+}]]></Body>
 				</Function>
 			</Functions>
 
@@ -2734,13 +2786,13 @@ for(int i=0,to=tdc.size();i<to;i++)
     			<BarChart>
 					<Id>1655437431654</Id>
 					<Name><![CDATA[chart]]></Name>
-					<X>390</X><Y>340</Y>
+					<X>90</X><Y>320</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AutoUpdate>false</AutoUpdate>
+					<AutoUpdate>true</AutoUpdate>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1655452800000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
@@ -2752,8 +2804,8 @@ for(int i=0,to=tdc.size();i<to;i++)
 						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>320</Width>
-					<Height>230</Height>
+					<Width>350</Width>
+					<Height>200</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
@@ -2766,7 +2818,7 @@ for(int i=0,to=tdc.size();i<to;i++)
 						<GridColor>-12566464</GridColor>
 					</ChartArea>
 					<Legend>
-						<Place>SOUTH</Place>
+						<Place>EAST</Place>
 						<TextColor>-16777216</TextColor>
 						<Size>30</Size>
 					</Legend>
@@ -2776,16 +2828,9 @@ for(int i=0,to=tdc.size();i<to;i++)
 						<TextColor>-12566464</TextColor>
 					</Labels>
 					<ShowLegend>true</ShowLegend>
-					<DataItem>
-					<Id>0</Id>
-					<Expression><![CDATA[0//tamanioColaDatasets[radio.getValue()]]]></Expression>
-					<Color>-9404272</Color>
-					<Expression2Flag>true</Expression2Flag>
-						<Title><![CDATA[item]]></Title>
-					</DataItem>
 					<ScaleFromExpression><![CDATA[0]]></ScaleFromExpression>
 					<ScaleToExpression><![CDATA[1]]></ScaleToExpression>
-					<ScaleType>AUTO</ScaleType>
+					<ScaleType>HUNDRED_PERCENTS</ScaleType>
 					<Bars>
 						<Direction>UP</Direction>
 						<RelativeWidth>0.8</RelativeWidth>
@@ -2795,7 +2840,7 @@ for(int i=0,to=tdc.size();i<to;i++)
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1655437731852</Id>
 					<Name><![CDATA[radio]]></Name>
-					<X>40</X><Y>340</Y>
+					<X>40</X><Y>360</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2805,6 +2850,7 @@ for(int i=0,to=tdc.size();i<to;i++)
                         <EmbeddedIcon>false</EmbeddedIcon>	
 						<TextColor/>
 						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[mostrarProbabilidadesDeTamanioDeColas(radio.getValue());]]></ActionCode>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -3037,70 +3083,6 @@ for(int i=0,to=tdc.size();i<to;i++)
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
-    			<Histogram>
-					<Id>1657771402042</Id>
-					<Name><![CDATA[chart1]]></Name>
-					<X>120</X><Y>360</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AutoUpdate>false</AutoUpdate>
-					<OccurrenceAtTime>true</OccurrenceAtTime>
-					<OccurrenceDate>1657785600000</OccurrenceDate>
-					<OccurrenceTime Class="CodeUnitValue">
-						<Code><![CDATA[0]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
-					</OccurrenceTime>
-					<RecurrenceCode Class="CodeUnitValue">
-						<Code><![CDATA[1]]></Code>
-						<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
-					</RecurrenceCode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>260</Width>
-					<Height>210</Height>
-					<BackgroundColor/>
-					<BorderColor/>
-					<ChartArea>
-						<XOffset>50</XOffset>
-						<YOffset>30</YOffset>
-						<Width>180</Width>
-						<Height>120</Height>
-						<BackgroundColor>-1</BackgroundColor>
-						<BorderColor>-16777216</BorderColor>
-						<GridColor>-12566464</GridColor>
-					</ChartArea>
-					<Legend>
-						<Place>SOUTH</Place>
-						<TextColor>-16777216</TextColor>
-						<Size>30</Size>
-					</Legend>
-					<Labels>
-						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
-						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
-						<TextColor>-12566464</TextColor>
-					</Labels>
-					<ShowLegend>true</ShowLegend>
-					<ShowPDF>true</ShowPDF>
-					<ShowCDF>false</ShowCDF>
-					<ShowMean>false</ShowMean>
-					<Bars>
-						<Direction>UP</Direction>
-						<RelativeWidth>0.8</RelativeWidth>
-					</Bars>
-					<HistogramDataExpression>
-					<Id>0</Id>
-					<Expression><![CDATA[tamanioColaDatasets[radio.getValue()]]]></Expression>
-						<ColorPDF>-32944</ColorPDF>
-						<ColorCDF>-2987746</ColorCDF>
-						<ColorLowPercent>-2448096</ColorLowPercent>
-						<ColorHighPercent>-9728477</ColorHighPercent>
-						<ColorMean>-7667573</ColorMean>
-						<LineWidth>1</LineWidth>						
-						<Title><![CDATA[Histogram Data Title]]></Title>							
-					</HistogramDataExpression>
-    			</Histogram>
 			</Presentation>
 
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
