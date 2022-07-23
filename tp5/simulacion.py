@@ -1,4 +1,5 @@
 import abc
+
 import numpy as np
 
 
@@ -62,3 +63,14 @@ class Simulacion(abc.ABC):
     @abc.abstractmethod
     def informe(self):
         pass
+
+
+class Experimento:
+    """Realizar un experimento con varias corridas de una simulación"""
+
+    def __init__(self, clase, params, param_kwargs, corridas=10):
+        self.resultados = [clase(*params, **param_kwargs) for i in range(corridas)]
+
+    def correr(self):
+        for s in self.resultados:
+            s.correr()

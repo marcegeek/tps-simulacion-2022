@@ -1,5 +1,9 @@
 import numpy as np
-from simulacion import Evento, Simulacion
+import matplotlib.pyplot as plt
+import statistics as st
+
+from simulacion import Evento, Simulacion, Experimento
+from util.plotter import GraficoDistribucion, GraficoDiscreto
 
 
 class EventoPartida(Evento):
@@ -117,6 +121,10 @@ class ColaMMC(Simulacion):
     def utilizacion_servidor(self):
         return self.area_estados / self.reloj
 
+    def tasa_global_arribos(self):
+        beta, _ = np.polyfit(self.tiempos_cola, self.clientes_cola_tiempo, 1)
+        return beta
+
     def denegacion_servicio(self):
         return self.clientes_denegados / self.clientes_completaron_demora
 
@@ -134,6 +142,7 @@ class ColaMMC(Simulacion):
         print(f'Tiempo promedio en el sistema: {self.tiempo_promedio_sistema():17.3f}')
         print(f'Número promedio de clientes en cola: {self.promedio_clientes_cola():11.3f}')
         print(f'Número promedio de clientes en el sistema: {self.promedio_clientes_sistema():5.3f}')
+        print(f'Tasa global de arribos: {self.tasa_global_arribos()}')
         if self.capacidad is not None:
             print(f'Probabilidad de denegación de servicio: {self.denegacion_servicio():8.3f}')
         print('Utilización de', end='')
@@ -153,7 +162,62 @@ class ColaMM1(ColaMMC):
         super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad, semilla=semilla)
 
 
-def test():
+def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=None, corridas=100):
+    tasa_arribos = tasa_servicio * factor
+    exp = Experimento(ColaMM1, [tasa_arribos, tasa_servicio], {'num_clientes': num_clientes, 'capacidad': capacidad},
+                      corridas=corridas)
+    exp.correr()
+    print(f'Cola M/M/1/{"∞" if capacidad is None else capacidad}')
+    print(f'Tasa de arribos/tasa de servicio: {factor * 100}%')
+    idx = np.random.randint(0, len(exp.resultados) - 1)
+    print(f'Resultados corrida n° {idx + 1}:')
+    exp.resultados[idx].informe()
+
+    promedios_clientes_cola = []
+    promedios_espera_cola = []
+    promedios_tiempo_sistema = []
+    promedios_tiempo_servicio = []
+    tasas_globales_arribos = []
+
+    graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]', ylabel='Clientes')
+    for cola in exp.resultados:
+        prom_clientes_cola = cola.promedio_clientes_cola()
+        prom_espera = cola.demora_promedio()
+        prom_sistema = cola.tiempo_promedio_sistema()
+        prom_tiempo_servicio = cola.tiempo_promedio_servicio()
+        graf_clientes.graficar(cola.tiempos_cola, cola.clientes_cola_tiempo)
+        promedios_clientes_cola.append(prom_clientes_cola)
+        promedios_espera_cola.append(prom_espera)
+        promedios_tiempo_sistema.append(prom_sistema)
+        promedios_tiempo_servicio.append(prom_tiempo_servicio)
+        tasas_globales_arribos.append(cola.tasa_global_arribos())
+    graf_clientes.legend()
+    for nombre, prom in [('Promedio de clientes en cola', promedios_clientes_cola), ('Tiempo promedio en cola', promedios_espera_cola),
+                         ('Tiempo promedio en el sistema', promedios_tiempo_sistema), ('Tiempo promedio de servicio', promedios_tiempo_servicio),
+                         ('Tasa global de arribos promedio', tasas_globales_arribos)]:
+        graf = GraficoDistribucion(nombre, xlabel='Promedios muestrales')
+        graf.graficar(prom)
+        graf.legend()
+    """mean_mean = st.mean(promedios_clientes_cola)
+    mean_std = st.stdev(promedios_clientes_cola)
+    print(f'Promedio los promedios: {mean_mean}')
+    print(f'Desvío estándar: {mean_std}')
+    print(f'Tasa promedio general: {st.mean(tasas_globales_arribos)}')
+    print(f'Desvío estándar: {st.stdev(tasas_globales_arribos)}')
+    print(
+        f'IC_95% clientes en cola {mean_mean} +- {1.96 * mean_std}: {mean_mean - 1.96 * mean_std}, {mean_mean + 1.96 * mean_std}')"""
+    plt.show()
+
+
+def main(num_clientes=1000, corridas=100):
+    tasa_servicio = 1 / 3  # "1/3" cliente por minuto -> 3 min por cliente
+    # for factor in [0.25, 0.5, 0.75, 1, 1.25]:
+    #for factor in [1.25]:
+    for factor in [0.25]:
+        realizar_experimento(tasa_servicio, factor, num_clientes, corridas=corridas)
+
+
+def _test():
     # print('M/M/1:')
     sim = ColaMM1(2, 4)
     sim.correr()
@@ -165,4 +229,4 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    main()
