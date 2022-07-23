@@ -192,12 +192,14 @@ def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=None, co
         promedios_tiempo_servicio.append(prom_tiempo_servicio)
         tasas_globales_arribos.append(cola.tasa_global_arribos())
     graf_clientes.legend()
+    graf_clientes.renderizar(nombre_archivo='clientes')
     for nombre, prom in [('Promedio de clientes en cola', promedios_clientes_cola), ('Tiempo promedio en cola', promedios_espera_cola),
                          ('Tiempo promedio en el sistema', promedios_tiempo_sistema), ('Tiempo promedio de servicio', promedios_tiempo_servicio),
                          ('Tasa global de arribos promedio', tasas_globales_arribos)]:
         graf = GraficoDistribucion(nombre, xlabel='Promedios muestrales')
         graf.graficar(prom)
         graf.legend()
+        graf.renderizar(nombre_archivo=nombre)
     """mean_mean = st.mean(promedios_clientes_cola)
     mean_std = st.stdev(promedios_clientes_cola)
     print(f'Promedio los promedios: {mean_mean}')
@@ -206,7 +208,7 @@ def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=None, co
     print(f'Desvío estándar: {st.stdev(tasas_globales_arribos)}')
     print(
         f'IC_95% clientes en cola {mean_mean} +- {1.96 * mean_std}: {mean_mean - 1.96 * mean_std}, {mean_mean + 1.96 * mean_std}')"""
-    plt.show()
+    #plt.show()
 
 
 def main(num_clientes=1000, corridas=100):
