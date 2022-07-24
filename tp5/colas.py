@@ -193,13 +193,19 @@ def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=None, co
         tasas_globales_arribos.append(cola.tasa_global_arribos())
     graf_clientes.legend()
     graf_clientes.renderizar(nombre_archivo='clientes')
-    for nombre, prom in [('Promedio de clientes en cola', promedios_clientes_cola), ('Tiempo promedio en cola', promedios_espera_cola),
-                         ('Tiempo promedio en el sistema', promedios_tiempo_sistema), ('Tiempo promedio de servicio', promedios_tiempo_servicio),
-                         ('Tasa global de arribos promedio', tasas_globales_arribos)]:
+    diccionario_graficas = {
+        'promedio-clientes-cola': ('Promedio de clientes en cola', promedios_clientes_cola),
+        'tiempo-promedio-cola': ('Tiempo promedio en cola', promedios_espera_cola),
+        'tiempo-promedio-sistema': ('Tiempo promedio en el sistema', promedios_tiempo_sistema),
+        'tiempo-promedio-servicio': ('Tiempo promedio de servicio', promedios_tiempo_servicio),
+        'tasa-global-arribos-promedio': ('Tasa global de arribos promedio', tasas_globales_arribos),
+    }
+    for archivo in diccionario_graficas:
+        nombre, prom = diccionario_graficas[archivo]
         graf = GraficoDistribucion(nombre, xlabel='Promedios muestrales')
         graf.graficar(prom)
         graf.legend()
-        graf.renderizar(nombre_archivo=nombre)
+        graf.renderizar(nombre_archivo=archivo)
     """mean_mean = st.mean(promedios_clientes_cola)
     mean_std = st.stdev(promedios_clientes_cola)
     print(f'Promedio los promedios: {mean_mean}')

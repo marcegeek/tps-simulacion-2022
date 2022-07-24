@@ -9,10 +9,10 @@ import latex
 
 
 class Grafico(abc.ABC):
-    def __init__(self, nombre, xlabel=None, ylabel=None):
-        self.nombre = nombre
+    def __init__(self, title, xlabel=None, ylabel=None):
+        self.title = title
         self.fig, self.ax = plt.subplots()
-        self.ax.set_title(self.nombre)
+        self.ax.set_title(self.title)
         if xlabel is not None:
             self.ax.set_xlabel(xlabel)
         if ylabel is not None:
@@ -27,8 +27,10 @@ class Grafico(abc.ABC):
         if nombre_archivo is None:
             self.fig.show()
         else:
+            # exportar figura, eliminando el espacio extra alrededor
             self.ax.set_title('')
-            self.fig.savefig(latex.generated_img_path(f'{nombre_archivo}.{formato}', create_dirs=True))
+            self.fig.savefig(latex.generated_img_path(f'{nombre_archivo}.{formato}', create_dirs=True), bbox_inches='tight')
+            latex.write_figure_content_tex(nombre_archivo, self.title)
 
     def legend(self, loc='upper right'):
         if self.ax.get_legend_handles_labels() != ([], []):
@@ -46,10 +48,10 @@ class GraficoDiscreto(Grafico):
 
 
 class GraficoDistribucion(Grafico):
-    def __init__(self, nombre, xlabel=None, ylabel=None):
+    def __init__(self, title, xlabel=None, ylabel=None):
         if ylabel is None:
             ylabel = 'Frecuencia relativa'
-        super().__init__(nombre, xlabel=xlabel, ylabel=ylabel)
+        super().__init__(title, xlabel=xlabel, ylabel=ylabel)
 
     def graficar(self, valores, normal=True, marcar_valores=True, confianza=0.95):
         self.ax.hist(valores, bins='auto', density=True)
