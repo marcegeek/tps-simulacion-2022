@@ -1,0 +1,26 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{util}
+\RequirePackage{float}
+\RequirePackage{graphicx}
+\RequirePackage{import}
+
+\newcommand{\carpetafiguras}{./figures/}
+
+% comando \contenidofigura{archivo}{leyenda} -> util para \begin{subfigure}{fraccion\linewidth}...\end{subfigure}%
+\newcommand{\contenidofigura}[2]{
+  \centering
+  \includegraphics[width=\linewidth]{#1}
+  \caption{#2}
+  \label{fig:#1}
+}
+
+% comando \figura{archivo}{leyenda} -> figura automática con \includegraphics
+\newcommand{\figura}[2]{
+  \begin{figure}[H]
+    \contenidofigura{#1}{#2}
+  \end{figure}
+}
+
+\newcommand{\importarfigura}[1]{
+  \import{\carpetafiguras}{#1}
+}

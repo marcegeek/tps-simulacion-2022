@@ -1,0 +1,33 @@
+\subsection{Modelo de Inventario en Python}
+En esta simulación se realizaron las corridas del sistema en base a eventos desarrollados por distintas acciones hechas en un inventario.
+Para esto se tendrán en cuenta los siguientes parámetros con los que se contará para poder llegar a nuestros objetivos:
+\begin{itemize}
+    \item Nivel de Inventario: El nivel del inventario actualmente.
+    \item Altas: el máximo de stock al que se puede llegar.
+    \item Bajas: el mínimo de stock al que se puede llegar.
+    \item Costo de reposición: costo de reposición de stock en el inventario.
+    \item Costo de mantenimiento: precio por el cual cada item se mantiene en stock.
+    \item Costo de reserva: costo de cada item al realizar una orden de compra.
+    \item Costo de faltante: costo por la falta de stock.
+    \item Media entredemanda.
+    \item Distribución de demanda.
+    \item Costo total ordenado
+    \item Area de existencia.
+    \item Area de escacez.
+\end{itemize}
+
+El funcionamiento del sistema desarrollado consta de eventos que surgen por meses donde la demanda cambia en base a una distribución de probabilidad.
+Esto hace que luego de un tiempo determinado se realize la evaluación del inventario con sus existencias o faltantes para cubrir la demanda y se pueda actuar frente a esto.
+En caso de que ante la demanda el modelo de inventario tenga una existencia menor a las Bajas, entonces se programa un pedido de arribos con una cantidad elegida para que luego de unos días lleguen y el inventario se reponga.
+Caso contrario, si el nivel de inventario es mayor a las bajas, sigue funcionando de manera habitual.
+
+Además el sistema calcula los costos mencionados anteriormente para que el usuario pueda ver cual es el estado de los costos del inventario.
+
+
+Una vez realizados los experimentos se buscará analizar los siguientes resultados de los mismos:
+\begin{itemize}
+    \item Costo de Orden
+    \item Costo de Mantenimiento
+    \item Costo de Faltante
+    \item Costo Total
+\end{itemize}

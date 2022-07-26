@@ -1,4 +1,5 @@
 import abc
+
 import numpy as np
 
 
@@ -49,9 +50,27 @@ class Simulacion(abc.ABC):
         self.sig_evento = None
 
     @abc.abstractmethod
-    def correr(self):
+    def es_fin(self):
         pass
+
+    def correr(self, mostrar=False):
+        """Relizar una corrida de la simulación"""
+        while not self.es_fin():
+            self.hacer_un_paso()
+        if mostrar:
+            self.informe()
 
     @abc.abstractmethod
     def informe(self):
         pass
+
+
+class Experimento:
+    """Realizar un experimento con varias corridas de una simulación"""
+
+    def __init__(self, clase, params, param_kwargs, corridas=10):
+        self.resultados = [clase(*params, **param_kwargs) for i in range(corridas)]
+
+    def correr(self):
+        for s in self.resultados:
+            s.correr()
