@@ -9,9 +9,12 @@ class EventoArriboPedido(Evento):
 
 class ModeloInventario(Simulacion):
     def __init__(self, meses=120, nivel_inventario=60, bigs=40, smalls=20, setup_cost=32, costo_incremental=3,
-                 costo_mantenimiento=1, costo_reserva=5, rango_lag=(0.5, 1), media_entredemanda=0.1, distribucion_demanda=((1, 2, 3, 4), (1/6, 1/3, 1/3, 1/6)), semilla=None):
+                 costo_mantenimiento=1, costo_reserva=5, rango_lag=(0.5, 1),
+                 media_entredemanda=0.1, distribucion_demanda=((1, 2, 3, 4), (1/6, 1/3, 1/3, 1/6)), semilla=None):
         super().__init__(semilla=semilla)
         self.nivel_inventario = nivel_inventario
+        self.niveles_inventario = [nivel_inventario]
+        self.tiempos = [0.0]
         self.meses = meses
         self.bigs = bigs
         self.smalls = smalls
@@ -27,12 +30,13 @@ class ModeloInventario(Simulacion):
         self.mantenidos_area = 0
         self.area_escasez = 0
 
-        self.programar_evaluacion()  # evaluación inicial (inicio primer mes)
+        self.eventos.append(Evento(0.0, self.evaluar))  # evaluación inicial (inicio primer mes)
         self.programar_demanda()  # demanda inicial
 
     def programar_evaluacion(self):
-        self.eventos.append(Evento(self.reloj + 1, self.evaluar))
-        pass
+        tiempo = self.reloj + 1
+        if tiempo < self.meses:  # al final de la simulación no se evalúa más
+            self.eventos.append(Evento(tiempo, self.evaluar))
 
     def programar_arribo_pedido(self, cantidad):
         self.eventos.append(
@@ -44,6 +48,8 @@ class ModeloInventario(Simulacion):
 
     def arribo_pedido(self, ev: EventoArriboPedido):
         self.nivel_inventario += ev.cantidad
+        self.tiempos.append(self.reloj)
+        self.niveles_inventario.append(self.nivel_inventario)
 
     def demanda(self, ev):
         self.programar_demanda()
@@ -56,6 +62,8 @@ class ModeloInventario(Simulacion):
         # noinspection PyUnboundLocalVariable
         cant_demand = valores[i]
         self.nivel_inventario -= cant_demand
+        self.tiempos.append(self.reloj)
+        self.niveles_inventario.append(self.nivel_inventario)
 
     def programar_demanda(self):
         self.eventos.append(
@@ -74,6 +82,18 @@ class ModeloInventario(Simulacion):
         costo_mantenimiento_prom = self.costo_mantenimiento * self.mantenidos_area / self.meses
         costo_escasez_prom = self.costo_reserva * self.area_escasez / self.meses
         costo_total = costo_ordenes_prom + costo_mantenimiento_prom + costo_escasez_prom
+        print('Modelo de inventario de producto único')
+        print(f'Nivel de inicial inventario: {self.niveles_inventario[0]}')
+        print(f'Tiempo medio entre demandas: {self.media_entredemanda}')
+        print(f'Distribución de la demanda: {self.distribucion_demanda}')
+        print(f'Política de pedido: {(self.smalls, self.bigs)}')
+        print(f'Costo de establecimiento de pedido: {self.setup_cost}')
+        print(f'Costo incremental: {self.costo_incremental}')
+        print(f'Costo de mantenimiento: {self.costo_mantenimiento}')
+        print(f'Costo de faltante: {self.costo_reserva}')
+        print(f'Rango distribución de demora de pedido: {list(self.rango_lag)}')
+        print(f'Cantidad total de períodos: {self.meses}')
+        print('\nResultados de la simulación:')
         print(f'Costo orden promedio: {costo_ordenes_prom}')
         print(f'Costo mantenimiento promedio: {costo_mantenimiento_prom}')
         print(f'Costo escasez promedio: {costo_escasez_prom}')
@@ -86,10 +106,8 @@ class ModeloInventario(Simulacion):
         elif self.nivel_inventario > 0:
             self.mantenidos_area += self.nivel_inventario * self.tiempo_desde_ult_evento
 
-    def correr(self):
-        while self.reloj < self.meses:
-            self.hacer_un_paso()
-        self.informe()
+    def es_fin(self):
+        return self.reloj >= self.meses
 
 
 def test():
