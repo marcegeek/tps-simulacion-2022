@@ -11,10 +11,12 @@
 \section{Introducción}\label{sec:introduccion}
 En el siguiente trabajo simularemos mediante un programa desarrollado en lenguaje Python, una cola simple, en la que
 solamente habrá llegada de clientes, atendidos por un único servidor luego de haber realizado una espera
-determinada en la cola y posteriormente partirán. Adicionalmente se simulará una cola con una cantidad de servidores predeterminada.
+determinada en la cola y posteriormente partirán.
+Adicionalmente se simulará una cola con una cantidad de servidores predeterminada.
 El modelo de inventario contará con el mismo formato y consistirá en un proceso por mes en el que se realiza una orden de compra
 a los proveedores, mientras se trata de alcanzar la demanda de los clientes a través de distintos indicadores de escacez y
-existencia. Finalmente se realizará una evaluación y se calcularán las estadísticas correspondientes.
+existencia.
+Finalmente se realizará una evaluación y se calcularán las estadísticas correspondientes.
 A su vez estudiaremos la eficacia de dichos programas al comparar ciertas medidas de rendimiento observadas con las
 teóricas computadas y a su vez con las obtenidas mediante una calculadora web, y de otra simulación desarrollada
 en el aplicativo Anylogic.
@@ -230,11 +232,27 @@ El número promedio de tiempo de los elementos en la reserva es:
 \end{equation}
 por lo que el costo promedio de la cartera de pedidos por mes es \pi I.
 
+
 \section{Análisis de resultados}
+    \input{anylogic-colas.tex}
+    \input{inventario-python.tex}
+    \input{anylogic-inventario.tex}
+
+
 \section{Conclusiones}
+\label{sec:conclusiones}
+Se buscó realizar 10 corridas de cada modelo donde como vimos se quizó analizar determinados resultados para saber como se comportaría con los parámetros que nosotros le ingresemos.
+Ante esto se realizaron los modelos con dos tecnologías distintas para poder compararlas y poder tener distintas fuentes de donde evaluar su potencial.
+Las tecnologías utilizadas fueron el lenguaje Python, donde se utilizaron clases y métodos específicos para las corridas;
+Y luego se desarrolló el mismo modelo en AnyLogic buscando tener un funcionamiento similar al desarrollado en código pero a través de patrones específicos de la presente herramienta.
+
+Se puede afirmar que los modelos de simulación creados han funcionado de la manera esperada.
+Los modelos creados en Python fueron los más adaptables y maleables debido a la posibilidad de desarrollarlo de la manera más conveniente.
+Sin embargo, a pesar de que AnyLogic pueda tener sus restricciones, es una tecnología muy interesante para este tipo de experimentos debido a que cuenta con muchas herramientas que hacen posible llegar a distintas soluciones.
+
 \section{Referencias}
   \label{sec:references}
-    https://es.wikipedia.org/wiki/Proceso_estoc%C3%A1stico#:~:text=En%20la%20teor%C3%ADa%20de%20la,otra%20variable%2C%20generalmente%20el%20tiempo.
+    https://es.wikipedia.org/wiki/Proceso\_estoc%C3%A1stico#:~:text=En%20la%20teor%C3%ADa%20de%20la,otra%20variable%2C%20generalmente%20el%20tiempo.
 
     Arash Mahdavi, Simulation Modeling Consultant, The AnyLogic Company M/M/1/∞/∞ (single-server
     queues). En The Art of Process-Centric Modeling with AnyLogic, pages 81–103. 2020. Disponible en https://www.anylogic.com/resources/books/the-art-of-process-centric-modeling-with-anylogic/
