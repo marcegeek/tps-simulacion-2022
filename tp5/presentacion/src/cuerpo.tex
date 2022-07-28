@@ -55,11 +55,11 @@ y G (distribución general).
 En el estudio con colas simples, cuya notación de Kendalls son M/M/1, para la primera, donde se posee un sólo serivor,
 las distribuciones de arribo y de servicio proceden de manera Markoviana y su cola es infinita, y en el caso de la
 siguientes M/M/C dónde solamente se añadiran mas servidores.
-Para la distribución de arribos, se tiene un parámetro λ, la tasa de arribos de clientes, de él obtenemos la media de
-clientes entrantes por unidad de tiempo 1/λ.
-Por otro lado, la tasa de tiempo de serivicios µ y la media de tiempos de servicios 1/ µ.
-A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor ρ = 1/sµ, la relación entre los clientes
-arribando y los clientes partiendo, siendo s el número de servidores, en nuestro caso s = 1 (luego se permitira variarlo).
+Para la distribución de arribos, se tiene un parámetro $\lambda$, la tasa de arribos de clientes, de él obtenemos la media de
+clientes entrantes por unidad de tiempo 1/$\lambda$.
+Por otro lado, la tasa de tiempo de serivicios µ y la media de tiempos de servicios 1/$\mu$.
+A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor $\rho = 1/s\mu$, la relación entre los clientes
+arribando y los clientes partiendo, siendo s el número de servidores, en nuestro caso $s = 1$ (luego se permitira variarlo).
 Como la llegada de clientes y su tiempo en ser servidos son variables aleatorias, se pueden considerar
 nuevas variables aleatorias, que son combinaciones lineales de las anteriores, por ejemplo:
 
@@ -99,11 +99,11 @@ obtenemos:
   \label{eq:equation3}
   \hat{q}(n) = \sum_{i=0}^{\infty}i\hat{p}_{i}
 \end{equation}
-donde \hat{p}i es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
-donde que había i clientes en la cola.
-Computacionalmente, sin embargo, es más fácil reescribir \hat{q}(n) usando algunas consideraciones geométricas.
+donde $\hat{p}i$ es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
+donde que había $i$ clientes en la cola.
+Computacionalmente, sin embargo, es más fácil reescribir $\hat{q}(n)$ usando algunas consideraciones geométricas.
 Si dejamos que Ti sea el total de tiempo durante la simulación donde la cola tiene una longitud i, entonces
-T(n) = T0 + T1 + T2 + ∙ ∙ ∙ y \hat{p}i = Ti/T(n), por lo que podemos reescribir la ecuación 1.1 como:
+$T(n) = T0 + T1 + T2 + \cdots$ y $\hat{p}i = Ti/T(n)$, por lo que podemos reescribir la ecuación 1.1 como:
 
 \begin{equation}
   \label{eq:equation4}
@@ -125,18 +125,18 @@ Esta integral puede ser calculada como la suma de rectángulos formados por la b
 de clientes en cola por la altura dicha cantidad de clientes en cola.
 
 La proporción esperada de tiempo del servidor en estado ocupado u(n), deviene de la probabilidad de que
-el servidor no esté vacío, pN>0 = 1 − p0. Para calcular su estimador u(n), primero se define la ``función
+el servidor no esté vacío, $pN > 0 = 1 - p0$. Para calcular su estimador u(n), primero se define la ``función
 ocupada'':
 
 \begin{equation}\label{eq:equation7}
-  B(t)\left\{ \begin{array}{lcc}
+  B(t) = \left\{ \begin{array}{lcc}
                   1 &   si  & Nt>0  \\
                   \\ 0 &  si  & Nt=0
   \end{array}
-  \right
+  \right.
 \end{equation}
 
-Entonces u(n) es la porción del tiempo total en la que B(t) = 1.
+Entonces u(n) es la porción del tiempo total en la que $B(t) = 1$.
 Al igual que a la medida anterior, podemos considerarlo como el área bajo B(t), así,
 \begin{equation}\label{eq:equation8}
 \hat{u}(n)=\frac{\int_{0}^{T(n)}B(t)}{T(n)}
@@ -180,7 +180,7 @@ las demandas), con:
             \\ 3 &  c.p. & 1/3 \\
             \\ 4 &  c.p.  & 1/6
   \end{array}
-  \right
+  \right.
 \end{equation}
 donde c.p. significa ``Con Probabilidad de''.
 
@@ -230,7 +230,7 @@ El número promedio de tiempo de los elementos en la reserva es:
     \label{eq:equation12}
     \bar{I}^{-}=\frac{\int_{0}^{n}I^{-}(t)dt}{n}
 \end{equation}
-por lo que el costo promedio de la cartera de pedidos por mes es \pi I.
+por lo que el costo promedio de la cartera de pedidos por mes es $\pi I$.
 
 
 \section{Análisis de resultados}
