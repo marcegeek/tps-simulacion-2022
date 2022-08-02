@@ -45,11 +45,11 @@ class ColaMMC(Simulacion):
 
     def programar_arribo(self):
         self.eventos.append(
-            Evento(self.reloj + self.np_randomstate.exponential(scale=1/self.tasa_arribos), self.arribo)
+            Evento(self.reloj + self.np_randomstate.exponential(scale=1 / self.tasa_arribos), self.arribo)
         )
 
     def programar_partida(self, servidor):
-        tiempo_servicio = self.np_randomstate.exponential(scale=1/self.tasa_servicio)
+        tiempo_servicio = self.np_randomstate.exponential(scale=1 / self.tasa_servicio)
         self.total_tiempo_servicio += tiempo_servicio
         self.eventos.append(
             EventoPartida(self.reloj + tiempo_servicio, self.partida, servidor)
@@ -88,7 +88,8 @@ class ColaMMC(Simulacion):
 
     def determinar_servidor(self):
         # de los servidores desocupados, seleccionar al azar con distribución uniforme
-        serv_desocupados = [i for i in range(len(self.estado_servidores)) if self.estado_servidores[i] == self.ESTADO_DESOCUPADO]
+        serv_desocupados = [i for i in range(len(self.estado_servidores)) if
+                            self.estado_servidores[i] == self.ESTADO_DESOCUPADO]
         return self.np_randomstate.choice(serv_desocupados)
 
     def servicio(self):
@@ -101,7 +102,7 @@ class ColaMMC(Simulacion):
     def actualizar_estadisticas(self):
         super().actualizar_estadisticas()
         self.area_clientes_cola += self.clientes_cola * self.tiempo_desde_ult_evento
-        self.area_estados += sum(self.estado_servidores)/len(self.estado_servidores) * self.tiempo_desde_ult_evento
+        self.area_estados += sum(self.estado_servidores) / len(self.estado_servidores) * self.tiempo_desde_ult_evento
 
     def demora_promedio(self):
         return self.demora_total / self.clientes_completaron_demora
@@ -131,6 +132,20 @@ class ColaMMC(Simulacion):
     def es_fin(self):
         return self.clientes_completaron_demora >= self.num_clientes
 
+    @classmethod
+    def medidas_estadisticas(cls):
+        return {
+            "demora_promedio": ("Demora promedio en cola", cls.demora_promedio),
+            "tiempo_promedio_sistema": ("Tiempo promedio en el sistema", cls.tiempo_promedio_sistema),
+            'n_promedio_clientes_cola': ('Promedio de clientes en cola', cls.promedio_clientes_cola),
+            'tiempo_promedio_servicio': ('Tiempo promedio de servicio', cls.tiempo_promedio_servicio),
+            'n_promedio_clientes_sistema': ('Promedio de clientes en el sistema', cls.promedio_clientes_sistema),
+            'utilizacion_servidor': ('Utilización promedio del servidor', cls.utilizacion_servidor),
+            #'probabilidad_n_clientes': probabilidades_n_clientes,
+            #'probabilidad_denegacion': cls.denegacion_servicio,
+            'tasa_global_arribos_promedio': ('Tasa global de arribos promedio', cls.tasa_global_arribos),
+        }
+
     def informe(self):
         capacidad = '∞' if self.capacidad is None else self.capacidad
         print(f'Modelo de colas M/M/{len(self.estado_servidores)}/{capacidad}')
@@ -142,7 +157,7 @@ class ColaMMC(Simulacion):
         print(f'Tiempo promedio en el sistema: {self.tiempo_promedio_sistema():17.3f}')
         print(f'Número promedio de clientes en cola: {self.promedio_clientes_cola():11.3f}')
         print(f'Número promedio de clientes en el sistema: {self.promedio_clientes_sistema():5.3f}')
-        print(f'Tasa global de arribos: {self.tasa_global_arribos()}')
+        #print(f'Tasa global de arribos: {self.tasa_global_arribos()}')
         if self.capacidad is not None:
             print(f'Probabilidad de denegación de servicio: {self.denegacion_servicio():8.3f}')
         print('Utilización de', end='')
@@ -159,7 +174,8 @@ class ColaMMC(Simulacion):
 class ColaMM1(ColaMMC):
 
     def __init__(self, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=None, semilla=None):
-        super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad, semilla=semilla)
+        super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad,
+                         semilla=semilla)
 
 
 def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=None, corridas=100):
@@ -167,61 +183,22 @@ def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=None, co
     exp = Experimento(ColaMM1, [tasa_arribos, tasa_servicio], {'num_clientes': num_clientes, 'capacidad': capacidad},
                       corridas=corridas)
     exp.correr()
-    print(f'Cola M/M/1/{"∞" if capacidad is None else capacidad}')
-    print(f'Tasa de arribos/tasa de servicio: {factor * 100}%')
-    idx = np.random.randint(0, len(exp.resultados) - 1)
-    print(f'Resultados corrida n° {idx + 1}:')
-    exp.resultados[idx].informe()
+    exp.reportar()
 
-    promedios_clientes_cola = []
-    promedios_espera_cola = []
-    promedios_tiempo_sistema = []
-    promedios_tiempo_servicio = []
-    tasas_globales_arribos = []
-
-    graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]', ylabel='Clientes')
+    graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]',
+                                    ylabel='Clientes')
     for cola in exp.resultados:
-        prom_clientes_cola = cola.promedio_clientes_cola()
-        prom_espera = cola.demora_promedio()
-        prom_sistema = cola.tiempo_promedio_sistema()
-        prom_tiempo_servicio = cola.tiempo_promedio_servicio()
         graf_clientes.graficar(cola.tiempos_cola, cola.clientes_cola_tiempo)
-        promedios_clientes_cola.append(prom_clientes_cola)
-        promedios_espera_cola.append(prom_espera)
-        promedios_tiempo_sistema.append(prom_sistema)
-        promedios_tiempo_servicio.append(prom_tiempo_servicio)
-        tasas_globales_arribos.append(cola.tasa_global_arribos())
     graf_clientes.legend()
-    graf_clientes.renderizar(nombre_archivo='clientes')
-    diccionario_graficas = {
-        'promedio-clientes-cola': ('Promedio de clientes en cola', promedios_clientes_cola),
-        'tiempo-promedio-cola': ('Tiempo promedio en cola', promedios_espera_cola),
-        'tiempo-promedio-sistema': ('Tiempo promedio en el sistema', promedios_tiempo_sistema),
-        'tiempo-promedio-servicio': ('Tiempo promedio de servicio', promedios_tiempo_servicio),
-        'tasa-global-arribos-promedio': ('Tasa global de arribos promedio', tasas_globales_arribos),
-    }
-    for archivo in diccionario_graficas:
-        nombre, prom = diccionario_graficas[archivo]
-        graf = GraficoDistribucion(nombre, xlabel='Promedios muestrales')
-        graf.graficar(prom)
-        graf.legend()
-        graf.renderizar(nombre_archivo=archivo)
-    """mean_mean = st.mean(promedios_clientes_cola)
-    mean_std = st.stdev(promedios_clientes_cola)
-    print(f'Promedio los promedios: {mean_mean}')
-    print(f'Desvío estándar: {mean_std}')
-    print(f'Tasa promedio general: {st.mean(tasas_globales_arribos)}')
-    print(f'Desvío estándar: {st.stdev(tasas_globales_arribos)}')
-    print(
-        f'IC_95% clientes en cola {mean_mean} +- {1.96 * mean_std}: {mean_mean - 1.96 * mean_std}, {mean_mean + 1.96 * mean_std}')"""
-    #plt.show()
+    #graf_clientes.renderizar(nombre_archivo='clientes')
+    graf_clientes.renderizar()
 
 
 def main(num_clientes=1000, corridas=100):
     tasa_servicio = 1 / 3  # "1/3" cliente por minuto -> 3 min por cliente
     # for factor in [0.25, 0.5, 0.75, 1, 1.25]:
-    #for factor in [1.25]:
-    for factor in [0.25]:
+    # for factor in [1.25]:
+    for factor in [1.25]:
         realizar_experimento(tasa_servicio, factor, num_clientes, corridas=corridas)
 
 
