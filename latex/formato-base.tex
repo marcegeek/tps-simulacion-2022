@@ -11,8 +11,9 @@
 \usepackage{microtype}      % microtypography
 \usepackage{kpfonts}        % use the same fonts for text and math
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\graphicspath{ {./images/} {./images/generated/} }
 \usepackage{float}          % para fijar figuras con \begin{figure}[H] ... \end{figure}
+\usepackage{subcaption}     % para poder crear subfiguras con \begin{subfigure}{ancho}...\end{subfigure}
 \usepackage{import}         % para facilitar la inclusión de los demas archivos
 \usepackage[
   backend=biber,
