@@ -810,7 +810,7 @@
 						<Parameter>
 							<Name><![CDATA[capacity]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[5]]></Code>
+								<Code><![CDATA[50]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
