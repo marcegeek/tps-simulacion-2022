@@ -1,8 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import statistics as st
 
-from simulacion import Evento, Simulacion, Experimento
+from simulacion import Evento, Simulacion, Experimento, VariadorParametros
 from util.plotter import GraficoDistribucion, GraficoDiscreto
 
 
@@ -14,6 +12,7 @@ class EventoPartida(Evento):
 
 
 class ColaMMC(Simulacion):
+    NOMBRE_MODELO = 'M/M/c'
     ESTADO_DESOCUPADO, ESTADO_OCUPADO = 0, 1
 
     def __init__(self, servidores, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=np.inf, semilla=None):
@@ -123,7 +122,9 @@ class ColaMMC(Simulacion):
         return self.area_estados / self.reloj
 
     def tasa_global_arribos(self):
-        beta, _ = np.polyfit(self.tiempos_cola, self.clientes_cola_tiempo, 1)
+        beta = 0.0
+        if len(self.tiempos_cola) > 1:
+            beta, _ = np.polyfit(self.tiempos_cola, self.clientes_cola_tiempo, 1)
         return beta
 
     def denegacion_servicio(self):
@@ -172,26 +173,52 @@ class ColaMMC(Simulacion):
 
 
 class ColaMM1(ColaMMC):
+    NOMBRE_MODELO = 'M/M/1'
 
     def __init__(self, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=np.inf, semilla=None):
         super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad,
                          semilla=semilla)
 
 
-def realizar_experimento(tasa_servicio, factor, num_clientes, capacidad=np.inf, corridas=100):
-    tasa_arribos = tasa_servicio * factor
-    exp = Experimento(ColaMM1, [tasa_arribos, tasa_servicio], {'num_clientes': num_clientes, 'capacidad': capacidad},
-                      corridas=corridas)
-    exp.correr()
-    exp.reportar()
+class VariadorMM1(VariadorParametros):
+    def __init__(self, tasa_servicio, taoverts_arr, capacidades):
+        self.tasa_servicio = tasa_servicio
+        self.taoverts_arr = taoverts_arr
+        self.capacidades = capacidades
 
-    graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]',
-                                    ylabel='Clientes')
-    for cola in exp.resultados:
-        graf_clientes.graficar(cola.tiempos_cola, cola.clientes_cola_tiempo)
-    graf_clientes.legend()
+    def get_params(self, taoverts, capacidad):
+        return (self.tasa_servicio * taoverts, self.tasa_servicio), {'capacidad': capacidad}
+
+    @staticmethod
+    def obtener_clave(valores):
+        ta_over_ts, capacidad = valores
+        return f'{int(ta_over_ts * 100)}_{capacidad}'
+
+    @staticmethod
+    def descr_parametros(clave):
+        ta_over_ts, capacidad = clave.split('_')
+        return f'Ta/Ts = {ta_over_ts}%, cap = {capacidad}'
+
+    @staticmethod
+    def descr_parametros_graf(clave):
+        ta_over_ts, capacidad = clave.split('_')
+        if capacidad == str(np.inf):
+            capacidad = '\\infty'
+        return f'$\\frac{{T_{{a}}}}{{T_{{s}}}} = {ta_over_ts}\\%$, $cap={capacidad}$'
+
+
+def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100):
+    exp = Experimento(ColaMM1, VariadorMM1(tasa_servicio, ta_over_ts_arr, capacidades), num_clientes=num_clientes, corridas=corridas)
+    exp.correr()
+    exp.reportar(exportar=True, mostrar=False)
+
+    #graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]',
+#                                    ylabel='Clientes')
+    #for cola in exp.resultados:
+    #    graf_clientes.graficar(cola.tiempos_cola, cola.clientes_cola_tiempo)
+    #graf_clientes.legend()
     #graf_clientes.renderizar(nombre_archivo='clientes')
-    graf_clientes.renderizar()
+    #graf_clientes.renderizar()
 
 
 def main():
@@ -199,9 +226,9 @@ def main():
     tasa_servicio = 2
     num_clientes = 1000
     corridas = 10
-    for capacidad in [np.inf, 0, 2, 5, 10, 50]:
-        for ta_over_ts in [0.25, 0.5, 0.75, 1, 1.25]:
-            realizar_experimento(tasa_servicio, ta_over_ts, num_clientes, capacidad=capacidad, corridas=corridas)
+    ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
+    capacidades = [np.inf, 0, 2, 5, 10, 50]
+    realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=num_clientes, corridas=corridas)
 
 
 def _test():
