@@ -17,6 +17,7 @@ class Grafico(abc.ABC):
             self.ax.set_xlabel(xlabel)
         if ylabel is not None:
             self.ax.set_ylabel(ylabel)
+        self._prop_cycle = plt.rcParams['axes.prop_cycle']()  # we CALL the prop_cycle
 
     @abc.abstractmethod
     def graficar(self, *valores):
@@ -36,15 +37,32 @@ class Grafico(abc.ABC):
         if self.ax.get_legend_handles_labels() != ([], []):
             self.ax.legend(loc=loc)
 
+    def plot(self, *args, **kwargs):
+        return self.ax.plot(*args, **kwargs, **self._next_color(kwargs))
+
+    def step(self, *args, **kwargs):
+        return self.ax.step(*args, **kwargs, **self._next_color(kwargs))
+
+    def hist(self, *args, **kwargs):
+        return self.ax.hist(*args, **kwargs, **self._next_color(kwargs))
+
+    def bar(self, *args, **kwargs):
+        return self.ax.bar(*args, **kwargs, **self._next_color(kwargs))
+
+    def _next_color(self, kwargs):
+        if 'color' in kwargs:
+            return {}
+        return next(self._prop_cycle)
+
 
 class GraficoContinuo(Grafico):
     def graficar(self, x, y, label=None):
-        self.ax.plot(x, y, label=label)
+        self.plot(x, y, label=label)
 
 
 class GraficoDiscreto(Grafico):
     def graficar(self, x, y, label=None):
-        self.ax.step(x, y, label=label)
+        self.step(x, y, label=label)
 
 
 class GraficoDistribucion(Grafico):
@@ -54,17 +72,30 @@ class GraficoDistribucion(Grafico):
         super().__init__(title, xlabel=xlabel, ylabel=ylabel)
 
     def graficar(self, valores, normal=True, marcar_valores=True, confianza=0.95):
-        self.ax.hist(valores, bins='auto', density=True)
+        media, desvio = st.mean(valores), st.stdev(valores)
+        if desvio != 0.0:
+            self.hist(valores, bins='auto', density=True)
+        else:  # desvío estándar == 0, todos los valores son iguales, no hay distribución normal ni IC
+            self.bar(media, 1, width=0.2)
+            # corregir rango, forzando desvío estándar = 1
+            self.ax.set_xlim(*stats.norm(media).interval(.999))
         if normal:
-            dist = stats.norm(loc=st.mean(valores), scale=st.stdev(valores))
-            x = np.linspace(dist.ppf(0.001), dist.ppf(0.999), 1000)
-            pdf = dist.pdf(x)
-            self.ax.plot(x, pdf)
-            if marcar_valores:
-                self.ax.plot([dist.mean()] * 2, [0, pdf.max()], '--',
-                             label='promedio estimado ($\\hat{\\mu}$)')
-                x1 = dist.ppf((1 - confianza) / 2)
-                x2 = dist.ppf((1 + confianza) / 2)
-                linea, = self.ax.plot([x1] * 2, [0, dist.pdf(x1)], '--',
-                                      label=f'IC {int(confianza * 100)}%')
-                self.ax.plot([x2] * 2, [0, dist.pdf(x2)], '--', color=linea.get_color())
+            if desvio != 0.0:
+                if len(valores) >= 30:  # al menos 30 elementos -> distribución normal
+                    dist = stats.norm(loc=media, scale=desvio)
+                else:  # menos de 30 elementos -> distribución t de Student
+                    dist = stats.t(len(valores) - 1, loc=media, scale=desvio)
+                x = np.linspace(dist.ppf(0.001), dist.ppf(0.999), 1000)
+                pdf = dist.pdf(x)
+                self.plot(x, pdf)
+                if marcar_valores:
+                    self.plot([dist.mean()] * 2, [0, pdf.max()], '--',
+                              label='promedio estimado ($\\hat{\\mu}$)')
+                    x1, x2 = dist.interval(confianza)
+                    linea, = self.plot([x1] * 2, [0, dist.pdf(x1)], '--',
+                                       label=f'IC {int(confianza * 100)}%')
+                    self.plot([x2] * 2, [0, dist.pdf(x2)], '--', color=linea.get_color())
+            else:
+                if marcar_valores:
+                    self.plot([media] * 2, [0, 1], '--',
+                                 label='promedio estimado ($\\hat{\\mu}$)')

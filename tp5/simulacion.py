@@ -5,6 +5,8 @@ import statistics
 import numpy as np
 import matplotlib.pyplot as plt
 
+from util.stathelper import intervalo_confianza
+
 try:
     from tqdm import tqdm
 except ImportError:
@@ -43,6 +45,7 @@ class Simulacion(abc.ABC):
 
     def __init__(self, semilla=None):
         self.reloj = 0.
+        self.tiempos = [self.reloj]
         self.eventos = []
         self.sig_evento = None  # el valor se modifica en la rutina de avance en el tiempo
         self.tiempo_ult_evento = 0.
@@ -55,6 +58,7 @@ class Simulacion(abc.ABC):
             raise Exception('Lista de eventos vacía')
         self.sig_evento = min(self.eventos)
         self.reloj = self.sig_evento.tiempo
+        self.tiempos.append(self.reloj)
 
     def actualizar_estadisticas(self):
         self.tiempo_desde_ult_evento = self.reloj - self.tiempo_ult_evento
@@ -179,7 +183,7 @@ class Experimento:
             for k in distribuciones:
                 promedio_promedios = statistics.mean(distribuciones[k])
                 desvio_promedios = statistics.stdev(distribuciones[k])
-                print(f'{diccionario_medidas[k][0]}: promedio de promedios: {promedio_promedios}, desvío estándar: {desvio_promedios}')
+                print(f'{diccionario_medidas[k][0]}: promedio de promedios: {promedio_promedios}, desvío estándar: {desvio_promedios}, IC 95%: {intervalo_confianza(distribuciones[k], 0.95)}')
                 graf = GraficoDistribucion(f'{diccionario_medidas[k][0]}, {self.parametros.descr_parametros_graf(clave)}')
                 graf.graficar(distribuciones[k])
                 graf.legend()
