@@ -41,81 +41,19 @@ A continuación se realizarán 10 simulaciones de 30 días cada una, donde se ll
     \item Costo Total
 \end{itemize}
 
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img1invent}
-    \caption{Simulación 1. Orden de compra alto.}
-\end{figure}
+Para esto se tiene en cuenta que cada 30 días se varían de forma aleatoria distintos parámetros, los cuales inciden entre sí de manera continua. De esta forma, luego de 10 meses de 30 días cada uno se puede ver la siguiente tabla con los resúmenes:
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img2invent}
-    \caption{Simulación 2. Orden de compra y ROP bajo.}
+    \includegraphics[width=\linewidth]{images/tabla}
+    \caption{Tabla con resúmenes de 10 simulaciones.}
 \end{figure}
+
+Por consiguiente mostraremos las gráficas de los últimos 30 días.
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img3invent}
-    \caption{Simulación 3. Cantidad inicial alta y ROP a un tercio de la cantidad inicial.}
+    \includegraphics[width=\linewidth]{images/resumen final}
+    \caption{Tabla con resúmenes de 10 simulaciones.}
 \end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img4invent}
-    \caption{Simulación 4. Gran falta de stock.}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img5invent}
-    \caption{Simulación 5. Gran falta de stock con mayor velocidad de recepción.}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img6invent}
-    \caption{Simulación 6. Mismo Escenario con mayor cantidad de demanda.}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img7invent}
-    \caption{Simulación 7. Mismo Escenario con mayor cantidad de orden de compra.}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img8invent}
-    \caption{Simulación 8. Baja demanda.}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img9invent}
-    \caption{Simulación 9. Baja demanda y aumento de ROP.}
-\end{figure}
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{images/img9invent}
-    \caption{Simulación 10. Disminución de orden de compra.}
-\end{figure}
-
-\begin{tabular}{||c||c|c|c|c||}
-    \hline \hline
-    Simulación nro & Orden & Mantenimiento & Faltante & TOTAL\\
-    \hline \hline
-    1 & $60$ & $486,7$ & $0$ & $546,7$\\
-    \hline
-    2 & $40$ & $34,8$ & $60,4$ & $135,2$\\
-    \hline
-    3 & $60$ & $285,5$ & $0$ & $345,5$\\
-    \hline
-    4 & $40$ & $0$ & $190,8$ & $230,8$\\
-    \hline
-    5 & $100$ & $0$ & $204,4$ & $304,4$\\
-    \hline
-    6 & $100$ & $2,6$ & $155,2$ & $257,8$\\
-    \hline
-    7 & $100$ & $52,7$ & $389,2$ & $541,9$\\
-    \hline
-    8 & $100$ & $66,1$ & $37,2$ & $203,3$\\
-    \hline
-    9 & $100$ & $138,9$ & $0$ & $238,9$\\
-    \hline
-    10 & $100$ & $124,4$ & $0$ &$224,4$\\
-    \hline \hline
-\end{tabular}
 
 \subsubsection{Conclusión de las simulaciones}\label{subsubsec:conclusiones}
 Cabe aclarar que los resultados negativos no significan que se ``ahorró'' el costo, esto cuenta como 0 debido a que no se pudo realizar el costo de mantenimiento del stock ya que hubo faltante del mismo.
