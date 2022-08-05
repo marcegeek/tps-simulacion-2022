@@ -1,7 +1,6 @@
 import numpy as np
 
 from simulacion import Evento, Simulacion, Experimento, VariadorParametros
-from util.plotter import GraficoDistribucion, GraficoDiscreto
 
 
 class EventoPartida(Evento):
@@ -29,10 +28,7 @@ class ColaMMC(Simulacion):
         self.clientes_cola_tiempo = [self.clientes_cola]
         self.clientes_denegados = 0
         self.clientes_denegados_tiempo = [self.clientes_denegados]
-        self.tiempos_cola = [0.0]
-        self.tiempos_denegados = [0.0]
         self.estados_servidores_tiempo = [[self.ESTADO_DESOCUPADO]] * servidores
-        self.tiempos_servidores = [[0.0]] * servidores
 
         self.clientes_completaron_demora = 0
         self.demora_total = 0.
@@ -61,12 +57,8 @@ class ColaMMC(Simulacion):
             if self.capacidad == np.inf or self.clientes_cola + 1 <= self.capacidad:  # comprobar capacidad de cola
                 self.clientes_cola += 1
                 self.tiempos_arribo.append(ev.tiempo)
-                self.clientes_cola_tiempo.append(self.clientes_cola)
-                self.tiempos_cola.append(self.reloj)
             else:
                 self.clientes_denegados += 1
-                self.clientes_denegados_tiempo.append(self.clientes_denegados)
-                self.tiempos_denegados.append(self.reloj)
         else:
             # servidor desocupado, el cliente es atendido sin demora
             self.clientes_completaron_demora += 1
@@ -74,15 +66,11 @@ class ColaMMC(Simulacion):
 
     def partida(self, ev):
         self.estado_servidores[ev.servidor] = self.ESTADO_DESOCUPADO
-        self.estados_servidores_tiempo[ev.servidor].append(self.estado_servidores[ev.servidor])
-        self.tiempos_servidores[ev.servidor].append(self.reloj)
         if self.clientes_cola != 0:
             # hay clientes en cola, el primero pasa a ser atendido
             self.clientes_cola -= 1
             self.demora_total += ev.tiempo - self.tiempos_arribo.pop(0)
             self.clientes_completaron_demora += 1
-            self.clientes_cola_tiempo.append(self.clientes_cola)
-            self.tiempos_cola.append(self.reloj)
             self.servicio()
 
     def determinar_servidor(self):
@@ -95,11 +83,13 @@ class ColaMMC(Simulacion):
         servidor = self.determinar_servidor()
         self.estado_servidores[servidor] = self.ESTADO_OCUPADO
         self.programar_partida(servidor)
-        self.estados_servidores_tiempo[servidor].append(self.estado_servidores[servidor])
-        self.tiempos_servidores[servidor].append(self.reloj)
 
     def actualizar_estadisticas(self):
         super().actualizar_estadisticas()
+        self.clientes_cola_tiempo.append(self.clientes_cola)
+        self.clientes_denegados_tiempo.append(self.clientes_denegados)
+        for i in range(len(self.estado_servidores)):
+            self.estados_servidores_tiempo[i].append(self.estado_servidores[i])
         self.area_clientes_cola += self.clientes_cola * self.tiempo_desde_ult_evento
         self.area_estados += sum(self.estado_servidores) / len(self.estado_servidores) * self.tiempo_desde_ult_evento
 
@@ -123,12 +113,22 @@ class ColaMMC(Simulacion):
 
     def tasa_global_arribos(self):
         beta = 0.0
-        if len(self.tiempos_cola) > 1:
-            beta, _ = np.polyfit(self.tiempos_cola, self.clientes_cola_tiempo, 1)
+        if len(self.tiempos) > 1:
+            beta = np.polyfit(self.tiempos, self.clientes_cola_tiempo, 1)[0]
         return beta
 
     def denegacion_servicio(self):
         return self.clientes_denegados / self.clientes_completaron_demora
+
+    def probabilidad_n_clientes(self, n):
+        tiempo_total_n = 0
+        tiempo_total = 0
+        for i in range(1, len(self.tiempos)):
+            tiempo_i = self.tiempos[i] - self.tiempos[i - 1]
+            if self.clientes_cola_tiempo[i] == n:
+                tiempo_total_n += tiempo_i
+            tiempo_total += tiempo_i
+        return tiempo_total_n / tiempo_total
 
     def es_fin(self):
         return self.clientes_completaron_demora >= self.num_clientes
@@ -136,14 +136,15 @@ class ColaMMC(Simulacion):
     @classmethod
     def medidas_estadisticas(cls):
         return {
-            "demora_promedio": ("Demora promedio en cola", cls.demora_promedio),
+            "demora_promedio": ("Demora promedio esperada en cola", cls.demora_promedio),
             "tiempo_promedio_sistema": ("Tiempo promedio en el sistema", cls.tiempo_promedio_sistema),
-            'n_promedio_clientes_cola': ('Promedio de clientes en cola', cls.promedio_clientes_cola),
+            'n_promedio_clientes_cola': ('Cantidad de clientes en cola en promedio', cls.promedio_clientes_cola),
             'tiempo_promedio_servicio': ('Tiempo promedio de servicio', cls.tiempo_promedio_servicio),
             'n_promedio_clientes_sistema': ('Promedio de clientes en el sistema', cls.promedio_clientes_sistema),
-            'utilizacion_servidor': ('Utilización promedio del servidor', cls.utilizacion_servidor),
-            #'probabilidad_n_clientes': probabilidades_n_clientes,
-            #'probabilidad_denegacion': cls.denegacion_servicio,
+            'utilizacion_servidor': ('Ocupación del servidor', cls.utilizacion_servidor),
+            # Probabilidad de encontrar n clientes en cola. (p(Q(t) = n) × 100 %)
+            #  'probabilidad_n_clientes': probabilidades_n_clientes,
+            'probabilidad_denegacion': ('Probabilidad de denegación del servicio', cls.denegacion_servicio),
             'tasa_global_arribos_promedio': ('Tasa global de arribos promedio', cls.tasa_global_arribos),
         }
 
@@ -169,6 +170,8 @@ class ColaMMC(Simulacion):
             print(' los servidores: ', end='')
             padding = 17
         print(f'{self.utilizacion_servidor():{padding}.3f}')
+        for i in range(max(self.clientes_cola_tiempo) + 1):
+            print(f'Probabilidad {i} clientes en cola: {self.probabilidad_n_clientes(i)}')
         print(f'Tiempo de fin de la simulación: {self.reloj:18.3f}')
 
 

@@ -45,6 +45,7 @@ class Simulacion(abc.ABC):
 
     def __init__(self, semilla=None):
         self.reloj = 0.
+        self.tiempos = [self.reloj]
         self.eventos = []
         self.sig_evento = None  # el valor se modifica en la rutina de avance en el tiempo
         self.tiempo_ult_evento = 0.
@@ -57,6 +58,7 @@ class Simulacion(abc.ABC):
             raise Exception('Lista de eventos vacía')
         self.sig_evento = min(self.eventos)
         self.reloj = self.sig_evento.tiempo
+        self.tiempos.append(self.reloj)
 
     def actualizar_estadisticas(self):
         self.tiempo_desde_ult_evento = self.reloj - self.tiempo_ult_evento
