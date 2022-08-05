@@ -120,15 +120,27 @@ class ColaMMC(Simulacion):
     def denegacion_servicio(self):
         return self.clientes_denegados / self.clientes_completaron_demora
 
-    def probabilidad_n_clientes(self, n):
-        tiempo_total_n = 0
+    def probabilidades_clientes(self):
+        """
+        Devolver una lista con la distribución de frecuencias de la cantidad de clientes en cola.
+        Los índices representan las cantidades respectivas.
+        """
         tiempo_total = 0
+        tiempos_totales_n = [0] * (max(self.clientes_cola_tiempo) + 1)
+        probs = []
         for i in range(1, len(self.tiempos)):
             tiempo_i = self.tiempos[i] - self.tiempos[i - 1]
-            if self.clientes_cola_tiempo[i] == n:
-                tiempo_total_n += tiempo_i
+            for n in range(len(tiempos_totales_n)):
+                if self.clientes_cola_tiempo[i] == n:
+                    tiempos_totales_n[n] += tiempo_i
             tiempo_total += tiempo_i
-        return tiempo_total_n / tiempo_total
+        for t in tiempos_totales_n:
+            probs.append(t/tiempo_total)
+        return probs
+
+    def probabilidad_n_clientes(self, n):
+        probs = self.probabilidades_clientes()
+        return probs[n] if n < len(probs) else 0.0
 
     def es_fin(self):
         return self.clientes_completaron_demora >= self.num_clientes
