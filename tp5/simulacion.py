@@ -1,9 +1,15 @@
 import abc
+import itertools
 import statistics
 
 import numpy as np
 import matplotlib.pyplot as plt
-import statistics as st
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    def tqdm(iterator, *args, **kwargs):
+        return iterator
 
 from util.plotter import GraficoDistribucion
 
@@ -27,6 +33,13 @@ class Evento:
 
 class Simulacion(abc.ABC):
     """Clase base de una simulación por eventos discretos"""
+
+    # noinspection PyPep8Naming,PyPropertyDefinition
+    @staticmethod
+    @property
+    @abc.abstractmethod
+    def NOMBRE_MODELO():
+        pass
 
     def __init__(self, semilla=None):
         self.reloj = 0.
@@ -80,43 +93,100 @@ class Simulacion(abc.ABC):
         pass
 
 
-class Experimento:
-    """Realizar un experimento con varias corridas de una simulación"""
+class VariadorParametros(abc.ABC):
+    """Clase variadora de parámetros, requiere parámetros fijos e iterables (metaparámetros a recorrer)"""
 
-    def __init__(self, clase, params, param_kwargs, corridas=10):
+    @abc.abstractmethod
+    def get_params(self, *args):
+        """Obtener parámetros de la simulación, calculando los valores como fuera necesario"""
+        pass
+
+    @property
+    def iterables_variacion(self):
+        """Obtener la lista de los metaparámetros a iterar con el producto cartesiano"""
+        valores = []
+        for k in self.__dict__:
+            o = self.__dict__[k]
+            if hasattr(o, '__getitem__') or hasattr(o, '__iter__'):
+                valores.append(o)
+        return valores
+
+    @staticmethod
+    @abc.abstractmethod
+    def obtener_clave(valores):
+        """Convertir un conjunto de metaparámetros en una clave apta para identificar gráficas y demás"""
+        pass
+
+    @staticmethod
+    @abc.abstractmethod
+    def descr_parametros(clave):
+        """Obtener texto descriptivo de los parámetros"""
+        pass
+
+    @staticmethod
+    @abc.abstractmethod
+    def descr_parametros_graf(clave):
+        """Obtener texto descriptivo de los parámetros para gráficas"""
+        pass
+
+    def __iter__(self):
+        for valores in itertools.product(*self.iterables_variacion):
+            yield self.obtener_clave(valores), self.get_params(*valores)
+
+
+class Experimento:
+    """Realizar un experimento con varias corridas de una simulación, variando los parámetros con un variador"""
+
+    def __init__(self, clase, variador_parametros, corridas=10, **kwargs):
         self._clase = clase
-        self.resultados = [self._clase(*params, **param_kwargs) for i in range(corridas)]
+        self.parametros = variador_parametros
+        self.corridas = corridas
+        self.simulaciones = {}
+        # instanciar simulaciones, sin correrlas todavía
+        for clave, (pargs, pkwargs) in self.parametros:
+            # si hay, agregar parámetros fijos de diccionario adicionales
+            for k in kwargs:
+                pkwargs[k] = kwargs[k]
+            self.simulaciones[clave] = [self._clase(*pargs, **pkwargs) for i in range(corridas)]
 
     def correr(self):
-        for s in self.resultados:
-            s.correr()
+        """Correr las simulaciones del experimento"""
+        print('Corriendo simulaciones...')
+        for clave in tqdm(self.simulaciones):
+            for sim in self.simulaciones[clave]:
+                sim.correr()
 
     def reportar(self, exportar=False, mostrar=True):
-        idx = np.random.randint(0, len(self.resultados) - 1)
-        print(f'Resultados corrida n° {idx + 1} (seleccionada al azar):')
-        self.resultados[idx].informe()
-        diccionario_medidas = self._clase.medidas_estadisticas()
-        distribuciones = {}
-        for k in diccionario_medidas:
-            distribuciones[k] = []
-        for sim in self.resultados:
+        for clave in self.simulaciones:
+            print(f"Simulación: {self._clase.NOMBRE_MODELO} - {self.parametros.descr_parametros(clave)}, corridas: {self.corridas}")
+            print()
+            idx = np.random.randint(0, len(self.simulaciones[clave]) - 1)
+            print(f'Resultados corrida n° {idx + 1} (seleccionada al azar):')
+            self.simulaciones[clave][idx].informe()
+            diccionario_medidas = self._clase.medidas_estadisticas()
+            distribuciones = {}
             for k in diccionario_medidas:
-                # el método está tomado desde la clase, así que sacamos el nombre y bajamos a la instancia
-                nombre_metodo = diccionario_medidas[k][1].__name__
-                metodo = getattr(sim, nombre_metodo)
-                distribuciones[k].append(metodo())
-        print()
-        print(f'Resultados experimento:')
-        print(f'Corridas: {len(self.resultados)}')
-        for k in distribuciones:
-            promedio_promedios = statistics.mean(distribuciones[k])
-            desvio_promedios = statistics.stdev(distribuciones[k])
-            print(f'{diccionario_medidas[k][0]}: promedio de promedios: {promedio_promedios}, desvío estándar: {desvio_promedios}')
-            graf = GraficoDistribucion(diccionario_medidas[k][0])
-            graf.graficar(distribuciones[k])
-            graf.legend()
-            if exportar:
-                #graf.renderizar()  TODO hacer exportación
-                pass
-        if mostrar:
-            plt.show()
+                distribuciones[k] = []
+            for sim in self.simulaciones[clave]:
+                for k in diccionario_medidas:
+                    # el método está tomado desde la clase, así que sacamos el nombre y bajamos a la instancia
+                    nombre_metodo = diccionario_medidas[k][1].__name__
+                    metodo = getattr(sim, nombre_metodo)
+                    distribuciones[k].append(metodo())
+            print()
+            print(f'Resultados experimento:')
+            print(f'Corridas: {len(self.simulaciones[clave])}')
+            for k in distribuciones:
+                promedio_promedios = statistics.mean(distribuciones[k])
+                desvio_promedios = statistics.stdev(distribuciones[k])
+                print(f'{diccionario_medidas[k][0]}: promedio de promedios: {promedio_promedios}, desvío estándar: {desvio_promedios}')
+                graf = GraficoDistribucion(f'{diccionario_medidas[k][0]}, {self.parametros.descr_parametros_graf(clave)}')
+                graf.graficar(distribuciones[k])
+                graf.legend()
+                if exportar:
+                    nombre_archivo = f'{clave}_{k}'
+                    graf.renderizar(nombre_archivo=nombre_archivo)
+                    if not mostrar:
+                        plt.close(graf.fig)
+            if mostrar:
+                plt.show()
