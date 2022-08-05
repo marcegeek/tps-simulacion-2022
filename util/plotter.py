@@ -56,15 +56,29 @@ class GraficoDistribucion(Grafico):
     def graficar(self, valores, normal=True, marcar_valores=True, confianza=0.95):
         self.ax.hist(valores, bins='auto', density=True)
         if normal:
-            dist = stats.norm(loc=st.mean(valores), scale=st.stdev(valores))
-            x = np.linspace(dist.ppf(0.001), dist.ppf(0.999), 1000)
-            pdf = dist.pdf(x)
-            self.ax.plot(x, pdf)
-            if marcar_valores:
-                self.ax.plot([dist.mean()] * 2, [0, pdf.max()], '--',
-                             label='promedio estimado ($\\hat{\\mu}$)')
+            media, desvio = st.mean(valores), st.stdev(valores)
+            if desvio != 0.0:
+                if len(valores) >= 30:  # al menos 30 elementos -> distribución normal
+                    dist = stats.norm(loc=media, scale=desvio)
+                else:  # menos de 30 elementos -> distribución t de Student
+                    dist = stats.t(len(valores) - 1, loc=media, scale=desvio)
+                x = np.linspace(dist.ppf(0.001), dist.ppf(0.999), 1000)
+                pdf = dist.pdf(x)
+                self.ax.plot(x, pdf)
+                if marcar_valores:
+                    self.ax.plot([dist.mean()] * 2, [0, pdf.max()], '--',
+                                 label='promedio estimado ($\\hat{\\mu}$)')
+                    x1 = dist.ppf((1 - confianza) / 2)
+                    x2 = dist.ppf((1 + confianza) / 2)
+                    linea, = self.ax.plot([x1] * 2, [0, dist.pdf(x1)], '--',
+                                          label=f'IC {int(confianza * 100)}%')
+                    self.ax.plot([x2] * 2, [0, dist.pdf(x2)], '--', color=linea.get_color())
+            else:  # desvío estandar = 0, todos lo valores son iguales, no hay distribución normal ni IC
+                # corregir rango histograma, forzando desvío estándar = 1
+                dist = stats.norm(loc=media, scale=1)
                 x1 = dist.ppf((1 - confianza) / 2)
                 x2 = dist.ppf((1 + confianza) / 2)
-                linea, = self.ax.plot([x1] * 2, [0, dist.pdf(x1)], '--',
-                                      label=f'IC {int(confianza * 100)}%')
-                self.ax.plot([x2] * 2, [0, dist.pdf(x2)], '--', color=linea.get_color())
+                self.ax.set_xlim(x1, x2)  # forzar rango gráfica
+                if marcar_valores:
+                    self.ax.plot([dist.mean()] * 2, [0, 1], '--',
+                                 label='promedio estimado ($\\hat{\\mu}$)')
