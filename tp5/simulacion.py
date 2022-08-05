@@ -5,6 +5,8 @@ import statistics
 import numpy as np
 import matplotlib.pyplot as plt
 
+from util.stathelper import intervalo_confianza
+
 try:
     from tqdm import tqdm
 except ImportError:
@@ -179,7 +181,7 @@ class Experimento:
             for k in distribuciones:
                 promedio_promedios = statistics.mean(distribuciones[k])
                 desvio_promedios = statistics.stdev(distribuciones[k])
-                print(f'{diccionario_medidas[k][0]}: promedio de promedios: {promedio_promedios}, desvío estándar: {desvio_promedios}')
+                print(f'{diccionario_medidas[k][0]}: promedio de promedios: {promedio_promedios}, desvío estándar: {desvio_promedios}, IC 95%: {intervalo_confianza(distribuciones[k], 0.95)}')
                 graf = GraficoDistribucion(f'{diccionario_medidas[k][0]}, {self.parametros.descr_parametros_graf(clave)}')
                 graf.graficar(distribuciones[k])
                 graf.legend()

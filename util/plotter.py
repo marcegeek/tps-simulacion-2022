@@ -68,16 +68,14 @@ class GraficoDistribucion(Grafico):
                 if marcar_valores:
                     self.ax.plot([dist.mean()] * 2, [0, pdf.max()], '--',
                                  label='promedio estimado ($\\hat{\\mu}$)')
-                    x1 = dist.ppf((1 - confianza) / 2)
-                    x2 = dist.ppf((1 + confianza) / 2)
+                    x1, x2 = dist.interval(confianza)
                     linea, = self.ax.plot([x1] * 2, [0, dist.pdf(x1)], '--',
                                           label=f'IC {int(confianza * 100)}%')
                     self.ax.plot([x2] * 2, [0, dist.pdf(x2)], '--', color=linea.get_color())
             else:  # desvío estandar = 0, todos lo valores son iguales, no hay distribución normal ni IC
                 # corregir rango histograma, forzando desvío estándar = 1
                 dist = stats.norm(loc=media, scale=1)
-                x1 = dist.ppf((1 - confianza) / 2)
-                x2 = dist.ppf((1 + confianza) / 2)
+                x1, x2 = dist.interval(confianza)
                 self.ax.set_xlim(x1, x2)  # forzar rango gráfica
                 if marcar_valores:
                     self.ax.plot([dist.mean()] * 2, [0, 1], '--',
