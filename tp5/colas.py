@@ -154,8 +154,7 @@ class ColaMMC(Simulacion):
             'tiempo_promedio_servicio': ('Tiempo promedio de servicio', cls.tiempo_promedio_servicio),
             'n_promedio_clientes_sistema': ('Promedio de clientes en el sistema', cls.promedio_clientes_sistema),
             'utilizacion_servidor': ('Ocupación del servidor', cls.utilizacion_servidor),
-            # Probabilidad de encontrar n clientes en cola. (p(Q(t) = n) × 100 %)
-            #  'probabilidad_n_clientes': probabilidades_n_clientes,
+            'probabilidad_n_clientes': ('Probabilidad de encontrar n clientes en cola', cls.probabilidades_clientes),
             'probabilidad_denegacion': ('Probabilidad de denegación del servicio', cls.denegacion_servicio),
             'tasa_global_arribos_promedio': ('Tasa global de arribos promedio', cls.tasa_global_arribos),
         }
@@ -222,10 +221,13 @@ class VariadorMM1(VariadorParametros):
         return f'$\\frac{{T_{{a}}}}{{T_{{s}}}} = {ta_over_ts}\\%$, $cap={capacidad}$'
 
 
-def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100):
+def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100, en_vivo=False):
     exp = Experimento(ColaMM1, VariadorMM1(tasa_servicio, ta_over_ts_arr, capacidades), num_clientes=num_clientes, corridas=corridas)
     exp.correr()
-    exp.reportar(exportar=True, mostrar=False)
+    if en_vivo:
+        exp.reportar(mostrar=True, exportar=False)
+    else:
+        exp.reportar(mostrar=False, exportar=True)
 
     #graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]',
 #                                    ylabel='Clientes')
@@ -243,7 +245,8 @@ def main():
     corridas = 10
     ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
     capacidades = [np.inf, 0, 2, 5, 10, 50]
-    realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=num_clientes, corridas=corridas)
+    en_vivo = False
+    realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=num_clientes, corridas=corridas, en_vivo=en_vivo)
 
 
 def _test():
