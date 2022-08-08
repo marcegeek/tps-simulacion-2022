@@ -76,7 +76,7 @@ class GraficoDistribucion(Grafico):
             ylabel = 'Frecuencia relativa'
         super().__init__(title, xlabel=xlabel, ylabel=ylabel)
 
-    def graficar(self, valores, normal=True, marcar_valores=True, confianza=0.95):
+    def graficar(self, valores, normal=True, marcar_valores=True, simbolo=None, confianza=0.95):
         media, desvio = stathelper.mean(valores), stathelper.stdev(valores)
         if desvio != 0.0:
             self.hist(valores, bins='auto', density=True)
@@ -94,8 +94,9 @@ class GraficoDistribucion(Grafico):
                 pdf = dist.pdf(x)
                 self.plot(x, pdf)
                 if marcar_valores:
+                    simbolo = f' ({simbolo})' if simbolo is not None else ''
                     self.plot([dist.mean()] * 2, [0, pdf.max()], '--',
-                              label='promedio estimado ($\\hat{\\mu}$)')
+                              label=f'promedio estimado{simbolo}')
                     x1, x2 = dist.interval(confianza)
                     linea, = self.plot([x1] * 2, [0, dist.pdf(x1)], '--',
                                        label=f'IC {int(confianza * 100)}%')
