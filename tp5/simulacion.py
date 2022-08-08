@@ -12,7 +12,7 @@ except ImportError:
     def tqdm(iterator, *args, **kwargs):
         return iterator
 
-from util.plotter import Plot, GraficoDistribucion
+from util.plotter import Plot, GraficoDistribucion, GraficoDiscreto
 
 
 class Evento:
@@ -93,6 +93,10 @@ class Simulacion(abc.ABC):
         el nombre con el que se va a exportar la gráfica respectiva.
         Formato: {'clave': VariableEstadistica('nombre estadístico o título de gráfica', cls.metodo), ...}
         """
+        pass
+
+    @abc.abstractmethod
+    def medidas_temporales(self):
         pass
 
 
@@ -177,6 +181,14 @@ class VariableEstadistica:
             return range(len(self.valor)), self.valor
 
 
+class VariableTemporal:
+    def __init__(self, nombre, datos, xlabel=None, ylabel=None):
+        self.nombre = nombre
+        self.datos = datos
+        self.xlabel = xlabel
+        self.ylabel = ylabel
+
+
 class Experimento:
     """Realizar un experimento con varias corridas de una simulación, variando los parámetros con un variador"""
 
@@ -199,7 +211,7 @@ class Experimento:
             for sim in self.simulaciones[clave]:
                 sim.correr()
 
-    def reportar(self, exportar=False, mostrar=True, confianza=0.95):
+    def reportar(self, exportar=False, mostrar=True, nubes_temporales=True, confianza=0.95):
         for clave in self.simulaciones:
             print()
             print(f"Simulación: {self._clase.NOMBRE_MODELO} - {self.parametros.descr_parametros(clave)}, "
@@ -208,6 +220,27 @@ class Experimento:
             idx = np.random.randint(0, len(self.simulaciones[clave]) - 1)
             print(f'Resultados corrida n° {idx + 1} (seleccionada al azar):')
             self.simulaciones[clave][idx].informe()
+            temporales = self.simulaciones[clave][idx].medidas_temporales()
+            for k in temporales:
+                var = temporales[k]
+                graf = GraficoDiscreto(f'{var.nombre}, {self.parametros.descr_parametros_graf(clave)}', xlabel=var.xlabel, ylabel=var.ylabel)
+                graf.graficar(*var.datos)
+                if exportar:
+                    nombre_archivo = f'{clave}_{k}_corrida_{idx + 1}'
+                    graf.renderizar(nombre_archivo=nombre_archivo)
+                    if not mostrar:
+                        plt.close(graf.fig)
+                if nubes_temporales:
+                    title = f'{var.nombre} (nube de corridas), {self.parametros.descr_parametros_graf(clave)}'
+                    graf_nube = GraficoDiscreto(title, xlabel=var.xlabel, ylabel=var.ylabel)
+                    for sim in self.simulaciones[clave]:
+                        var = sim.medidas_temporales()[k]
+                        graf_nube.graficar(*var.datos)
+                    if exportar:
+                        nombre_archivo = f'{clave}_{k}_nube'
+                        graf.renderizar(nombre_archivo=nombre_archivo)
+                        if not mostrar:
+                            plt.close(graf.fig)
             diccionario_medidas = self._clase.medidas_estadisticas()
             resultados = {}
             for k in diccionario_medidas:
@@ -225,8 +258,12 @@ class Experimento:
                     desvio_promedios = stathelper.stdev(resultados[k])
                     print(f'{diccionario_medidas[k].nombre}: {promedio_promedios}, '
                           f'IC {int(confianza * 100)}%: {stathelper.intervalo_confianza(resultados[k], confianza)}')
+                    xlabel = diccionario_medidas[k].xlabel
+                    if xlabel is None:
+                        xlabel = 'Valores'
                     graf = GraficoDistribucion(f'{diccionario_medidas[k].nombre}, '
-                                               f'{self.parametros.descr_parametros_graf(clave)}')
+                                               f'{self.parametros.descr_parametros_graf(clave)}',
+                                               xlabel=xlabel)
                     graf.graficar(resultados[k], simbolo=diccionario_medidas[k].simbolo)
                     graf.legend()
                 else:  # distribución de listas (distribuciones de frecuencia)

@@ -1,6 +1,6 @@
 import numpy as np
 
-from simulacion import Evento, Simulacion, Experimento, VariadorParametros, VariableEstadistica
+from simulacion import Evento, Simulacion, Experimento, VariadorParametros, VariableEstadistica, VariableTemporal
 
 
 class EventoPartida(Evento):
@@ -148,15 +148,21 @@ class ColaMMC(Simulacion):
     @classmethod
     def medidas_estadisticas(cls):
         return {
-            "demora_promedio": VariableEstadistica("Demora promedio esperada en cola", cls.demora_promedio, simbolo=r'$\hat{d}(n)$'),
-            "tiempo_promedio_sistema": VariableEstadistica("Tiempo promedio en el sistema", cls.tiempo_promedio_sistema, simbolo=r'$\hat{d}(n) + \hat{s}(n)$'),
-            'n_promedio_clientes_cola': VariableEstadistica('Cantidad de clientes en cola en promedio', cls.promedio_clientes_cola, simbolo=r'$\hat{q}(n)$'),
-            'tiempo_promedio_servicio': VariableEstadistica('Tiempo promedio de servicio', cls.tiempo_promedio_servicio, simbolo=r'$\hat{s}(n)$'),
-            'n_promedio_clientes_sistema': VariableEstadistica('Promedio de clientes en el sistema', cls.promedio_clientes_sistema, simbolo=r'$\hat{q}(n) + \hat{u}(n)$'),
+            "demora_promedio": VariableEstadistica("Demora promedio esperada en cola", cls.demora_promedio, simbolo=r'$\hat{d}(n)$', xlabel='Tiempo [minutos]'),
+            "tiempo_promedio_sistema": VariableEstadistica("Tiempo promedio en el sistema", cls.tiempo_promedio_sistema, simbolo=r'$\hat{d}(n) + \hat{s}(n)$', xlabel='Tiempo [minutos]'),
+            'n_promedio_clientes_cola': VariableEstadistica('Cantidad de clientes en cola en promedio', cls.promedio_clientes_cola, simbolo=r'$\hat{q}(n)$', xlabel='Cantidad de clientes'),
+            'tiempo_promedio_servicio': VariableEstadistica('Tiempo promedio de servicio', cls.tiempo_promedio_servicio, simbolo=r'$\hat{s}(n)$', xlabel='Tiempo [minutos]'),
+            'n_promedio_clientes_sistema': VariableEstadistica('Promedio de clientes en el sistema', cls.promedio_clientes_sistema, simbolo=r'$\hat{q}(n) + \hat{u}(n)$', xlabel='Cantidad de clientes'),
             'utilizacion_servidor': VariableEstadistica('Ocupación del servidor', cls.utilizacion_servidor, simbolo=r'$\hat{u}(n)$'),
             'probabilidad_n_clientes': VariableEstadistica('Probabilidad de encontrar n clientes en cola', cls.probabilidades_clientes, xlabel='n', simbolo=r'$\hat{p}(Q(t) = n$'),
             'probabilidad_denegacion': VariableEstadistica('Probabilidad de denegación del servicio', cls.denegacion_servicio, simbolo=r'$\hat{p}(den)$'),
             'tasa_global_arribos_promedio': VariableEstadistica('Tasa global de arribos promedio', cls.tasa_global_arribos, simbolo=r'${\hat{T}_a}_g(n)$'),
+        }
+
+    def medidas_temporales(self):
+        return {
+            "n_clientes_cola_tiempo": VariableTemporal('Cantidad de clientes en cola a lo largo del tiempo', (self.tiempos, self.clientes_cola_tiempo), xlabel='Tiempo [minutos]', ylabel='Cantidad de clientes'),
+            "n_denegados_tiempo": VariableTemporal('Cantidad acumulada de clientes denegados a lo largo del tiempo', (self.tiempos, self.clientes_denegados_tiempo), xlabel='Tiempo [minutos]', ylabel='Cantidad de clientes'),
         }
 
     def informe(self):
