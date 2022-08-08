@@ -2,13 +2,13 @@ import abc
 
 import matplotlib.pyplot as plt
 import numpy as np
-import statistics as st
 from scipy import stats
 
 import latex
+from util import stathelper
 
 
-class Grafico(abc.ABC):
+class Plot:
     def __init__(self, title, xlabel=None, ylabel=None):
         self.title = title
         self.fig, self.ax = plt.subplots()
@@ -18,10 +18,6 @@ class Grafico(abc.ABC):
         if ylabel is not None:
             self.ax.set_ylabel(ylabel)
         self._prop_cycle = plt.rcParams['axes.prop_cycle']()  # we CALL the prop_cycle
-
-    @abc.abstractmethod
-    def graficar(self, *valores):
-        pass
 
     def renderizar(self, nombre_archivo=None, formato='pdf'):
         self.legend()
@@ -47,12 +43,21 @@ class Grafico(abc.ABC):
         return self.ax.hist(*args, **kwargs, **self._next_color(kwargs))
 
     def bar(self, *args, **kwargs):
+        if 'yerr' in kwargs:
+            if 'capsize' not in kwargs:
+                kwargs['capsize'] = 80/len(args[0])
         return self.ax.bar(*args, **kwargs, **self._next_color(kwargs))
 
     def _next_color(self, kwargs):
         if 'color' in kwargs:
             return {}
         return next(self._prop_cycle)
+
+
+class Grafico(Plot, abc.ABC):
+    @abc.abstractmethod
+    def graficar(self, *valores):
+        pass
 
 
 class GraficoContinuo(Grafico):
@@ -71,8 +76,8 @@ class GraficoDistribucion(Grafico):
             ylabel = 'Frecuencia relativa'
         super().__init__(title, xlabel=xlabel, ylabel=ylabel)
 
-    def graficar(self, valores, normal=True, marcar_valores=True, confianza=0.95):
-        media, desvio = st.mean(valores), st.stdev(valores)
+    def graficar(self, valores, normal=True, marcar_valores=True, simbolo=None, confianza=0.95):
+        media, desvio = stathelper.mean(valores), stathelper.stdev(valores)
         if desvio != 0.0:
             self.hist(valores, bins='auto', density=True)
         else:  # desvío estándar == 0, todos los valores son iguales, no hay distribución normal ni IC
@@ -89,8 +94,9 @@ class GraficoDistribucion(Grafico):
                 pdf = dist.pdf(x)
                 self.plot(x, pdf)
                 if marcar_valores:
+                    simbolo = f' ({simbolo})' if simbolo is not None else ''
                     self.plot([dist.mean()] * 2, [0, pdf.max()], '--',
-                              label='promedio estimado ($\\hat{\\mu}$)')
+                              label=f'promedio estimado{simbolo}')
                     x1, x2 = dist.interval(confianza)
                     linea, = self.plot([x1] * 2, [0, dist.pdf(x1)], '--',
                                        label=f'IC {int(confianza * 100)}%')
@@ -98,4 +104,4 @@ class GraficoDistribucion(Grafico):
             else:
                 if marcar_valores:
                     self.plot([media] * 2, [0, 1], '--',
-                                 label='promedio estimado ($\\hat{\\mu}$)')
+                              label='promedio estimado ($\\hat{\\mu}$)')
