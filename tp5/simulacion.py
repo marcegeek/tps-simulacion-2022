@@ -42,6 +42,13 @@ class Simulacion(abc.ABC):
     def NOMBRE_MODELO():
         pass
 
+    # noinspection PyPep8Naming,PyPropertyDefinition
+    @staticmethod
+    @property
+    @abc.abstractmethod
+    def CLAVE():
+        pass
+
     def __init__(self, semilla=None):
         self.reloj = 0.
         self.tiempos = [self.reloj]
@@ -241,7 +248,7 @@ class Experimento:
                         var = sim.medidas_temporales()[k]
                         graf_nube.graficar(*var.datos)
                     if not en_vivo:
-                        nombre_archivo = f'{clave}_{k}_nube'
+                        nombre_archivo = f'{self._clase.CLAVE}_{clave}_{k}_nube'
                         graf.renderizar(nombre_archivo=nombre_archivo)
                         plt.close(graf.fig)
             diccionario_medidas = self.simulaciones[clave][0].medidas_estadisticas()
@@ -300,7 +307,7 @@ class Experimento:
                     intervalos = [(probs[i] - probs_err[0][i], probs[i] + probs_err[1][i]) for i in range(len(probs))]
                     print(f'{diccionario_medidas[k].nombre}: {probs}, IC {int(confianza * 100)}%: {intervalos}')
                 if not en_vivo:
-                    nombre_archivo = f'{clave}_{k}'
+                    nombre_archivo = f'{self._clase.CLAVE}_{clave}_{k}'
                     graf.renderizar(nombre_archivo=nombre_archivo)
                     plt.close(graf.fig)
             if en_vivo:
