@@ -1,6 +1,6 @@
 import numpy as np
 
-from simulacion import Evento, Simulacion, Experimento, VariadorParametros, VariableEstadistica
+from simulacion import Evento, Simulacion, Experimento, VariadorParametros, VariableEstadistica, VariableTemporal
 
 
 class EventoPartida(Evento):
@@ -12,6 +12,7 @@ class EventoPartida(Evento):
 
 class ColaMMC(Simulacion):
     NOMBRE_MODELO = 'M/M/c'
+    CLAVE = 'cola_mmc'
     ESTADO_DESOCUPADO, ESTADO_OCUPADO = 0, 1
 
     def __init__(self, servidores, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=np.inf, semilla=None):
@@ -145,19 +146,37 @@ class ColaMMC(Simulacion):
     def es_fin(self):
         return self.clientes_completaron_demora >= self.num_clientes
 
-    @classmethod
-    def medidas_estadisticas(cls):
-        return {
-            "demora_promedio": VariableEstadistica("Demora promedio esperada en cola", cls.demora_promedio, simbolo=r'$\hat{d}(n)$'),
-            "tiempo_promedio_sistema": VariableEstadistica("Tiempo promedio en el sistema", cls.tiempo_promedio_sistema, simbolo=r'$\hat{d}(n) + \hat{s}(n)$'),
-            'n_promedio_clientes_cola': VariableEstadistica('Cantidad de clientes en cola en promedio', cls.promedio_clientes_cola, simbolo=r'$\hat{q}(n)$'),
-            'tiempo_promedio_servicio': VariableEstadistica('Tiempo promedio de servicio', cls.tiempo_promedio_servicio, simbolo=r'$\hat{s}(n)$'),
-            'n_promedio_clientes_sistema': VariableEstadistica('Promedio de clientes en el sistema', cls.promedio_clientes_sistema, simbolo=r'$\hat{q}(n) + \hat{u}(n)$'),
-            'utilizacion_servidor': VariableEstadistica('Ocupación del servidor', cls.utilizacion_servidor, simbolo=r'$\hat{u}(n)$'),
-            'probabilidad_n_clientes': VariableEstadistica('Probabilidad de encontrar n clientes en cola', cls.probabilidades_clientes, xlabel='n', simbolo=r'$\hat{p}(Q(t) = n$'),
-            'probabilidad_denegacion': VariableEstadistica('Probabilidad de denegación del servicio', cls.denegacion_servicio, simbolo=r'$\hat{p}(den)$'),
-            'tasa_global_arribos_promedio': VariableEstadistica('Tasa global de arribos promedio', cls.tasa_global_arribos, simbolo=r'${\hat{T}_a}_g(n)$'),
+    def medidas_estadisticas(self):
+        medidas = {
+            "demora_promedio": VariableEstadistica("Demora promedio esperada en cola", self.demora_promedio, simbolo=r'$\hat{d}(n)$', xlabel='Tiempo [minutos]'),
+            "tiempo_promedio_sistema": VariableEstadistica("Tiempo promedio en el sistema", self.tiempo_promedio_sistema, simbolo=r'$\hat{d}(n) + \hat{s}(n)$', xlabel='Tiempo [minutos]'),
+            'n_promedio_clientes_cola': VariableEstadistica('Cantidad de clientes en cola en promedio', self.promedio_clientes_cola, simbolo=r'$\hat{q}(n)$', xlabel='Cantidad de clientes'),
+            'tiempo_promedio_servicio': VariableEstadistica('Tiempo promedio de servicio', self.tiempo_promedio_servicio, simbolo=r'$\hat{s}(n)$', xlabel='Tiempo [minutos]'),
+            'n_promedio_clientes_sistema': VariableEstadistica('Promedio de clientes en el sistema', self.promedio_clientes_sistema, simbolo=r'$\hat{q}(n) + \hat{u}(n)$', xlabel='Cantidad de clientes'),
+            'utilizacion_servidor': VariableEstadistica('Ocupación del servidor', self.utilizacion_servidor, simbolo=r'$\hat{u}(n)$'),
+            'probabilidad_n_clientes': VariableEstadistica('Probabilidad de encontrar n clientes en cola', self.probabilidades_clientes, xlabel='n', simbolo=r'$\hat{p}(Q(t) = n$'),
+            'probabilidad_denegacion': VariableEstadistica('Probabilidad de denegación del servicio', self.denegacion_servicio, simbolo=r'$\hat{p}(den)$'),
+            'tasa_global_arribos_promedio': VariableEstadistica('Tasa global de arribos promedio', self.tasa_global_arribos, simbolo=r'${\hat{T}_a}_g(n)$'),
         }
+        if self.capacidad == np.inf:
+            medidas.pop('probabilidad_denegacion')
+        elif self.capacidad == 0:
+            medidas.pop('demora_promedio')
+            medidas.pop('n_promedio_clientes_cola')
+            medidas.pop('probabilidad_n_clientes')
+            medidas.pop('tasa_global_arribos_promedio')
+        return medidas
+
+    def medidas_temporales(self):
+        medidas = {
+            "n_clientes_cola_tiempo": VariableTemporal('Cantidad de clientes en cola a lo largo del tiempo', (self.tiempos, self.clientes_cola_tiempo), xlabel='Tiempo [minutos]', ylabel='Cantidad de clientes'),
+            "n_denegados_tiempo": VariableTemporal('Cantidad acumulada de clientes denegados a lo largo del tiempo', (self.tiempos, self.clientes_denegados_tiempo), xlabel='Tiempo [minutos]', ylabel='Cantidad de clientes'),
+        }
+        if self.capacidad == np.inf:
+            medidas.pop('n_denegados_tiempo')
+        elif self.capacidad == 0:
+            medidas.pop('n_clientes_cola_tiempo')
+        return medidas
 
     def informe(self):
         capacidad = '∞' if self.capacidad == np.inf else self.capacidad
@@ -188,6 +207,7 @@ class ColaMMC(Simulacion):
 
 class ColaMM1(ColaMMC):
     NOMBRE_MODELO = 'M/M/1'
+    CLAVE = 'cola_mm1'
 
     def __init__(self, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=np.inf, semilla=None):
         super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad,
@@ -224,25 +244,14 @@ class VariadorMM1(VariadorParametros):
 def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100, en_vivo=False):
     exp = Experimento(ColaMM1, VariadorMM1(tasa_servicio, ta_over_ts_arr, capacidades), num_clientes=num_clientes, corridas=corridas)
     exp.correr()
-    if en_vivo:
-        exp.reportar(mostrar=True, exportar=False)
-    else:
-        exp.reportar(mostrar=False, exportar=True)
-
-    #graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]',
-#                                    ylabel='Clientes')
-    #for cola in exp.resultados:
-    #    graf_clientes.graficar(cola.tiempos_cola, cola.clientes_cola_tiempo)
-    #graf_clientes.legend()
-    #graf_clientes.renderizar(nombre_archivo='clientes')
-    #graf_clientes.renderizar()
+    exp.reportar(en_vivo=en_vivo)
 
 
 def main():
     # Duración del servicio: ~ Exp(0.5') -> tasa: 1/0.5' = 2 clientes/min
     tasa_servicio = 2
     num_clientes = 1000
-    corridas = 10
+    corridas = 100
     ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
     capacidades = [np.inf, 0, 2, 5, 10, 50]
     en_vivo = False

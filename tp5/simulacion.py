@@ -12,7 +12,7 @@ except ImportError:
     def tqdm(iterator, *args, **kwargs):
         return iterator
 
-from util.plotter import Plot, GraficoDistribucion
+from util.plotter import Plot, GraficoDistribucion, GraficoDiscreto
 
 
 class Evento:
@@ -40,6 +40,13 @@ class Simulacion(abc.ABC):
     @property
     @abc.abstractmethod
     def NOMBRE_MODELO():
+        pass
+
+    # noinspection PyPep8Naming,PyPropertyDefinition
+    @staticmethod
+    @property
+    @abc.abstractmethod
+    def CLAVE():
         pass
 
     def __init__(self, semilla=None):
@@ -85,14 +92,17 @@ class Simulacion(abc.ABC):
     def informe(self):
         pass
 
-    @classmethod
     @abc.abstractmethod
-    def medidas_estadisticas(cls):
+    def medidas_estadisticas(self):
         """
         Devuelve diccionario con las variables estadísticas correspondientes (VariableEstadistica), la clave representa
         el nombre con el que se va a exportar la gráfica respectiva.
-        Formato: {'clave': VariableEstadistica('nombre estadístico o título de gráfica', cls.metodo), ...}
+        Formato: {'clave': VariableEstadistica('nombre estadístico o título de gráfica', self.metodo), ...}
         """
+        pass
+
+    @abc.abstractmethod
+    def medidas_temporales(self):
         pass
 
 
@@ -152,18 +162,19 @@ class VariableEstadistica:
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.simbolo = simbolo
-        self.valor = None
+        self._datos = None
 
-    def instanciar_valor(self, instancia):
-        # el método está tomado desde la clase, así que sacamos el nombre y bajamos a la instancia
-        nombre_metodo = self.metodo.__name__
-        metodo = getattr(instancia, nombre_metodo)
-        self.valor = metodo()
+    @property
+    def datos(self):
+        if self._datos is None:
+            self._instanciar()
+        return self._datos
+
+    def _instanciar(self):
+        self._datos = self.metodo()
 
     def es_escalar(self):
-        if self.valor is None:
-            raise Exception(f'Valor/es de {self.nombre} aun no instanciados')
-        return np.isscalar(self.valor) or np.array(self.valor).ndim == 0
+        return np.isscalar(self.datos) or np.array(self.datos).ndim == 0
 
     def es_distribucion(self):
         return not self.es_escalar()
@@ -171,10 +182,18 @@ class VariableEstadistica:
     def get_frecuencias(self):
         if self.es_escalar():
             return None
-        if isinstance(self.valor, dict):
-            return self.valor.keys(), self.valor.values()
+        if isinstance(self.datos, dict):
+            return self.datos.keys(), self.datos.values()
         else:
-            return range(len(self.valor)), self.valor
+            return range(len(self.datos)), self.datos
+
+
+class VariableTemporal:
+    def __init__(self, nombre, datos, xlabel=None, ylabel=None):
+        self.nombre = nombre
+        self.datos = datos
+        self.xlabel = xlabel
+        self.ylabel = ylabel
 
 
 class Experimento:
@@ -199,7 +218,7 @@ class Experimento:
             for sim in self.simulaciones[clave]:
                 sim.correr()
 
-    def reportar(self, exportar=False, mostrar=True, confianza=0.95):
+    def reportar(self, en_vivo=True, nubes_temporales=True, confianza=0.95):
         for clave in self.simulaciones:
             print()
             print(f"Simulación: {self._clase.NOMBRE_MODELO} - {self.parametros.descr_parametros(clave)}, "
@@ -208,25 +227,53 @@ class Experimento:
             idx = np.random.randint(0, len(self.simulaciones[clave]) - 1)
             print(f'Resultados corrida n° {idx + 1} (seleccionada al azar):')
             self.simulaciones[clave][idx].informe()
-            diccionario_medidas = self._clase.medidas_estadisticas()
+            temporales = self.simulaciones[clave][idx].medidas_temporales()
+            for k in temporales:
+                var = temporales[k]
+                titulo = var.nombre
+                if en_vivo:
+                    titulo += f' {self.parametros.descr_parametros_graf(clave)}'
+                graf = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
+                graf.graficar(*var.datos)
+                if not en_vivo:
+                    nombre_archivo = f'{self._clase.CLAVE}_{clave}_{k}_corrida_{idx + 1}'
+                    graf.renderizar(nombre_archivo=nombre_archivo)
+                    plt.close(graf.fig)
+                if nubes_temporales:
+                    titulo = f'{var.nombre} (nube de corridas)'
+                    if en_vivo:
+                        titulo += f' {self.parametros.descr_parametros_graf(clave)}'
+                    graf_nube = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
+                    for sim in self.simulaciones[clave]:
+                        var = sim.medidas_temporales()[k]
+                        graf_nube.graficar(*var.datos)
+                    if not en_vivo:
+                        nombre_archivo = f'{self._clase.CLAVE}_{clave}_{k}_nube'
+                        graf.renderizar(nombre_archivo=nombre_archivo)
+                        plt.close(graf.fig)
+            diccionario_medidas = self.simulaciones[clave][0].medidas_estadisticas()
             resultados = {}
             for k in diccionario_medidas:
                 resultados[k] = []
             for sim in self.simulaciones[clave]:
-                for k in diccionario_medidas:
-                    var = diccionario_medidas[k]
-                    var.instanciar_valor(sim)
-                    resultados[k].append(var.valor)
+                medidas_estadisticas = sim.medidas_estadisticas()
+                for k in medidas_estadisticas:
+                    var = medidas_estadisticas[k]
+                    resultados[k].append(var.datos)
             print()
             print(f'Resultados experimento:')
             for k in resultados:
                 if not hasattr(resultados[k][0], '__len__'):  # distribución de valores (promedios)
                     promedio_promedios = stathelper.mean(resultados[k])
-                    desvio_promedios = stathelper.stdev(resultados[k])
                     print(f'{diccionario_medidas[k].nombre}: {promedio_promedios}, '
                           f'IC {int(confianza * 100)}%: {stathelper.intervalo_confianza(resultados[k], confianza)}')
-                    graf = GraficoDistribucion(f'{diccionario_medidas[k].nombre}, '
-                                               f'{self.parametros.descr_parametros_graf(clave)}')
+                    xlabel = diccionario_medidas[k].xlabel
+                    if xlabel is None:
+                        xlabel = 'Valores'
+                    titulo = diccionario_medidas[k].nombre
+                    if en_vivo:
+                        titulo += f', {self.parametros.descr_parametros_graf(clave)}'
+                    graf = GraficoDistribucion(titulo, xlabel=xlabel)
                     graf.graficar(resultados[k], simbolo=diccionario_medidas[k].simbolo)
                     graf.legend()
                 else:  # distribución de listas (distribuciones de frecuencia)
@@ -248,8 +295,10 @@ class Experimento:
                     xlabel = diccionario_medidas[k].xlabel
                     if xlabel is None:
                         xlabel = 'Valores'
-                    graf = Plot(f'{diccionario_medidas[k].nombre}, {self.parametros.descr_parametros_graf(clave)}',
-                                xlabel=xlabel, ylabel='Frecuencia relativa')
+                    titulo = diccionario_medidas[k].nombre
+                    if en_vivo:
+                        titulo += f', {self.parametros.descr_parametros_graf(clave)}'
+                    graf = Plot(titulo, xlabel=xlabel, ylabel='Frecuencia relativa')
                     x = np.arange(0, len(probs))
                     graf.bar(x, probs, yerr=probs_err)
                     if len(x) <= 25:
@@ -257,10 +306,9 @@ class Experimento:
                     # noinspection PyUnresolvedReferences
                     intervalos = [(probs[i] - probs_err[0][i], probs[i] + probs_err[1][i]) for i in range(len(probs))]
                     print(f'{diccionario_medidas[k].nombre}: {probs}, IC {int(confianza * 100)}%: {intervalos}')
-                if exportar:
-                    nombre_archivo = f'{clave}_{k}'
+                if not en_vivo:
+                    nombre_archivo = f'{self._clase.CLAVE}_{clave}_{k}'
                     graf.renderizar(nombre_archivo=nombre_archivo)
-                    if not mostrar:
-                        plt.close(graf.fig)
-            if mostrar:
+                    plt.close(graf.fig)
+            if en_vivo:
                 plt.show()

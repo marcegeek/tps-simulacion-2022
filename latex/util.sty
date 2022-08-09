@@ -21,6 +21,12 @@
   \end{figure}
 }
 
-\newcommand{\importarfigura}[1]{
-  \import{\carpetafiguras}{#1}
+\newcommand{\importarcontenidofigura}[1]{
+  \import{\carpetafiguras}{#1-content}
+}
+
+\newcommand{\importarfiguraunica}[1]{
+  \begin{figure}[H]
+    \importarcontenidofigura{#1}
+  \end{figure}
 }

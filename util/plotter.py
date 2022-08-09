@@ -85,6 +85,8 @@ class GraficoDistribucion(Grafico):
             # corregir rango, forzando desvío estándar = 1
             self.ax.set_xlim(*stats.norm(media).interval(.999))
         if normal:
+            if marcar_valores and simbolo is None:
+                simbolo = r'$\hat{\mu}$'
             if desvio != 0.0:
                 if len(valores) >= 30:  # al menos 30 elementos -> distribución normal
                     dist = stats.norm(loc=media, scale=desvio)
@@ -94,9 +96,8 @@ class GraficoDistribucion(Grafico):
                 pdf = dist.pdf(x)
                 self.plot(x, pdf)
                 if marcar_valores:
-                    simbolo = f' ({simbolo})' if simbolo is not None else ''
                     self.plot([dist.mean()] * 2, [0, pdf.max()], '--',
-                              label=f'promedio estimado{simbolo}')
+                              label=simbolo)
                     x1, x2 = dist.interval(confianza)
                     linea, = self.plot([x1] * 2, [0, dist.pdf(x1)], '--',
                                        label=f'IC {int(confianza * 100)}%')
@@ -104,4 +105,4 @@ class GraficoDistribucion(Grafico):
             else:
                 if marcar_valores:
                     self.plot([media] * 2, [0, 1], '--',
-                              label='promedio estimado ($\\hat{\\mu}$)')
+                              label=simbolo)
