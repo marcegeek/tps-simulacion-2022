@@ -17,7 +17,6 @@ class ModeloInventario(Simulacion):
         super().__init__(semilla=semilla)
         self.nivel_inventario = nivel_inventario
         self.niveles_inventario = [nivel_inventario]
-        self.tiempos = [0.0]
         self.meses = meses
         self.bigs = bigs
         self.smalls = smalls
@@ -51,8 +50,6 @@ class ModeloInventario(Simulacion):
 
     def arribo_pedido(self, ev: EventoArriboPedido):
         self.nivel_inventario += ev.cantidad
-        self.tiempos.append(self.reloj)
-        self.niveles_inventario.append(self.nivel_inventario)
 
     def demanda(self, ev):
         self.programar_demanda()
@@ -65,8 +62,6 @@ class ModeloInventario(Simulacion):
         # noinspection PyUnboundLocalVariable
         cant_demand = valores[i]
         self.nivel_inventario -= cant_demand
-        self.tiempos.append(self.reloj)
-        self.niveles_inventario.append(self.nivel_inventario)
 
     def programar_demanda(self):
         self.eventos.append(
@@ -101,8 +96,17 @@ class ModeloInventario(Simulacion):
         }
 
     def medidas_temporales(self):
-        # TODO completar
-        return {}
+        return {
+            "nivel_inventario_teorico": VariableTemporal("Nivel teórico de inventario a lo largo del tiempo",
+                                                         (self.tiempos, self.niveles_inventario),
+                                                         xlabel="Tiempo [meses]", ylabel="Nivel"),
+            "nivel_inventario_real": VariableTemporal("Nivel real de inventario a lo largo del tiempo",
+                                                      (self.tiempos, [max(0, n) for n in self.niveles_inventario]),
+                                                      xlabel="Tiempo [meses]", ylabel="Nivel"),
+            "nivel_faltante": VariableTemporal("Nivel faltante lo largo del tiempo",
+                                               (self.tiempos, [max(-n, 0) for n in self.niveles_inventario]),
+                                               xlabel="Tiempo [meses]", ylabel="Nivel"),
+        }
 
     def informe(self):
         costo_ordenes_prom = self.costo_total_ordenado / self.meses
@@ -128,6 +132,7 @@ class ModeloInventario(Simulacion):
 
     def actualizar_estadisticas(self):
         super().actualizar_estadisticas()
+        self.niveles_inventario.append(self.nivel_inventario)
         if self.nivel_inventario < 0:
             self.area_escasez -= self.nivel_inventario * self.tiempo_desde_ult_evento
         elif self.nivel_inventario > 0:
