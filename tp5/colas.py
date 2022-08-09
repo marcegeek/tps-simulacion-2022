@@ -160,7 +160,10 @@ class ColaMMC(Simulacion):
         if self.capacidad == np.inf:
             medidas.pop('probabilidad_denegacion')
         elif self.capacidad == 0:
+            medidas.pop('demora_promedio')
             medidas.pop('n_promedio_clientes_cola')
+            medidas.pop('probabilidad_n_clientes')
+            medidas.pop('tasa_global_arribos_promedio')
         return medidas
 
     def medidas_temporales(self):
