@@ -94,7 +94,8 @@ class ModeloInventario(Simulacion):
     def medidas_estadisticas(self):
         return {
             "costo_ordenes_prom": VariableEstadistica("Costo de orden promedio", self.costo_ordenes_prom),
-            "costo_escasez_prom": VariableEstadistica("Costo escasez promedio", self.costo_escasez_prom),
+            "costo_mantenimiento": VariableEstadistica("Costo de manteninimiento promedio", self.costo_mantenimiento_prom),
+            "costo_faltante_prom": VariableEstadistica("Costo faltante promedio", self.costo_escasez_prom),
             "costo_total": VariableEstadistica("Costo total", self.costo_total),
         }
 
