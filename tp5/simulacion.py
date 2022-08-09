@@ -236,7 +236,7 @@ class Experimento:
                 graf = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
                 graf.graficar(*var.datos)
                 if not en_vivo:
-                    nombre_archivo = f'{clave}_{k}_corrida_{idx + 1}'
+                    nombre_archivo = f'{self._clase.CLAVE}_{clave}_{k}_corrida_{idx + 1}'
                     graf.renderizar(nombre_archivo=nombre_archivo)
                     plt.close(graf.fig)
                 if nubes_temporales:
