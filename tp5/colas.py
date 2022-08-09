@@ -146,7 +146,7 @@ class ColaMMC(Simulacion):
         return self.clientes_completaron_demora >= self.num_clientes
 
     def medidas_estadisticas(self):
-        return {
+        medidas = {
             "demora_promedio": VariableEstadistica("Demora promedio esperada en cola", self.demora_promedio, simbolo=r'$\hat{d}(n)$', xlabel='Tiempo [minutos]'),
             "tiempo_promedio_sistema": VariableEstadistica("Tiempo promedio en el sistema", self.tiempo_promedio_sistema, simbolo=r'$\hat{d}(n) + \hat{s}(n)$', xlabel='Tiempo [minutos]'),
             'n_promedio_clientes_cola': VariableEstadistica('Cantidad de clientes en cola en promedio', self.promedio_clientes_cola, simbolo=r'$\hat{q}(n)$', xlabel='Cantidad de clientes'),
@@ -157,12 +157,22 @@ class ColaMMC(Simulacion):
             'probabilidad_denegacion': VariableEstadistica('Probabilidad de denegación del servicio', self.denegacion_servicio, simbolo=r'$\hat{p}(den)$'),
             'tasa_global_arribos_promedio': VariableEstadistica('Tasa global de arribos promedio', self.tasa_global_arribos, simbolo=r'${\hat{T}_a}_g(n)$'),
         }
+        if self.capacidad == np.inf:
+            medidas.pop('probabilidad_denegacion')
+        elif self.capacidad == 0:
+            medidas.pop('n_promedio_clientes_cola')
+        return medidas
 
     def medidas_temporales(self):
-        return {
+        medidas = {
             "n_clientes_cola_tiempo": VariableTemporal('Cantidad de clientes en cola a lo largo del tiempo', (self.tiempos, self.clientes_cola_tiempo), xlabel='Tiempo [minutos]', ylabel='Cantidad de clientes'),
             "n_denegados_tiempo": VariableTemporal('Cantidad acumulada de clientes denegados a lo largo del tiempo', (self.tiempos, self.clientes_denegados_tiempo), xlabel='Tiempo [minutos]', ylabel='Cantidad de clientes'),
         }
+        if self.capacidad == np.inf:
+            medidas.pop('n_denegados_tiempo')
+        elif self.capacidad == 0:
+            medidas.pop('n_clientes_cola_tiempo')
+        return medidas
 
     def informe(self):
         capacidad = '∞' if self.capacidad == np.inf else self.capacidad
