@@ -266,7 +266,7 @@ class Experimento:
                 if not hasattr(resultados[k][0], '__len__'):  # distribución de valores (promedios)
                     promedio_promedios = stathelper.mean(resultados[k])
                     print(f'{diccionario_medidas[k].nombre}: {promedio_promedios}, '
-                          f'IC {int(confianza * 100)}%: {stathelper.intervalo_confianza(resultados[k], confianza)}')
+                          f'IC {int(confianza * 100)}%: {promedio_promedios} \\pm {promedio_promedios - stathelper.intervalo_confianza(resultados[k], confianza)[0]}')
                     xlabel = diccionario_medidas[k].xlabel
                     if xlabel is None:
                         xlabel = 'Valores'
