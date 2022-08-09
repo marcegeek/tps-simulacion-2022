@@ -53,12 +53,12 @@ def figure_path(filename, create_dirs=False):
 
 
 def write_figure_content_tex(nombre_imagen, caption):
-    latex_code = f'\\contenidofigura{{{nombre_imagen}}}{{{caption}}}'
+    latex_code = f'\\contenidofigura{{{nombre_imagen}}}{{{caption}}}\n'
     path = figure_path(f"{nombre_imagen.split('.')[0]}-content.tex", create_dirs=True)
     path.write_text(latex_code, encoding='utf-8')
 
 
 def write_figure_tex(nombre_imagen, caption):
-    latex_code = f'\\figura{{{nombre_imagen}}}{{{caption}}}'
+    latex_code = f'\\figura{{{nombre_imagen}}}{{{caption}}}\n'
     path = figure_path(f"{nombre_imagen.split('.')[0]}.tex", create_dirs=True)
     path.write_text(latex_code, encoding='utf-8')
