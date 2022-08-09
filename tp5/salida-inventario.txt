@@ -1,0 +1,325 @@
+Corriendo simulaciones...
+
+Simulación: Inventario producto único - (s, S = 20, 40), corridas: 100
+
+Resultados corrida n° 10 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (20, 40)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 98.5
+Costo mantenimiento promedio: 9.634095741633045
+Costo escasez promedio: 13.62594033744441
+Costo total: 121.76003607907745
+
+Resultados experimento:
+Costo de orden promedio: 97.42841666666666, IC 95%: 97.42841666666666 \pm 5.639226163819501
+Costo de manteninimiento promedio: 9.277084635415907, IC 95%: 9.277084635415907 \pm 1.0428533725070164
+Costo faltante promedio: 17.692599633172343, IC 95%: 17.692599633172343 \pm 4.079764827413161
+Costo total: 124.39810093525492, IC 95%: 124.39810093525492 \pm 7.457382735635093
+
+Simulación: Inventario producto único - (s, S = 20, 60), corridas: 100
+
+Resultados corrida n° 17 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (20, 60)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 91.11666666666666
+Costo mantenimiento promedio: 16.474678470326054
+Costo escasez promedio: 14.655798705000413
+Costo total: 122.24714384199312
+
+Resultados experimento:
+Costo de orden promedio: 88.62425, IC 95%: 88.62425 \pm 4.921075794980581
+Costo de manteninimiento promedio: 17.530754784969467, IC 95%: 17.530754784969467 \pm 1.5808255015264763
+Costo faltante promedio: 12.926274514428966, IC 95%: 12.926274514428966 \pm 3.971569689233114
+Costo total: 119.08127929939843, IC 95%: 119.08127929939843 \pm 6.545242870422712
+
+Simulación: Inventario producto único - (s, S = 20, 80), corridas: 100
+
+Resultados corrida n° 3 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (20, 80)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 84.24166666666666
+Costo mantenimiento promedio: 28.600297763275567
+Costo escasez promedio: 9.34155678864236
+Costo total: 122.18352121858459
+
+Resultados experimento:
+Costo de orden promedio: 85.02158333333334, IC 95%: 85.02158333333334 \pm 5.319521428425389
+Costo de manteninimiento promedio: 26.940543083398794, IC 95%: 26.940543083398794 \pm 2.092571116726109
+Costo faltante promedio: 9.652689360672749, IC 95%: 9.652689360672749 \pm 3.5388719844442305
+Costo total: 121.61481577740489, IC 95%: 121.61481577740489 \pm 6.332880063557468
+
+Simulación: Inventario producto único - (s, S = 20, 100), corridas: 100
+
+Resultados corrida n° 83 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (20, 100)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 82.64166666666667
+Costo mantenimiento promedio: 37.02654737983508
+Costo escasez promedio: 8.732006481229524
+Costo total: 128.40022052773128
+
+Resultados experimento:
+Costo de orden promedio: 83.09783333333333, IC 95%: 83.09783333333333 \pm 5.3503161562986605
+Costo de manteninimiento promedio: 36.77669373585675, IC 95%: 36.77669373585675 \pm 2.0741302136109923
+Costo faltante promedio: 7.336436081566954, IC 95%: 7.336436081566954 \pm 2.820703650948399
+Costo total: 127.21096315075704, IC 95%: 127.21096315075704 \pm 5.857097743651394
+
+Simulación: Inventario producto único - (s, S = 40, 60), corridas: 100
+
+Resultados corrida n° 76 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (40, 60)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 100.85
+Costo mantenimiento promedio: 25.345027921280163
+Costo escasez promedio: 1.1242535918835277
+Costo total: 127.31928151316369
+
+Resultados experimento:
+Costo de orden promedio: 98.19558333333333, IC 95%: 98.19558333333333 \pm 5.9626408976665175
+Costo de manteninimiento promedio: 25.61528119442861, IC 95%: 25.61528119442861 \pm 1.4843484352673961
+Costo faltante promedio: 1.796916241658415, IC 95%: 1.796916241658415 \pm 1.2533044322597982
+Costo total: 125.60778076942036, IC 95%: 125.60778076942036 \pm 5.410906115076301
+
+Simulación: Inventario producto único - (s, S = 40, 80), corridas: 100
+
+Resultados corrida n° 66 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (40, 80)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 93.23333333333333
+Costo mantenimiento promedio: 34.4722549618958
+Costo escasez promedio: 3.0363702252157903
+Costo total: 130.7419585204449
+
+Resultados experimento:
+Costo de orden promedio: 88.739, IC 95%: 88.739 \pm 5.041269361514551
+Costo de manteninimiento promedio: 35.22639791244364, IC 95%: 35.22639791244364 \pm 2.122950590953252
+Costo faltante promedio: 1.3418221639219852, IC 95%: 1.3418221639219852 \pm 1.1095488592491982
+Costo total: 125.30722007636562, IC 95%: 125.30722007636562 \pm 4.299294899272425
+
+Simulación: Inventario producto único - (s, S = 40, 100), corridas: 100
+
+Resultados corrida n° 22 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (40, 100)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 87.40833333333333
+Costo mantenimiento promedio: 45.20467106792763
+Costo escasez promedio: 1.3395504858296965
+Costo total: 133.95255488709066
+
+Resultados experimento:
+Costo de orden promedio: 85.30966666666667, IC 95%: 85.30966666666667 \pm 5.17519944247114
+Costo de manteninimiento promedio: 45.119863899918954, IC 95%: 45.119863899918954 \pm 2.392745274464893
+Costo faltante promedio: 1.0937589119285427, IC 95%: 1.0937589119285427 \pm 1.0374456197068533
+Costo total: 131.52328947851416, IC 95%: 131.52328947851416 \pm 4.5975842245412935
+
+Simulación: Inventario producto único - (s, S = 40, 120), corridas: 100
+
+Resultados corrida n° 8 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (40, 120)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 87.125
+Costo mantenimiento promedio: 55.22242505899391
+Costo escasez promedio: 0.4069333503906145
+Costo total: 142.7543584093845
+
+Resultados experimento:
+Costo de orden promedio: 83.28266666666667, IC 95%: 83.28266666666667 \pm 4.783734413663282
+Costo de manteninimiento promedio: 55.18826540456111, IC 95%: 55.18826540456111 \pm 2.9149397537746466
+Costo faltante promedio: 0.8055043895702508, IC 95%: 0.8055043895702508 \pm 1.0432418576166202
+Costo total: 139.27643646079804, IC 95%: 139.27643646079804 \pm 4.074794204752095
+
+Simulación: Inventario producto único - (s, S = 60, 80), corridas: 100
+
+Resultados corrida n° 20 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (60, 80)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 105.2
+Costo mantenimiento promedio: 44.0815766194118
+Costo escasez promedio: 0.15115368108163554
+Costo total: 149.43273030049343
+
+Resultados experimento:
+Costo de orden promedio: 99.07275, IC 95%: 99.07275 \pm 6.08019176955186
+Costo de manteninimiento promedio: 45.11682084744345, IC 95%: 45.11682084744345 \pm 1.8044467435906526
+Costo faltante promedio: 0.07491396579604287, IC 95%: 0.07491396579604287 \pm 0.20437393479241217
+Costo total: 144.2644848132395, IC 95%: 144.2644848132395 \pm 4.978981808276529
+
+Simulación: Inventario producto único - (s, S = 60, 100), corridas: 100
+
+Resultados corrida n° 49 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (60, 100)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 92.45
+Costo mantenimiento promedio: 54.53327123329479
+Costo escasez promedio: 0.018913378202172648
+Costo total: 147.00218461149697
+
+Resultados experimento:
+Costo de orden promedio: 89.90016666666666, IC 95%: 89.90016666666666 \pm 5.195329511760022
+Costo de manteninimiento promedio: 54.42348856291998, IC 95%: 54.42348856291998 \pm 2.206383930687309
+Costo faltante promedio: 0.054812924751270226, IC 95%: 0.054812924751270226 \pm 0.17655381749757698
+Costo total: 144.37846815433792, IC 95%: 144.37846815433792 \pm 3.938173970938209
+
+Simulación: Inventario producto único - (s, S = 60, 120), corridas: 100
+
+Resultados corrida n° 39 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (60, 120)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 88.225
+Costo mantenimiento promedio: 62.99547332245831
+Costo escasez promedio: 0.02618010636570922
+Costo total: 151.246653428824
+
+Resultados experimento:
+Costo de orden promedio: 85.61316666666667, IC 95%: 85.61316666666667 \pm 4.893099897405406
+Costo de manteninimiento promedio: 64.77956372478408, IC 95%: 64.77956372478408 \pm 2.341326798684257
+Costo faltante promedio: 0.02813668909951701, IC 95%: 0.02813668909951701 \pm 0.1273947460379341
+Costo total: 150.42086708055027, IC 95%: 150.42086708055027 \pm 4.199632775510224
+
+Simulación: Inventario producto único - (s, S = 60, 140), corridas: 100
+
+Resultados corrida n° 88 (seleccionada al azar):
+Modelo de inventario de producto único
+Nivel de inicial inventario: 60
+Tiempo medio entre demandas: 0.1
+Distribución de la demanda: ((1, 2, 3, 4), (0.16666666666666666, 0.3333333333333333, 0.3333333333333333, 0.16666666666666666))
+Política de pedido: (60, 140)
+Costo de establecimiento de pedido: 32
+Costo incremental: 3
+Costo de mantenimiento: 1
+Costo de faltante: 5
+Rango distribución de demora de pedido: [0.5, 1]
+Cantidad total de períodos: 120
+
+Resultados de la simulación:
+Costo orden promedio: 84.23333333333333
+Costo mantenimiento promedio: 75.9689158177599
+Costo escasez promedio: 0.000389094046575611
+Costo total: 160.2026382451398
+
+Resultados experimento:
+Costo de orden promedio: 83.54283333333333, IC 95%: 83.54283333333333 \pm 5.424403865958709
+Costo de manteninimiento promedio: 74.87959424401382, IC 95%: 74.87959424401382 \pm 2.5973416041958615
+Costo faltante promedio: 0.03624349882428993, IC 95%: 0.03624349882428993 \pm 0.13012201074815677
+Costo total: 158.45867107617144, IC 95%: 158.45867107617144 \pm 4.437720018719574
