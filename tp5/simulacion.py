@@ -218,7 +218,7 @@ class Experimento:
             for sim in self.simulaciones[clave]:
                 sim.correr()
 
-    def reportar(self, en_vivo=True, nubes_temporales=True, confianza=0.95):
+    def reportar(self, en_vivo=True, nubes_temporales=True, etiquetar_params=True, confianza=0.95):
         for clave in self.simulaciones:
             print()
             print(f"Simulación: {self._clase.NOMBRE_MODELO} - {self.parametros.descr_parametros(clave)}, "
@@ -231,7 +231,7 @@ class Experimento:
             for k in temporales:
                 var = temporales[k]
                 titulo = var.nombre
-                if en_vivo:
+                if etiquetar_params:
                     titulo += f' {self.parametros.descr_parametros_graf(clave)}'
                 graf = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
                 graf.graficar(*var.datos)
@@ -241,7 +241,7 @@ class Experimento:
                     plt.close(graf.fig)
                 if nubes_temporales:
                     titulo = f'{var.nombre} (nube de corridas)'
-                    if en_vivo:
+                    if etiquetar_params:
                         titulo += f' {self.parametros.descr_parametros_graf(clave)}'
                     graf_nube = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
                     for sim in self.simulaciones[clave]:
@@ -271,7 +271,7 @@ class Experimento:
                     if xlabel is None:
                         xlabel = 'Valores'
                     titulo = diccionario_medidas[k].nombre
-                    if en_vivo:
+                    if etiquetar_params:
                         titulo += f', {self.parametros.descr_parametros_graf(clave)}'
                     graf = GraficoDistribucion(titulo, xlabel=xlabel)
                     graf.graficar(resultados[k], simbolo=diccionario_medidas[k].simbolo)
@@ -296,7 +296,7 @@ class Experimento:
                     if xlabel is None:
                         xlabel = 'Valores'
                     titulo = diccionario_medidas[k].nombre
-                    if en_vivo:
+                    if etiquetar_params:
                         titulo += f', {self.parametros.descr_parametros_graf(clave)}'
                     graf = Plot(titulo, xlabel=xlabel, ylabel='Frecuencia relativa')
                     x = np.arange(0, len(probs))

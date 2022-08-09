@@ -240,7 +240,7 @@ class VariadorMM1(VariadorParametros):
         capacidad, ta_over_ts = clave.split('_')
         if capacidad == str(np.inf):
             capacidad = '\\infty'
-        return f'$cap={capacidad}$, $\\frac{{T_{{a}}}}{{T_{{s}}}} = {ta_over_ts}\\%$'
+        return f'$\\frac{{T_{{a}}}}{{T_{{s}}}} = {ta_over_ts}\\%$'
 
 
 def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100, en_vivo=False):
