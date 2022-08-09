@@ -217,30 +217,30 @@ class ColaMM1(ColaMMC):
 
 
 class VariadorMM1(VariadorParametros):
-    def __init__(self, tasa_servicio, taoverts_arr, capacidades):
+    def __init__(self, tasa_servicio, capacidades, taoverts_arr):
         self.tasa_servicio = tasa_servicio
-        self.taoverts_arr = taoverts_arr
         self.capacidades = capacidades
+        self.taoverts_arr = taoverts_arr
 
-    def get_params(self, taoverts, capacidad):
+    def get_params(self, capacidad, taoverts):
         return (self.tasa_servicio * taoverts, self.tasa_servicio), {'capacidad': capacidad}
 
     @staticmethod
     def obtener_clave(valores):
-        ta_over_ts, capacidad = valores
-        return f'{int(ta_over_ts * 100)}_{capacidad}'
+        capacidad, ta_over_ts = valores
+        return f'{capacidad}_{int(ta_over_ts * 100)}'
 
     @staticmethod
     def descr_parametros(clave):
-        ta_over_ts, capacidad = clave.split('_')
-        return f'Ta/Ts = {ta_over_ts}%, cap = {capacidad}'
+        capacidad, ta_over_ts = clave.split('_')
+        return f'cap = {capacidad}, Ta/Ts = {ta_over_ts}%'
 
     @staticmethod
     def descr_parametros_graf(clave):
-        ta_over_ts, capacidad = clave.split('_')
+        capacidad, ta_over_ts = clave.split('_')
         if capacidad == str(np.inf):
             capacidad = '\\infty'
-        return f'$\\frac{{T_{{a}}}}{{T_{{s}}}} = {ta_over_ts}\\%$, $cap={capacidad}$'
+        return f'$cap={capacidad}$, $\\frac{{T_{{a}}}}{{T_{{s}}}} = {ta_over_ts}\\%$'
 
 
 def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100, en_vivo=False):
@@ -254,10 +254,10 @@ def main():
     tasa_servicio = 2
     num_clientes = 1000
     corridas = 100
+    capacidades = [0, 2, 5, 10, 50, np.inf]
     ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
-    capacidades = [np.inf, 0, 2, 5, 10, 50]
     en_vivo = False
-    realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=num_clientes, corridas=corridas, en_vivo=en_vivo)
+    realizar_experimento(tasa_servicio, capacidades, ta_over_ts_arr, num_clientes=num_clientes, corridas=corridas, en_vivo=en_vivo)
 
 
 def _test():
