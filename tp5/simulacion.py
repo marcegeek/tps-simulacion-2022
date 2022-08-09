@@ -211,7 +211,7 @@ class Experimento:
             for sim in self.simulaciones[clave]:
                 sim.correr()
 
-    def reportar(self, exportar=False, mostrar=True, nubes_temporales=True, confianza=0.95):
+    def reportar(self, en_vivo=True, nubes_temporales=True, confianza=0.95):
         for clave in self.simulaciones:
             print()
             print(f"Simulación: {self._clase.NOMBRE_MODELO} - {self.parametros.descr_parametros(clave)}, "
@@ -223,24 +223,27 @@ class Experimento:
             temporales = self.simulaciones[clave][idx].medidas_temporales()
             for k in temporales:
                 var = temporales[k]
-                graf = GraficoDiscreto(f'{var.nombre}, {self.parametros.descr_parametros_graf(clave)}', xlabel=var.xlabel, ylabel=var.ylabel)
+                titulo = var.nombre
+                if en_vivo:
+                    titulo += f' {self.parametros.descr_parametros_graf(clave)}'
+                graf = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
                 graf.graficar(*var.datos)
-                if exportar:
+                if not en_vivo:
                     nombre_archivo = f'{clave}_{k}_corrida_{idx + 1}'
                     graf.renderizar(nombre_archivo=nombre_archivo)
-                    if not mostrar:
-                        plt.close(graf.fig)
+                    plt.close(graf.fig)
                 if nubes_temporales:
-                    title = f'{var.nombre} (nube de corridas), {self.parametros.descr_parametros_graf(clave)}'
-                    graf_nube = GraficoDiscreto(title, xlabel=var.xlabel, ylabel=var.ylabel)
+                    titulo = f'{var.nombre} (nube de corridas)'
+                    if en_vivo:
+                        titulo += f' {self.parametros.descr_parametros_graf(clave)}'
+                    graf_nube = GraficoDiscreto(titulo, xlabel=var.xlabel, ylabel=var.ylabel)
                     for sim in self.simulaciones[clave]:
                         var = sim.medidas_temporales()[k]
                         graf_nube.graficar(*var.datos)
-                    if exportar:
+                    if not en_vivo:
                         nombre_archivo = f'{clave}_{k}_nube'
                         graf.renderizar(nombre_archivo=nombre_archivo)
-                        if not mostrar:
-                            plt.close(graf.fig)
+                        plt.close(graf.fig)
             diccionario_medidas = self.simulaciones[clave][0].medidas_estadisticas()
             resultados = {}
             for k in diccionario_medidas:
@@ -260,9 +263,10 @@ class Experimento:
                     xlabel = diccionario_medidas[k].xlabel
                     if xlabel is None:
                         xlabel = 'Valores'
-                    graf = GraficoDistribucion(f'{diccionario_medidas[k].nombre}, '
-                                               f'{self.parametros.descr_parametros_graf(clave)}',
-                                               xlabel=xlabel)
+                    titulo = diccionario_medidas[k].nombre
+                    if en_vivo:
+                        titulo += f', {self.parametros.descr_parametros_graf(clave)}'
+                    graf = GraficoDistribucion(titulo, xlabel=xlabel)
                     graf.graficar(resultados[k], simbolo=diccionario_medidas[k].simbolo)
                     graf.legend()
                 else:  # distribución de listas (distribuciones de frecuencia)
@@ -284,8 +288,10 @@ class Experimento:
                     xlabel = diccionario_medidas[k].xlabel
                     if xlabel is None:
                         xlabel = 'Valores'
-                    graf = Plot(f'{diccionario_medidas[k].nombre}, {self.parametros.descr_parametros_graf(clave)}',
-                                xlabel=xlabel, ylabel='Frecuencia relativa')
+                    titulo = diccionario_medidas[k].nombre
+                    if en_vivo:
+                        titulo += f', {self.parametros.descr_parametros_graf(clave)}'
+                    graf = Plot(titulo, xlabel=xlabel, ylabel='Frecuencia relativa')
                     x = np.arange(0, len(probs))
                     graf.bar(x, probs, yerr=probs_err)
                     if len(x) <= 25:
@@ -293,10 +299,9 @@ class Experimento:
                     # noinspection PyUnresolvedReferences
                     intervalos = [(probs[i] - probs_err[0][i], probs[i] + probs_err[1][i]) for i in range(len(probs))]
                     print(f'{diccionario_medidas[k].nombre}: {probs}, IC {int(confianza * 100)}%: {intervalos}')
-                if exportar:
+                if not en_vivo:
                     nombre_archivo = f'{clave}_{k}'
                     graf.renderizar(nombre_archivo=nombre_archivo)
-                    if not mostrar:
-                        plt.close(graf.fig)
-            if mostrar:
+                    plt.close(graf.fig)
+            if en_vivo:
                 plt.show()

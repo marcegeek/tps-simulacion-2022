@@ -239,18 +239,7 @@ class VariadorMM1(VariadorParametros):
 def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=1000, corridas=100, en_vivo=False):
     exp = Experimento(ColaMM1, VariadorMM1(tasa_servicio, ta_over_ts_arr, capacidades), num_clientes=num_clientes, corridas=corridas)
     exp.correr()
-    if en_vivo:
-        exp.reportar(mostrar=True, exportar=False)
-    else:
-        exp.reportar(mostrar=False, exportar=True)
-
-    #graf_clientes = GraficoDiscreto('Clientes en cola a lo largo del tiempo', xlabel='Tiempo [minutos]',
-#                                    ylabel='Clientes')
-    #for cola in exp.resultados:
-    #    graf_clientes.graficar(cola.tiempos_cola, cola.clientes_cola_tiempo)
-    #graf_clientes.legend()
-    #graf_clientes.renderizar(nombre_archivo='clientes')
-    #graf_clientes.renderizar()
+    exp.reportar(en_vivo=en_vivo)
 
 
 def main():
@@ -260,7 +249,7 @@ def main():
     corridas = 10
     ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
     capacidades = [np.inf, 0, 2, 5, 10, 50]
-    en_vivo = True
+    en_vivo = False
     realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_clientes=num_clientes, corridas=corridas, en_vivo=en_vivo)
 
 
