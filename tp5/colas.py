@@ -12,7 +12,7 @@ class EventoPartida(Evento):
 
 class ColaMMC(Simulacion):
     NOMBRE_MODELO = 'M/M/c'
-    CLAVE = 'mmc'
+    CLAVE = 'cola_mmc'
     ESTADO_DESOCUPADO, ESTADO_OCUPADO = 0, 1
 
     def __init__(self, servidores, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=np.inf, semilla=None):
@@ -207,7 +207,7 @@ class ColaMMC(Simulacion):
 
 class ColaMM1(ColaMMC):
     NOMBRE_MODELO = 'M/M/1'
-    CLAVE = 'mm1'
+    CLAVE = 'cola_mm1'
 
     def __init__(self, tasa_arribos, tasa_servicio, num_clientes=1000, capacidad=np.inf, semilla=None):
         super().__init__(1, tasa_arribos, tasa_servicio, num_clientes=num_clientes, capacidad=capacidad,
