@@ -242,6 +242,7 @@ def grafico_violin(lista):
 
 
 def grafico_histograma(lista):
+
     #intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
     #plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
     plt.hist(lista, bins='sqrt', color='#F2AB6D')
@@ -249,7 +250,19 @@ def grafico_histograma(lista):
     plt.xlabel('Número')
     plt.ylabel('Frecuencia absoluta')
     #plt.xticks(intervalos)
-    plt.show()
+    # plt.show()
+
+
+def grafico_histograma_p(valores_p,nombre_generador):
+    #intervalos = range(min(lista), max(lista) + 2)  # calculamos los extremos de los intervalos
+    #plt.hist(x=lista, bins=intervalos, color='#F2AB6D', rwidth=0.85)
+    # len_valores_p=len(valores_p)
+    fig,his=plt.subplots()
+    his.hist(valores_p, bins='sqrt', color='#F2AB6D')
+    his.set_title('Histograma de números generados - '+nombre_generador)
+    his.set_xlabel('Número')
+    his.set_ylabel('Frecuencia absoluta')
+    # plt.show()
 
 
 def rachas(l):
@@ -382,39 +395,42 @@ def test_frecuencia_monobit(lista):
 
 def evaluar_pvalue(pvalue, alpha=0.05):
     if pvalue <= alpha or abs(pvalue - alpha) < 0.00001:
-        return "No es aleatorio"
+        return "  NO  "
     else:
-        return "Puede ser aleatorio"
+        return "QUIZÁS"
 
 
-def probar_generador(generador, nombre, size=1000):
+def grafico_torta(valores_p1,valores_p0):
+    fig,ax = plt.subplots()
+    ax.pie(
+        [len(valores_p1),len(valores_p0)]
+        , labels=["Puede ser aleatorio","No es aleatorio"]
+        # , autopct="%0.1f %%"
+    )
+    #ax.set_title('T´ítulo', loc='center',
+     #            fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
+    #ax.plot(range(len(valores_p)), valores_p)
+
+
+def probar_generador(generador, nombre, n_min=0, n_max=10000, size=1000):
     nums = generador.rand(size=size)  # usar los rangos completos
-    grafico_puntos(size, nums)
-    grafico_histograma(nums)
-    grafico_caja(nums)
-    grafico_violin(nums)
+    valores_p=[]
+    #generador.seed()
     rachas_pvalue = rachas(nums)
     chi2_pvalue = test_chicuadrado_uniforme(nums, range(n_min, n_max + 1))
     poker_pvalue = poker(nums)
     frecuencia_monobit_pvalue = test_frecuencia_monobit(nums)
-    print(f"Por test de rachas, el generador {nombre}: {evaluar_pvalue(rachas_pvalue)}")
-    print(f"Por test de chi cuadrado, el generador {nombre}: {evaluar_pvalue(chi2_pvalue)}")
-    print(f"Por test de póker, el generador {nombre}: {evaluar_pvalue(poker_pvalue)}")
-    print(f"Por test de frecuencia (monobit), el generador {nombre}: {evaluar_pvalue(frecuencia_monobit_pvalue)}")
+    valores_p.extend([rachas_pvalue,chi2_pvalue,poker_pvalue,frecuencia_monobit_pvalue])
+    print(f"| {nombre+' '*(29-len(nombre))} | {evaluar_pvalue(rachas_pvalue)} | {evaluar_pvalue(chi2_pvalue)} | {evaluar_pvalue(poker_pvalue)} | {evaluar_pvalue(frecuencia_monobit_pvalue)} |")
+    print('+-------------------------------+--------+--------+--------+--------+')
+    # print(nombre)
+    #grafico_histograma_p(valores_p,nombre)
+    p_evaluados=[evaluar_pvalue(val).startswith('Puede') for val in valores_p]
+    #print(p_evaluados)
+    #grafico_torta([i for i in range(p_evaluados.count(True))],[i for i in range(p_evaluados.count(False))])
 
 
 def main():
-    """nums = []
-    for i in range(8000):
-        nums.append(random.random())
-    print(poker(nums))
-    generador = GCLAnsiC(10)
-    nums = []
-    for i in range(8000):
-        nums.append(generador.rand())
-    print(poker(nums))
-    return"""
-
     """#Ejemplos de listas no aleatorias y aleatorias testeando con el test de rachas
     lista= [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
     lista2=[2,4,2,5,1,6,2]
@@ -423,14 +439,18 @@ def main():
 
     # Histograma de valores p
     # Test de hipótesis de uniformidad de valores p
+        # Por chi cuadrado
     # Proporción de aceptación de hipótesis nula
 
+    print('+-------------------------------+--------+--------+--------+--------+'+'\n'
+          '| Generadores pseudoaleatorios  | rachas | chi^2  | poker  | monobit|'+'\n'
+          '+-------------------------------+--------+--------+--------+--------+')
+
     """Generador GCL ANSI C"""
-    #[valores_p,proporciones_aceptacion],\
     probar_generador(GCLAnsiC(), "GCL ANSI C")
 
     """Generador GCL parámetros arbitrarios (m=2**31, a=1000, c=151)"""
-    probar_generador(GeneradorGCL(2**31, 1000, 151), "GCL con (m=2**31, a=1000, c=151)")
+    probar_generador(GeneradorGCL(2**31, 1000, 151), "GCL m=2³² a=10³ c=151")
 
     """Generador de Python"""
     probar_generador(GeneradorPyMT19937(), "MT19937 de Python")
@@ -439,6 +459,7 @@ def main():
     probar_generador(GeneradorCuadrados(digitos=4), "Cuadrados Medios (4 dígitos)")
     probar_generador(GeneradorCuadrados(digitos=10), "Cuadrados Medios (10 dígitos)")
 
+    plt.show()
 
 if __name__ == '__main__':
     main()
