@@ -9,6 +9,7 @@ class EventoArriboPedido(Evento):
 
 class ModeloInventario(Simulacion):
     NOMBRE_MODELO = "Inventario producto único"
+    CLAVE = "inventario"
 
     def __init__(self, meses=120, nivel_inventario=60, bigs=40, smalls=20, setup_cost=32, costo_incremental=3,
                  costo_mantenimiento=1, costo_reserva=5, rango_lag=(0.5, 1),
