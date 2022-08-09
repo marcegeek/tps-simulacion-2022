@@ -69,7 +69,7 @@ def main():
 
         var_u.plot(range(100), varianza)
         var_u.plot([0, 100], [var_esperado, var_esperado], marker='o', linestyle='dotted')
-        var_u.set_title('Varianzas por tirada:', loc='center',
+        var_u.set_title('Varianzas por tiradas:', loc='center',
                       fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
         var_u.set_xlabel('Tirada')
         var_u.set_ylabel('Variación')
@@ -85,7 +85,7 @@ def main():
         "Imágen de desvíos"
         des_u.plot(range(100), desvio)
         des_u.plot([0, 100], [desv_esperado, desv_esperado], marker='|', linestyle='dashed')
-        des_u.set_title('Desvío por número aparecido:', loc='center',
+        des_u.set_title('Desvío por tiradas:', loc='center',
                       fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
         des_u.set_xlabel('Tirada')
         des_u.set_ylabel('Desvío Estándar')
@@ -117,7 +117,7 @@ def main():
     fig, var = plt.subplots()
     var.plot(range(1000), varianzas)
     var.plot([0, 1000], [var_esperado, var_esperado], marker='o', linestyle='dotted')
-    var.set_title('Varianza por tirada:', loc='left',
+    var.set_title('Varianza promedio:', loc='left',
                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     var.set_xlabel('Tirada')
     var.set_ylabel('Variación')
@@ -127,7 +127,7 @@ def main():
     fig, des = plt.subplots()
     des.plot(range(1000), desvios)
     des.plot([0, 1000], [desv_esperado, desv_esperado], marker='|', linestyle='dashed')
-    des.set_title('Desvío por tirada:', loc='left',
+    des.set_title('Desvío promedio:', loc='left',
                   fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     des.set_xlabel('Tirada')
     des.set_ylabel('Desvío Estándar')
@@ -136,7 +136,7 @@ def main():
     fig, ax = plt.subplots()
     ax.plot(range(1000), promedios)
     ax.plot([0, 1000], [prom_esperado, prom_esperado], marker='o', linestyle='dotted')
-    ax.set_title('Promedio por tirada:', loc='left',
+    ax.set_title('Promedio global:', loc='left',
                  fontdict={'fontsize': 14, 'fontweight': 'bold', 'color': 'tab:blue'})
     ax.set_xlabel('Tirada')
     ax.set_ylabel('Promedio')
