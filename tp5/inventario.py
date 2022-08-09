@@ -1,4 +1,4 @@
-from simulacion import Evento, Simulacion
+from simulacion import Evento, Simulacion, Experimento, VariadorParametros, VariableEstadistica, VariableTemporal
 
 
 class EventoArriboPedido(Evento):
@@ -8,6 +8,8 @@ class EventoArriboPedido(Evento):
 
 
 class ModeloInventario(Simulacion):
+    NOMBRE_MODELO = "Inventario producto único"
+
     def __init__(self, meses=120, nivel_inventario=60, bigs=40, smalls=20, setup_cost=32, costo_incremental=3,
                  costo_mantenimiento=1, costo_reserva=5, rango_lag=(0.5, 1),
                  media_entredemanda=0.1, distribucion_demanda=((1, 2, 3, 4), (1/6, 1/3, 1/3, 1/6)), semilla=None):
@@ -77,6 +79,29 @@ class ModeloInventario(Simulacion):
             self.programar_arribo_pedido(cantidad)
         self.programar_evaluacion()
 
+    def costo_ordenes_prom(self):
+        return self.costo_total_ordenado / self.meses
+
+    def costo_mantenimiento_prom(self):
+        return self.costo_mantenimiento * self.mantenidos_area / self.meses
+
+    def costo_escasez_prom(self):
+        return self.costo_reserva * self.area_escasez / self.meses
+
+    def costo_total(self):
+        return self.costo_ordenes_prom() + self.costo_mantenimiento_prom() + self.costo_escasez_prom()
+
+    def medidas_estadisticas(self):
+        return {
+            "costo_ordenes_prom": VariableEstadistica("Costo de orden promedio", self.costo_ordenes_prom),
+            "costo_escasez_prom": VariableEstadistica("Costo escasez promedio", self.costo_escasez_prom),
+            "costo_total": VariableEstadistica("Costo total", self.costo_total),
+        }
+
+    def medidas_temporales(self):
+        # TODO completar
+        return {}
+
     def informe(self):
         costo_ordenes_prom = self.costo_total_ordenado / self.meses
         costo_mantenimiento_prom = self.costo_mantenimiento * self.mantenidos_area / self.meses
@@ -110,10 +135,43 @@ class ModeloInventario(Simulacion):
         return self.reloj >= self.meses
 
 
-def test():
+def _test():
     inventario = ModeloInventario()
     inventario.correr()
 
 
+class VariadorInventario(VariadorParametros):
+    def __init__(self, smalls_arr, bigs_minus_smalls_arr):
+        self.smalls_arr = smalls_arr
+        self.bigs_minus_smalls_arr = bigs_minus_smalls_arr
+
+    def get_params(self, smalls, bigs_minus_smalls):
+        return (), {'smalls': smalls, 'bigs': smalls + bigs_minus_smalls}
+
+    @staticmethod
+    def obtener_clave(valores):
+        smalls, bigs_minus_smalls = valores
+        bigs = bigs_minus_smalls + smalls
+        return f'{smalls}_{bigs}'
+
+    @classmethod
+    def descr_parametros(cls, clave):
+        smalls, bigs = clave.split('_')
+        return f'(s, S = {smalls}, {bigs})'
+
+    @classmethod
+    def descr_parametros_graf(cls, clave):
+        return f'${cls.descr_parametros(clave)}$'
+
+
+def main():
+    smalls_arr = [20, 40, 60]
+    bigs_minus_smalls_arr = [20, 40, 60, 80]
+    variador = VariadorInventario(smalls_arr, bigs_minus_smalls_arr)
+    exp = Experimento(ModeloInventario, variador, corridas=100)
+    exp.correr()
+    exp.reportar(en_vivo=False)
+
+
 if __name__ == '__main__':
-    test()
+    main()
