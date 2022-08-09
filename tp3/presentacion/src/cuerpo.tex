@@ -96,6 +96,26 @@ Según los parámetros de este generador, existen distintas variantes, cada una 
 
 \section{Análisis de resultados}
 
+Salida del programa:
+\begin{verbatim}
++-------------------------------+--------+--------+--------+--------+
+| Generadores pseudoaleatorios  | rachas | chi²   | poker  | monobit|
++-------------------------------+--------+--------+--------+--------+
+| GCL ANSI C                    | QUIZÁS | QUIZÁS | QUIZÁS | QUIZÁS |
++-------------------------------+--------+--------+--------+--------+
+| GCL m=2³² a=10³ c=151         |   NO   | QUIZÁS |   NO   |   NO   |
++-------------------------------+--------+--------+--------+--------+
+| MT19937 de Python             | QUIZÁS | QUIZÁS | QUIZÁS | QUIZÁS |
++-------------------------------+--------+--------+--------+--------+
+| Cuadrados Medios (4 dígitos)  | QUIZÁS |   NO   |   NO   |   NO   |
++-------------------------------+--------+--------+--------+--------+
+| Cuadrados Medios (10 dígitos) | QUIZÁS | QUIZÁS | QUIZÁS |   NO   |
++-------------------------------+--------+--------+--------+--------+
+\end{verbatim}
+
+Donde \texttt{"NO"} significa que los datos presentan características que no poseen los generadore ideales de números
+aleatorios, y \texttt{"QUIZÁS"} significa que estas características no se encuentran (esto no es suficiente para declarar
+la aleatoriedad del método).
 
 \section{Conclusiones}
 \input{conclusiones}

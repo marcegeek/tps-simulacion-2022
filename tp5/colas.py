@@ -246,7 +246,7 @@ def main():
     # Duración del servicio: ~ Exp(0.5') -> tasa: 1/0.5' = 2 clientes/min
     tasa_servicio = 2
     num_clientes = 1000
-    corridas = 10
+    corridas = 100
     ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
     capacidades = [np.inf, 0, 2, 5, 10, 50]
     en_vivo = False
