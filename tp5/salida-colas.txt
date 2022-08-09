@@ -1,0 +1,1350 @@
+Corriendo simulaciones...
+
+Simulación: M/M/1 - Ta/Ts = 25%, cap = inf, corridas: 100
+
+Resultados corrida n° 54 (seleccionada al azar):
+Modelo de colas M/M/1/∞
+Tasa de arribos:                           0.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.147 minutos
+Tiempo promedio en el sistema:             0.629
+Número promedio de clientes en cola:       0.072
+Número promedio de clientes en el sistema: 0.311
+Utilización del servidor:                  0.238
+Probabilidad 0 clientes en cola: 0.9444387341420659
+Probabilidad 1 clientes en cola: 0.04208185509776471
+Probabilidad 2 clientes en cola: 0.010341197806108758
+Probabilidad 3 clientes en cola: 0.002887638489411732
+Probabilidad 4 clientes en cola: 0.00025057446464880667
+Tiempo de fin de la simulación:           2023.897
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.16342548687846903, IC 95%: (0.11841511497462731, 0.20843585878231075)
+Tiempo promedio en el sistema: 0.6624178391918085, IC 95%: (0.5939357742989307, 0.7308999040846863)
+Cantidad de clientes en cola en promedio: 0.08207193028384813, IC 95%: (0.057643055073355216, 0.10650080549434104)
+Tiempo promedio de servicio: 0.49899235231333955, IC 95%: (0.46717831471704613, 0.530806389909633)
+Promedio de clientes en el sistema: 0.33200438453686937, IC 95%: (0.2895626104280447, 0.374446158645694)
+Ocupación del servidor: 0.24993245425302127, IC 95%: (0.22839839598102257, 0.27146651252501997)
+Probabilidad de encontrar n clientes en cola: [0.9382185983247278, 0.04647920103248452, 0.011547510118121954, 0.0028079303552132344, 0.0007143298018286847, 0.0001814471408206009, 4.751954956058454e-05, 3.4636772426792258e-06], IC 95%: [(0.9245659849033651, 0.9518712117460905), (0.03787257370664408, 0.055085828358324956), (0.006542273516300452, 0.016552746719943456), (0.00038030869764274847, 0.00523555201278372), (-0.0007038655632839329, 0.0021325251669413025), (-0.0006859620630276382, 0.0010488563446688398), (-0.00031166023403697584, 0.0004066993331581449), (-3.494461060444481e-05, 4.187196508980326e-05)]
+Tasa global de arribos promedio: 6.8951909199664894e-06, IC 95%: (-9.781391994433667e-05, 0.00011160430178426965)
+
+Simulación: M/M/1 - Ta/Ts = 25%, cap = 0, corridas: 100
+
+Resultados corrida n° 16 (seleccionada al azar):
+Modelo de colas M/M/1/0
+Tasa de arribos:                           0.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.000 minutos
+Tiempo promedio en el sistema:             0.506
+Número promedio de clientes en cola:       0.000
+Número promedio de clientes en el sistema: 0.197
+Probabilidad de denegación de servicio:    0.238
+Utilización del servidor:                  0.197
+Probabilidad 0 clientes en cola: 1.0
+Tiempo de fin de la simulación:           2562.600
+
+Resultados experimento:
+Tiempo promedio en el sistema: 0.4993086985229081, IC 95%: (0.46851868454677553, 0.5300987124990406)
+Tiempo promedio de servicio: 0.4993086985229081, IC 95%: (0.46851868454677553, 0.5300987124990406)
+Promedio de clientes en el sistema: 0.19897448953795635, IC 95%: (0.18393403239247963, 0.21401494668343307)
+Ocupación del servidor: 0.19897448953795635, IC 95%: (0.18393403239247963, 0.21401494668343307)
+Probabilidad de denegación del servicio: 0.25141, IC 95%: (0.21757222648060784, 0.28524777351939223)
+
+Simulación: M/M/1 - Ta/Ts = 25%, cap = 2, corridas: 100
+
+Resultados corrida n° 59 (seleccionada al azar):
+Modelo de colas M/M/1/2
+Tasa de arribos:                           0.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.145 minutos
+Tiempo promedio en el sistema:             0.648
+Número promedio de clientes en cola:       0.073
+Número promedio de clientes en el sistema: 0.328
+Probabilidad de denegación de servicio:    0.012
+Utilización del servidor:                  0.255
+Probabilidad 0 clientes en cola: 0.938645819963477
+Probabilidad 1 clientes en cola: 0.04931510607578677
+Probabilidad 2 clientes en cola: 0.01203907396073639
+Tiempo de fin de la simulación:           1972.746
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.1414148061808667, IC 95%: (0.11173001492386905, 0.17109959743786432)
+Tiempo promedio en el sistema: 0.6388329550008868, IC 95%: (0.5851110835349942, 0.6925548264667793)
+Cantidad de clientes en cola en promedio: 0.07005655728725071, IC 95%: (0.05438633011004688, 0.08572678446445456)
+Tiempo promedio de servicio: 0.49741814882002006, IC 95%: (0.46586431718030064, 0.5289719804597395)
+Promedio de clientes en el sistema: 0.31602550840175614, IC 95%: (0.28515987023423783, 0.34689114656927444)
+Ocupación del servidor: 0.2459689511145054, IC 95%: (0.22776170624856823, 0.26417619598044256)
+Probabilidad de encontrar n clientes en cola: [0.9417122569744103, 0.04651892876392865, 0.011768814261661032], IC 95%: [(0.9300473000526251, 0.9533772138961955), (0.03771371260237988, 0.05532414492547742), (0.006721765051351532, 0.016815863471970532)]
+Probabilidad de denegación del servicio: 0.01176, IC 95%: (0.0032138995538910885, 0.02030610044610891)
+Tasa global de arribos promedio: 4.616438211323235e-06, IC 95%: (-5.604521316529467e-05, 6.527808958794114e-05)
+
+Simulación: M/M/1 - Ta/Ts = 25%, cap = 5, corridas: 100
+
+Resultados corrida n° 6 (seleccionada al azar):
+Modelo de colas M/M/1/5
+Tasa de arribos:                           0.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.158 minutos
+Tiempo promedio en el sistema:             0.657
+Número promedio de clientes en cola:       0.079
+Número promedio de clientes en el sistema: 0.329
+Probabilidad de denegación de servicio:    0.000
+Utilización del servidor:                  0.250
+Probabilidad 0 clientes en cola: 0.9386601763242309
+Probabilidad 1 clientes en cola: 0.047433530705900756
+Probabilidad 2 clientes en cola: 0.010728173854121788
+Probabilidad 3 clientes en cola: 0.002621592463648667
+Probabilidad 4 clientes en cola: 0.0005565266520977942
+Tiempo de fin de la simulación:           1994.587
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.16984874959600277, IC 95%: (0.11386240885388502, 0.22583509033812052)
+Tiempo promedio en el sistema: 0.6714764830088427, IC 95%: (0.5911604699068465, 0.7517924961108389)
+Cantidad de clientes en cola en promedio: 0.08506906949980265, IC 95%: (0.054263849288743525, 0.11587428971086178)
+Tiempo promedio de servicio: 0.5016277334128398, IC 95%: (0.4686648725063188, 0.534590594319361)
+Promedio de clientes en el sistema: 0.3354768917046531, IC 95%: (0.28410638439528446, 0.38684739901402176)
+Ocupación del servidor: 0.25040782220485047, IC 95%: (0.22612761804795636, 0.27468802636174455)
+Probabilidad de encontrar n clientes en cola: [0.9365425601409769, 0.047219132144567716, 0.012068518644932536, 0.00317993180661391, 0.0007761816690163595, 0.0002136755938925408], IC 95%: [(0.9192955420521893, 0.9537895782297645), (0.036539769648121626, 0.057898494641013806), (0.00605070115623048, 0.01808633613363459), (-2.2443441226296847e-05, 0.006382307054454117), (-0.0005602751889281333, 0.002112638526960852), (-0.0006754849930068231, 0.0011028361807919047)]
+Probabilidad de denegación del servicio: 0.00025, IC 95%: (-0.001067731760330017, 0.001567731760330017)
+Tasa global de arribos promedio: -4.942154889492591e-07, IC 95%: (-8.512963511699074e-05, 8.414120413909222e-05)
+
+Simulación: M/M/1 - Ta/Ts = 25%, cap = 10, corridas: 100
+
+Resultados corrida n° 53 (seleccionada al azar):
+Modelo de colas M/M/1/10
+Tasa de arribos:                           0.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.145 minutos
+Tiempo promedio en el sistema:             0.631
+Número promedio de clientes en cola:       0.074
+Número promedio de clientes en el sistema: 0.321
+Probabilidad de denegación de servicio:    0.000
+Utilización del servidor:                  0.247
+Probabilidad 0 clientes en cola: 0.9395071147630962
+Probabilidad 1 clientes en cola: 0.05049189728274924
+Probabilidad 2 clientes en cola: 0.00709043164973473
+Probabilidad 3 clientes en cola: 0.00246007846553153
+Probabilidad 4 clientes en cola: 0.0004504778388882925
+Tiempo de fin de la simulación:           1963.492
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.16196844196945134, IC 95%: (0.119549869123102, 0.20438701481580068)
+Tiempo promedio en el sistema: 0.6609396435075697, IC 95%: (0.5951991102044979, 0.7266801768106416)
+Cantidad de clientes en cola en promedio: 0.08103594145018468, IC 95%: (0.05707025351160652, 0.10500162938876284)
+Tiempo promedio de servicio: 0.4989712015381184, IC 95%: (0.46549440748806914, 0.5324479955881677)
+Promedio de clientes en el sistema: 0.32989302017653876, IC 95%: (0.28498155784160156, 0.37480448251147597)
+Ocupación del servidor: 0.24885707872635407, IC 95%: (0.22396613398571102, 0.2737480234669971)
+Probabilidad de encontrar n clientes en cola: [0.9387601835799759, 0.04615309875949149, 0.011375363148737916, 0.0028796441574883746, 0.0006873246507494171, 0.00012679873486112655, 1.3334775283732813e-05, 4.134555549756472e-06, 1.1763786228112166e-07], IC 95%: [(0.9247057497669897, 0.9528146173929621), (0.03646744728184182, 0.05583875023714115), (0.00657819790546177, 0.016172528392014062), (0.00037866928364354473, 0.005380619031333205), (-0.0008006220894747994, 0.0021752713909736336), (-0.0004652260702283963, 0.0007188235399506495), (-0.00018366673551227942, 0.00021033628607974506), (-7.524079730998135e-05, 8.35099084094943e-05), (-2.1880218706116916e-06, 2.423297595173935e-06)]
+Probabilidad de denegación del servicio: 0.0, IC 95%: (0.0, 0.0)
+Tasa global de arribos promedio: 5.43347045677964e-06, IC 95%: (-9.280893006208683e-05, 0.00010367587097564611)
+
+Simulación: M/M/1 - Ta/Ts = 25%, cap = 50, corridas: 100
+
+Resultados corrida n° 10 (seleccionada al azar):
+Modelo de colas M/M/1/50
+Tasa de arribos:                           0.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.176 minutos
+Tiempo promedio en el sistema:             0.705
+Número promedio de clientes en cola:       0.086
+Número promedio de clientes en el sistema: 0.346
+Probabilidad de denegación de servicio:    0.000
+Utilización del servidor:                  0.260
+Probabilidad 0 clientes en cola: 0.9297713976719673
+Probabilidad 1 clientes en cola: 0.05685998700162438
+Probabilidad 2 clientes en cola: 0.011051990714706429
+Probabilidad 3 clientes en cola: 0.001832619910502125
+Probabilidad 4 clientes en cola: 0.0004840047011998179
+Tiempo de fin de la simulación:           2033.286
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.1666626223799766, IC 95%: (0.11796399143366285, 0.21536125332629033)
+Tiempo promedio en el sistema: 0.6662799947400224, IC 95%: (0.5907817849303935, 0.7417782045496514)
+Cantidad de clientes en cola en promedio: 0.08412104581943743, IC 95%: (0.05707573403426697, 0.11116635760460788)
+Tiempo promedio de servicio: 0.49961737236004583, IC 95%: (0.4644476396966925, 0.5347871050233991)
+Promedio de clientes en el sistema: 0.3355629572049571, IC 95%: (0.2859881662077344, 0.38513774820217983)
+Ocupación del servidor: 0.25144191138551963, IC 95%: (0.2251883166723247, 0.2776955060987146)
+Probabilidad de encontrar n clientes en cola: [0.9368756267312864, 0.04712344018801282, 0.012191150823318557, 0.0029243322826173804, 0.0006514841702918764, 0.00017218686532283404, 5.701644489691478e-05, 4.762494253168906e-06], IC 95%: [(0.9208287644023997, 0.9529224890601732), (0.036271388239736704, 0.05797549213628894), (0.0061585213424292665, 0.01822378030420785), (0.00035784691788691295, 0.0054908176473478475), (-0.0005010882477104234, 0.0018040565882941762), (-0.0005503116198156798, 0.000894685350461348), (-0.0002967577074538773, 0.00041079059724770687), (-4.908860235026284e-05, 5.8613590856600655e-05)]
+Probabilidad de denegación del servicio: 0.0, IC 95%: (0.0, 0.0)
+Tasa global de arribos promedio: -1.0896891339116776e-07, IC 95%: (-9.340678445306148e-05, 9.318884662627915e-05)
+
+Simulación: M/M/1 - Ta/Ts = 50%, cap = inf, corridas: 100
+
+Resultados corrida n° 77 (seleccionada al azar):
+Modelo de colas M/M/1/∞
+Tasa de arribos:                           1.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.390 minutos
+Tiempo promedio en el sistema:             0.870
+Número promedio de clientes en cola:       0.368
+Número promedio de clientes en el sistema: 0.820
+Utilización del servidor:                  0.452
+Probabilidad 0 clientes en cola: 0.7991527942503193
+Probabilidad 1 clientes en cola: 0.10310511963533212
+Probabilidad 2 clientes en cola: 0.05299038348348082
+Probabilidad 3 clientes en cola: 0.027338508219486204
+Probabilidad 4 clientes en cola: 0.01188027931217742
+Probabilidad 5 clientes en cola: 0.004384980990053031
+Probabilidad 6 clientes en cola: 0.0006151323539155853
+Probabilidad 7 clientes en cola: 0.0005328017552355677
+Tiempo de fin de la simulación:           1061.028
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.5014054561169927, IC 95%: (0.3367548613454241, 0.6660560508885613)
+Tiempo promedio en el sistema: 1.0011832257227906, IC 95%: (0.8161855404216426, 1.1861809110239385)
+Cantidad de clientes en cola en promedio: 0.5044809934558437, IC 95%: (0.32720194888155163, 0.6817600380301359)
+Tiempo promedio de servicio: 0.4997777696057979, IC 95%: (0.4681763878017025, 0.5313791514098932)
+Promedio de clientes en el sistema: 1.005445320006066, IC 95%: (0.7955208636825949, 1.215369776329537)
+Ocupación del servidor: 0.5009643265502224, IC 95%: (0.4598244496924171, 0.5421042034080277)
+Probabilidad de encontrar n clientes en cola: [0.7475191090272066, 0.12551398795190558, 0.06360115419649305, 0.03181717608157243, 0.01594635013951086, 0.008016572738963645, 0.00390957970481974, 0.0018715360833025721, 0.0009815455393699399, 0.000473270718512715, 0.00018247140908643725, 0.00010246861381352568, 2.577499112127145e-05, 3.233497700778743e-05, 6.6678273137891495e-06], IC 95%: [(0.698147366311761, 0.7968908517426523), (0.10722573534299702, 0.14380224056081412), (0.04656893094080038, 0.08063337745218573), (0.017785282383206223, 0.04584906977993864), (0.005602399569187495, 0.026290300709834222), (0.0003886507136109593, 0.01564449476431633), (-0.0014298563127566367, 0.009249015722396116), (-0.0019414947032308386, 0.005684566869835983), (-0.0016008566732825036, 0.003563947752022383), (-0.0016543759138158056, 0.0026009173508412357), (-0.0008161804433307253, 0.0011811232615035999), (-0.0006472624322311695, 0.0008521996598582209), (-0.0003302925441011025, 0.00038184252634364534), (-0.00043330074144538, 0.0004979706954609548), (-9.93043660090586e-05, 0.00011264002063663691)]
+Tasa global de arribos promedio: 3.418708021831958e-05, IC 95%: (-0.000874841006508606, 0.0009432151669452452)
+
+Simulación: M/M/1 - Ta/Ts = 50%, cap = 0, corridas: 100
+
+Resultados corrida n° 85 (seleccionada al azar):
+Modelo de colas M/M/1/0
+Tasa de arribos:                           1.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.000 minutos
+Tiempo promedio en el sistema:             0.514
+Número promedio de clientes en cola:       0.000
+Número promedio de clientes en el sistema: 0.344
+Probabilidad de denegación de servicio:    0.479
+Utilización del servidor:                  0.344
+Probabilidad 0 clientes en cola: 1.0
+Tiempo de fin de la simulación:           1495.131
+
+Resultados experimento:
+Tiempo promedio en el sistema: 0.5030788161267183, IC 95%: (0.4718325212499208, 0.5343251110035159)
+Tiempo promedio de servicio: 0.5030788161267183, IC 95%: (0.4718325212499208, 0.5343251110035159)
+Promedio de clientes en el sistema: 0.334370765026839, IC 95%: (0.3153777334801674, 0.3533637965735106)
+Ocupación del servidor: 0.334370765026839, IC 95%: (0.3153777334801674, 0.3533637965735106)
+Probabilidad de denegación del servicio: 0.50571, IC 95%: (0.4488588975194984, 0.5625611024805016)
+
+Simulación: M/M/1 - Ta/Ts = 50%, cap = 2, corridas: 100
+
+Resultados corrida n° 94 (seleccionada al azar):
+Modelo de colas M/M/1/2
+Tasa de arribos:                           1.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.321 minutos
+Tiempo promedio en el sistema:             0.841
+Número promedio de clientes en cola:       0.300
+Número promedio de clientes en el sistema: 0.785
+Probabilidad de denegación de servicio:    0.084
+Utilización del servidor:                  0.485
+Probabilidad 0 clientes en cola: 0.7807095562015587
+Probabilidad 1 clientes en cola: 0.1387899564636376
+Probabilidad 2 clientes en cola: 0.08050048733480365
+Tiempo de fin de la simulación:           1071.325
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.28103770210479817, IC 95%: (0.22658854473568818, 0.33548685947390816)
+Tiempo promedio en el sistema: 0.7791204558003261, IC 95%: (0.6969482867206839, 0.8612926248799683)
+Cantidad de clientes en cola en promedio: 0.26188514219620934, IC 95%: (0.20944247881288425, 0.31432780557953444)
+Tiempo promedio de servicio: 0.49808275369552796, IC 95%: (0.46586575059429136, 0.5302997567967646)
+Promedio de clientes en el sistema: 0.7251899133331655, IC 95%: (0.6430900852513043, 0.8072897414150267)
+Ocupación del servidor: 0.4633047711369562, IC 95%: (0.429915018456151, 0.49669452381776136)
+Probabilidad de encontrar n clientes en cola: [0.8027092117910822, 0.1326964342216263, 0.06459435398729152], IC 95%: [(0.7680384028098807, 0.8373800207722838), (0.11318017102170287, 0.15221269742154972), (0.04552884217664903, 0.08365986579793401)]
+Probabilidad de denegación del servicio: 0.06958, IC 95%: (0.0416399755826264, 0.0975200244173736)
+Tasa global de arribos promedio: 1.0111499827024459e-05, IC 95%: (-0.000157368049822841, 0.0001775910494768899)
+
+Simulación: M/M/1 - Ta/Ts = 50%, cap = 5, corridas: 100
+
+Resultados corrida n° 23 (seleccionada al azar):
+Modelo de colas M/M/1/5
+Tasa de arribos:                           1.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.435 minutos
+Tiempo promedio en el sistema:             0.963
+Número promedio de clientes en cola:       0.430
+Número promedio de clientes en el sistema: 0.952
+Probabilidad de denegación de servicio:    0.005
+Utilización del servidor:                  0.521
+Probabilidad 0 clientes en cola: 0.755338771377275
+Probabilidad 1 clientes en cola: 0.1333537684387179
+Probabilidad 2 clientes en cola: 0.06044417116711265
+Probabilidad 3 clientes en cola: 0.030626828218144022
+Probabilidad 4 clientes en cola: 0.017049416407413493
+Probabilidad 5 clientes en cola: 0.003187044391337039
+Tiempo de fin de la simulación:           1012.084
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.4426832287823368, IC 95%: (0.33737148830474695, 0.5479949692599266)
+Tiempo promedio en el sistema: 0.9413324433133472, IC 95%: (0.8135631600717126, 1.0691017265549818)
+Cantidad de clientes en cola en promedio: 0.43982650335117157, IC 95%: (0.32534562707628756, 0.5543073796260556)
+Tiempo promedio de servicio: 0.4986492145310104, IC 95%: (0.4661877261301598, 0.531110702931861)
+Promedio de clientes en el sistema: 0.9339143848964485, IC 95%: (0.7846808766395299, 1.0831478931533671)
+Ocupación del servidor: 0.49408788154527694, IC 95%: (0.4507425523900255, 0.5374332107005284)
+Probabilidad de encontrar n clientes en cola: [0.759014111220199, 0.12575412597808974, 0.061769499328798654, 0.030920226819463645, 0.01493748501015093, 0.007604551643297972], IC 95%: [(0.7129642287753779, 0.8050639936650201), (0.1051111226740993, 0.14639712928208018), (0.043613284404433066, 0.07992571425316425), (0.018596866169659776, 0.043243587469267514), (0.00659792084521627, 0.023277049175085593), (0.0001637351205461832, 0.01504536816604976)]
+Probabilidad de denegación del servicio: 0.00778, IC 95%: (-0.0018443466725180874, 0.017404346672518087)
+Tasa global de arribos promedio: 2.381831396393437e-06, IC 95%: (-0.0005326266147812445, 0.0005373902775740314)
+
+Simulación: M/M/1 - Ta/Ts = 50%, cap = 10, corridas: 100
+
+Resultados corrida n° 7 (seleccionada al azar):
+Modelo de colas M/M/1/10
+Tasa de arribos:                           1.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.715 minutos
+Tiempo promedio en el sistema:             1.219
+Número promedio de clientes en cola:       0.777
+Número promedio de clientes en el sistema: 1.325
+Probabilidad de denegación de servicio:    0.002
+Utilización del servidor:                  0.548
+Probabilidad 0 clientes en cola: 0.6853647906546698
+Probabilidad 1 clientes en cola: 0.12519667608927948
+Probabilidad 2 clientes en cola: 0.08285199176503083
+Probabilidad 3 clientes en cola: 0.04398616834352771
+Probabilidad 4 clientes en cola: 0.025540234921681636
+Probabilidad 5 clientes en cola: 0.010453509312031917
+Probabilidad 6 clientes en cola: 0.008093447244450373
+Probabilidad 7 clientes en cola: 0.0067024123809225605
+Probabilidad 8 clientes en cola: 0.005539235287292286
+Probabilidad 9 clientes en cola: 0.002322349771793602
+Probabilidad 10 clientes en cola: 0.003949184229319754
+Tiempo de fin de la simulación:            919.600
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.48708863994559276, IC 95%: (0.32801182336293233, 0.6461654565282532)
+Tiempo promedio en el sistema: 0.9850044485800262, IC 95%: (0.8057255662918066, 1.1642833308682459)
+Cantidad de clientes en cola en promedio: 0.48963703432932365, IC 95%: (0.3116253325088933, 0.6676487361497541)
+Tiempo promedio de servicio: 0.49791580863443347, IC 95%: (0.4654552957272778, 0.5303763215415891)
+Promedio de clientes en el sistema: 0.9878212055063189, IC 95%: (0.7730268614805615, 1.2026155495320763)
+Ocupación del servidor: 0.4981841711769952, IC 95%: (0.45318876642134415, 0.5431795759326463)
+Probabilidad de encontrar n clientes en cola: [0.7520042033471701, 0.12461801391405927, 0.062439294386619874, 0.03093460172090015, 0.015424491085185173, 0.007532072864322861, 0.0037363190219758826, 0.0017517021768894189, 0.0009576477521235886, 0.00037925087763757414, 0.00022240285311611], IC 95%: [(0.6990396852239911, 0.8049687214703491), (0.1054355510967128, 0.14380047673140575), (0.04473253815551193, 0.08014605061772781), (0.017814818251518594, 0.04405438519028171), (0.00596403415427426, 0.024884948016096087), (0.0004407516524163012, 0.01462339407622942), (-0.0012801263929275108, 0.008752764436879275), (-0.0013792184025791803, 0.0048826227563580175), (-0.001989494327476695, 0.003904789831723872), (-0.0011767087083668628, 0.0019352104636420112), (-0.0010780395823134976, 0.0015228452885457178)]
+Probabilidad de denegación del servicio: 0.00024, IC 95%: (-0.0013632108952266774, 0.0018432108952266774)
+Tasa global de arribos promedio: 3.5771003849691785e-05, IC 95%: (-0.0007711568006635888, 0.0008426988083629724)
+
+Simulación: M/M/1 - Ta/Ts = 50%, cap = 50, corridas: 100
+
+Resultados corrida n° 65 (seleccionada al azar):
+Modelo de colas M/M/1/50
+Tasa de arribos:                           1.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.411 minutos
+Tiempo promedio en el sistema:             0.924
+Número promedio de clientes en cola:       0.382
+Número promedio de clientes en el sistema: 0.859
+Probabilidad de denegación de servicio:    0.000
+Utilización del servidor:                  0.477
+Probabilidad 0 clientes en cola: 0.7742528631560583
+Probabilidad 1 clientes en cola: 0.13108741626472084
+Probabilidad 2 clientes en cola: 0.05768740100419845
+Probabilidad 3 clientes en cola: 0.02067887565066485
+Probabilidad 4 clientes en cola: 0.009179367509741172
+Probabilidad 5 clientes en cola: 0.005970377667308361
+Probabilidad 6 clientes en cola: 0.0011436987473079467
+Tiempo de fin de la simulación:           1076.223
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.5080616487970344, IC 95%: (0.3391900381554491, 0.6769332594386197)
+Tiempo promedio en el sistema: 1.0092388035113258, IC 95%: (0.8242170191966884, 1.1942605878259631)
+Cantidad de clientes en cola en promedio: 0.5087507004847629, IC 95%: (0.31980751256599993, 0.6976938884035259)
+Tiempo promedio de servicio: 0.5011771547142913, IC 95%: (0.4740507855118373, 0.5283035239167452)
+Promedio de clientes en el sistema: 1.0080520292547224, IC 95%: (0.7823592088688278, 1.233744849640617)
+Ocupación del servidor: 0.4993013287699595, IC 95%: (0.45474729452021956, 0.5438553630196994)
+Probabilidad de encontrar n clientes en cola: [0.7498034591372007, 0.12359196360298935, 0.0618858322714114, 0.03131506374319527, 0.01592894552783271, 0.008742672954327584, 0.004664519894980949, 0.001963986557318549, 0.0011715268952828314, 0.0005428528529915398, 0.00027642411801943813, 9.745239749646339e-05, 1.5300046953216793e-05], IC 95%: [(0.701345329632158, 0.7982615886422434), (0.10463316205192551, 0.1425507651540532), (0.047455606021398845, 0.07631605852142395), (0.017664868736339757, 0.04496525875005079), (0.004976660903731653, 0.02688123015193377), (0.0005146247378214064, 0.01697072117083376), (-0.0019305852727237553, 0.011259625062685654), (-0.0017717672212497798, 0.005699740335886877), (-0.0021277187054017667, 0.00447077249596743), (-0.0013398124602149865, 0.002425518166198066), (-0.0010771148481909393, 0.0016299630842298155), (-0.0006631387845981035, 0.0008580435795910303), (-0.00011797859263984151, 0.00014857868654627508)]
+Probabilidad de denegación del servicio: 0.0, IC 95%: (0.0, 0.0)
+Tasa global de arribos promedio: -3.1959407945666446e-07, IC 95%: (-0.0009648128947800897, 0.0009641737066211763)
+
+Simulación: M/M/1 - Ta/Ts = 75%, cap = inf, corridas: 100
+
+Resultados corrida n° 97 (seleccionada al azar):
+Modelo de colas M/M/1/∞
+Tasa de arribos:                           1.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   1.475 minutos
+Tiempo promedio en el sistema:             1.968
+Número promedio de clientes en cola:       2.290
+Número promedio de clientes en el sistema: 3.035
+Utilización del servidor:                  0.745
+Probabilidad 0 clientes en cola: 0.42130019056972773
+Probabilidad 1 clientes en cola: 0.11720287156612676
+Probabilidad 2 clientes en cola: 0.11588608646717531
+Probabilidad 3 clientes en cola: 0.08402260162290932
+Probabilidad 4 clientes en cola: 0.07075264960379021
+Probabilidad 5 clientes en cola: 0.05470380174365037
+Probabilidad 6 clientes en cola: 0.04064444627076665
+Probabilidad 7 clientes en cola: 0.033027195859530886
+Probabilidad 8 clientes en cola: 0.01960770856691826
+Probabilidad 9 clientes en cola: 0.016017257277533687
+Probabilidad 10 clientes en cola: 0.005639479567005687
+Probabilidad 11 clientes en cola: 0.003390213150904179
+Probabilidad 12 clientes en cola: 0.003366901942213032
+Probabilidad 13 clientes en cola: 0.0009982792944225993
+Probabilidad 14 clientes en cola: 0.003846813746206829
+Probabilidad 15 clientes en cola: 0.0019547040721724727
+Probabilidad 16 clientes en cola: 0.003689522437606727
+Probabilidad 17 clientes en cola: 0.003931651287204717
+Probabilidad 18 clientes en cola: 1.762495413454728e-05
+Tiempo de fin de la simulación:            660.471
+
+Resultados experimento:
+Demora promedio esperada en cola: 1.455208360771674, IC 95%: (0.7480938729801253, 2.1623228485632224)
+Tiempo promedio en el sistema: 1.9562117003015485, IC 95%: (1.234758886147021, 2.677664514456076)
+Cantidad de clientes en cola en promedio: 2.1982632468271297, IC 95%: (1.0493262542620634, 3.347200239392196)
+Tiempo promedio de servicio: 0.5010033395298746, IC 95%: (0.46902253940161764, 0.5329841396581316)
+Promedio de clientes en el sistema: 2.9495789549083344, IC 95%: (1.7527168844446612, 4.146441025372008)
+Ocupación del servidor: 0.7513157080812052, IC 95%: (0.6879828348551468, 0.8146485813072636)
+Probabilidad de encontrar n clientes en cola: [0.43500921030645834, 0.140689121285477, 0.10634367891576492, 0.08102663207790031, 0.05929528011143914, 0.04548785722021794, 0.03480813162883546, 0.026166214598402886, 0.019482827421031985, 0.014638240295515413, 0.010275956512157548, 0.00768890942646768, 0.005551324403946179, 0.004303950703749548, 0.0030911984251385995, 0.0017977428055041377, 0.0013048699987245934, 0.0009312033871822461, 0.0006954766101114724, 0.0005907355901256143, 0.0004294623638489435, 0.00026709474201867806, 0.0001031872007314791, 2.0293197018667714e-05, 1.4007722312275098e-06], IC 95%: [(0.3340150530280199, 0.5360033675848968), (0.10866162477806865, 0.17271661779288536), (0.08107831123069374, 0.1316090466008361), (0.058888745727468356, 0.10316451842833227), (0.037624257864603786, 0.0809663023582745), (0.025041923134485222, 0.06593379130595066), (0.014639961058642927, 0.05497630219902799), (0.00688551376014384, 0.04544691543666193), (0.0012537174239514517, 0.03771193741811252), (-0.0015243429831037682, 0.030800823574134592), (-0.0041705709762485475, 0.024722484000563642), (-0.005005504388547636, 0.020383323241482995), (-0.004686943958131761, 0.01578959276602412), (-0.004202555358779212, 0.01281045676627831), (-0.003055057679372606, 0.009237454529649806), (-0.002914532597122263, 0.006510018208130539), (-0.0033229322826866413, 0.0059326722801358285), (-0.003201569202219616, 0.005063975976584109), (-0.0030378815263596226, 0.004428834746582568), (-0.002753723966212195, 0.003935195146463424), (-0.0021776112025346747, 0.0030365359302325615), (-0.0016486277517331015, 0.0021828172357704575), (-0.0007015106402561261, 0.0009078850417190843), (-0.0001674314166581461, 0.00020801781069548154), (-2.293446004491181e-05, 2.5736004507366833e-05)]
+Tasa global de arribos promedio: 0.0001311146492718852, IC 95%: (-0.005729459447287365, 0.005991688745831136)
+
+Simulación: M/M/1 - Ta/Ts = 75%, cap = 0, corridas: 100
+
+Resultados corrida n° 43 (seleccionada al azar):
+Modelo de colas M/M/1/0
+Tasa de arribos:                           1.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.000 minutos
+Tiempo promedio en el sistema:             0.484
+Número promedio de clientes en cola:       0.000
+Número promedio de clientes en el sistema: 0.418
+Probabilidad de denegación de servicio:    0.707
+Utilización del servidor:                  0.418
+Probabilidad 0 clientes en cola: 1.0
+Tiempo de fin de la simulación:           1159.245
+
+Resultados experimento:
+Tiempo promedio en el sistema: 0.49765083343497646, IC 95%: (0.466543188411694, 0.528758478458259)
+Tiempo promedio de servicio: 0.49765083343497646, IC 95%: (0.466543188411694, 0.528758478458259)
+Promedio de clientes en el sistema: 0.4269845927895598, IC 95%: (0.4058854302053933, 0.4480837553737263)
+Ocupación del servidor: 0.4269845927895598, IC 95%: (0.4058854302053933, 0.4480837553737263)
+Probabilidad de denegación del servicio: 0.7462, IC 95%: (0.6741631591977326, 0.8182368408022673)
+
+Simulación: M/M/1 - Ta/Ts = 75%, cap = 2, corridas: 100
+
+Resultados corrida n° 18 (seleccionada al azar):
+Modelo de colas M/M/1/2
+Tasa de arribos:                           1.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.356 minutos
+Tiempo promedio en el sistema:             0.831
+Número promedio de clientes en cola:       0.436
+Número promedio de clientes en el sistema: 1.018
+Probabilidad de denegación de servicio:    0.163
+Utilización del servidor:                  0.582
+Probabilidad 0 clientes en cola: 0.6908189533247554
+Probabilidad 1 clientes en cola: 0.18228451219971742
+Probabilidad 2 clientes en cola: 0.12689653447552715
+Tiempo de fin de la simulación:            815.669
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.406896597674012, IC 95%: (0.3593046119100393, 0.45448858343798465)
+Tiempo promedio en el sistema: 0.9083889422197577, IC 95%: (0.8372468780331805, 0.979531006406335)
+Cantidad de clientes en cola en promedio: 0.5152920062713247, IC 95%: (0.4534327657763004, 0.5771512467663489)
+Tiempo promedio de servicio: 0.5014923445457458, IC 95%: (0.47338847839027387, 0.5295962107012177)
+Promedio de clientes en el sistema: 1.1495568449768507, IC 95%: (1.0561432866512213, 1.2429704033024802)
+Ocupación del servidor: 0.6342648387055262, IC 95%: (0.5975689685402783, 0.6709607088707741)
+Probabilidad de encontrar n clientes en cola: [0.6396367965380418, 0.20543440065259172, 0.15492880280936647], IC 95%: [(0.6003971596674391, 0.6788764334086446), (0.18266764547055125, 0.22820115583463219), (0.12977534804996327, 0.18008225756876967)]
+Probabilidad de denegación del servicio: 0.18188, IC 95%: (0.14096586414767792, 0.22279413585232205)
+Tasa global de arribos promedio: 6.953824668340033e-06, IC 95%: (-0.0002796876000829283, 0.0002935952494196084)
+
+Simulación: M/M/1 - Ta/Ts = 75%, cap = 5, corridas: 100
+
+Resultados corrida n° 37 (seleccionada al azar):
+Modelo de colas M/M/1/5
+Tasa de arribos:                           1.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.780 minutos
+Tiempo promedio en el sistema:             1.261
+Número promedio de clientes en cola:       1.078
+Número promedio de clientes en el sistema: 1.743
+Probabilidad de denegación de servicio:    0.039
+Utilización del servidor:                  0.665
+Probabilidad 0 clientes en cola: 0.5582568826480248
+Probabilidad 1 clientes en cola: 0.1473923509747766
+Probabilidad 2 clientes en cola: 0.10466090437771804
+Probabilidad 3 clientes en cola: 0.07808649523071348
+Probabilidad 4 clientes en cola: 0.07094041854089563
+Probabilidad 5 clientes en cola: 0.04066294822787157
+Tiempo de fin de la simulación:            723.342
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.8542835944465401, IC 95%: (0.6730308504422593, 1.035536338450821)
+Tiempo promedio en el sistema: 1.355959616920531, IC 95%: (1.1478411713398058, 1.5640780625012562)
+Cantidad de clientes en cola en promedio: 1.2201213831046374, IC 95%: (0.9426430991639696, 1.4975996670453051)
+Tiempo promedio de servicio: 0.5016760224739909, IC 95%: (0.4679786860927306, 0.5353733588552513)
+Promedio de clientes en el sistema: 1.9344647028371202, IC 95%: (1.608673688593396, 2.2602557170808444)
+Ocupación del servidor: 0.7143433197324827, IC 95%: (0.6592786487413849, 0.7694079907235805)
+Probabilidad de encontrar n clientes en cola: [0.5017074651522254, 0.16497816656454908, 0.12065665268318641, 0.09028005247006649, 0.0688985618863468, 0.05347910124362577], IC 95%: [(0.42803507319235157, 0.5753798571120993), (0.14050989633312766, 0.1894464367959705), (0.09860192882313831, 0.1427113765432345), (0.06667484858628084, 0.11388525635385213), (0.043517611515612786, 0.09427951225708081), (0.02772900099535771, 0.07922920149189383)]
+Probabilidad de denegación del servicio: 0.05568, IC 95%: (0.023576016917692365, 0.08778398308230764)
+Tasa global de arribos promedio: 3.0707666266503377e-05, IC 95%: (-0.0012384192404157873, 0.001299834572948794)
+
+Simulación: M/M/1 - Ta/Ts = 75%, cap = 10, corridas: 100
+
+Resultados corrida n° 16 (seleccionada al azar):
+Modelo de colas M/M/1/10
+Tasa de arribos:                           1.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   1.433 minutos
+Tiempo promedio en el sistema:             1.958
+Número promedio de clientes en cola:       2.105
+Número promedio de clientes en el sistema: 2.872
+Probabilidad de denegación de servicio:    0.021
+Utilización del servidor:                  0.767
+Probabilidad 0 clientes en cola: 0.41842904674915116
+Probabilidad 1 clientes en cola: 0.13725235188628307
+Probabilidad 2 clientes en cola: 0.10510508797039408
+Probabilidad 3 clientes en cola: 0.08993435365995125
+Probabilidad 4 clientes en cola: 0.08017208023882223
+Probabilidad 5 clientes en cola: 0.05044300964222758
+Probabilidad 6 clientes en cola: 0.03141779388236008
+Probabilidad 7 clientes en cola: 0.026110660005325755
+Probabilidad 8 clientes en cola: 0.023785192144136935
+Probabilidad 9 clientes en cola: 0.019776417971338087
+Probabilidad 10 clientes en cola: 0.01757400585000979
+Tiempo de fin de la simulación:            681.581
+
+Resultados experimento:
+Demora promedio esperada en cola: 1.2252521912499819, IC 95%: (0.8183430777901192, 1.6321613047098444)
+Tiempo promedio en el sistema: 1.7229123808759068, IC 95%: (1.2951745946601947, 2.150650167091619)
+Cantidad de clientes en cola en promedio: 1.8309234638131797, IC 95%: (1.1834074385843625, 2.478439489041997)
+Tiempo promedio de servicio: 0.4976601896259252, IC 95%: (0.466656975967357, 0.5286634032844933)
+Promedio de clientes en el sistema: 2.5705132546312406, IC 95%: (1.874913223237173, 3.266113286025308)
+Ocupación del servidor: 0.7395897908180609, IC 95%: (0.6810634888020699, 0.7981160928340518)
+Probabilidad de encontrar n clientes en cola: [0.4542183435971118, 0.14636926488440336, 0.11039215885594617, 0.08166551306009022, 0.06220036175257263, 0.04481671786896678, 0.03330201530626394, 0.024155090661743546, 0.019039023144338318, 0.013736714628638635, 0.010104796239924626], IC 95%: [(0.36645272303910514, 0.5419839641551184), (0.11683462186553155, 0.17590390790327515), (0.0872514232040707, 0.13353289450782163), (0.06241875702229561, 0.10091226909788484), (0.0404810318209126, 0.08391969168423266), (0.024532678427410172, 0.0651007573105234), (0.011758146574026612, 0.05484588403850127), (0.0049009732686729306, 0.04340920805481416), (0.0014504350124824143, 0.036627611276194225), (-0.0011782374593840555, 0.028651666716661327), (-0.003065744225009364, 0.023275336704858617)]
+Probabilidad de denegación del servicio: 0.00995, IC 95%: (-0.004606489147943482, 0.024506489147943483)
+Tasa global de arribos promedio: 0.00015797424284768848, IC 95%: (-0.0034958112003590845, 0.0038117596860544616)
+
+Simulación: M/M/1 - Ta/Ts = 75%, cap = 50, corridas: 100
+
+Resultados corrida n° 59 (seleccionada al azar):
+Modelo de colas M/M/1/50
+Tasa de arribos:                           1.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   1.359 minutos
+Tiempo promedio en el sistema:             1.840
+Número promedio de clientes en cola:       2.109
+Número promedio de clientes en el sistema: 2.855
+Probabilidad de denegación de servicio:    0.000
+Utilización del servidor:                  0.746
+Probabilidad 0 clientes en cola: 0.4359163006763634
+Probabilidad 1 clientes en cola: 0.1366274150601716
+Probabilidad 2 clientes en cola: 0.10063966803392096
+Probabilidad 3 clientes en cola: 0.07999212418299144
+Probabilidad 4 clientes en cola: 0.06325708610712065
+Probabilidad 5 clientes en cola: 0.04993292475271537
+Probabilidad 6 clientes en cola: 0.03582678105613335
+Probabilidad 7 clientes en cola: 0.03187183545315401
+Probabilidad 8 clientes en cola: 0.02986789544740144
+Probabilidad 9 clientes en cola: 0.019380421763042676
+Probabilidad 10 clientes en cola: 0.00980294779658186
+Probabilidad 11 clientes en cola: 0.0043714180979015525
+Probabilidad 12 clientes en cola: 0.00153158473614158
+Probabilidad 13 clientes en cola: 0.0008396788598989132
+Probabilidad 14 clientes en cola: 0.00014191797646113542
+Tiempo de fin de la simulación:            644.508
+
+Resultados experimento:
+Demora promedio esperada en cola: 1.4510013932423549, IC 95%: (0.6463903341742426, 2.255612452310467)
+Tiempo promedio en el sistema: 1.9503395777165693, IC 95%: (1.1319992140415684, 2.76867994139157)
+Cantidad de clientes en cola en promedio: 2.1825729737015274, IC 95%: (0.8999950578447147, 3.4651508895583403)
+Tiempo promedio de servicio: 0.49933818447421446, IC 95%: (0.46768384914723143, 0.5309925198011975)
+Promedio de clientes en el sistema: 2.9282900009021904, IC 95%: (1.6033060725924528, 4.253273929211928)
+Ocupación del servidor: 0.7457170272006628, IC 95%: (0.6842554132350213, 0.8071786411663043)
+Probabilidad de encontrar n clientes en cola: [0.4452968277721709, 0.1426342772571391, 0.10444154219795374, 0.07780133026241914, 0.057299534932640686, 0.0443191100318783, 0.03248235410413197, 0.02443924165441558, 0.018242752756413627, 0.012804829821703152, 0.009843608128584423, 0.00730151702618717, 0.00591712761467166, 0.004238922442934962, 0.003781604544095393, 0.0027026077965407107, 0.001826897066501505, 0.0011330704149629218, 0.000907199638349214, 0.0005596457913436179, 0.00047500099092131744, 0.0003949234251244201, 0.00033399778637808157, 0.00024634543028830583, 0.0001211135614118735, 0.00015779416924596623, 7.401992916288797e-05, 7.267167197489827e-05, 8.795447737500886e-05, 3.253561268598572e-05, 6.209347793585581e-06, 9.814581411094363e-06, 9.097866222854855e-07, 1.300371951174726e-06, 1.1284278205929562e-05, 1.233244094376105e-07], IC 95%: [(0.346223939837679, 0.5443697157066627), (0.1107061011632153, 0.17456245335106288), (0.07805623296588728, 0.13082685143002018), (0.05455613238660363, 0.10104652813823466), (0.03517871489687262, 0.07942035496840875), (0.023338596152508807, 0.0652996239112478), (0.014140122662687781, 0.05082458554557616), (0.006334865421312473, 0.04254361788751869), (0.00022997956378888532, 0.03625552594903837), (-0.00221642002576798, 0.027826079669174282), (-0.002064261950326555, 0.0217514782074954), (-0.0030113365056760053, 0.017614370558050346), (-0.005610475187700144, 0.017444730417043464), (-0.00536030969006502, 0.013838154575934944), (-0.005639862951073254, 0.01320307203926404), (-0.0045170796820690525, 0.009922295275150475), (-0.003816604731959188, 0.007470398864962198), (-0.0032018636729561623, 0.005468004502882005), (-0.003257147677113917, 0.005071546953812345), (-0.002944037857244899, 0.004063329439932135), (-0.0029075508755954994, 0.003857552857438134), (-0.002830622759086601, 0.0036204696093354413), (-0.0025161995944828746, 0.0031841951672390376), (-0.0025647483852286796, 0.003057439245805291), (-0.0015678137265308007, 0.0018100408493545478), (-0.00231799584549694, 0.0026335841839888728), (-0.0010375913849970733, 0.0011856312433228492), (-0.0009800011810235652, 0.0011253445249733618), (-0.0013344178622136935, 0.001510326816963711), (-0.0005254549775142519, 0.0005905262028862233), (-0.00011549163263552431, 0.00012791032822269548), (-0.00018254767947971818, 0.00020217684230190692), (-1.692170351067349e-05, 1.874127675524446e-05), (-2.418644995691068e-05, 2.6787193859260133e-05), (-0.0002098835105455924, 0.00023245206695745154), (-2.2937895996862704e-06, 2.540438418561491e-06)]
+Probabilidad de denegación del servicio: 0.0, IC 95%: (0.0, 0.0)
+Tasa global de arribos promedio: 0.00048742747922956095, IC 95%: (-0.005493509868595241, 0.006468364827054362)
+
+Simulación: M/M/1 - Ta/Ts = 100%, cap = inf, corridas: 100
+
+Resultados corrida n° 99 (seleccionada al azar):
+Modelo de colas M/M/1/∞
+Tasa de arribos:                           2.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   6.464 minutos
+Tiempo promedio en el sistema:             6.946
+Número promedio de clientes en cola:      13.208
+Número promedio de clientes en el sistema: 14.148
+Utilización del servidor:                  0.940
+Probabilidad 0 clientes en cola: 0.11852837565475675
+Probabilidad 1 clientes en cola: 0.05227957249614002
+Probabilidad 2 clientes en cola: 0.052493961093558826
+Probabilidad 3 clientes en cola: 0.055291099059380185
+Probabilidad 4 clientes en cola: 0.04106838036184815
+Probabilidad 5 clientes en cola: 0.037247822432607554
+Probabilidad 6 clientes en cola: 0.03834856703184576
+Probabilidad 7 clientes en cola: 0.028994440203120496
+Probabilidad 8 clientes en cola: 0.028283804928446846
+Probabilidad 9 clientes en cola: 0.030343905104141613
+Probabilidad 10 clientes en cola: 0.028351250212064402
+Probabilidad 11 clientes en cola: 0.025851223609751884
+Probabilidad 12 clientes en cola: 0.021860387880947473
+Probabilidad 13 clientes en cola: 0.019352495283802562
+Probabilidad 14 clientes en cola: 0.017190442770954367
+Probabilidad 15 clientes en cola: 0.010153446383732074
+Probabilidad 16 clientes en cola: 0.013519915887219047
+Probabilidad 17 clientes en cola: 0.02799038254991613
+Probabilidad 18 clientes en cola: 0.02677714156958884
+Probabilidad 19 clientes en cola: 0.01817351697734555
+Probabilidad 20 clientes en cola: 0.014640197693894838
+Probabilidad 21 clientes en cola: 0.01850762529257117
+Probabilidad 22 clientes en cola: 0.023388368192624052
+Probabilidad 23 clientes en cola: 0.029347852073417377
+Probabilidad 24 clientes en cola: 0.02772543968094762
+Probabilidad 25 clientes en cola: 0.02368460241509851
+Probabilidad 26 clientes en cola: 0.016106036720352598
+Probabilidad 27 clientes en cola: 0.017263424993560893
+Probabilidad 28 clientes en cola: 0.019089639164263036
+Probabilidad 29 clientes en cola: 0.021145826393223693
+Probabilidad 30 clientes en cola: 0.009992024894596266
+Probabilidad 31 clientes en cola: 0.010294914145720344
+Probabilidad 32 clientes en cola: 0.010423255051692297
+Probabilidad 33 clientes en cola: 0.0072458084148091
+Probabilidad 34 clientes en cola: 0.00712683069803564
+Probabilidad 35 clientes en cola: 0.008999405351817768
+Probabilidad 36 clientes en cola: 0.006911685877858918
+Probabilidad 37 clientes en cola: 0.004539335799979346
+Probabilidad 38 clientes en cola: 0.004304109267718822
+Probabilidad 39 clientes en cola: 0.004113615283454936
+Probabilidad 40 clientes en cola: 0.004537974414500059
+Probabilidad 41 clientes en cola: 0.007932715989593522
+Probabilidad 42 clientes en cola: 0.0055374947085692185
+Probabilidad 43 clientes en cola: 0.004143680911881159
+Probabilidad 44 clientes en cola: 0.0008980050786502779
+Tiempo de fin de la simulación:            513.495
+
+Resultados experimento:
+Demora promedio esperada en cola: 10.643639526959547, IC 95%: (-2.037808427225153, 23.325087481144244)
+Tiempo promedio en el sistema: 11.14365526069333, IC 95%: (-1.5546543961908732, 23.841964917577535)
+Cantidad de clientes en cola en promedio: 21.397721450958493, IC 95%: (-4.769409276614862, 47.56485217853185)
+Tiempo promedio de servicio: 0.5000157337337842, IC 95%: (0.4702263951924045, 0.5298050722751638)
+Promedio de clientes en el sistema: 22.360598279943456, IC 95%: (-3.8400599069147106, 48.56125646680162)
+Ocupación del servidor: 0.9628768289849641, IC 95%: (0.9041731344640839, 1.0215805235058444)
+Probabilidad de encontrar n clientes en cola: [0.07270113421361692, 0.034164566185862326, 0.03400168830644279, 0.03261650693311273, 0.031714504220574875, 0.03068467879572702, 0.029420769826759893, 0.028550217414919535, 0.028809984244275923, 0.026765845764822417, 0.025851743337795552, 0.02509844093292098, 0.02432207916244445, 0.02438503469227237, 0.02323134054642576, 0.022060137690681724, 0.02066725226149863, 0.02116092775416841, 0.020133589981294702, 0.0196489339540901, 0.018570091513587055, 0.018338547647159743, 0.018010757509491066, 0.017851437178385575, 0.01653336000540057, 0.016648943610864976, 0.015832352804229084, 0.01543527802677072, 0.015144787183992963, 0.01454839016822365, 0.013099381537543281, 0.012268665334437297, 0.011879869780330269, 0.011094615717447735, 0.011289181058758478, 0.01042930139283901, 0.009471380163212752, 0.008307349065201435, 0.00818496244894564, 0.007385664078770556, 0.0066151440004933665, 0.00653721548072789, 0.005957131965005203, 0.005083281277174333, 0.005161142521114346, 0.005080689324203282, 0.00470457341067143, 0.0044039370481031535, 0.004564611124801756, 0.004530259909022297, 0.004316029842307459, 0.004275818945280881, 0.004326943676999373, 0.0038306499929498423, 0.004208993541527646, 0.004022753062066674, 0.003968290890219956, 0.0037903095436686205, 0.0028744256688857345, 0.0025594733353075175, 0.0028856847304717776, 0.002734018689991868, 0.0026437450760174973, 0.0022914044709352204, 0.002419836417082048, 0.0023759410811169768, 0.0020373346135661202, 0.0018443202965256116, 0.0017670083361400878, 0.00197260310355478, 0.002096004160024582, 0.0019851200930735033, 0.0020570155816909443, 0.0019923216986245202, 0.0021099151081768277, 0.0019101852368213746, 0.0014325299618802975, 0.001339796754560142, 0.001381747066811622, 0.00132633921557849, 0.0011289036463787289, 0.0008529007486176306, 0.000750754711634011, 0.0006534682197140238, 0.0006615666828225725, 0.00045384428206922834, 0.0003440233807142673, 0.00046522681775441963, 0.0006738027253138829, 0.0008262895046473308, 0.0008357623921350302, 0.0008709941912588713, 0.0010307653666092038, 0.0012103456053724408, 0.001280466669286686, 0.0011927317004136724, 0.0009025254682919154, 0.000852400296823535, 0.0006244778699727631, 0.0005560644178477424, 0.00045015930603400315, 0.00045574953969410736, 0.00040806236109881095, 0.00046535625720582396, 0.0004760809492751394, 0.0004997650703060092, 0.0003682771621894348, 0.00028133724383457557, 0.0002520945181478344, 0.00014089190656981754, 0.00015635629050634738, 0.000175234631986211, 0.00022809796701976507, 0.000380623196538148, 0.00024059564901609886, 0.0002722276552477466, 0.00019956742643831784, 0.00020993704797837474, 0.00017821607346866778, 8.934078459314263e-05, 9.09669725663358e-05, 5.886234235603277e-05, 5.145576086181589e-06, 8.062192531336479e-06, 5.694910850172243e-06, 7.743572309605242e-06], IC 95%: [(-0.036015086740973076, 0.1814173551682069), (-0.012024572232530069, 0.08035370460425473), (-0.010186370432213598, 0.07818974704509918), (-0.010442821993196627, 0.07567583585942209), (-0.011909844019279879, 0.07533885246042962), (-0.011741824656674865, 0.0731111822481289), (-0.00962841603208488, 0.06846995568560467), (-0.007512990452298963, 0.06461342528213804), (-0.006372681626377011, 0.06399265011492886), (-0.0052321830867708904, 0.058763874616415725), (-0.004316772423590104, 0.05602025909918121), (-0.004119175165688858, 0.05431605703153082), (-0.003791050571590928, 0.05243520889647983), (-0.005326223871293587, 0.054096293255838326), (-0.004056773512910929, 0.050519454605762446), (-0.003674125401847174, 0.04779440078321062), (-0.00369467469871387, 0.045029179221711124), (-0.0018840311847433747, 0.0442058866930802), (-0.0032489989081455582, 0.04351617887073496), (-0.004401095861315055, 0.04369896376949525), (-0.003295327624090967, 0.04043551065126508), (-0.005876639221983539, 0.042553734516303024), (-0.0052810468772994945, 0.04130256189628163), (-0.007426460123191581, 0.04312933447996273), (-0.007319016306096285, 0.04038573631689742), (-0.008713265429350341, 0.0420111526510803), (-0.00868189948856292, 0.040346605097021086), (-0.011131290688728592, 0.04200184674227003), (-0.010314121027023972, 0.040603695395009895), (-0.009973173383295517, 0.03906995371974282), (-0.009054744522297677, 0.03525350759738424), (-0.009435373419814973, 0.03397270408868957), (-0.011136103997627945, 0.03489584355828848), (-0.01038490123722189, 0.03257413267211736), (-0.010727010746570799, 0.03330537286408775), (-0.009887773600989545, 0.030746376386667565), (-0.009207860985289576, 0.028150621311715078), (-0.009869582422925747, 0.026484280553328618), (-0.011002671385370142, 0.02737259628326142), (-0.010384773537381486, 0.0251561016949226), (-0.009212241531207359, 0.02244252953219409), (-0.009001989692131233, 0.02207642065358701), (-0.008542510982671685, 0.020456774912682094), (-0.007757352254470059, 0.017923914808818726), (-0.008226452820198914, 0.018548737862427604), (-0.009540095347231324, 0.01970147399563789), (-0.010034453069718976, 0.019443599891061834), (-0.009296092183211792, 0.0181039662794181), (-0.00948606226525332, 0.018615284514856834), (-0.009854669259129402, 0.018915189077173995), (-0.009008543212365291, 0.01764060289698021), (-0.009356256169343439, 0.017907894059905203), (-0.010269522072213362, 0.01892340942621211), (-0.010144958354416115, 0.017806258340315802), (-0.012949451024765437, 0.02136743810782073), (-0.011328789593833356, 0.019374295717966703), (-0.011918748096284307, 0.01985532987672422), (-0.012501546238296754, 0.020082165325633995), (-0.01020014109182606, 0.01594899242959753), (-0.00876375394435649, 0.013882700614971525), (-0.009299570439975039, 0.015070939900918595), (-0.008605951526403623, 0.014073988906387357), (-0.007818569812215381, 0.013106059964250375), (-0.00763945322997223, 0.01222226217184267), (-0.008241413814083196, 0.013081086648247291), (-0.008287791866297358, 0.013039674028531312), (-0.006884761820710662, 0.010959431047842902), (-0.00707165363114096, 0.010760294224192182), (-0.006838998148771419, 0.010373014821051595), (-0.0072511325875860054, 0.011196338794695566), (-0.008751872239189525, 0.01294388055923869), (-0.008437388324751915, 0.012407628510898923), (-0.008364251637017837, 0.012478282800399726), (-0.008391631461225707, 0.01237627485847475), (-0.00844324722004096, 0.012663077436394615), (-0.007522290176565924, 0.011342660650208674), (-0.005989910215026797, 0.008854970138787392), (-0.0067647965845487375, 0.009444390093669023), (-0.007804002894479704, 0.010567497028102947), (-0.007509879256905834, 0.010162557688062814), (-0.005737597992313062, 0.00799540528507052), (-0.004411595529370011, 0.006117397026605273), (-0.005313198346206173, 0.006814707769474194), (-0.00466114032512051, 0.005968076764548557), (-0.004757813513058907, 0.006080946878704052), (-0.0031550178601819257, 0.004062706424320382), (-0.0024041939864398974, 0.0030922407478684317), (-0.0036698925682253974, 0.004600346203734237), (-0.005188656073252628, 0.006536261523880394), (-0.006099384086398921, 0.007751963095693583), (-0.005564576049017657, 0.007236100833287718), (-0.0054808957886453135, 0.0072228841711630565), (-0.006517157960423578, 0.008578688693641987), (-0.008201819013194387, 0.01062251022393927), (-0.009799112859901357, 0.01236004619847473), (-0.010518636647334961, 0.012904100048162306), (-0.007468132866584383, 0.009273183803168213), (-0.006754113705448496, 0.008458914299095566), (-0.005136270828382083, 0.006385226568327609), (-0.004661086821930624, 0.00577321565762611), (-0.004118602543130725, 0.0050189211551987314), (-0.003927474445257295, 0.004838973524645509), (-0.003571217772304277, 0.004387342494501899), (-0.004391603541831817, 0.005322316056243464), (-0.004338273028288354, 0.005290434926838634), (-0.0046546935558751164, 0.005654223696487135), (-0.003984303026136497, 0.004720857350515367), (-0.0026889644039539574, 0.003251638891623109), (-0.0030473310735310536, 0.0035515201098267227), (-0.0018414834555590678, 0.002123267268698703), (-0.00208338617299277, 0.002396098754005465), (-0.0020573080029801065, 0.0024077772669525285), (-0.00273648334626351, 0.0031926792803030402), (-0.00423629534166196, 0.004997541734738256), (-0.002696167323805461, 0.0031773586218376585), (-0.0034431175635729738, 0.003987572874068467), (-0.002260036639008523, 0.0026591714918851586), (-0.002357193627379906, 0.002777067723336655), (-0.002187696837066479, 0.0025441289840038147), (-0.0012502501004045112, 0.0014289316695907965), (-0.0012707646506192635, 0.0014526985957519353), (-0.0007678689968149655, 0.000885593681527031), (-8.88199889993653e-05, 9.911114117172848e-05), (-0.0001377817849110655, 0.00015390616997373844), (-7.36080046069959e-05, 8.499782630734038e-05), (-0.00010442779141829376, 0.00011991493603750422)]
+Tasa global de arribos promedio: 0.052561727356298375, IC 95%: (-0.06729147560079926, 0.17241493031339603)
+
+Simulación: M/M/1 - Ta/Ts = 100%, cap = 0, corridas: 100
+
+Resultados corrida n° 3 (seleccionada al azar):
+Modelo de colas M/M/1/0
+Tasa de arribos:                           2.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.000 minutos
+Tiempo promedio en el sistema:             0.520
+Número promedio de clientes en cola:       0.000
+Número promedio de clientes en el sistema: 0.520
+Probabilidad de denegación de servicio:    1.100
+Utilización del servidor:                  0.520
+Probabilidad 0 clientes en cola: 1.0
+Tiempo de fin de la simulación:            999.404
+
+Resultados experimento:
+Tiempo promedio en el sistema: 0.5003958833214655, IC 95%: (0.4690866173606899, 0.531705149282241)
+Tiempo promedio de servicio: 0.5003958833214655, IC 95%: (0.4690866173606899, 0.531705149282241)
+Promedio de clientes en el sistema: 0.4998242740773707, IC 95%: (0.4764102579097961, 0.5232382902449453)
+Ocupación del servidor: 0.4998242740773707, IC 95%: (0.4764102579097961, 0.5232382902449453)
+Probabilidad de denegación del servicio: 0.9974999999999999, IC 95%: (0.9095787828618556, 1.0854212171381443)
+
+Simulación: M/M/1 - Ta/Ts = 100%, cap = 2, corridas: 100
+
+Resultados corrida n° 2 (seleccionada al azar):
+Modelo de colas M/M/1/2
+Tasa de arribos:                           2.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.500 minutos
+Tiempo promedio en el sistema:             1.007
+Número promedio de clientes en cola:       0.722
+Número promedio de clientes en el sistema: 1.453
+Probabilidad de denegación de servicio:    0.343
+Utilización del servidor:                  0.731
+Probabilidad 0 clientes en cola: 0.5172900109223137
+Probabilidad 1 clientes en cola: 0.24350437502251737
+Probabilidad 2 clientes en cola: 0.23920561405516894
+Tiempo de fin de la simulación:            692.874
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.5041506123371761, IC 95%: (0.43992871229063657, 0.5683725123837156)
+Tiempo promedio en el sistema: 1.0075832801344826, IC 95%: (0.9116906234365856, 1.1034759368323797)
+Cantidad de clientes en cola en promedio: 0.7547704281090424, IC 95%: (0.6743570793482477, 0.835183776869837)
+Tiempo promedio de servicio: 0.5034326677973067, IC 95%: (0.46934434503226374, 0.5375209905623496)
+Promedio de clientes en el sistema: 1.507605462180055, IC 95%: (1.3960654170673281, 1.6191455072927818)
+Ocupación del servidor: 0.7528350340710125, IC 95%: (0.717130651739762, 0.788539416402263)
+Probabilidad de encontrar n clientes en cola: [0.4969140568573935, 0.2514014581761706, 0.2516844849664359], IC 95%: [(0.44952993856463247, 0.5442981751501544), (0.22698720632468267, 0.27581571002765853), (0.21582466748482884, 0.28754430244804297)]
+Probabilidad de denegación del servicio: 0.33417, IC 95%: (0.2670721878083019, 0.40126781219169816)
+Tasa global de arribos promedio: 1.5355082157194586e-05, IC 95%: (-0.00034534033451441917, 0.0003760504988288083)
+
+Simulación: M/M/1 - Ta/Ts = 100%, cap = 5, corridas: 100
+
+Resultados corrida n° 51 (seleccionada al azar):
+Modelo de colas M/M/1/5
+Tasa de arribos:                           2.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   1.224 minutos
+Tiempo promedio en el sistema:             1.718
+Número promedio de clientes en cola:       2.080
+Número promedio de clientes en el sistema: 2.919
+Probabilidad de denegación de servicio:    0.137
+Utilización del servidor:                  0.839
+Probabilidad 0 clientes en cola: 0.2953637177905208
+Probabilidad 1 clientes en cola: 0.16038745827658402
+Probabilidad 2 clientes en cola: 0.1337340595271122
+Probabilidad 3 clientes en cola: 0.12843953570143354
+Probabilidad 4 clientes en cola: 0.14322902926442452
+Probabilidad 5 clientes en cola: 0.1388461994399249
+Tiempo de fin de la simulación:            588.671
+
+Resultados experimento:
+Demora promedio esperada en cola: 1.2517822593041381, IC 95%: (1.0522155594777076, 1.4513489591305686)
+Tiempo promedio en el sistema: 1.7537052674909976, IC 95%: (1.5283749947210346, 1.9790355402609607)
+Cantidad de clientes en cola en promedio: 2.148687779032745, IC 95%: (1.8128897264942925, 2.484485831571198)
+Tiempo promedio de servicio: 0.5019230081868596, IC 95%: (0.4716482052276841, 0.5321978111460351)
+Promedio de clientes en el sistema: 3.0080442167933223, IC 95%: (2.631809504070445, 3.3842789295161997)
+Ocupación del servidor: 0.8593564377605771, IC 95%: (0.8126757854215939, 0.9060370900995603)
+Probabilidad de encontrar n clientes en cola: [0.2824940734678351, 0.1424925053003522, 0.14560164757624894, 0.14421914047881468, 0.1436286087402935, 0.14156402443645552], IC 95%: [(0.20709738398261357, 0.35789076295305666), (0.11660820582798315, 0.16837680477272127), (0.11977617926298785, 0.17142711588951004), (0.11610964419468665, 0.17232863676294272), (0.11145401219557821, 0.1758032052850088), (0.10093240470839887, 0.18219564416451217)]
+Probabilidad de denegación del servicio: 0.16558, IC 95%: (0.11032179429798286, 0.22083820570201715)
+Tasa global de arribos promedio: 2.7098362187964902e-05, IC 95%: (-0.0017050509952873248, 0.0017592477196632546)
+
+Simulación: M/M/1 - Ta/Ts = 100%, cap = 10, corridas: 100
+
+Resultados corrida n° 97 (seleccionada al azar):
+Modelo de colas M/M/1/10
+Tasa de arribos:                           2.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   2.588 minutos
+Tiempo promedio en el sistema:             3.092
+Número promedio de clientes en cola:       4.679
+Número promedio de clientes en el sistema: 5.588
+Probabilidad de denegación de servicio:    0.112
+Utilización del servidor:                  0.909
+Probabilidad 0 clientes en cola: 0.17232450163731633
+Probabilidad 1 clientes en cola: 0.07476132457877528
+Probabilidad 2 clientes en cola: 0.09072150861271734
+Probabilidad 3 clientes en cola: 0.08734800261669551
+Probabilidad 4 clientes en cola: 0.07601924770171475
+Probabilidad 5 clientes en cola: 0.06946844157909145
+Probabilidad 6 clientes en cola: 0.07433195476867195
+Probabilidad 7 clientes en cola: 0.0667540995305262
+Probabilidad 8 clientes en cola: 0.0922650649761864
+Probabilidad 9 clientes en cola: 0.10173825960410522
+Probabilidad 10 clientes en cola: 0.09426759439419956
+Tiempo de fin de la simulación:            553.043
+
+Resultados experimento:
+Demora promedio esperada en cola: 2.498719758511436, IC 95%: (1.8522670396919918, 3.14517247733088)
+Tiempo promedio en el sistema: 2.9994627652121157, IC 95%: (2.326490210377675, 3.6724353200465565)
+Cantidad de clientes en cola en promedio: 4.586588748850852, IC 95%: (3.414553007526898, 5.758624490174807)
+Tiempo promedio de servicio: 0.5007430067006798, IC 95%: (0.4666526541934889, 0.5348333592078708)
+Promedio de clientes en el sistema: 5.501928288985713, IC 95%: (4.288651519183113, 6.715205058788313)
+Ocupación del servidor: 0.9153395401348612, IC 95%: (0.8666951167288154, 0.963983963540907)
+Probabilidad de encontrar n clientes en cola: [0.16709802377820562, 0.08291627090358601, 0.0841451200290544, 0.0833238288589632, 0.08154090211368739, 0.08270935285831615, 0.08353383356393435, 0.08315155355012367, 0.08456005376751775, 0.08425453357479074, 0.0827665270018207], IC 95%: [(0.07933923512900277, 0.2548568124274085), (0.04570542813876346, 0.12012711366840856), (0.05227013609202952, 0.11602010396607929), (0.054181765677863036, 0.11246589204006335), (0.056530230926057703, 0.10655157330131708), (0.05652711177736916, 0.10889159393926315), (0.05461928252665033, 0.11244838460121837), (0.05112509365003895, 0.1151780134502084), (0.047963032500640004, 0.1211570750343955), (0.04097013560776819, 0.12753893154181328), (0.035311026010948016, 0.1302220279926934)]
+Probabilidad de denegación del servicio: 0.09038, IC 95%: (0.03774750841393972, 0.14301249158606028)
+Tasa global de arribos promedio: 0.0005007138546017834, IC 95%: (-0.00612673951745232, 0.007128167226655886)
+
+Simulación: M/M/1 - Ta/Ts = 100%, cap = 50, corridas: 100
+
+Resultados corrida n° 41 (seleccionada al azar):
+Modelo de colas M/M/1/50
+Tasa de arribos:                           2.000 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   7.077 minutos
+Tiempo promedio en el sistema:             7.554
+Número promedio de clientes en cola:      13.796
+Número promedio de clientes en el sistema: 14.725
+Probabilidad de denegación de servicio:    0.001
+Utilización del servidor:                  0.929
+Probabilidad 0 clientes en cola: 0.13866035191049947
+Probabilidad 1 clientes en cola: 0.06853805989305731
+Probabilidad 2 clientes en cola: 0.05016823599888723
+Probabilidad 3 clientes en cola: 0.057776568369305205
+Probabilidad 4 clientes en cola: 0.0463535162803246
+Probabilidad 5 clientes en cola: 0.03818511668912919
+Probabilidad 6 clientes en cola: 0.03938297261904377
+Probabilidad 7 clientes en cola: 0.03286923921621305
+Probabilidad 8 clientes en cola: 0.02525740804316891
+Probabilidad 9 clientes en cola: 0.010978001363159313
+Probabilidad 10 clientes en cola: 0.012465061593328176
+Probabilidad 11 clientes en cola: 0.013862912981952432
+Probabilidad 12 clientes en cola: 0.004854631109665874
+Probabilidad 13 clientes en cola: 0.004574820268362811
+Probabilidad 14 clientes en cola: 0.009738966553328758
+Probabilidad 15 clientes en cola: 0.008776511427418658
+Probabilidad 16 clientes en cola: 0.010042233975901831
+Probabilidad 17 clientes en cola: 0.009917627907738898
+Probabilidad 18 clientes en cola: 0.018343507442300098
+Probabilidad 19 clientes en cola: 0.024091556456118376
+Probabilidad 20 clientes en cola: 0.028155672834526944
+Probabilidad 21 clientes en cola: 0.024610540487129927
+Probabilidad 22 clientes en cola: 0.03235205308660186
+Probabilidad 23 clientes en cola: 0.023790935306242076
+Probabilidad 24 clientes en cola: 0.03474517913780699
+Probabilidad 25 clientes en cola: 0.024828325138056193
+Probabilidad 26 clientes en cola: 0.024427880898517038
+Probabilidad 27 clientes en cola: 0.02239487235181248
+Probabilidad 28 clientes en cola: 0.025209088444072398
+Probabilidad 29 clientes en cola: 0.029320752453459734
+Probabilidad 30 clientes en cola: 0.014383613467598156
+Probabilidad 31 clientes en cola: 0.010642663920242497
+Probabilidad 32 clientes en cola: 0.006001203242378185
+Probabilidad 33 clientes en cola: 0.0028277132129689297
+Probabilidad 34 clientes en cola: 0.00489829652630067
+Probabilidad 35 clientes en cola: 0.0016685077414523841
+Probabilidad 36 clientes en cola: 0.002335857993448483
+Probabilidad 37 clientes en cola: 0.0060560332547410466
+Probabilidad 38 clientes en cola: 0.006160467914868958
+Probabilidad 39 clientes en cola: 0.011226431561376562
+Probabilidad 40 clientes en cola: 0.007373396195952943
+Probabilidad 41 clientes en cola: 0.005679957954106933
+Probabilidad 42 clientes en cola: 0.006881749018484098
+Probabilidad 43 clientes en cola: 0.006025442284451236
+Probabilidad 44 clientes en cola: 0.0037749026868942426
+Probabilidad 45 clientes en cola: 0.0015198825399432405
+Probabilidad 46 clientes en cola: 0.0005730171504583313
+Probabilidad 47 clientes en cola: 0.002372598740157158
+Probabilidad 48 clientes en cola: 0.0016473495389048775
+Probabilidad 49 clientes en cola: 0.0021256572761662934
+Probabilidad 50 clientes en cola: 0.0011526575419751836
+Tiempo de fin de la simulación:            513.311
+
+Resultados experimento:
+Demora promedio esperada en cola: 9.85023484908942, IC 95%: (1.5715649650115768, 18.12890473316726)
+Tiempo promedio en el sistema: 10.35223372254075, IC 95%: (2.052346475710328, 18.652120969371175)
+Cantidad de clientes en cola en promedio: 19.334146597869914, IC 95%: (3.2815822618391977, 35.38671093390063)
+Tiempo promedio de servicio: 0.5019988734513312, IC 95%: (0.47123667551860693, 0.5327610713840555)
+Promedio de clientes en el sistema: 20.29907111755728, IC 95%: (4.207320479012772, 36.390821756101786)
+Ocupación del servidor: 0.9649245196873638, IC 95%: (0.9087550978910299, 1.0210939414836977)
+Probabilidad de encontrar n clientes en cola: [0.070544995810528, 0.03477934134340243, 0.03163567410056117, 0.03132469352148493, 0.03082400821584582, 0.029866892257397224, 0.02921518921743862, 0.02773130736161157, 0.026349314164097533, 0.024799607559301717, 0.024274043549006183, 0.023206186189491423, 0.02347516499610329, 0.023633184188793954, 0.022934329449167633, 0.021945495691476243, 0.0216963212161028, 0.020321687530605526, 0.020972311345239636, 0.0201712853224818, 0.019102887523344807, 0.01865453824701072, 0.018399512338552776, 0.017877212013464046, 0.018129656908451797, 0.016573091972529375, 0.016024767030282737, 0.016044633890907108, 0.015839269196508396, 0.01497641292386656, 0.01496643670174522, 0.01360771184030755, 0.012952017499978853, 0.012970770035065032, 0.012650775352974939, 0.012711676444007112, 0.012871038784415643, 0.01284385244133677, 0.012342459816562337, 0.012123618572807254, 0.012399680250635915, 0.012609871745250486, 0.012655741793287737, 0.012490823176460268, 0.012238097465263099, 0.012873457451007753, 0.012779287409723903, 0.012893341111735356, 0.012733516429081685, 0.01273818954819655, 0.01222462105510071], IC 95%: [(-0.0386473765392531, 0.1797373681603091), (-0.013983143519933475, 0.08354182620673833), (-0.012250527177034766, 0.0755218753781571), (-0.012207948837483433, 0.07485733588045329), (-0.010383205293935077, 0.07203122172562672), (-0.008307348255396637, 0.06804113277019108), (-0.009886426776523936, 0.06831680521140118), (-0.007755873144761324, 0.06321848786798447), (-0.004910324720364498, 0.057608953048559564), (-0.004991275543199929, 0.05459049066180337), (-0.004783508152476374, 0.053331595250488736), (-0.0012789515169613977, 0.04769132389594424), (-0.0037415500295244174, 0.050691880021731), (-0.0038714110006714333, 0.05113777937825934), (-0.003090520412933895, 0.04895917931126916), (-0.004636876988703888, 0.048527868371656374), (-0.005977552031976512, 0.049370194464182116), (-0.006643294378663657, 0.04728666943987471), (-0.008012807334908976, 0.049957430025388244), (-0.009700375764597466, 0.050042946409561063), (-0.007385737974481978, 0.04559151302117159), (-0.0062181106073748195, 0.04352718710139626), (-0.006809326849952106, 0.04360835152705766), (-0.006642520597154453, 0.04239694462408254), (-0.005384633559767423, 0.041643947376671014), (-0.004906552479966474, 0.03805273642502523), (-0.003964741191875648, 0.03601427525244112), (-0.0034707044333758333, 0.03555997221519005), (-0.004860302497843059, 0.03653884089085985), (-0.006641962472786483, 0.0365947883205196), (-0.007106396645061432, 0.03703927004855187), (-0.006990759410509598, 0.0342061830911247), (-0.006459587768271716, 0.03236362276822942), (-0.006908029419822265, 0.03284956948995233), (-0.008640224650817463, 0.03394177535676734), (-0.010615976356836457, 0.03603932924485068), (-0.011614830406561865, 0.03735690797539315), (-0.011876797198655654, 0.03756450208132919), (-0.011661573922365833, 0.03634649355549051), (-0.010022256091641762, 0.03426949323725627), (-0.01136795166205275, 0.03616731216332458), (-0.012056148721631155, 0.03727589221213213), (-0.013546591299067311, 0.03885807488564279), (-0.013346770088910796, 0.03832841644183133), (-0.01406240797980865, 0.03853860291033485), (-0.017579999903839988, 0.043326914805855495), (-0.018842290905629097, 0.0444008657250769), (-0.019949290721427395, 0.045735972944898104), (-0.021209591904312777, 0.04667662476247615), (-0.022240589918256712, 0.04771696901464981), (-0.021596405688602282, 0.0460456477988037)]
+Probabilidad de denegación del servicio: 0.01276, IC 95%: (-0.023103083636063948, 0.04862308363606395)
+Tasa global de arribos promedio: 0.03337546993555462, IC 95%: (-0.04477954351887065, 0.1115304833899799)
+
+Simulación: M/M/1 - Ta/Ts = 125%, cap = inf, corridas: 100
+
+Resultados corrida n° 36 (seleccionada al azar):
+Modelo de colas M/M/1/∞
+Tasa de arribos:                           2.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                  51.841 minutos
+Tiempo promedio en el sistema:            52.342
+Número promedio de clientes en cola:     122.381
+Número promedio de clientes en el sistema: 123.375
+Utilización del servidor:                  0.994
+Probabilidad 0 clientes en cola: 0.010058952857808558
+Probabilidad 1 clientes en cola: 0.003551248073291717
+Probabilidad 2 clientes en cola: 0.001744904828498468
+Probabilidad 3 clientes en cola: 0.0014832283266092746
+Probabilidad 4 clientes en cola: 0.003701725602364066
+Probabilidad 5 clientes en cola: 0.003422597350102695
+Probabilidad 6 clientes en cola: 0.001939661754954824
+Probabilidad 7 clientes en cola: 0.00021538023753043883
+Probabilidad 8 clientes en cola: 0.00041222597799268164
+Probabilidad 9 clientes en cola: 0.0006633320228390346
+Probabilidad 10 clientes en cola: 0.0014019873221026225
+Probabilidad 11 clientes en cola: 0.00043379590142817397
+Probabilidad 12 clientes en cola: 0.0013469899075408177
+Probabilidad 13 clientes en cola: 0.001777535936520979
+Probabilidad 14 clientes en cola: 0.0008461518857856634
+Probabilidad 15 clientes en cola: 0.00023450107540408645
+Probabilidad 16 clientes en cola: 0.002629940028382964
+Probabilidad 17 clientes en cola: 0.003226928920588342
+Probabilidad 18 clientes en cola: 0.002898453289315724
+Probabilidad 19 clientes en cola: 0.0017666300042148443
+Probabilidad 20 clientes en cola: 0.005026437208484064
+Probabilidad 21 clientes en cola: 0.002827104137249497
+Probabilidad 22 clientes en cola: 0.0032079504872914045
+Probabilidad 23 clientes en cola: 0.0021886695767412835
+Probabilidad 24 clientes en cola: 0.001282609936664192
+Probabilidad 25 clientes en cola: 0.0033342825196216036
+Probabilidad 26 clientes en cola: 0.0025028729729807894
+Probabilidad 27 clientes en cola: 0.0028989063821059356
+Probabilidad 28 clientes en cola: 0.0026577088585055943
+Probabilidad 29 clientes en cola: 0.0020251356858862544
+Probabilidad 30 clientes en cola: 0.004280432620519276
+Probabilidad 31 clientes en cola: 0.004251433009276445
+Probabilidad 32 clientes en cola: 0.011104200374418302
+Probabilidad 33 clientes en cola: 0.018741210548467342
+Probabilidad 34 clientes en cola: 0.00661553439592749
+Probabilidad 35 clientes en cola: 0.005899990590788205
+Probabilidad 36 clientes en cola: 0.00566948443330553
+Probabilidad 37 clientes en cola: 0.005031825688754749
+Probabilidad 38 clientes en cola: 0.0004706112178710773
+Probabilidad 39 clientes en cola: 4.4548435815222236e-05
+Probabilidad 40 clientes en cola: 0.0008633639228733431
+Probabilidad 41 clientes en cola: 0.0014034105399005647
+Probabilidad 42 clientes en cola: 0.006281011835777469
+Probabilidad 43 clientes en cola: 0.0050806105843373755
+Probabilidad 44 clientes en cola: 0.004964139510811846
+Probabilidad 45 clientes en cola: 0.0030268421511256893
+Probabilidad 46 clientes en cola: 0.001100083298744691
+Probabilidad 47 clientes en cola: 0.001110730745799431
+Probabilidad 48 clientes en cola: 0.00039441073479060807
+Probabilidad 49 clientes en cola: 0.0010022557668760276
+Probabilidad 50 clientes en cola: 0.0012214161847300346
+Probabilidad 51 clientes en cola: 0.0020782632679967944
+Probabilidad 52 clientes en cola: 0.001634183886061937
+Probabilidad 53 clientes en cola: 0.00433189816577336
+Probabilidad 54 clientes en cola: 0.005850486411568844
+Probabilidad 55 clientes en cola: 0.002282945972980833
+Probabilidad 56 clientes en cola: 0.0003300082256521641
+Probabilidad 57 clientes en cola: 0.00021085781633908715
+Probabilidad 58 clientes en cola: 0.0020106593843268704
+Probabilidad 59 clientes en cola: 0.005194126092855595
+Probabilidad 60 clientes en cola: 0.005999509987596378
+Probabilidad 61 clientes en cola: 0.0010672135234918072
+Probabilidad 62 clientes en cola: 0.0007162972842211274
+Probabilidad 63 clientes en cola: 0.0024643290858636134
+Probabilidad 64 clientes en cola: 0.0034282438442166537
+Probabilidad 65 clientes en cola: 0.004617180705569897
+Probabilidad 66 clientes en cola: 0.002722534455226276
+Probabilidad 67 clientes en cola: 0.004020486308863055
+Probabilidad 68 clientes en cola: 0.00278249285025346
+Probabilidad 69 clientes en cola: 0.0006211587355841756
+Probabilidad 70 clientes en cola: 0.0017791666821123844
+Probabilidad 71 clientes en cola: 0.0012993351419940146
+Probabilidad 72 clientes en cola: 0.0013562326061173004
+Probabilidad 73 clientes en cola: 0.0020340790726526524
+Probabilidad 74 clientes en cola: 0.0005548070395862129
+Probabilidad 75 clientes en cola: 0.0010573024754120897
+Probabilidad 76 clientes en cola: 0.0024747859107080777
+Probabilidad 77 clientes en cola: 0.0038666288753428824
+Probabilidad 78 clientes en cola: 0.002980458222693363
+Probabilidad 79 clientes en cola: 0.0066254607516206205
+Probabilidad 80 clientes en cola: 0.004432778186463103
+Probabilidad 81 clientes en cola: 0.003730250431752992
+Probabilidad 82 clientes en cola: 0.0034654532585438893
+Probabilidad 83 clientes en cola: 0.0009939462354014732
+Probabilidad 84 clientes en cola: 0.0016353350530698156
+Probabilidad 85 clientes en cola: 0.0011430319954549317
+Probabilidad 86 clientes en cola: 0.0002423899980100698
+Probabilidad 87 clientes en cola: 0.0003548632006230499
+Probabilidad 88 clientes en cola: 0.00034857426628349416
+Probabilidad 89 clientes en cola: 0.0013509230727172534
+Probabilidad 90 clientes en cola: 0.002631374907659806
+Probabilidad 91 clientes en cola: 0.002258305124895665
+Probabilidad 92 clientes en cola: 0.0008413488970335707
+Probabilidad 93 clientes en cola: 0.001904299716064305
+Probabilidad 94 clientes en cola: 0.003448592954226404
+Probabilidad 95 clientes en cola: 0.0015207332753417939
+Probabilidad 96 clientes en cola: 0.005909699109757156
+Probabilidad 97 clientes en cola: 0.002690732678422589
+Probabilidad 98 clientes en cola: 0.002986054670825444
+Probabilidad 99 clientes en cola: 0.0004870504156395923
+Probabilidad 100 clientes en cola: 0.004077990079646664
+Probabilidad 101 clientes en cola: 0.003695770229067753
+Probabilidad 102 clientes en cola: 0.0035117871766329714
+Probabilidad 103 clientes en cola: 0.0022684290626914213
+Probabilidad 104 clientes en cola: 0.001918698562177443
+Probabilidad 105 clientes en cola: 0.0032129805947165298
+Probabilidad 106 clientes en cola: 0.0028840492255295313
+Probabilidad 107 clientes en cola: 0.002401742963958095
+Probabilidad 108 clientes en cola: 0.0014128672148979021
+Probabilidad 109 clientes en cola: 0.0014136017282983795
+Probabilidad 110 clientes en cola: 0.002868417398735409
+Probabilidad 111 clientes en cola: 0.010999478004618202
+Probabilidad 112 clientes en cola: 0.011403807192721003
+Probabilidad 113 clientes en cola: 0.014051427152684565
+Probabilidad 114 clientes en cola: 0.015174530596451819
+Probabilidad 115 clientes en cola: 0.01755556086842415
+Probabilidad 116 clientes en cola: 0.023375868974650018
+Probabilidad 117 clientes en cola: 0.029224379712877693
+Probabilidad 118 clientes en cola: 0.030607269476507246
+Probabilidad 119 clientes en cola: 0.02494194524937463
+Probabilidad 120 clientes en cola: 0.027065317011605118
+Probabilidad 121 clientes en cola: 0.026907665710220855
+Probabilidad 122 clientes en cola: 0.019566897721107136
+Probabilidad 123 clientes en cola: 0.01938223758373472
+Probabilidad 124 clientes en cola: 0.016886643137237606
+Probabilidad 125 clientes en cola: 0.009346307946529894
+Probabilidad 126 clientes en cola: 0.011021314074624533
+Probabilidad 127 clientes en cola: 0.007516231066396789
+Probabilidad 128 clientes en cola: 0.0032806945266486533
+Probabilidad 129 clientes en cola: 0.0055784662306691355
+Probabilidad 130 clientes en cola: 0.005068335701502393
+Probabilidad 131 clientes en cola: 0.0025689146756673444
+Probabilidad 132 clientes en cola: 0.002443990043388891
+Probabilidad 133 clientes en cola: 0.0009800916927109628
+Probabilidad 134 clientes en cola: 0.00029742098099819507
+Probabilidad 135 clientes en cola: 0.00034309716478802014
+Probabilidad 136 clientes en cola: 5.0912961459054444e-05
+Probabilidad 137 clientes en cola: 0.0014734325078016625
+Probabilidad 138 clientes en cola: 0.0016802179720084554
+Probabilidad 139 clientes en cola: 0.00241388689137704
+Probabilidad 140 clientes en cola: 0.00018009701499988295
+Probabilidad 141 clientes en cola: 0.00039919220126970233
+Probabilidad 142 clientes en cola: 0.00023117424010042132
+Probabilidad 143 clientes en cola: 6.297457325191742e-05
+Probabilidad 144 clientes en cola: 6.0418947479303426e-05
+Probabilidad 145 clientes en cola: 0.001223057953929789
+Probabilidad 146 clientes en cola: 0.0011781274248212857
+Probabilidad 147 clientes en cola: 0.0008886161056365428
+Probabilidad 148 clientes en cola: 0.0026618520517170184
+Probabilidad 149 clientes en cola: 0.001336507795132224
+Probabilidad 150 clientes en cola: 0.004460756306542577
+Probabilidad 151 clientes en cola: 0.007693901832499758
+Probabilidad 152 clientes en cola: 0.007576230490629511
+Probabilidad 153 clientes en cola: 0.005995137613066903
+Probabilidad 154 clientes en cola: 0.0011664273881557925
+Probabilidad 155 clientes en cola: 0.00024562276499776926
+Probabilidad 156 clientes en cola: 0.0021985374066863105
+Probabilidad 157 clientes en cola: 0.001403331881352351
+Probabilidad 158 clientes en cola: 0.0023909584308182165
+Probabilidad 159 clientes en cola: 0.001056919979256452
+Probabilidad 160 clientes en cola: 0.004724594076603447
+Probabilidad 161 clientes en cola: 0.004758463958631471
+Probabilidad 162 clientes en cola: 0.006791875432110179
+Probabilidad 163 clientes en cola: 0.004645985312092131
+Probabilidad 164 clientes en cola: 0.00432537572005867
+Probabilidad 165 clientes en cola: 0.0054559258585643484
+Probabilidad 166 clientes en cola: 0.008727709873128344
+Probabilidad 167 clientes en cola: 0.0042287389492690775
+Probabilidad 168 clientes en cola: 0.002995381298656077
+Probabilidad 169 clientes en cola: 0.00043671232700882856
+Probabilidad 170 clientes en cola: 0.0014309328411939682
+Probabilidad 171 clientes en cola: 0.00025996432062806295
+Probabilidad 172 clientes en cola: 0.0013548104574860591
+Probabilidad 173 clientes en cola: 0.004628253948572768
+Probabilidad 174 clientes en cola: 0.005345385439098156
+Probabilidad 175 clientes en cola: 0.0014892394192092691
+Probabilidad 176 clientes en cola: 0.003934980390905637
+Probabilidad 177 clientes en cola: 0.0016971234983915193
+Probabilidad 178 clientes en cola: 0.002409884110530096
+Probabilidad 179 clientes en cola: 0.0069248537639093125
+Probabilidad 180 clientes en cola: 0.006647234739834541
+Probabilidad 181 clientes en cola: 0.014199550087919446
+Probabilidad 182 clientes en cola: 0.009759326139086649
+Probabilidad 183 clientes en cola: 0.005238237830206405
+Probabilidad 184 clientes en cola: 0.0063896729917389495
+Probabilidad 185 clientes en cola: 0.008805533750600225
+Probabilidad 186 clientes en cola: 0.0084020237277415
+Probabilidad 187 clientes en cola: 0.008833232771791264
+Probabilidad 188 clientes en cola: 0.00900757246982658
+Probabilidad 189 clientes en cola: 0.006564539003447583
+Probabilidad 190 clientes en cola: 0.010544065143794159
+Probabilidad 191 clientes en cola: 0.009914547663035421
+Probabilidad 192 clientes en cola: 0.00956157731010602
+Probabilidad 193 clientes en cola: 0.009050853052874033
+Probabilidad 194 clientes en cola: 0.008218875091141692
+Probabilidad 195 clientes en cola: 0.009431384323088201
+Probabilidad 196 clientes en cola: 0.006282736730494256
+Probabilidad 197 clientes en cola: 0.0020007374422667396
+Probabilidad 198 clientes en cola: 0.0008467111420518247
+Probabilidad 199 clientes en cola: 0.0009504634538275018
+Probabilidad 200 clientes en cola: 0.0009299455929814721
+Probabilidad 201 clientes en cola: 0.00018319442620870848
+Probabilidad 202 clientes en cola: 0.0004403501328050064
+Probabilidad 203 clientes en cola: 1.0229800472476115e-05
+Probabilidad 204 clientes en cola: 0.00011825940169917701
+Probabilidad 205 clientes en cola: 0.0016570287017737427
+Probabilidad 206 clientes en cola: 0.0010250183618650517
+Probabilidad 207 clientes en cola: 0.0002745782707738547
+Probabilidad 208 clientes en cola: 0.00012134005911794777
+Probabilidad 209 clientes en cola: 0.0009150469341495071
+Probabilidad 210 clientes en cola: 0.0017163877779013165
+Probabilidad 211 clientes en cola: 0.002243335547201145
+Probabilidad 212 clientes en cola: 0.002627107715355434
+Probabilidad 213 clientes en cola: 0.0023898109658544533
+Probabilidad 214 clientes en cola: 0.00015912280847419123
+Probabilidad 215 clientes en cola: 0.00026854370769027806
+Probabilidad 216 clientes en cola: 0.00019695618936070263
+Probabilidad 217 clientes en cola: 0.0003928078067144633
+Probabilidad 218 clientes en cola: 0.002608220874773818
+Probabilidad 219 clientes en cola: 0.006903927937704259
+Probabilidad 220 clientes en cola: 0.007834070601053063
+Probabilidad 221 clientes en cola: 0.008363327312283137
+Probabilidad 222 clientes en cola: 0.006784436733618189
+Probabilidad 223 clientes en cola: 0.011680130484552345
+Probabilidad 224 clientes en cola: 0.005809057810421344
+Probabilidad 225 clientes en cola: 0.0027875841180093463
+Probabilidad 226 clientes en cola: 0.0018781786105399431
+Probabilidad 227 clientes en cola: 0.0016458095409061172
+Probabilidad 228 clientes en cola: 0.00030877236173773234
+Probabilidad 229 clientes en cola: 0.0007662917959700206
+Probabilidad 230 clientes en cola: 0.0009684817902467162
+Probabilidad 231 clientes en cola: 0.0005258675469584184
+Probabilidad 232 clientes en cola: 0.0030987709516205673
+Probabilidad 233 clientes en cola: 0.002060660466085464
+Probabilidad 234 clientes en cola: 0.0007774956441333298
+Tiempo de fin de la simulación:            503.546
+
+Resultados experimento:
+Demora promedio esperada en cola: 51.286406329896295, IC 95%: (32.27359738626406, 70.29921527352853)
+Tiempo promedio en el sistema: 51.78614621943781, IC 95%: (32.75598540014433, 70.81630703873128)
+Cantidad de clientes en cola en promedio: 127.5832248311905, IC 95%: (80.86380169434264, 174.30264796803837)
+Tiempo promedio de servicio: 0.49973988954151377, IC 95%: (0.471261959040207, 0.5282178200428206)
+Promedio de clientes en el sistema: 128.5791851664978, IC 95%: (81.86014182361407, 175.29822850938154)
+Ocupación del servidor: 0.9959603353072933, IC 95%: (0.9876920480201491, 1.0042286225944375)
+Probabilidad de encontrar n clientes en cola: [0.007746177355036048, 0.003507640201149737, 0.003599341949616952, 0.003665654817814668, 0.003633784940572294, 0.0036974042793804936, 0.0038305438334439684, 0.003888143658331355, 0.0036658074891895223, 0.0035173452865766303, 0.00347803161459146, 0.0035712658715949985, 0.003966263569832712, 0.003782305779319667, 0.003820982572907387, 0.003957317611225897, 0.004045351519079733, 0.004111731182918469, 0.004078528861520682, 0.004348377092716139, 0.004047104228680866, 0.003678326426271382, 0.00367847828011604, 0.003912793607379823, 0.0038205583735524884, 0.004023794710295119, 0.004025459653065791, 0.004103045730722906, 0.00422094416130421, 0.004014015495574256, 0.0043898989598602604, 0.004156252985648881, 0.004080856720228722, 0.004062923153339354, 0.003737268443163253, 0.003333287737421231, 0.00379223318706073, 0.004259669479329912, 0.004113760126579434, 0.004435862700764468, 0.004342416244786649, 0.004285845455194963, 0.00436120938581584, 0.00419813585365229, 0.004058627636933617, 0.004482942799612353, 0.004448116702917761, 0.004747252091150036, 0.004371993818008829, 0.0045149403824931225, 0.004405551975886654, 0.003923373868828073, 0.004146183173822384, 0.004330661388180329, 0.004703707083098838, 0.004326840635373474, 0.004102223478027049, 0.003858428146633739, 0.003912961176037892, 0.004221524422223306, 0.00415511799522707, 0.004165596454166102, 0.004414110309580021, 0.004907788861857451, 0.004529136646845615, 0.0047019944021347735, 0.004270987628225343, 0.004385879814700816, 0.004566076213836916, 0.004594013501752329, 0.004253801354036505, 0.003948326319782469, 0.003829014859353264, 0.0036183203124214784, 0.0035883538431096375, 0.003742026049950342, 0.003708276596541799, 0.0035886667026654518, 0.003802890565564106, 0.0038652733061334617, 0.004066880801516868, 0.003685126723692109, 0.0031280146585326773, 0.003262066848686631, 0.0036372181935654573, 0.0033885288177523025, 0.0035430179642550936, 0.003721296649586614, 0.003624645924343389, 0.003889016839666354, 0.004015128087278688, 0.004022984412040576, 0.0038103541498272046, 0.0038397661896744217, 0.0034742533136768576, 0.0032987907393779536, 0.0031544897766666185, 0.003444999288502329, 0.0033967872288361415, 0.003285580875000709, 0.0035187556058640227, 0.003506034688393524, 0.003400407310405312, 0.0032947716080262614, 0.0032338708597843355, 0.0037222635884844946, 0.0036972320443132245, 0.0037099700998693983, 0.0039225179218054605, 0.004419794598334002, 0.004273058778986327, 0.0043979517905653005, 0.004074954076637745, 0.004371043074151036, 0.004187676790181686, 0.004352092018024218, 0.004210873669438465, 0.0045755393840052104, 0.004457109581563685, 0.003922204735357748, 0.003941558729775718, 0.004045906583974152, 0.0038287942261555903, 0.004082981151697347, 0.00431720367417039, 0.0039353953450819434, 0.0037380194457917668, 0.003905544377639678, 0.003769977412162745, 0.00395443639929963, 0.0037629964249514796, 0.0038068632207373743, 0.00375222333982072, 0.003419010874750701, 0.0035224868613154803, 0.003829536011593867, 0.003496639048548638, 0.0038075211474543546, 0.0038197562085730656, 0.00390735822684612, 0.003984369583221095, 0.004120499077268568, 0.004181578390768531, 0.004301282640133813, 0.004030539323984404, 0.004493238515763916, 0.004240092589870994, 0.003642916391602354, 0.003823664093565979, 0.0036479557930339137, 0.003990307829333714, 0.0037156140447957547, 0.004165526873716242, 0.004273530384083148, 0.004106723786043367, 0.004403413310505002, 0.004101107228472338, 0.0040800047438398854, 0.00414696117865215, 0.0042924978487851925, 0.004104186780467916, 0.003950221885754363, 0.0037556027702206956, 0.0033463078398511445, 0.0035706711814696883, 0.0037334964010962714, 0.004327790315677696, 0.004925044497941436, 0.004109191843260826, 0.00396318204481867, 0.0039153836456034385, 0.0036845476480762015, 0.00382096660278455, 0.0035892751792409453, 0.003664283195477609, 0.0040844122609765415, 0.003766098020119675, 0.0036867697158042678, 0.003771669954783448, 0.003423869721796998, 0.0038737111100390783, 0.003635598479941704, 0.003932360341306572, 0.0036543487142801567, 0.003815767072312746, 0.0038783920456155817, 0.0036965372992511457, 0.0034176116341251414, 0.0036151227469920786, 0.0036582300488263203, 0.0037128146729508656, 0.003281960117268219, 0.0033423561078715254, 0.0032948151938004266, 0.0036096101213272435, 0.0037051620116508844, 0.0035766132422933965, 0.0033616922396603093, 0.003682624411953957, 0.00389224007998031, 0.003417520349608529, 0.0038972283864069767, 0.0036887819935184324, 0.0038270408855304015, 0.003743575552088574, 0.0040353281171496905, 0.003966383426926928, 0.004028820477633008, 0.003559812403367716, 0.003136078753700373, 0.0035811751304303105, 0.003493050807557241, 0.003283923616807158, 0.0032345704007107723, 0.0034737983094551774, 0.0035986600737156274, 0.003739042594548013, 0.0035032008352815715, 0.0035444807673442502, 0.0037019545920155992, 0.003476912080475193, 0.0034595336822910087, 0.0035795037245764743, 0.0033523454481779987, 0.0028842208074835924, 0.002845936883649684, 0.0029998415735698453, 0.002662835298736832, 0.002803560371912135, 0.003023979113408436, 0.0028966709982878864, 0.00293064697949579, 0.0026125519108470036, 0.0028315256161264503, 0.0024387386820638795, 0.0022689118663572145, 0.002181595294433084, 0.0025724575585623615, 0.0023845992067542516, 0.0026127428482689103, 0.002322628181027879, 0.002204666614845426, 0.002856719854452253, 0.0025549368500223874, 0.0027658868170415555, 0.002688577598710722, 0.0023975851756575448, 0.002239671556779995, 0.0021867909652726015, 0.002148640843377011, 0.002164165653519716, 0.002015893043563476, 0.0021195042344910433, 0.0016923852586554382, 0.0016968534294509428, 0.0015312801647285003, 0.0016339372247583727, 0.0013467216368081023, 0.001373469983448599, 0.0014252851504581038, 0.001320057162171778, 0.0012453895774552496, 0.0013717187093443863, 0.0012075798933332037, 0.0011639004314347918, 0.001273101833092565, 0.0012484318182416799, 0.0013492738632015036, 0.0011790551798328002, 0.0010410911726241577, 0.0007919353394474632, 0.0006382833408976014, 0.0005955286880934625, 0.0006653495649984518, 0.0007214920310628239, 0.0009211277527531691, 0.000990931925437091, 0.0009710396176657785, 0.0008858415107517033, 0.0009116770395915434, 0.0008149625926425376, 0.0010772881550895176, 0.0007693472260445521, 0.000742009080121882, 0.0006859716361042096, 0.0007157760956434009, 0.0005937121678808172, 0.0005093942422392388, 0.0004897168044875702, 0.0004729612145620164, 0.0004464224831200263, 0.0004777837096045909, 0.0005039354843707275, 0.00036498006402867905, 0.0005128919302706021, 0.0004456851198468151, 0.0005173608110472873, 0.0004736957742906567, 0.0003822773964422822, 0.0004118776313054124, 0.00044735213451799926, 0.00038758940211831475, 0.00043062927852239625, 0.0004548598694501477, 0.0004478369520246506, 0.0004034476866923438, 0.00040794743785869036, 0.00040598929687158986, 0.0003761246245927996, 0.00035513145631881554, 0.0003059522532920863, 0.0003672396498708804, 0.00019954935655108158, 0.00022457385178598045, 0.0003224060490540833, 0.0003727701695618323, 0.000300126601286818, 0.00024371453209676996, 0.00020584146870388767, 0.0001251658480977045, 0.00019559655167951688, 0.0002049905480973995, 0.00013903598860146447, 0.00013799348948323624, 0.00013725837850575096, 0.0001364867838739583, 0.00012883429743446685, 0.00014481443792513848, 0.0001279766182411307, 9.171708368171157e-05, 0.00013823389804255636, 0.00017213091995232004, 0.00014484052868425848, 0.0001361923557273016, 0.00014304158094341376, 8.223244364295284e-05, 9.181192298981254e-05, 4.383729261006073e-05, 3.887444251264324e-05, 1.1934161230008371e-05, 1.5134273961939902e-05, 2.1711970121930938e-05, 2.5421459076366785e-05, 4.9170311488885377e-05, 2.153736564474462e-05, 4.001826900592896e-05, 4.694338026163164e-05, 6.420944471737663e-05, 4.78731987060515e-05, 7.317803552445584e-05, 3.4486876325114296e-05, 3.694418325729617e-05, 4.4454631606120044e-05, 6.109799888339818e-05, 6.986005807219244e-05, 1.9227925273826437e-05, 1.4511757537059048e-05, 6.3029497436486154e-06, 1.6065372457204072e-05, 3.648812610235089e-05, 6.1016958931242334e-05, 7.190337567313199e-05, 1.9604362720347916e-05], IC 95%: [(-0.007495535768573226, 0.02298789047864532), (-0.002755733488275557, 0.00977101389057503), (-0.00223776589271356, 0.009436449791947464), (-0.004109432654496016, 0.011440742290125353), (-0.004967912100165456, 0.012235481981310043), (-0.004699093805292657, 0.012093902364053645), (-0.004829529885486052, 0.01249061755237399), (-0.005625027620699276, 0.013401314937361986), (-0.005438918179140526, 0.012770533157519571), (-0.004054105359767043, 0.011088795932920304), (-0.003890885224152258, 0.010846948453335179), (-0.0032575728822128963, 0.010400104625402893), (-0.002683511135489967, 0.01061603827515539), (-0.0024127680067987903, 0.009977379565438125), (-0.003088638534183727, 0.0107306036799985), (-0.0034941404465561954, 0.01140877566900799), (-0.002744079204900626, 0.010834782243060092), (-0.0028471722369982242, 0.011070634602835163), (-0.0038845807165138182, 0.01204163843955518), (-0.003949136869925613, 0.012645891055357891), (-0.0038904358413223176, 0.011984644298684049), (-0.0031804806436528076, 0.010537133496195571), (-0.004107088019262153, 0.011464044579494233), (-0.003910055536627315, 0.01173564275138696), (-0.003520506153436305, 0.011161622900541282), (-0.003478122177811743, 0.011525711598401982), (-0.0027994289440172676, 0.010850348250148849), (-0.0021882869251057483, 0.01039437838655156), (-0.002714445269636289, 0.011156333592244709), (-0.00298943191854975, 0.011017462909698263), (-0.0030556058420975083, 0.01183540376181803), (-0.003488335251032505, 0.011800841222330268), (-0.0030664747552685504, 0.011228188195725994), (-0.003352835276974148, 0.011478681583652856), (-0.0026205599221121364, 0.010095096808438642), (-0.0028446292737490894, 0.009511204748591552), (-0.0034618928707054685, 0.011046359244826928), (-0.0037622661243212853, 0.012281605082981109), (-0.003562681922212393, 0.01179020217537126), (-0.0033347674893381184, 0.012206492890867053), (-0.004071543819660536, 0.012756376309233835), (-0.0030810005076176324, 0.011652691418007559), (-0.0031168520275591397, 0.01183927079919082), (-0.0037184875106041713, 0.012114759217908751), (-0.002923040758335418, 0.011040296032202652), (-0.002684907201587962, 0.011650792800812668), (-0.0027576895797200626, 0.011653922985555584), (-0.0034641682065304543, 0.012958672388830526), (-0.0024524812097720143, 0.011196468845789672), (-0.0023924290940484207, 0.011422309859034665), (-0.0027959990442982165, 0.011607102996071525), (-0.0028303786754731337, 0.01067712641312928), (-0.004143665033118501, 0.012436031380763268), (-0.0035161896573002813, 0.01217751243366094), (-0.003210507135022375, 0.012617921301220051), (-0.0025841503904732816, 0.011237831661220228), (-0.0028908484745000526, 0.01109529543055415), (-0.0031328682250787664, 0.010849724518346244), (-0.0035249378741280665, 0.011350860226203852), (-0.003696735135742594, 0.012139783980189205), (-0.0037755411953088137, 0.012085777185762953), (-0.004518420170035815, 0.01284961307836802), (-0.00432810304379772, 0.013156323662957763), (-0.005240312077323191, 0.015055889801038093), (-0.00399455453152776, 0.01305282782521899), (-0.004719617380716399, 0.014123606184985947), (-0.004732654174553377, 0.013274629431004062), (-0.004165949251008525, 0.012937708880410157), (-0.0032597760850802456, 0.012391928512754077), (-0.0034727194373223432, 0.012660746440827), (-0.0034850973900228217, 0.011992700098095832), (-0.003546817347582735, 0.011443469987147674), (-0.0032384127501359516, 0.01089644246884248), (-0.0037764990117948338, 0.011013139636637791), (-0.004324303409099415, 0.011501011095318689), (-0.004301545220268465, 0.011785597320169148), (-0.0032317131968489505, 0.010648266389932548), (-0.0023199634791891037, 0.009497296884520008), (-0.0027280877761271965, 0.01033386890725541), (-0.0030996254705414916, 0.010830172082808415), (-0.003500183902693815, 0.01163394550572755), (-0.0035520943326082387, 0.010922347779992457), (-0.0027369367024098435, 0.008992966019475197), (-0.002222463613088826, 0.008746597310462088), (-0.0036968925549715377, 0.010971328942102452), (-0.0034819921466024122, 0.010259049782107017), (-0.004155921818908118, 0.011241957747418306), (-0.0037811387745900087, 0.011223732073763237), (-0.0030347050337556094, 0.010283996882442387), (-0.004585976865452321, 0.01236401054478503), (-0.004946083563227485, 0.012976339737784861), (-0.005134499884286149, 0.013180468708367303), (-0.004195681484964922, 0.011816389784619331), (-0.0031756492531017193, 0.010855181632450563), (-0.0024772471060745265, 0.009425753733428242), (-0.0029774938455765575, 0.009575075324332464), (-0.003366451181047028, 0.009675430734380265), (-0.0034559145140260973, 0.010345913091030756), (-0.0023063680860442473, 0.00909994254371653), (-0.0025902724641773444, 0.009161434214178761), (-0.0028217956764742098, 0.009859306888202255), (-0.0033266963307237592, 0.010338765707510807), (-0.0029779125497168026, 0.009778727170527426), (-0.0034471251845726554, 0.010036668400625177), (-0.0027037361103658328, 0.009171477829934504), (-0.0033173045864770857, 0.010761831763446075), (-0.00390580682711159, 0.011300270915738039), (-0.003966934507068105, 0.011386874706806901), (-0.0038975105872044013, 0.011742546430815322), (-0.004556580599285405, 0.013396169795953409), (-0.005114506205769555, 0.013660623763742209), (-0.004840689970547012, 0.013636593551677612), (-0.002893008657884568, 0.011042916811160059), (-0.003725814016311297, 0.012467900164613369), (-0.004173058163692776, 0.012548411744056149), (-0.004081249113314166, 0.012785433149362601), (-0.004351541437457213, 0.012773288776334144), (-0.0048332614505280135, 0.013984340218538435), (-0.005204320825227222, 0.014118539988354592), (-0.004918585705870883, 0.01276299517658638), (-0.005379099120020283, 0.013262216579571717), (-0.004812575271522658, 0.012904388439470962), (-0.004299091697114628, 0.01195668014942581), (-0.003945330377154662, 0.012111292680549356), (-0.004426624567617433, 0.013061031915958213), (-0.0036302211509623133, 0.0115010118411262), (-0.003752393191195951, 0.011228432082779485), (-0.00363868020587292, 0.011449768961152277), (-0.003889530920972073, 0.011429485745297563), (-0.003372777579030397, 0.011281650377629657), (-0.004880917705744366, 0.012406910555647325), (-0.004418073311644598, 0.012031799753119347), (-0.0029289211842821617, 0.010433367863923602), (-0.0024284428813666006, 0.009266464630868002), (-0.0029770710540235703, 0.010022044776654531), (-0.003188370563187313, 0.010847442586375048), (-0.0027493030051948413, 0.009742581102292118), (-0.003689722034090937, 0.011304764328999645), (-0.004016727077456589, 0.01165623949460272), (-0.003051901428600387, 0.010866617882292626), (-0.003387582101862091, 0.01135632126830428), (-0.003999827762581901, 0.012240825917119037), (-0.003521989677987729, 0.011885146459524792), (-0.004065902932701989, 0.012668468212969616), (-0.00485072783576413, 0.012911806483732937), (-0.00486564829288191, 0.013852125324409742), (-0.004920925975494869, 0.013401111155236858), (-0.0045732307761005946, 0.011859063559305303), (-0.0036385913382223174, 0.011285919525354276), (-0.0030561136631655395, 0.010352025249233367), (-0.003378739889997262, 0.01135935554866469), (-0.0031505653162832393, 0.01058179340587475), (-0.0037443718510701855, 0.012075425598502668), (-0.0028325527388910355, 0.011379613507057332), (-0.003855412420753466, 0.0120688599928402), (-0.004544023025205181, 0.013350849646215185), (-0.004159569389329858, 0.012361783846274534), (-0.00423309141769816, 0.012393100905377931), (-0.0032731291260542595, 0.01156705148335856), (-0.0045280439393587685, 0.013113039636929153), (-0.004038849880815724, 0.012247223441751557), (-0.0038126230755946905, 0.011713066847103416), (-0.003130796084766306, 0.010642001625207696), (-0.003295350082564767, 0.009987965762267056), (-0.004117345206438926, 0.011258687569378303), (-0.0032588164939847696, 0.010725809296177313), (-0.004068818962122509, 0.012724399593477903), (-0.004390347108840099, 0.014240436104722972), (-0.002958516086821913, 0.011176899773343563), (-0.0032248514100974845, 0.011151215499734824), (-0.0035775314032558602, 0.011408298694462738), (-0.0029061277618665786, 0.010275223058018982), (-0.003147063152518238, 0.010788996358087338), (-0.002834305119825367, 0.010012855478307258), (-0.003224790610147771, 0.010553357001102989), (-0.0029745961945704348, 0.011143420716523519), (-0.002947970632618001, 0.01048016667285735), (-0.003832038177916202, 0.011205577609524738), (-0.0034062030241005397, 0.010949542933667436), (-0.0029786621480572006, 0.009826401591651197), (-0.003509968669278034, 0.01125739088935619), (-0.002969946724675377, 0.010241143684558786), (-0.003608916666711406, 0.01147363734932455), (-0.003504002458182765, 0.010812699886743079), (-0.003802206240562762, 0.011433740385188254), (-0.004744124757983905, 0.01250090884921507), (-0.004933524114196092, 0.012326598712698384), (-0.004032271862109911, 0.010867495130360193), (-0.0046294906614061234, 0.01185973615539028), (-0.004228861947662865, 0.011545322045315505), (-0.0039086263521539814, 0.011334255698055714), (-0.002951557932916544, 0.009515478167452983), (-0.0035317063915801016, 0.010216418607323152), (-0.0033936196243361666, 0.00998325001193702), (-0.003400337178930306, 0.010619557421584793), (-0.0033395510242338468, 0.010749875047535615), (-0.0033531397588367094, 0.010506366243423503), (-0.003042851236312225, 0.009766235715632843), (-0.0038588694085716904, 0.011224118232479603), (-0.0043379338863939534, 0.012122414046354574), (-0.003405499785545563, 0.010240540484762622), (-0.004188872106793485, 0.011983328879607439), (-0.0039039904873126867, 0.011281554474349552), (-0.004925604653375191, 0.012579686424435993), (-0.0040108114543195746, 0.011497962558496723), (-0.004536158631062055, 0.012606814865361436), (-0.003563749540640689, 0.011496516394494546), (-0.0039672828263718094, 0.012024923781637824), (-0.004196371805239148, 0.01131599661197458), (-0.0034916332851042107, 0.009763790792504957), (-0.0037577113062308544, 0.010920061567091476), (-0.0035190811186620362, 0.010505182733776517), (-0.0040916621707004185, 0.010659509404314734), (-0.004864302720129403, 0.011333443521550949), (-0.005498056137103784, 0.012445652756014138), (-0.004299007730493578, 0.011496327877924832), (-0.004018989921414819, 0.011497075110510846), (-0.004218939709060692, 0.011225341379623836), (-0.004501850239056023, 0.011590811773744523), (-0.004153633275505979, 0.011557542459537176), (-0.003263202443189511, 0.010217026604139897), (-0.003717038818698336, 0.010636106183280354), (-0.0047355859195194125, 0.011894593368672362), (-0.005004471307569514, 0.01170916220392551), (-0.004299525958271273, 0.010067967573238457), (-0.0037627719600061265, 0.009454645727305495), (-0.0037679156560162584, 0.009767598803155949), (-0.0032977080547831883, 0.008623378652256852), (-0.003963736153419334, 0.009570856897243605), (-0.0037391911779821613, 0.009787149404799033), (-0.003911769442548625, 0.009705111439124397), (-0.004310348582321072, 0.010171642541312653), (-0.0036389595918635003, 0.008864063413557508), (-0.003780293972469859, 0.00944334520472276), (-0.0037951189512047193, 0.008672596315332478), (-0.003145153525945834, 0.007682977258660263), (-0.002885482067476319, 0.007248672656342487), (-0.003233460772713914, 0.008378375889838637), (-0.0034050366202831995, 0.008174235033791702), (-0.004007211445987798, 0.009232697142525618), (-0.003818027700165903, 0.008463284062221662), (-0.0035250507302827853, 0.007934383959973637), (-0.004870505377059471, 0.010583945085963978), (-0.003927276316290071, 0.009037150016334846), (-0.004936577826586264, 0.010468351460669375), (-0.004958397789130096, 0.010335552986551541), (-0.004348458722521203, 0.009143629073836292), (-0.003630072728096031, 0.008109415841656021), (-0.0035296296656058624, 0.007903211596151066), (-0.003808107006458265, 0.008105388693212288), (-0.003798042587248282, 0.008126373894287713), (-0.0033934143414440752, 0.0074252004285710275), (-0.0037567681471440423, 0.007995776616126129), (-0.003912134217925045, 0.0072969047352359215), (-0.003846645812695548, 0.007240352671597433), (-0.003107501537459695, 0.006170061866916696), (-0.003384573764968356, 0.006652448214485102), (-0.0035398160231173356, 0.00623325929673354), (-0.0035169807962168185, 0.0062639207631140165), (-0.0028902322967943577, 0.005740802597710565), (-0.0024606491713314873, 0.005100763495675044), (-0.0027664479048061267, 0.005257227059716626), (-0.0027941621674641044, 0.005537599586152877), (-0.0030651831756384872, 0.005480342962304895), (-0.0028735390333989746, 0.005201339896268559), (-0.003249506037220522, 0.005795709703405652), (-0.003675102225013327, 0.006171965861496686), (-0.0037975284060570934, 0.0064960761324601), (-0.0039624842266320365, 0.006320594586297636), (-0.0037464261090439555, 0.005828608454292271), (-0.0026931052873985736, 0.0042769759662935), (-0.0021502818009371026, 0.0034268484827323052), (-0.0018083822296010204, 0.0029994396057879454), (-0.0021802423180394964, 0.0035109414480363997), (-0.0025770783115046697, 0.004020062373630317), (-0.0038766148225644306, 0.005718870328070769), (-0.00528072526050896, 0.007262589111383142), (-0.004087815554346821, 0.006029894789678378), (-0.002979452088712586, 0.004751135110215993), (-0.0032102357224854496, 0.005033589801668536), (-0.0027506364226852656, 0.004380561607970341), (-0.0039525143941237465, 0.006107090704302782), (-0.0030647643454363607, 0.004603458797525465), (-0.003036366191980658, 0.004520384352224422), (-0.0036730996427665015, 0.005045042914974921), (-0.004458811254765206, 0.005890363446052008), (-0.0041921207424575205, 0.0053795450782191554), (-0.002509907373932667, 0.0035286958584111448), (-0.0020540397460771962, 0.0030334733550523366), (-0.0020848256965280516, 0.003030748125652085), (-0.001848604788152798, 0.0027414497543928507), (-0.002200883654915568, 0.00315645107412475), (-0.002296476157383807, 0.003304347126125262), (-0.0019691212031245817, 0.00269908133118194), (-0.0024770161460080506, 0.0035028000065492546), (-0.0018828547874337864, 0.0027742250271274166), (-0.002530471863320487, 0.0035651934854150614), (-0.002490600886104064, 0.003437992434685378), (-0.0019434251807105775, 0.0027079799735951417), (-0.0018615850052200583, 0.002685340267830883), (-0.0020885704580503287, 0.0029832747270863275), (-0.001945614448711099, 0.0027207932529477283), (-0.002143262969776907, 0.0030045215268216996), (-0.0024847430931935295, 0.0033944628320938253), (-0.0024928831052083624, 0.0033885570092576636), (-0.002273008123189036, 0.003079903496573724), (-0.00280134248128955, 0.0036172373570069307), (-0.002455687602858271, 0.003267666196601451), (-0.0021001114681962803, 0.0028523607173818796), (-0.0024901450340680214, 0.0032004079467056524), (-0.0023378884330528993, 0.0029497929396370723), (-0.002669609628730348, 0.0034040889284721087), (-0.0012776860220603781, 0.0016767847351625415), (-0.001611448617328412, 0.002060596320900373), (-0.0027649446580560754, 0.003409756756164242), (-0.0031657646936859955, 0.00391130503280966), (-0.0027063275474190312, 0.0033065807499926673), (-0.001823882135043377, 0.002311311199236917), (-0.0015516896811082867, 0.001963372618516062), (-0.0011042546889563137, 0.0013545863851517227), (-0.0017783752261127214, 0.002169568329471755), (-0.001709279907204443, 0.002119261003399242), (-0.0012795949266939362, 0.001557666903896865), (-0.0012892140815995827, 0.001565201060566055), (-0.0013947902640076438, 0.0016693070210191457), (-0.0015102668644060406, 0.001783240432153957), (-0.001510839110320574, 0.0017685077051895076), (-0.001657226197238444, 0.001946855073088721), (-0.0013135813547869252, 0.0015695345912691866), (-0.0010181630254327695, 0.0012015971927961926), (-0.0016411361380217657, 0.0019176039341068784), (-0.0017997579958032995, 0.0021440198357079395), (-0.001603890269862757, 0.0018935713272312741), (-0.0016226993406287553, 0.0018950840520833585), (-0.0014847439228105825, 0.00177082708469741), (-0.0008677653435111307, 0.0010322302307970365), (-0.0012933862475076852, 0.0014770100934873105), (-0.0006613425161414401, 0.0007490171013615617), (-0.0006322205006344564, 0.0007099693856597428), (-0.00017063448010597388, 0.0001945028025659906), (-0.00027333864496532234, 0.0003036071928892022), (-0.0003805177371604776, 0.00042394167740433944), (-0.0004057027022439892, 0.0004565456203967228), (-0.0006289022094145178, 0.0007272428323922885), (-0.00029668508214611975, 0.00033975981343560893), (-0.0006373364838002031, 0.0007173730218120609), (-0.0006970197872347494, 0.0007909065477580127), (-0.0009113790246835054, 0.0010397979141182586), (-0.0007440924690016814, 0.0008398388664137844), (-0.0013271245729774685, 0.0014734806440263803), (-0.0005562734152391574, 0.000625247167889386), (-0.0004730144130491782, 0.0005469027795637706), (-0.0005787271166860096, 0.0006676363798982497), (-0.0007916458985681302, 0.0009138418963349265), (-0.0009067803744133649, 0.0010465004905577497), (-0.00031289955512768893, 0.0003513554056753418), (-0.0002699134637130751, 0.0002989369787871932), (-0.0001172325951955239, 0.0001298384946828211), (-0.00029881014168621327, 0.0003309408866006214), (-0.0006786660041372853, 0.0007516422563419871), (-0.0011348934605827034, 0.0012569273784451879), (-0.0013373768911887894, 0.0014811836425350534), (-0.00036463408599706805, 0.00040384281143776384)]
+Tasa global de arribos promedio: 0.49452506780238026, IC 95%: (0.3301915899162635, 0.658858545688497)
+
+Simulación: M/M/1 - Ta/Ts = 125%, cap = 0, corridas: 100
+
+Resultados corrida n° 35 (seleccionada al azar):
+Modelo de colas M/M/1/0
+Tasa de arribos:                           2.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.000 minutos
+Tiempo promedio en el sistema:             0.508
+Número promedio de clientes en cola:       0.000
+Número promedio de clientes en el sistema: 0.565
+Probabilidad de denegación de servicio:    1.279
+Utilización del servidor:                  0.565
+Probabilidad 0 clientes en cola: 1.0
+Tiempo de fin de la simulación:            897.099
+
+Resultados experimento:
+Tiempo promedio en el sistema: 0.5012082297471329, IC 95%: (0.4681695288589636, 0.534246930635302)
+Tiempo promedio de servicio: 0.5012082297471329, IC 95%: (0.4681695288589636, 0.534246930635302)
+Promedio de clientes en el sistema: 0.5565944864025509, IC 95%: (0.5335895430730008, 0.5795994297321011)
+Ocupación del servidor: 0.5565944864025509, IC 95%: (0.5335895430730008, 0.5795994297321011)
+Probabilidad de denegación del servicio: 1.2509000000000001, IC 95%: (1.1613884754089778, 1.3404115245910224)
+
+Simulación: M/M/1 - Ta/Ts = 125%, cap = 2, corridas: 100
+
+Resultados corrida n° 94 (seleccionada al azar):
+Modelo de colas M/M/1/2
+Tasa de arribos:                           2.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   0.543 minutos
+Tiempo promedio en el sistema:             1.026
+Número promedio de clientes en cola:       0.921
+Número promedio de clientes en el sistema: 1.738
+Probabilidad de denegación de servicio:    0.512
+Utilización del servidor:                  0.818
+Probabilidad 0 clientes en cola: 0.3974620916521055
+Probabilidad 1 clientes en cola: 0.2841725273363649
+Probabilidad 2 clientes en cola: 0.3183653810115296
+Tiempo de fin de la simulación:            590.063
+
+Resultados experimento:
+Demora promedio esperada en cola: 0.5709848191612585, IC 95%: (0.5083102510976303, 0.6336593872248868)
+Tiempo promedio en el sistema: 1.070204552357058, IC 95%: (0.9772164681391324, 1.1631926365749836)
+Cantidad de clientes en cola en promedio: 0.9445300901767005, IC 95%: (0.8661278988751587, 1.0229322814782422)
+Tiempo promedio de servicio: 0.49921973319579943, IC 95%: (0.46673956258331517, 0.5316999038082837)
+Promedio de clientes en el sistema: 1.769388427368245, IC 95%: (1.6648242048818194, 1.8739526498546706)
+Ocupación del servidor: 0.8248583371915444, IC 95%: (0.793968626425284, 0.8557480479578049)
+Probabilidad de encontrar n clientes en cola: [0.3913904100217688, 0.2726890897797619, 0.3359205001984693], IC 95%: [(0.3465655626638067, 0.4362152573797308), (0.25028710072626575, 0.2950910788332581), (0.2996560628451384, 0.3721849375518002)]
+Probabilidad de denegación del servicio: 0.51356, IC 95%: (0.42420170760395765, 0.6029182923960423)
+Tasa global de arribos promedio: 5.7135874961632175e-06, IC 95%: (-0.0003004131851942391, 0.00031184036018656555)
+
+Simulación: M/M/1 - Ta/Ts = 125%, cap = 5, corridas: 100
+
+Resultados corrida n° 32 (seleccionada al azar):
+Modelo de colas M/M/1/5
+Tasa de arribos:                           2.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   1.667 minutos
+Tiempo promedio en el sistema:             2.179
+Número promedio de clientes en cola:       3.073
+Número promedio de clientes en el sistema: 4.015
+Probabilidad de denegación de servicio:    0.398
+Utilización del servidor:                  0.941
+Probabilidad 0 clientes en cola: 0.1342165815312195
+Probabilidad 1 clientes en cola: 0.0895724162806268
+Probabilidad 2 clientes en cola: 0.12206542864320902
+Probabilidad 3 clientes en cola: 0.15937548449538388
+Probabilidad 4 clientes en cola: 0.2122109795377874
+Probabilidad 5 clientes en cola: 0.28255910951177343
+Tiempo de fin de la simulación:            543.662
+
+Resultados experimento:
+Demora promedio esperada en cola: 1.5702127238068437, IC 95%: (1.3572156628551162, 1.7832097847585713)
+Tiempo promedio en el sistema: 2.0714087127672802, IC 95%: (1.8281641298650673, 2.314653295669493)
+Cantidad de clientes en cola en promedio: 2.9288149014581912, IC 95%: (2.6344285501669686, 3.223201252749414)
+Tiempo promedio de servicio: 0.5011959889604366, IC 95%: (0.46790928760033684, 0.5344826903205363)
+Promedio de clientes en el sistema: 3.862067556133001, IC 95%: (3.547469690097379, 4.1766654221686235)
+Ocupación del servidor: 0.9332526546748098, IC 95%: (0.9075901018441273, 0.9589152075054923)
+Probabilidad de encontrar n clientes en cola: [0.14806680073097722, 0.10386194983837632, 0.12962079569238416, 0.16195960709268853, 0.202621694270888, 0.25386915237468577], IC 95%: [(0.10018015456757942, 0.19595344689437502), (0.07850713446721684, 0.1292167652095358), (0.10615880730540114, 0.15308278407936718), (0.13954252767399755, 0.1843766865113795), (0.17316447183036598, 0.23207891671141), (0.20418746198481788, 0.3035508427645537)]
+Probabilidad de denegación del servicio: 0.33959, IC 95%: (0.25413985002642653, 0.4250401499735735)
+Tasa global de arribos promedio: -4.841601065188579e-05, IC 95%: (-0.0017852318763138544, 0.0016883998550100828)
+
+Simulación: M/M/1 - Ta/Ts = 125%, cap = 10, corridas: 100
+
+Resultados corrida n° 46 (seleccionada al azar):
+Modelo de colas M/M/1/10
+Tasa de arribos:                           2.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                   3.734 minutos
+Tiempo promedio en el sistema:             4.243
+Número promedio de clientes en cola:       7.167
+Número promedio de clientes en el sistema: 8.145
+Probabilidad de denegación de servicio:    0.326
+Utilización del servidor:                  0.978
+Probabilidad 0 clientes en cola: 0.0460964164277835
+Probabilidad 1 clientes en cola: 0.03424133571102535
+Probabilidad 2 clientes en cola: 0.03259648807618908
+Probabilidad 3 clientes en cola: 0.038416624853073345
+Probabilidad 4 clientes en cola: 0.029902937159726365
+Probabilidad 5 clientes en cola: 0.04607836023787312
+Probabilidad 6 clientes en cola: 0.08599405636898222
+Probabilidad 7 clientes en cola: 0.10194472120407806
+Probabilidad 8 clientes en cola: 0.13971521072795037
+Probabilidad 9 clientes en cola: 0.1949878674943133
+Probabilidad 10 clientes en cola: 0.25002598173900525
+Tiempo de fin de la simulación:            521.184
+
+Resultados experimento:
+Demora promedio esperada en cola: 3.4560752085931576, IC 95%: (2.9705739148489356, 3.9415765023373797)
+Tiempo promedio en el sistema: 3.9557881420906047, IC 95%: (3.4434241551173597, 4.46815212906385)
+Cantidad de clientes en cola en promedio: 6.791105636030629, IC 95%: (6.077794755936139, 7.504416516125119)
+Tiempo promedio de servicio: 0.49971293349744705, IC 95%: (0.4685074572319811, 0.5309184097629129)
+Promedio de clientes en el sistema: 7.769218061434952, IC 95%: (7.04333716694192, 8.495098955927983)
+Ocupación del servidor: 0.9781124254043226, IC 95%: (0.9593341867962348, 0.9968906640124104)
+Probabilidad de encontrar n clientes en cola: [0.048168154855944834, 0.03183991600406709, 0.03787253690443324, 0.04709277381720441, 0.05725794841637623, 0.07012719313444316, 0.08767810971595871, 0.10976837825220888, 0.13333544671415803, 0.16715173619817067, 0.20970780598703473], IC 95%: [(0.011281178492769627, 0.08505513121912003), (0.01065343550236043, 0.053026396505773746), (0.01604511177329692, 0.05969996203556956), (0.024913412957980993, 0.06927213467642783), (0.03605463965098885, 0.07846125718176361), (0.05037176337924195, 0.08988262288964435), (0.06640471456869634, 0.10895150486322108), (0.08568424186520779, 0.13385251463920997), (0.10433546683206607, 0.16233542659625), (0.1314562173616619, 0.20284725503467943), (0.15771455830322376, 0.26170105367084573)]
+Probabilidad de denegación del servicio: 0.26902, IC 95%: (0.18856038888426635, 0.3494796111157336)
+Tasa global de arribos promedio: 0.001373001522630325, IC 95%: (-0.0035563606633129095, 0.006302363708573559)
+
+Simulación: M/M/1 - Ta/Ts = 125%, cap = 50, corridas: 100
+
+Resultados corrida n° 29 (seleccionada al azar):
+Modelo de colas M/M/1/50
+Tasa de arribos:                           2.500 clientes/min
+Tasa de servicio:                          2.000 clientes/min
+Número de clientes:                        1000
+
+Resultados de la simulación:
+Tiempo promedio en cola:                  19.331 minutos
+Tiempo promedio en el sistema:            19.800
+Número promedio de clientes en cola:      41.732
+Número promedio de clientes en el sistema: 42.731
+Probabilidad de denegación de servicio:    0.184
+Utilización del servidor:                  0.999
+Probabilidad 0 clientes en cola: 0.0016929125359982252
+Probabilidad 1 clientes en cola: 0.0031286964462959362
+Probabilidad 2 clientes en cola: 0.004530706971427
+Probabilidad 3 clientes en cola: 0.003468769314274551
+Probabilidad 4 clientes en cola: 0.006809018888164752
+Probabilidad 5 clientes en cola: 0.0031347063033149896
+Probabilidad 6 clientes en cola: 0.006559448867820342
+Probabilidad 7 clientes en cola: 0.00900840583228154
+Probabilidad 8 clientes en cola: 0.0035874316407882266
+Probabilidad 9 clientes en cola: 0.0018079710309461714
+Probabilidad 10 clientes en cola: 0.0035676878441265477
+Probabilidad 11 clientes en cola: 0.000666661698535653
+Probabilidad 12 clientes en cola: 0.00033530637127387417
+Probabilidad 13 clientes en cola: 0.001226825220020016
+Probabilidad 14 clientes en cola: 0.0008015581949371105
+Probabilidad 15 clientes en cola: 0.0025625042529268133
+Probabilidad 16 clientes en cola: 0.0034857074333631997
+Probabilidad 17 clientes en cola: 0.005034329962458252
+Probabilidad 18 clientes en cola: 0.007156044645460908
+Probabilidad 19 clientes en cola: 0.008423893307657063
+Probabilidad 20 clientes en cola: 0.005643745755907557
+Probabilidad 21 clientes en cola: 0.0050991392429022555
+Probabilidad 22 clientes en cola: 0.008347932809447086
+Probabilidad 23 clientes en cola: 0.010747571654914462
+Probabilidad 24 clientes en cola: 0.005839387940602743
+Probabilidad 25 clientes en cola: 0.011378829403762251
+Probabilidad 26 clientes en cola: 0.011470362588101416
+Probabilidad 27 clientes en cola: 0.008205072406704792
+Probabilidad 28 clientes en cola: 0.0012422794020476697
+Probabilidad 29 clientes en cola: 0.0008910626214478521
+Probabilidad 30 clientes en cola: 0.0003199713435401063
+Probabilidad 31 clientes en cola: 0.0004058501853789595
+Probabilidad 32 clientes en cola: 0.0014894909866254784
+Probabilidad 33 clientes en cola: 0.0027150681882201246
+Probabilidad 34 clientes en cola: 0.011456621059237025
+Probabilidad 35 clientes en cola: 0.011100470137174944
+Probabilidad 36 clientes en cola: 0.012263077852287035
+Probabilidad 37 clientes en cola: 0.010730492847489536
+Probabilidad 38 clientes en cola: 0.011335731017497675
+Probabilidad 39 clientes en cola: 0.012234819667646772
+Probabilidad 40 clientes en cola: 0.0146853506912645
+Probabilidad 41 clientes en cola: 0.016397804840698218
+Probabilidad 42 clientes en cola: 0.030249804355833708
+Probabilidad 43 clientes en cola: 0.040635704888595074
+Probabilidad 44 clientes en cola: 0.04253839617523977
+Probabilidad 45 clientes en cola: 0.06403707939066303
+Probabilidad 46 clientes en cola: 0.07744238259562587
+Probabilidad 47 clientes en cola: 0.10452734500160857
+Probabilidad 48 clientes en cola: 0.11334946347311288
+Probabilidad 49 clientes en cola: 0.12213202294738419
+Probabilidad 50 clientes en cola: 0.15409908176696727
+Tiempo de fin de la simulación:            469.003
+
+Resultados experimento:
+Demora promedio esperada en cola: 20.041526988554143, IC 95%: (16.833114880496918, 23.249939096611367)
+Tiempo promedio en el sistema: 20.537757962842882, IC 95%: (17.308299900339307, 23.767216025346457)
+Cantidad de clientes en cola en promedio: 41.28435999422036, IC 95%: (36.2362850792691, 46.33243490917162)
+Tiempo promedio de servicio: 0.4962309742887417, IC 95%: (0.46710700796684357, 0.5253549406106398)
+Promedio de clientes en el sistema: 42.28113505621526, IC 95%: (37.231821780371796, 47.33044833205873)
+Ocupación del servidor: 0.9967750619949007, IC 95%: (0.9901757082012083, 1.003374415788593)
+Probabilidad de encontrar n clientes en cola: [0.006576685572573244, 0.003565870764023834, 0.0037489250620686004, 0.003998213881498055, 0.00381414376121173, 0.0036881172146181226, 0.003946284309756749, 0.004049512310051581, 0.0042445844099763385, 0.0045331048796072, 0.004598858825674913, 0.004537593653616785, 0.0046292816487466665, 0.004367078121988113, 0.00422036130901833, 0.0043605345562931505, 0.004348729524013434, 0.004267794550719235, 0.00420220333218414, 0.004622030909071858, 0.004709813284813504, 0.005402095280230571, 0.00582493002422585, 0.005471276549405527, 0.004824009213936527, 0.0052482408873674585, 0.005145409913116635, 0.005191477392240185, 0.005222572763683458, 0.005966322700251695, 0.005859863116423941, 0.0063169428661233136, 0.006808362859053441, 0.007355391333991353, 0.008757658633685769, 0.009687247311445846, 0.01147508874522178, 0.013459480296311629, 0.01521199234474494, 0.019090526415981558, 0.02193844326143234, 0.02565371374258713, 0.030856456545866884, 0.038357135361173446, 0.046027667461702976, 0.05569442903210606, 0.06803145083624292, 0.08348895290844828, 0.10275794138934867, 0.1262239572266672, 0.15762124170545705], IC 95%: [(-0.005037898613583573, 0.01819126975873006), (-0.0027783348073056676, 0.009910076335353336), (-0.0028715409531542904, 0.010369391077291491), (-0.0037692516023016785, 0.011765679365297788), (-0.0032181795250722017, 0.010846467047495662), (-0.0034579779991455333, 0.010834212428381779), (-0.0033188020575580833, 0.011211370677071581), (-0.003214074026666381, 0.011313098646769541), (-0.003075858747439153, 0.01156502756739183), (-0.003899272767094509, 0.01296548252630891), (-0.004604661449352248, 0.013802379100702073), (-0.0036873788803307214, 0.012762566187564292), (-0.0036547740706010974, 0.01291333736809443), (-0.0029280149998111822, 0.01166217124378741), (-0.002935791113340507, 0.011376513731377167), (-0.0038533825530174546, 0.012574451665603757), (-0.00494914937288112, 0.013646608420907988), (-0.004419223689567867, 0.012954812791006336), (-0.005194829916078422, 0.013599236580446702), (-0.004866587915103362, 0.014110649733247077), (-0.004374294368650154, 0.013793920938277162), (-0.004058112899585519, 0.01486230346004666), (-0.003929099027362072, 0.015578959075813772), (-0.003780523686940587, 0.01472307678575164), (-0.0032139740647456755, 0.01286199249261873), (-0.003708555810541839, 0.014205037585276756), (-0.004250199962227156, 0.014541019788460428), (-0.004472119190039264, 0.014855073974519633), (-0.0037866580163016137, 0.014231803543668528), (-0.004666758107275789, 0.01659940350777918), (-0.004850239293732245, 0.016569965526580126), (-0.004044177562439979, 0.016678063294686605), (-0.0033495989335650365, 0.01696632465167192), (-0.0035957265281730526, 0.018306509196155757), (-0.005144695108797235, 0.02266001237616877), (-0.003961922931463524, 0.023336417554355216), (-0.001995391254406972, 0.02494556874485053), (-0.0016506041548461463, 0.028569564747469404), (-0.0027294807259537774, 0.03315346541544366), (0.0002893374591722425, 0.037891715372790874), (0.0035822108527261073, 0.04029467567013857), (0.008659503708080114, 0.04264792377709414), (0.012265365222063035, 0.04944754786967073), (0.017408595943207244, 0.059305674779139644), (0.02400279046776417, 0.06805254445564178), (0.03224278038124974, 0.07914607768296238), (0.04027130188690267, 0.09579159978558316), (0.04715048218219325, 0.1198274236347033), (0.06065780491030211, 0.14485807786839522), (0.07125758094919413, 0.1811903335041403), (0.08407749093794116, 0.23116499247297295)]
+Probabilidad de denegación del servicio: 0.19533, IC 95%: (0.09328781154835525, 0.29737218845164476)
+Tasa global de arribos promedio: 0.045150981068042245, IC 95%: (0.00639496360758586, 0.08390699852849863)
