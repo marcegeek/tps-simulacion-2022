@@ -25,6 +25,7 @@ class ColaMMC(Simulacion):
 
         self.tiempos_arribo = []
         self.estado_servidores = [self.ESTADO_DESOCUPADO] * servidores
+        self.arribos_totales = 0
         self.clientes_cola = 0
         self.clientes_cola_tiempo = [self.clientes_cola]
         self.clientes_denegados = 0
@@ -53,6 +54,7 @@ class ColaMMC(Simulacion):
 
     def arribo(self, ev):
         self.programar_arribo()
+        self.arribos_totales += 1
         if self.estado_servidores.count(self.ESTADO_OCUPADO) == len(self.estado_servidores):
             # todos los servidores ocupados, incrementar clientes en cola
             if self.capacidad == np.inf or self.clientes_cola + 1 <= self.capacidad:  # comprobar capacidad de cola
@@ -119,7 +121,7 @@ class ColaMMC(Simulacion):
         return beta
 
     def denegacion_servicio(self):
-        return self.clientes_denegados / self.clientes_completaron_demora
+        return self.clientes_denegados / self.arribos_totales
 
     def probabilidades_clientes(self):
         """
