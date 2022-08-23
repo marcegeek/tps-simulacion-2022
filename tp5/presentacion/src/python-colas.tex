@@ -9,29 +9,30 @@ Realizaremos 100 simulaciones de 1000 clientes cada una y promediamos los siguie
     \item Cantidad de clientes en cola en promedio ($q(n)$)
     \item Demora promedio esperada en cola ($d(n)$)
     \item Tiempo promedio en el sistema ($d(n)+s(n)$)
-    \item Ocupación del servidor ($u(n)*100\%$)
+    \item Ocupación del servidor ($u(n)$)
     \item Probabilidad de denegación del servicio. ($p(den)$)
-    \item Probabilidad de encontrar n clientes en cola. ($p(Q(t)=n)\times100\%$)
+    \item Probabilidad de encontrar n clientes en cola. ($p(Q(t)=n)$)
 \end{itemize}
+
+Presentaremos los resultados obtenidos junto con sus intervalos de confianza del 95\%, obtenidos suponiendo que los mismos se distribuyen de manera normal, por el teorema central del límite, en el formato $valor \pm error$.
 
 \subsubsection[cap = 0]{$cap = 0$}
 
-Los parámetros $d(n)$, $q(n)$ y $p(Q(t)=n)\times100\%$ no aplican cuando la capacidad de la cola es 0.
-El promedio de clientes en sistema es en este caso, equivalente al factor de uso del servicio.
+Los parámetros $d(n)$, $q(n)$ y $p(Q(t)=n)$ no aplican cuando la capacidad de la cola es 0. El promedio de clientes en sistema es en este caso, equivalente al factor de uso del servicio.
 
 \begin{tabular}{||c||c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $$ & $$ & $$ \\
+    25 & $0.499 \pm 0.031$ & $19.897 \pm 1.504$ & $25.141 \pm 3.384$ \\
     \hline
-    50 & $$ & $$ & $$ \\
+    50 & $0.503 \pm 0.031$ & $33.437 \pm 1.899$ & $50.571 \pm 5.685$ \\
     \hline
-    75 & $$ & $$ & $$ \\
+    75 & $0.498 \pm 0.031$ & $42.698 \pm 2.11$ & $74.62 \pm 7.204$ \\
     \hline
-    100 & $$ & $$ & $$ \\
+    100 & $0.5 \pm 0.031$ & $49.982 \pm 2.341$ & $99.75 \pm 8.792$ \\
     \hline
-    125 & $$ & $$ & $$ \\
+    125 & $0.501 \pm 0.033$ & $55.659 \pm 2.3$ & $$ \\
     \hline \hline
 \end{tabular}
 
