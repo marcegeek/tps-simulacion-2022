@@ -1,4 +1,4 @@
-\subsection{Modelo MM1 en Python}
+\subsection{Modelo M/M/1 en Python}
 
 Para analizar el rendimiento del modelo, variamos la tasa de arribos ($T_a$) en base a la tasa de servicio ($T_s$), y
 la capacidad de la cola ($cap$).
@@ -24,39 +24,56 @@ Los parámetros $d(n)$, $q(n)$ y $p(Q(t)=n)$ no aplican cuando la capacidad de l
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $0.499 \pm 0.031$ & $19.897 \pm 1.504$ & $25.141 \pm 3.384$ \\
+    25 & $1.992 \pm 0.122$ & $19.915 \pm 1.375$ & $19.878 \pm 2.118$ \\
     \hline
-    50 & $0.503 \pm 0.031$ & $33.437 \pm 1.899$ & $50.571 \pm 5.685$ \\
+    50 & $2.003 \pm 0.126$ & $33.32 \pm 1.803$ & $33.354 \pm 2.358$ \\
     \hline
-    75 & $0.498 \pm 0.031$ & $42.698 \pm 2.11$ & $74.62 \pm 7.204$ \\
+    75 & $2.004 \pm 0.119$ & $42.924 \pm 2.14$ & $42.892 \pm 2.048$ \\
     \hline
-    100 & $0.5 \pm 0.031$ & $49.982 \pm 2.341$ & $99.75 \pm 8.792$ \\
+    100 & $1.991 \pm 0.116$ & $49.905 \pm 2.116$ & $49.596 \pm 2.279$ \\
     \hline
-    125 & $0.501 \pm 0.033$ & $55.659 \pm 2.3$ & $$ \\
+    125 & $2.008 \pm 0.122$ & $55.555 \pm 2.066$ & $55.503 \pm 2.028$ \\
     \hline \hline
 \end{tabular}
 
 \subsubsection[cap = 2]{$cap = 2$}
 
-\begin{tabular}{||c||c|c|c|c|c|c||}
+\begin{small}
+  \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    25 & $0.32 \pm 0.031$ & $0.071 \pm 0.015$ & $0.576 \pm 0.112$ & $2.589 \pm 0.198$ & $24.871 \pm 1.842$ & $1.165 \pm 0.811$ \\
     \hline
-    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    50 & $0.737 \pm 0.082$ & $0.269 \pm 0.049$ & $1.15 \pm 0.207$ & $3.154 \pm 0.337$ & $46.817 \pm 3.684$ & $6.666 \pm 2.297$ \\
     \hline
-    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    75 & $1.141 \pm 0.102$ & $0.51 \pm 0.069$ & $1.604 \pm 0.225$ & $3.593 \pm 0.347$ & $63.133 \pm 3.754$ & $15.088 \pm 3.029$ \\
     \hline
-    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    100 & $1.507 \pm 0.119$ & $0.754 \pm 0.085$ & $2.006 \pm 0.25$ & $4.009 \pm 0.368$ & $75.238 \pm 3.781$ & $25.061 \pm 3.607$ \\
     \hline
-    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    125 & $1.773 \pm 0.1$ & $0.946 \pm 0.075$ & $2.282 \pm 0.239$ & $4.278 \pm 0.351$ & $82.628 \pm 2.868$ & $33.783 \pm 3.5$ \\
     \hline \hline
-\end{tabular}
+  \end{tabular}
+\end{small}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-2}
-  \caption{Probabilidad de encontrar n clientes en cola.}
+  \centering
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_25_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_50_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_75_probabilidad_n_clientes}
+  \end{subfigure}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_100_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_125_probabilidad_n_clientes}
+  \end{subfigure}
+  \caption{Probabilidad de encontrar n clientes en cola, con bandas de error del 95\%.}
 \end{figure}
 
 \subsubsection[cap = 5]{$cap = 5$}
