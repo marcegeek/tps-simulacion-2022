@@ -16,7 +16,7 @@ n = 1000
 1 mes
 
 ## Intervalo entre demandas:
-~Exp(0.1 mes)
+~Exp(1/0.1 mes): valor esperado 0.1 mes
 
 ## Tamaños de las demandas:
 ~Empírica:
