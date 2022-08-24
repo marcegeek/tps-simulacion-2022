@@ -3,7 +3,7 @@
 Variar en 25%, 50%, 75%, 100%, 125% de la tasa de servicio. 
 
 ## Duración del servicio:
-~ Exp(0.5')
+~Exp(0.5 cliente/min): valor esperado 2'
 
 ## Tamaño de cola:
 Variar: Infinita, 0, 2, 5, 10, 50
