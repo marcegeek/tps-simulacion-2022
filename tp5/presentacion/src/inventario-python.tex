@@ -1,33 +1,66 @@
-\subsection{Modelo de Inventario en Python}
-En esta simulación se realizaron las corridas del sistema en base a eventos desarrollados por distintas acciones hechas en un inventario.
+\subsection{Modelo de inventario en Python}
+
+En esta simulación se realizarán las corridas del sistema en base a los eventos correspondientes a las distintas acciones de un inventario.
+El funcionamiento del sistema desarrollado consta de eventos que surgen por meses donde la demanda cambia en base a una distribución de probabilidad.
+Cada cierto tiempo se realiza la evaluación del inventario con sus existencias o faltantes para poder tomar acciones que permitan cubrir la demanda según una política de inventario determinada $(s, S)$.
+En caso de que ante la demanda el modelo de inventario tenga una existencia menor al nivel inferior de inventario $s$, entonces se programa un pedido con la cantidad necesaria para completar hasta el nivel superior $S$, esto es $S - I$, para que luego de unos días llegue y el inventario se reponga.
+Caso contrario, si el nivel de inventario es mayor o igual que $s$, sigue funcionando de manera habitual.
+
 Para esto se tendrán en cuenta los siguientes parámetros con los que se contará para poder llegar a nuestros objetivos:
 \begin{itemize}
-    \item Nivel de Inventario: El nivel del inventario actualmente.
-    \item Altas: el máximo de stock al que se puede llegar.
-    \item Bajas: el mínimo de stock al que se puede llegar.
-    \item Costo de reposición: costo de reposición de stock en el inventario.
-    \item Costo de mantenimiento: precio por el cual cada item se mantiene en stock.
-    \item Costo de reserva: costo de cada item al realizar una orden de compra.
-    \item Costo de faltante: costo por la falta de stock.
-    \item Media entredemanda.
-    \item Distribución de demanda.
-    \item Costo total ordenado
-    \item Area de existencia.
-    \item Area de escacez.
+    \item Política de inventario $(s, S)$: niveles inferior y superior de inventario que determinan a partir de qué punto realizar un pedido y en qué cantidad.
+    \item Nivel inicial de inventario: en nuestro caso igual a $60$ unidades.
+    \item Costo de mantenimiento ($h$): precio por el cual se mantiene cada unidad en stock, $\$ 1$ para nuestro caso.
+    \item Costo inicial de envío ($K$): costo fijo en el que se incurre cada vez que se hace un pedido, $\$ 32$ (cuando la cantidad pedida $Z > 0$, si no $\$ 0$) para nuestro caso.
+    \item Costo incremental de envío ($i$): costo adicional por unidad pedida, $\$ 3$ para nuestro caso.
+    \item Costo de orden ($C_o(Z)$): costo de realizar una orden de compra, $C_o(Z) = K + iZ$.
+    \item Costo de faltante ($\pi$): costo por la falta de stock, $\$ 5$ para nuestro caso.
+    \item Tardanza de la reposición: tiempo que tarda en arribar un pedido para reponer stock, en nuestro caso es una variable aleatoria que se distribuye de manera uniforme entre 0.5 y 1 mes.
+    \item Tiempo medio entre demandas (meses): variable aleatoria con distribución exponencial, $\nicefrac{1}{\lambda} = 0.1$ en nuestro caso ($\lambda = 10$ demandas/mes).
+    \item Distribución de la demanda: en nuestro caso $D=\left\{ \begin{array}{lcc}
+            1 &   c.p.  & 1/6 \\
+            \\ 2 &  c.p. & 1/3 \\
+            \\ 3 &  c.p. & 1/3 \\
+            \\ 4 &  c.p.  & 1/6
+  \end{array}
+  \right.$.
+    \item Criterio de finalización: en nuestro caso es por el tiempo de la simulación, $t = 120$ meses, es decir 10 años.
 \end{itemize}
 
-El funcionamiento del sistema desarrollado consta de eventos que surgen por meses donde la demanda cambia en base a una distribución de probabilidad.
-Esto hace que luego de un tiempo determinado se realize la evaluación del inventario con sus existencias o faltantes para cubrir la demanda y se pueda actuar frente a esto.
-En caso de que ante la demanda el modelo de inventario tenga una existencia menor a las Bajas, entonces se programa un pedido de arribos con una cantidad elegida para que luego de unos días lleguen y el inventario se reponga.
-Caso contrario, si el nivel de inventario es mayor a las bajas, sigue funcionando de manera habitual.
-
-Además el sistema calcula los costos mencionados anteriormente para que el usuario pueda ver cual es el estado de los costos del inventario.
-
-
-Una vez realizados los experimentos se buscará analizar los siguientes resultados de los mismos:
+Para poder llevar a cabo la simulación, emplearemos las siguientes variables de estado y estadísticas:
 \begin{itemize}
-    \item Costo de Orden
-    \item Costo de Mantenimiento
-    \item Costo de Faltante
-    \item Costo Total
+    \item Nivel de inventario: el nivel actual del inventario.
+    \item Costo total de pedido: el costo de pedido acumulado actual.
+    \item Área de existencia: área debajo del nivel de inventario real a lo largo del tiempo.
+    \item Área de escasez: área debajo del nivel de inventario faltante a lo largo del tiempo.
 \end{itemize}
+
+Finalmente, el sistema calcula los costos mencionados anteriormente para poder analizar el estado de los costos del inventario, hacer comparaciones y extraer conclusiones que permitan tomar decisiones.
+
+Para analizar el rendimiento del modelo, variamos la política de inventario $(s, S)$, dado que es el principal factor que la empresa puede modificar y sobre el cual podrá tomar decisiones.
+
+Realizaremos 100 simulaciones, de 120 meses cada una como se ha mencionado anteriormente y promediaremos los siguientes estadísticos:
+\begin{itemize}
+    \item Costo de orden promedio ($\bar{C}_{o}$)
+    \item Costo de mantenimiento promedio ($h \bar{I}^{+}$)
+    \item Costo de faltante promedio ($\pi \bar{I}^{-}$)
+    \item Costo total promedio ($\bar{C}_{T} = \bar{C}_{o} + h \bar{I}^{+} + \pi \bar{I}^{-}$)
+\end{itemize}
+
+Presentaremos los resultados obtenidos junto con sus intervalos de confianza del 95\%, obtenidos suponiendo que los mismos se distribuyen de manera normal, por el teorema central del límite, en el formato $valor \pm error$.
+
+\begin{tabular}{||c||c|c|c|c||}
+    \hline \hline
+    Política $(s, S)$ & $\bar{C}_{o}$ [\$/mes] & $h \bar{I}^{+}$ [\$/mes] & $\pi \bar{I}^{-}$ [\$/mes] & $\bar{C}_{T}$ [\$/mes] \\
+    \hline \hline
+    $(20, 40)$ & $97.428 \pm 5.639$ & $9.277 \pm 1.043$ & $17.693 \pm 4.08$ & $124.398 \pm 7.457$ \\
+    $(20, 60)$ & $88.624 \pm 4.921$ & $17.531 \pm 1.581$ & $12.926 \pm 3.972$ & $119.081 \pm 6.545$ \\
+    $(20, 80)$ & $85.022 \pm 5.32$ & $26.941 \pm 2.093$ & $9.653 \pm 3.539$ & $121.615 \pm 6.333$ \\
+    $(20, 100)$ & $83.098 \pm 5.35$ & $36.777 \pm 2.074$ & $7.336 \pm 2.821$ & $127.211 \pm 5.857$ \\
+    $(40, 60)$ & $98.196 \pm 5.963$ & $25.615 \pm 1.484$ & $1.797 \pm 1.253$ & $125.608 \pm 5.411$ \\
+    $(40, 80)$ & $88.739 \pm 5.041$ & $35.226 \pm 2.123$ & $1.342 \pm 1.11$ & $125.307 \pm 4.299$ \\
+    $(40, 100)$ & $85.31 \pm 5.175$ & $45.12 \pm 2.393$ & $1.094 \pm 1.037$ & $131.523 \pm 4.598$ \\
+    $(60, 80)$ & $99.073 \pm 6.08$ & $45.117 \pm 1.804$ & $0.075 \pm 0.204$ & $144.264 \pm 4.979$ \\
+    $(60, 100)$ & $89.9 \pm 5.195$ & $54.423 \pm 2.206$ & $0.055 \pm 0.177$ & $144.378 \pm 3.938$ \\
+    \hline \hline
+\end{tabular}
