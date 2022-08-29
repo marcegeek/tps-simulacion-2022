@@ -1,4 +1,4 @@
-\subsection{Modelo MM1 en Python}
+\subsection{Modelo M/M/1 en Python}
 
 Para analizar el rendimiento del modelo, variamos la tasa de arribos ($T_a$) en base a la tasa de servicio ($T_s$), y
 la capacidad de la cola ($cap$).
@@ -24,111 +24,179 @@ Los parámetros $d(n)$, $q(n)$ y $p(Q(t)=n)$ no aplican cuando la capacidad de l
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $0.499 \pm 0.031$ & $19.897 \pm 1.504$ & $25.141 \pm 3.384$ \\
+    25 & $1.992 \pm 0.122$ & $19.915 \pm 1.375$ & $19.878 \pm 2.118$ \\
     \hline
-    50 & $0.503 \pm 0.031$ & $33.437 \pm 1.899$ & $50.571 \pm 5.685$ \\
+    50 & $2.003 \pm 0.126$ & $33.32 \pm 1.803$ & $33.354 \pm 2.358$ \\
     \hline
-    75 & $0.498 \pm 0.031$ & $42.698 \pm 2.11$ & $74.62 \pm 7.204$ \\
+    75 & $2.004 \pm 0.119$ & $42.924 \pm 2.14$ & $42.892 \pm 2.048$ \\
     \hline
-    100 & $0.5 \pm 0.031$ & $49.982 \pm 2.341$ & $99.75 \pm 8.792$ \\
+    100 & $1.991 \pm 0.116$ & $49.905 \pm 2.116$ & $49.596 \pm 2.279$ \\
     \hline
-    125 & $0.501 \pm 0.033$ & $55.659 \pm 2.3$ & $$ \\
+    125 & $2.008 \pm 0.122$ & $55.555 \pm 2.066$ & $55.503 \pm 2.028$ \\
     \hline \hline
 \end{tabular}
 
 \subsubsection[cap = 2]{$cap = 2$}
 
-\begin{tabular}{||c||c|c|c|c|c|c||}
+\begin{small}
+  \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n)$ [min] & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    25 & $0.32 \pm 0.031$ & $0.071 \pm 0.015$ & $0.576 \pm 0.112$ & $2.589 \pm 0.198$ & $24.871 \pm 1.842$ & $1.165 \pm 0.811$ \\
     \hline
-    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    50 & $0.737 \pm 0.082$ & $0.269 \pm 0.049$ & $1.15 \pm 0.207$ & $3.154 \pm 0.337$ & $46.817 \pm 3.684$ & $6.666 \pm 2.297$ \\
     \hline
-    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    75 & $1.141 \pm 0.102$ & $0.51 \pm 0.069$ & $1.604 \pm 0.225$ & $3.593 \pm 0.347$ & $63.133 \pm 3.754$ & $15.088 \pm 3.029$ \\
     \hline
-    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    100 & $1.507 \pm 0.119$ & $0.754 \pm 0.085$ & $2.006 \pm 0.25$ & $4.009 \pm 0.368$ & $75.238 \pm 3.781$ & $25.061 \pm 3.607$ \\
     \hline
-    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    125 & $1.773 \pm 0.1$ & $0.946 \pm 0.075$ & $2.282 \pm 0.239$ & $4.278 \pm 0.351$ & $82.628 \pm 2.868$ & $33.783 \pm 3.5$ \\
     \hline \hline
-\end{tabular}
+  \end{tabular}
+\end{small}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-2}
-  \caption{Probabilidad de encontrar n clientes en cola.}
+  \centering
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_25_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_50_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_75_probabilidad_n_clientes}
+  \end{subfigure}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_100_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_2_125_probabilidad_n_clientes}
+  \end{subfigure}
+  \caption{Probabilidad de encontrar n clientes en cola, con bandas de error del 95\%.}
 \end{figure}
 
 \subsubsection[cap = 5]{$cap = 5$}
 
-\begin{tabular}{||c||c|c|c|c|c|c||}
+\begin{small}
+  \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    25 & $0.331 \pm 0.037$ & $0.082 \pm 0.025$ & $0.653 \pm 0.191$ & $2.652 \pm 0.26$ & $24.943 \pm 1.86$ & $0.011 \pm 0.078$ \\
     \hline
-    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    50 & $0.948 \pm 0.153$ & $0.452 \pm 0.117$ & $1.812 \pm 0.424$ & $3.809 \pm 0.519$ & $49.608 \pm 4.103$ & $0.805 \pm 0.846$ \\
     \hline
-    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    75 & $1.925 \pm 0.327$ & $1.213 \pm 0.281$ & $3.413 \pm 0.728$ & $5.423 \pm 0.827$ & $71.213 \pm 5.204$ & $5.082 \pm 2.563$ \\
     \hline
-    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    100 & $3.009 \pm 0.343$ & $2.152 \pm 0.307$ & $5.017 \pm 0.773$ & $7.02 \pm 0.886$ & $85.697 \pm 4.226$ & $14.367 \pm 4.22$ \\
     \hline
-    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    125 & $3.845 \pm 0.341$ & $2.911 \pm 0.316$ & $6.229 \pm 0.828$ & $8.23 \pm 0.936$ & $93.364 \pm 3.049$ & $25.278 \pm 4.571$ \\
     \hline \hline
-\end{tabular}
+  \end{tabular}
+\end{small}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-5}
-  \caption{Probabilidad de encontrar n clientes en cola.}
+  \centering
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_5_25_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_5_50_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_5_75_probabilidad_n_clientes}
+  \end{subfigure}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_5_100_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_5_125_probabilidad_n_clientes}
+  \end{subfigure}
+  \caption{Probabilidad de encontrar n clientes en cola, con bandas de error del 95\%.}
 \end{figure}
 
 \subsubsection[cap = 10]{$cap = 10$}
 
-\begin{tabular}{||c||c|c|c|c|c|c||}
+\begin{small}
+  \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    25 & $0.331 \pm 0.043$ & $0.082 \pm 0.026$ & $0.656 \pm 0.195$ & $2.649 \pm 0.279$ & $24.899 \pm 1.98$ & $0 \pm 0$ \\
     \hline
-    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    50 & $1 \pm 0.196$ & $0.499 \pm 0.161$ & $1.991 \pm 0.577$ & $3.997 \pm 0.653$ & $50.056 \pm 4.315$ & $0.03 \pm 0.191$ \\
     \hline
-    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    75 & $2.603 \pm 0.633$ & $1.861 \pm 0.592$ & $5.009 \pm 1.467$ & $7.017 \pm 1.528$ & $74.207 \pm 5.288$ & $1.006 \pm 1.392$ \\
     \hline
-    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    100 & $5.448\pm 1.097$ & $4.532 \pm 1.063$ & $9.81 \pm 2.36$ & $11.8 \pm 2.451$ & $91.566 \pm 4.281$ & $7.819 \pm 5.039$ \\
     \hline
-    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    125 & $7.858 \pm 0.818$ & $6.878 \pm 0.802$ & $13.973 \pm 2.167$ & $15.974 \pm 2.285$ & $98.064 \pm 2.147$ & $21.018 \pm 5.133$ \\
     \hline \hline
-\end{tabular}
+  \end{tabular}
+\end{small}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-10}
-  \caption{Probabilidad de encontrar n clientes en cola.}
+  \centering
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_10_25_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_10_50_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_10_75_probabilidad_n_clientes}
+  \end{subfigure}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_10_100_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_10_125_probabilidad_n_clientes}
+  \end{subfigure}
+  \caption{Probabilidad de encontrar n clientes en cola, con bandas de error del 95\%.}
 \end{figure}
 
 \subsubsection[cap = 50]{$cap = 50$}
 
-\begin{tabular}{||c||c|c|c|c|c|c||}
+\begin{small}
+  \begin{tabular}{||c||c|c|c|c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%] & $p(den)$ [\%] \\
     \hline \hline
-    25 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    25 & $0.332 \pm 0.041$ & $0.083 \pm 0.024$ & $0.665 \pm 0.174$ & $2.661 \pm 0.252$ & $24.895 \pm 2.103$ & $0 \pm 0$ \\
     \hline
-    50 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    50 & $1 \pm 0.224$ & $0.501 \pm 0.193$ & $2 \pm 0.715$ & $3.999 \pm 0.79$ & $49.895 \pm 4.074$ & $0 \pm 0$ \\
     \hline
-    75 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    75 & $3.091 \pm 1.422$ & $2.34 \pm 1.363$ & $6.176 \pm 3.348$ & $8.177 \pm 3.427$ & $75.172 \pm 7.084$ & $0 \pm 0$ \\
     \hline
-    100 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    100 & $19.447 \pm 14.655$ & $18.48 \pm 14.622$ & $37.589 \pm 30.016$ & $39.592 \pm 30.1$ & $96.679 \pm 4.886$ & $0.911 \pm 2.832$ \\
     \hline
-    125 & $$ & $$ & $$ & $$ & $$ & $$ \\
+    125 & $42.903 \pm 3.911$ & $41.907 \pm 3.909$ & $82.136 \pm 11.07$ & $84.138 \pm 11.164$ & $99.614 \pm 0.795$ & $16.649 \pm 6.263$ \\
     \hline \hline
-\end{tabular}
+  \end{tabular}
+\end{small}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-50}
-  \caption{Probabilidad de encontrar n clientes en cola.}
+  \centering
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_50_25_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_50_50_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_50_75_probabilidad_n_clientes}
+  \end{subfigure}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_50_100_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_50_125_probabilidad_n_clientes}
+  \end{subfigure}
+  \caption{Probabilidad de encontrar n clientes en cola, con bandas de error del 95\%.}
 \end{figure}
 
-\subsubsection[cap = ∞]{$cap = \infty$}
+\subsubsection[cap = inf]{$cap = \infty$}
 
 En este caso no tenemos tope de clientes en la cola, entonces no hay probabilidad de denegación.
 
@@ -140,24 +208,39 @@ En este caso no tenemos tope de clientes en la cola, entonces no hay probabilida
     \item Ocupación del servidor ($u(n)*100\%$)
 \end{itemize}
 
-\begin{tabular}{||c||c|c|c|c|c|c||}
+\begin{tabular}{||c||c|c|c|c|c||}
     \hline \hline
     $\frac{T_a}{T_s}\times100\%$ [\%] & $q(n)+u(n)$ [min] & $q(n)$ [clientes] & $d(n)$ [min] & $d(n)+s(n) [min]$ & $u(n)\times100\%$ [\%]\\
     \hline \hline
-    25 & $0,331$ & $0,082$ & $0,653$ & $2,637$ & $24,866$ \\
+    25 & $0.333 \pm 0.048$ & $0.082 \pm 0.028$ & $0.656 \pm 0.201$ & $2.655 \pm 0.283$ & $25.043 \pm 2.484$ \\
     \hline
-    50 & $0,995$ & $0,496$ & $1,978$ & $3,981$ & $49,949$ \\
+    50 & $0.987 \pm 0.207$ & $0.488 \pm 0.173$ & $1.95 \pm 0.633$ & $3.951 \pm 0.698$ & $49.869 \pm 4.294$ \\
     \hline
-    75 & $2,924$ & $2,176$ & $5,778$ & $7,778$ & $74,845$ \\
+    75 & $2.897 \pm 1.212$ & $2.154 \pm 1.168$ & $5.747 \pm 2.921$ & $7.744 \pm 2.981$ & $74.292 \pm 5.812$ \\
     \hline
-    100 & $23,853$ & $22,892$ & $45,548$ & $47,546$ & $96,121$ \\
+    100 & $24.092 \pm 25.391$ & $23.123 \pm 25.365$ & $45.93 \pm 49.21$ & $47.936 \pm 49.28$ & $96.902 \pm 4.846$ \\
     \hline
-    125 & $127,97$ & $126,975$ & $203,476$ & $205,469$ & $99,563$ \\
+    125 & $130.666 \pm 54.734$ & $129.669 \pm 54.733$ & $206.951 \pm 85.041$ & $208.946 \pm 85.13$ & $99.668 \pm 0.573$ \\
     \hline \hline
 \end{tabular}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{images/anylogic-colas-50}
-  \caption{Probabilidad de encontrar n clientes en cola.}
+  \centering
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_inf_25_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_inf_50_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_inf_75_probabilidad_n_clientes}
+  \end{subfigure}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_inf_100_probabilidad_n_clientes}
+  \end{subfigure}\hspace{0.35cm}
+  \begin{subfigure}{0.267\linewidth}
+    \importarcontenidofigura{cola_mm1_inf_125_probabilidad_n_clientes}
+  \end{subfigure}
+  \caption{Probabilidad de encontrar n clientes en cola, con bandas de error del 95\%.}
 \end{figure}
 

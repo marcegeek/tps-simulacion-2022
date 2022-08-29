@@ -3,7 +3,7 @@
 Variar en 25%, 50%, 75%, 100%, 125% de la tasa de servicio. 
 
 ## Duración del servicio:
-~ Exp(0.5')
+~Exp(0.5 cliente/min): valor esperado 2'
 
 ## Tamaño de cola:
 Variar: Infinita, 0, 2, 5, 10, 50
@@ -16,7 +16,7 @@ n = 1000
 1 mes
 
 ## Intervalo entre demandas:
-~Exp(0.1 mes)
+~Exp(1/0.1 mes): valor esperado 0.1 mes
 
 ## Tamaños de las demandas:
 ~Empírica:

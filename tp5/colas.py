@@ -250,8 +250,8 @@ def realizar_experimento(tasa_servicio, ta_over_ts_arr, capacidades, num_cliente
 
 
 def main():
-    # Duración del servicio: ~ Exp(0.5') -> tasa: 1/0.5' = 2 clientes/min
-    tasa_servicio = 2
+    # Duración del servicio: ~Exp(0.5 cliente/min) -> valor esperado: beta = 1/lambda = 2 min
+    tasa_servicio = 0.5
     num_clientes = 1000
     corridas = 100
     capacidades = [0, 2, 5, 10, 50, np.inf]
