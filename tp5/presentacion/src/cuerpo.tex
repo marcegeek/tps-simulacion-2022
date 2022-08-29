@@ -33,42 +33,41 @@ Cada una de las variables aleatorias del proceso tiene su propia función de dis
 estar correlacionadas entre sí.
 
 Cada variable o conjunto de variables sometidas a influencias o efectos aleatorios constituye un proceso estocástico.
-Un proceso estocástico Xt puede entenderse como una familia uniparamétrica de
-variables aleatorias indexadas mediante el tiempo t.
+Un proceso estocástico $X_{t}$ puede entenderse como una familia uniparamétrica de
+variables aleatorias indexadas mediante el tiempo $t$.
 Los procesos estocásticos permiten tratar procesos dinámicos en los que hay cierta aleatoriedad.
 
 
 \section{Modelo M/M/1}\label{sec:modelo-m/m/1}
 Un sistema de espera M/M/1 es aquel que considera un servidor, con tiempos exponenciales de servicio y entre llegadas
-de clientes. La implicancia que los tiempos de servicio se distribuyan exponencial es que existe una preponderancia de
+de clientes. La implicancia de que los tiempos de servicio se distribuyan de manera exponencial es que existe una preponderancia de
 tiempos de servicio menores al promedio combinados con algunos pocos tiempos extensos. Un ejemplo de ello es lo que
 sucede en las cajas de los bancos donde la mayoría de las transacciones requieren poco tiempo de proceso por parte del
 cajero, no obstante algunas transacciones más complejas consumen bastante tiempo. Por otra parte afirmar que los tiempos
-entre llegadas se distribuyen exponencial implica una preponderancia de tiempos entre llegadas menores que el promedio
+entre llegadas se distribuyen de manera exponencial implica una preponderancia de tiempos entre llegadas menores que el promedio
 en combinación con algunos tiempos más extensos. Lo anterior tiene relación con la aleatoriedad del proceso de llegada
-de clientes que permite establecer la Propiedad de Falta de Memoria o Amnesia de la Distribución Exponencial y
-con los conceptos presentados en el artículo Qué son las Líneas de Espera (Teoría de Colas), donde queda en evidencia
+de clientes que permite establecer la propiedad de falta de memoria o amnesia de la distribución exponencial~\cite{operaciones2015amnesia} y
+con los conceptos presentados en~\cite{operaciones2015lineas}, donde queda en evidencia
 que la formación de las colas o filas esta asociada a la variabilidad del sistema.
 
 En este contexto consideremos la siguiente notación, donde valores usuales para A y B son M (distribución exponencial)
 y G (distribución general).
 
-En el estudio con colas simples, cuya notación de Kendalls son M/M/1, para la primera, donde se posee un sólo serivor,
-las distribuciones de arribo y de servicio proceden de manera Markoviana y su cola es infinita, y en el caso de la
+En el estudio de colas simples, cuya notación de Kendall es M/M/1, para la primera, donde se posee un sólo serivor,
+las distribuciones de arribo y de servicio proceden de manera markoviana y su cola es infinita, y en el caso de la
 siguientes M/M/C dónde solamente se añadiran mas servidores.
 Para la distribución de arribos, se tiene un parámetro $\lambda$, la tasa de arribos de clientes, de él obtenemos la media de
-clientes entrantes por unidad de tiempo 1/$\lambda$.
-Por otro lado, la tasa de tiempo de serivicios µ y la media de tiempos de servicios 1/$\mu$.
-A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor $\rho = 1/s\mu$, la relación entre los clientes
-arribando y los clientes partiendo, siendo s el número de servidores, en nuestro caso $s = 1$ (luego se permitira variarlo).
+clientes entrantes por unidad de tiempo $\nicefrac{1}{\lambda}$.
+Por otro lado, la tasa de tiempo de serivicios $\mu$ y la media de tiempos de servicios $\nicefrac{1}/{\mu}$.
+A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor $\rho = \nicefrac{\lambda}{s\mu}$, la relación entre los clientes
+arribando y los clientes partiendo, siendo $s$ el número de servidores, en nuestro caso $s = 1$.
 Como la llegada de clientes y su tiempo en ser servidos son variables aleatorias, se pueden considerar
 nuevas variables aleatorias, que son combinaciones lineales de las anteriores, por ejemplo:
 
-Considere un sistema de colas de un solo servidor para el cual el intervalo entre llegadas son A1, A2, . . . veces con
-variables aleatorias independientes e idénticamente distribuidas.
+Considere un sistema de colas de un solo servidor para el cual los tiempos entre arribos $A_{1}, A_{2}, \cdots$ son variables aleatorias independientes e idénticamente distribuidas.
 
-A partir de una única ejecución de la simulación con retrasos de los clientes D1, D2, . . . , Dn, es obvio que el
-estimador de d(n) es:
+A partir de una única ejecución de la simulación con retrasos de los clientes $D_{1}, D_{2}, \cdots, D_{n}$, es obvio que el
+estimador de $d(n)$ es:
 
 \begin{equation} \label{eq:equation}
 \hat{d}(n) = \frac{\sum_{i = 1}^{n}D_{i}}{n}
