@@ -64,3 +64,10 @@ Presentaremos los resultados obtenidos junto con sus intervalos de confianza del
     $(60, 100)$ & $89.9 \pm 5.195$ & $54.423 \pm 2.206$ & $0.055 \pm 0.177$ & $144.378 \pm 3.938$ \\
     \hline \hline
 \end{tabular}
+
+\subsubsection{Conclusiones de la simulación}
+    De los resultados obtenidos, podemos observar como a medida que se van incrementando los niveles generales de inventario, el costo por faltante se va reduciendo hasta hacerse practicamente despreciable, mientras que por el contrario se va incrementando el costo de mantenimiento. Por otro lado, notamos como el costo de orden es afectado por la diferencia entre entre los niveles superior e inferior, siendo mayor cuanto más cercanos están estos entre sí, lo cual es una consecuencia de la mayor frecuencia con la que se realizan pedidos al proveedor.
+
+    Finalmente, buscamos un balance entre los costos que permita minimizar el costo total. De las simulaciones realizadas, podemos determinar que de las políticas de inventario comparadas, la mejor resulta ser $(s,S)=(20,60)$, dado que es la que presenta el menor costo total por mes, $\bar{C}_{T}=\$ 119.081 \pm 6.545$, con un 95\% de confianza. Sin embargo, cabe mencionar que, como los valores obtenidos están dados por un intervalo de confianza hay que tener en cuenta su solapamiento con los intervalos obtenidos para otras políticas, en nuestro caso resulta que el mismo se solapa con los obtenidos para casi todas las políticas, quedando las políticas $(s,S)=(40, 100)$, $(s,S)=(60,80)$ y $(s,S)=(60,100)$ completamente separados con costos totales mucho mayores de $\bar{C}_{T}=\$ 131.523 \pm 4.598$, $\bar{C}_{T}=\$ 144.264 \pm 4.979$ y $\bar{C}_{T}=\$ 144.378 \pm 3.938$, respectivamente.
+
+    De todo esto podemos concluir que las políticas $(s,S)=(40,100)$, $(s,S)=(60,80)$ y $(s,S)=(60,100)$ deberán ser descartadas, por presentar éstas costos significativamente superiores al resto de políticas.
