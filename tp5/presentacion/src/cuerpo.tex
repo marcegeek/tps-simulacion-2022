@@ -112,11 +112,11 @@ obtenemos:
   \label{eq:equation3}
   \hat{q}(n) = \sum_{i=0}^{\infty}i\hat{p}_{i}
 \end{equation}
-donde $\hat{p}i$ es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
+donde $\hat{p}_{i}$ es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
 donde que había $i$ clientes en la cola.
 Computacionalmente, sin embargo, es más fácil reescribir $\hat{q}(n)$ usando algunas consideraciones geométricas.
 Si dejamos que $T_{i}$ sea el total de tiempo durante la simulación donde la cola tiene una longitud $i$, entonces
-$T(n) = T0 + T1 + T2 + \cdots$ y $\hat{p}i = Ti/T(n)$, por lo que podemos reescribir la ecuación \ref{eq:equation3} como:
+$T(n) = T0 + T1 + T2 + \cdots$ y $\hat{p}_{i} = \nicefrac{T_{i}}{T(n)}$, por lo que podemos reescribir la ecuación \ref{eq:equation3} como:
 
 \begin{equation}
   \label{eq:equation4}
