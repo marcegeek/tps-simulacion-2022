@@ -177,7 +177,7 @@ def main():
     variador = VariadorInventario(smalls_arr, bigs_minus_smalls_arr)
     exp = Experimento(ModeloInventario, variador, corridas=100)
     exp.correr()
-    exp.reportar(en_vivo=False)
+    exp.reportar(en_vivo=True)
 
 
 if __name__ == '__main__':

@@ -256,7 +256,7 @@ def main():
     corridas = 100
     capacidades = [0, 2, 5, 10, 50, np.inf]
     ta_over_ts_arr = [0.25, 0.5, 0.75, 1, 1.25]
-    en_vivo = False
+    en_vivo = True
     realizar_experimento(tasa_servicio, capacidades, ta_over_ts_arr, num_clientes=num_clientes, corridas=corridas, en_vivo=en_vivo)
 
 
