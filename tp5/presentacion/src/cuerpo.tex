@@ -13,19 +13,18 @@
 En el siguiente trabajo simularemos mediante un programa desarrollado en lenguaje Python, una cola simple, en la que
 solamente habrá llegada de clientes, atendidos por un único servidor luego de haber realizado una espera
 determinada en la cola y posteriormente partirán.
-Adicionalmente se simulará una cola con una cantidad de servidores predeterminada.
 El modelo de inventario contará con el mismo formato y consistirá en un proceso por mes en el que se realiza una orden de compra
-a los proveedores, mientras se trata de alcanzar la demanda de los clientes a través de distintos indicadores de escacez y
+a los proveedores, mientras se trata de alcanzar la demanda de los clientes a través de distintos indicadores de escasez y
 existencia.
 Finalmente se realizará una evaluación y se calcularán las estadísticas correspondientes.
 A su vez estudiaremos la eficacia de dichos programas al comparar ciertas medidas de rendimiento observadas con las
 teóricas computadas y a su vez con las obtenidas mediante una calculadora web, y de otra simulación desarrollada
-en el aplicativo Anylogic.
+en el aplicativo AnyLogic.
 
 
 \section{Marco teórico}\label{sec:marco-teórico}
 
-\subsection{Proceso Estocástico}\label{subsec:proceso-estocástico}
+\subsection{Proceso estocástico}\label{subsec:proceso-estocástico}
 En la teoría de la probabilidad, un proceso estocástico es un concepto matemático que sirve para representar
 magnitudes aleatorias que varían con el tiempo o para caracterizar una sucesión de variables aleatorias (estocásticas)
 que evolucionan en función de otra variable, generalmente el tiempo.
@@ -50,17 +49,31 @@ de clientes que permite establecer la propiedad de falta de memoria o amnesia de
 con los conceptos presentados en~\cite{operaciones2015lineas}, donde queda en evidencia
 que la formación de las colas o filas esta asociada a la variabilidad del sistema.
 
-En este contexto consideremos la siguiente notación, donde valores usuales para A y B son M (distribución exponencial)
-y G (distribución general).
+Un sistema de cola está caracterizado por tres componentes: el proceso de llegada, el mecanismo de servicio y la disciplina de la cola. El proceso de llegada se refiere a cómo se produce la llegada de clientes al sistema. Sea $A_{i}$ el tiempo entre los arribos del $(i - 1 )$-ésimo y el $i$-ésimo cliente. Si suponemos que $A_{1},A_{2},\cdots$ son variables aleatorias independientes e idénticamente distribuidas, definimos el tiempo medio (o esperado) entre arribos por $E(A)$ y definimos entonces la tasa de arribo de clientes $\lambda=\nicefrac{1}{E(A)}$.
 
-En el estudio de colas simples, cuya notación de Kendall es M/M/1, para la primera, donde se posee un sólo serivor,
-las distribuciones de arribo y de servicio proceden de manera markoviana y su cola es infinita, y en el caso de la
-siguientes M/M/C dónde solamente se añadiran mas servidores.
-Para la distribución de arribos, se tiene un parámetro $\lambda$, la tasa de arribos de clientes, de él obtenemos la media de
-clientes entrantes por unidad de tiempo $\nicefrac{1}{\lambda}$.
-Por otro lado, la tasa de tiempo de serivicios $\mu$ y la media de tiempos de servicios $\nicefrac{1}/{\mu}$.
-A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor $\rho = \nicefrac{\lambda}{s\mu}$, la relación entre los clientes
-arribando y los clientes partiendo, siendo $s$ el número de servidores, en nuestro caso $s = 1$.
+El mecanismo de servicio se define especificando el número de servidores ($s$), si cada servidor tiene su propia cola o hay una sola cola para todos, y la distribución de probabilidad de los tiempos de servicio. Sea $S_{i}$ el tiempo de servicio del $i$-ésimo cliente. Si $S_{1},S_{2},\cdots$ son variables aleatorias IID, definimos el tiempo medio de servicio como $E(S)$ y la tasa de servicio de un servidor como $\mu = \nicefrac{1}{E(S)}$.
+
+La disciplina de la cola se refiere a cómo se selecciona al siguiente cliente de la cola (si es que hay) una vez finalizado el servicio del cliente actual. Algunas disciplinas comunes son:
+\begin{itemize}
+  \item FIFO: Los clientes son atendidos por orden de llegada (el primero que entra, el primero que sale).
+  \item LIFO: Los clientes son atendidos en orden inverso al de llegada (el último que entra, el primero que sale).
+  \item Con prioridad: Los clientes son atendidos según su importancia o sus requerimientos de servicio.
+\end{itemize}
+
+Existen ciertos sistemas de cola que se dan con frecuencia en la práctica, por lo que se han desarrollado notaciones estándar. En particular nos interesa el caso con $s$ servidores, una única cola (cola simple) con disciplina FIFO y tiempos entre llegadas y de servicio IID, e independientes entre sí.
+
+A tal sistema se lo denomina una cola $GI/G/s$ (notación de Kendall), donde $GI$ (general independiente) se refiere a la distribución de los $A_{i}$ y $G$ (general) se refiere a la distribución de los $S_{i}$. Cuando se conocen las distribuciones de $A_{i}$ y $S_{i}$, se emplean los símbolos correspondientes en su lugar. En particular nos interesa el símbolo $M$ que se refiere a una distribución exponencial, por su propiedad markoviana (es decir, de falta de memoria). De esta manera a un sistema de cola de servidor único con tiempos entre llegadas y de servicio exponenciales y disciplina FIFO se lo denomina una cola $M/M/1$.
+
+Para cualquier cola $GI/G/s$, se denomina la cantidad $\rho = \nicefrac{\lambda}{s\mu}$ el factor de utilización ($s\mu$ es la tasa de servicio cuando todos los servidores se encuentran ocupados).
+
+%En el estudio de colas simples, cuya notación de Kendall es M/M/1, para la primera, donde se posee un sólo servidor,
+%las distribuciones de arribo y de servicio proceden de manera markoviana y su cola es infinita, y en el caso de la
+%siguientes M/M/C dónde solamente se añadiran mas servidores.
+%Para la distribución de arribos, se tiene un parámetro $\lambda$, la tasa de arribos de clientes, de él obtenemos la media de
+%clientes entrantes por unidad de tiempo $\nicefrac{1}{\lambda}$.
+%Por otro lado, la tasa de tiempo de serivicios $\mu$ y la media de tiempos de servicios $\nicefrac{1}{\mu}$.
+%A partir de estos dos parámetros, obtenemos la tasa de utilización del servidor $\rho = \nicefrac{\lambda}{s\mu}$, la relación entre los clientes
+%arribando y los clientes partiendo, siendo $s$ el número de servidores, en nuestro caso $s = 1$.
 Como la llegada de clientes y su tiempo en ser servidos son variables aleatorias, se pueden considerar
 nuevas variables aleatorias, que son combinaciones lineales de las anteriores, por ejemplo:
 
@@ -72,45 +85,45 @@ estimador de $d(n)$ es:
 \begin{equation} \label{eq:equation}
 \hat{d}(n) = \frac{\sum_{i = 1}^{n}D_{i}}{n}
 \end{equation}
-que es solo el promedio de los Di's que se observaron en la simulación.
+que es solo el promedio de los $D_{i}$ que se observaron en la simulación.
 
 Una de las medidas para nuestro modelo simple es el número promedio esperado de clientes en la cola (pero sin
-ser servida), denotada por q(n), donde la n es necesaria en la notación para indicar que este promedio se
-toma durante el período de tiempo necesario para observar los n retrasos que definen
+ser servida), denotada por $q(n)$, donde la $n$ es necesaria en la notación para indicar que este promedio se
+toma durante el período de tiempo necesario para observar los $n$ retrasos que definen
 nuestra regla de parada.
 Este es un tipo diferente de ``promedio'' a comparación del retraso promedio en cola, porque se toma el tiempo
 (continuo), en lugar de los clientes (siendo este discreto).
 Por lo tanto, necesitamos definir qué significa este número promedio de tiempo de
 clientes en cola.
-Para hacer esto, sea Q(t) el número de clientes en cola en el tiempo t, para cualquier número real t>=0 ,
-y sea T(n) el tiempo requerido para observar nuestros n retrasos en la cola.
-Entonces para cualquier tiempo t entre 0 y T(n), Q(t) es un entero no negativo. Además, si dejamos que pi sea la
-proporción esperada (que estará entre 0 y 1) del tiempo que Q(t) es igual a i, entonces una definición
-razonable de q(n) sería:
+Para hacer esto, sea $Q(t)$ el número de clientes en cola en el tiempo $t$, para cualquier número real $t \geq 0$,
+y sea $T(n)$ el tiempo requerido para observar nuestros $n$ retrasos en la cola.
+Entonces para cualquier tiempo $t$ entre $0$ y $T(n)$, $Q(t)$ es un entero no negativo. Además, si dejamos que $p_{i}$ sea la
+proporción esperada (que estará entre 0 y 1) del tiempo que $Q(t)$ es igual a $i$, entonces una definición
+razonable de $q(n)$ sería:
  \begin{equation}
    \label{eq:equation2}
 q(n) = \sum_{i=0}^{\infty}ip_{i}
  \end{equation}
-Por lo tanto, q(n) es un promedio ponderado de los posibles valores de i para la longitud de la cola Q(t),
+Por lo tanto, $q(n)$ es un promedio ponderado de los posibles valores de $i$ para la longitud de la cola $Q(t)$,
 siendo las áreas la proporción esperada de tiempo que la cola pasa en cada uno de sus posibles longitudes.
-Para estimar q(n) a partir de una simulación, simplemente reemplazamos los pi con estimaciones de ellos y
+Para estimar $q(n)$ a partir de una simulación, simplemente reemplazamos los $p_{i}$ con estimaciones de ellos y
 obtenemos:
 \begin{equation}
   \label{eq:equation3}
   \hat{q}(n) = \sum_{i=0}^{\infty}i\hat{p}_{i}
 \end{equation}
-donde $\hat{p}i$ es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
+donde $\hat{p}_{i}$ es la proporción observada (en lugar de la esperada) del tiempo durante la simulación
 donde que había $i$ clientes en la cola.
 Computacionalmente, sin embargo, es más fácil reescribir $\hat{q}(n)$ usando algunas consideraciones geométricas.
-Si dejamos que Ti sea el total de tiempo durante la simulación donde la cola tiene una longitud i, entonces
-$T(n) = T0 + T1 + T2 + \cdots$ y $\hat{p}i = Ti/T(n)$, por lo que podemos reescribir la ecuación 1.1 como:
+Si dejamos que $T_{i}$ sea el total de tiempo durante la simulación donde la cola tiene una longitud $i$, entonces
+$T(n) = T_{0} + T_{1} + T_{2} + \cdots$ y $\hat{p}_{i} = \nicefrac{T_{i}}{T(n)}$, por lo que podemos reescribir la ecuación \ref{eq:equation3} como:
 
 \begin{equation}
   \label{eq:equation4}
 \hat{q}(n)=\frac{\sum_{i=0}^{\infty}iT_{i} }{T(n)}
 \end{equation}
 
-El numerador de la ecuación anterior, representa el área bajo la función Q(t):
+El numerador de la ecuación anterior, representa el área bajo la función $Q(t)$:
 \begin{equation}
   \label{eq:equation5}
   \sum_{i=0}^{k-1}iT_{i} = \int_{0}^{T(n)}Q(t)dt
@@ -124,9 +137,9 @@ Reemplazándolo en la ecuación anterior, nos queda:
 Esta integral puede ser calculada como la suma de rectángulos formados por la base tiempo de cierta cantidad
 de clientes en cola por la altura dicha cantidad de clientes en cola.
 
-La proporción esperada de tiempo del servidor en estado ocupado u(n), deviene de la probabilidad de que
-el servidor no esté vacío, $pN > 0 = 1 - p0$. Para calcular su estimador u(n), primero se define la ``función
-ocupada'':
+La proporción esperada de tiempo del servidor en estado ocupado $u(n)$, deviene de la probabilidad de que
+el servidor no esté vacío, $p_{N} > 0 = 1 - p_{0}$. Para calcular su estimador $\hat{u}(n)$, primero se define la ``función
+ocupado'':
 
 \begin{equation}\label{eq:equation7}
   B(t) = \left\{ \begin{array}{lcc}
@@ -136,15 +149,15 @@ ocupada'':
   \right.
 \end{equation}
 
-Entonces u(n) es la porción del tiempo total en la que $B(t) = 1$.
-Al igual que a la medida anterior, podemos considerarlo como el área bajo B(t), así,
+Entonces $\hat{u}(n)$ es la porción del tiempo total en la que $B(t) = 1$.
+Al igual que a la medida anterior, podemos considerarlo como el área bajo $B(t)$, así,
 \begin{equation}\label{eq:equation8}
 \hat{u}(n)=\frac{\int_{0}^{T(n)}B(t)}{T(n)}
 \end{equation}
-En definitiva, u(n) es la sumatoria de áreas rectangulares, donde la base es el tiempo en el que el servidor
+En definitiva, $\hat{u}(n)$ es la sumatoria de áreas rectangulares, donde la base es el tiempo en el que el servidor
 está en un estado específico, y la altura es dicho estado, 0 o 1.
 
-\section{Modelo de Inventario}\label{sec:modelo-m/m/c}
+\section{Modelo de inventario}\label{sec:modelo-m/m/c}
 Los inventarios están presentes en todas las compañías que tratan con productos físicos,
 tales como fabricantes, distribuidores, comerciantes, etc.
 Las empresas necesitan inventarios de materias primas para la manufactura de productos y a su vez
@@ -168,9 +181,9 @@ En cambio en el modelo de periodo de
 tiempo fijo, el conteo tiene lugar solo durante el periodo de revisión.
 
 Suponiendo una empresa que vende un solo producto le gustaría decidir cuántos artículos debería
-tener en inventario para cada uno de los siguientes n meses (n es un parámetro de entrada fijo).
-Los tiempos entre demandas son variables aleatorias exponenciales con una media de 0,1 mes.
-Los tamaños de las demandas, D, son variables aleatorias IID (independientes de cuando se presentan
+tener en inventario para cada uno de los siguientes $n$ meses ($n$ es un parámetro de entrada fijo).
+Los tiempos entre demandas son variables aleatorias exponenciales con una media de $0.1$ mes.
+Los tamaños de las demandas, $D$, son variables aleatorias IID (independientes de cuando se presentan
 las demandas), con:
 \begin{equation}
   \label{eq:equation9}
@@ -182,46 +195,46 @@ las demandas), con:
   \end{array}
   \right.
 \end{equation}
-donde c.p. significa ``Con Probabilidad de''.
+donde c.p. significa ``con probabilidad de''.
 
 Al comienzo de cada mes, la empresa revisa el nivel de inventario y decide cuántos artículos pedir
 a su proveedor.
-Si la empresa ordena Z artículos, incurre en un costo de K + iZ, donde K = \$32 es el costo de
-preparación e i = \$3 es el incremento coste incremental por artículo pedido.
-(Si Z = 0, no incurre ningún costo).
+Si la empresa ordena $Z$ artículos, incurre en un costo de $K + iZ$, donde $K = \$32$ es el costo de
+preparación e $i = \$3$ es el costo incremental por artículo pedido.
+(Si $Z = 0$, no incurre ningún costo).
 Cuando se realiza un pedido, el tiempo requerido para que llegue (llamado retraso en la entrega
-o tiempo de entrega) es una variable aleatoria que se distribuye uniformemente entre 0,5 y 1 mes.
+o tiempo de entrega) es una variable aleatoria que se distribuye uniformemente entre $0.5$ y $1$ mes.
 
-La empresa utiliza una política estacionaria (s, S) para decidir cuánto pedir, es decir,
+La empresa utiliza una política estacionaria $(s, S)$ para decidir cuánto pedir, es decir,
 \begin{equation}
   \label{eq:equation10}
   Z = \left\{ \begin{array}{lcc}
                 S-I & if I < s \\
-                \\ 0 & if I \leq s
+                \\ 0 & if I \geq s
   \end{array}
   \right.
 \end{equation}
-donde I es el nivel de inventario al comienzo del mes.
+donde $I$ es el nivel de inventario al comienzo del mes.
 
 Para nuestro modelo, supondremos que la empresa incurre en un costo de mantenimiento de
-h = \$1 por artículo por mes mantenido en el inventario (positivo).
+$h = \$1$ por artículo por mes mantenido en el inventario (positivo).
 El costo de mantenimiento incluye costos tales como alquiler de almacenes, seguros, impuestos
 y mantenimiento, así como el costo de oportunidad de tener capital inmovilizado en el inventario
 en lugar de invertirlo en otra parte.
 Hemos ignorado en nuestra formulación el hecho de que todavía se incurre en algunos costos de
-mantenimiento cuando I = 0.
+mantenimiento cuando $I = 0$.
 Sin embargo, dado que nuestro objetivo es comparar las políticas de pedido, ignorar este factor,
 que después de todo es independiente de la política utilizada, no afectará nuestra evaluación
 de qué política es la mejor.
-Ahora, dado que I es el número de elementos retenidos en el inventario en el momento t,
+Ahora, dado que $I$ es el número de elementos retenidos en el inventario en el momento $t$,
 la cantidad promedio de tiempo (por mes) de artículos mantenidos en el inventario durante el
-período de n meses es
+período de $n$ meses es
 \begin{equation}
   \label{eq:equation11}
   \bar{I}^{+}=\frac{\int_{0}^{n}I^{+}(t)dt}{n}
 \end{equation}
 
-De manera similar, suponga que la compañía incurre en un costo de trabajo pendiente de p = \$5 por
+De manera similar, suponga que la compañía incurre en un costo de trabajo pendiente de $p = \$5$ por
 artículo por mes en reserva;
 esto representa el costo del mantenimiento adicional de activos cuando existe acumulación de pedidos,
 así como pérdida de la buena voluntad de los clientes.
